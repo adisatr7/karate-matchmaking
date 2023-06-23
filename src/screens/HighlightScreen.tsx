@@ -1,19 +1,17 @@
 import Sidebar from "../components/Sidebar"
-import imageBackground from "../assets/background2.jpg"
+import MenuBackground from "../components/MenuBackground"
 
 
-export default function Dashboard() {
+export default function HighlightScreen() {
   return (
     /* Main window */
-    <div className="w-screen h-screen flex flex-row">
+    <MenuBackground>
 
       {/* Sidebar - left side, collapsible */}
       <Sidebar/>
 
       {/* Main content - right side, scrollable */}
-      <div 
-        style={{ backgroundImage: `url(${imageBackground})` }} 
-        className="flex flex-1 bg-cover pl-[120px] pr-[20px] py-[28px]">
+      <div className="flex flex-1 pl-[120px] pr-[20px] py-[28px]">
 
         {/* Card 1 */}
         <div className="h-fit w-fit rounded-md p-[24px] bg-dark-glass bg-opacity-50 backdrop-blur-md">
@@ -29,6 +27,6 @@ export default function Dashboard() {
 
       </div>
 
-    </div>
+    </MenuBackground>
   )
 }

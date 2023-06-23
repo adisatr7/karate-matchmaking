@@ -1,5 +1,6 @@
 import React from "react"
-import { useAppSelector } from "../store"
+import { useAppDispatch, useAppSelector } from "../store"
+import { hideSidebar } from "../store/slices/sidebarSlice"
 
 
 type PropsType = {
@@ -10,10 +11,16 @@ type PropsType = {
 
 export default function SidebarButton({ icon: Icon, label, onClick }: PropsType) {
   const isExpanded = useAppSelector(state => state.sidebar.isExpanded)
+  const dispatch = useAppDispatch()
+
+  const handleButtonClick = () => {
+    dispatch(hideSidebar())
+    onClick
+  }
 
   return (
     // Container
-    <button onClick={() => onClick}
+    <button onClick={() => handleButtonClick()}
       className="mb-[18px] flex flex-row w-full hover:cursor-pointer text-white hover:text-primary-opaque items-center">
 
       {/* Icon */}
