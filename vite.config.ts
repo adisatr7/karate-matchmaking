@@ -1,5 +1,7 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react-swc"
+import svgr from "vite-plugin-svgr"
+
 
 export default defineConfig({
   // Prevent vite from obscuring rust errors
@@ -13,18 +15,18 @@ export default defineConfig({
   // To make use of `TAURI_PLATFORM`, `TAURI_ARCH`, `TAURI_FAMILY`,
   // `TAURI_PLATFORM_VERSION`, `TAURI_PLATFORM_TYPE` and `TAURI_DEBUG`
   // env variables
-  envPrefix: ['VITE_', 'TAURI_'],
+  envPrefix: ["VITE_", "TAURI_"],
 
   build: {
     // Tauri uses Chromium on Windows and WebKit on macOS and Linux
-    target: process.env.TAURI_PLATFORM == 'windows' ? 'chrome105' : 'safari13',
+    target: process.env.TAURI_PLATFORM == "windows" ? "chrome105" : "safari13",
     
-    // Don't minify for debug builds
-    minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
+    // Don"t minify for debug builds
+    minify: !process.env.TAURI_DEBUG ? "esbuild" : false,
     
     // Produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
   },
   
-  plugins: [react()],
+  plugins: [svgr(), react()],
 })
