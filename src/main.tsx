@@ -11,6 +11,16 @@ import App from "./App.tsx"
 import HighlightScreen from "./screens/HighlightScreen.tsx"
 import LoginScreen from "./screens/LoginScreen.tsx"
 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
+
+
+/**
+ * Initializes icon library from FontAwesome
+ */
+library.add(faBars, faXmark)  
+
+
 /** 
  * Define router to allow the app to navigate between screens
  */
@@ -29,6 +39,10 @@ const screens = createBrowserRouter([
   }
 ])
 
+
+/**
+ * Render the app to the root element (DO NOT TOUCH!)
+ */
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
