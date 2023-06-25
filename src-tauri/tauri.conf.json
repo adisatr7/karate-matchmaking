@@ -22,7 +22,7 @@
         "removeDir": false,
         "removeFile": false,
         "renameFile": false,
-        "scope": ["$APP/**/*"],
+        "scope": ["$APPDATA/**/*"],
         "writeFile": true
       },
       "path": {

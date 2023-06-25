@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../store"
 
 import { collapseSidebar } from "../store/slices/sidebarSlice"
@@ -13,6 +13,7 @@ import athleteImage1 from "../assets/athlete1.png"
 import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
 import { useNavigate } from "react-router-dom"
+import { appDataDir } from "@tauri-apps/api/path"
 
 
 export default function LoginScreen() {
@@ -53,18 +54,18 @@ export default function LoginScreen() {
     
     // Create 'data' folder if it doesn't exist
     createDir("data", {
-      dir: BaseDirectory.App,
+      dir: BaseDirectory.AppData,
       recursive: true
     })
     
     // Write current user to file
     writeTextFile({
-      path: "./data/users.data",
+      path: "data/users.data",
       contents: JSON.stringify({
         currentUser: user,
         users: registeredUsers
       })},
-      { dir: BaseDirectory.App }
+      { dir: BaseDirectory.AppData }
     ).catch(err => {
       useNotification("Gagal menyimpan data", err)
     })
@@ -84,6 +85,18 @@ export default function LoginScreen() {
     }, 300)
   }
 
+  const [debugText, setDebugText] = useState("")
+
+  const tempFunc = async() => {
+    return await appDataDir()
+  }
+
+  useEffect(() => {
+    const appDir = tempFunc()
+    appDir.then((dir) => {
+      setDebugText(dir)
+    })
+  })
 
   return (
     <div className="w-screen h-screen flex flex-row justify-center items-center bg-cover bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900">

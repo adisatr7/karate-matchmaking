@@ -8,13 +8,17 @@ import { isPermissionGranted, requestPermission, sendNotification } from "@tauri
  * @param message The message of the notification.
  */
 export default async function useNotification (title: any, message?: any) {
-  let permissionGranted = await isPermissionGranted()
+  try {
+    let permissionGranted = await isPermissionGranted()
 
-  if (!permissionGranted) {
-    const permission = await requestPermission()
-    permissionGranted = permission === "granted"
-  }
-  if (permissionGranted) {
-    sendNotification({ title: `${title}`, body: `${message || ""}` })
+    if (!permissionGranted) {
+      const permission = await requestPermission()
+      permissionGranted = permission === "granted"
+    }
+    if (permissionGranted) {
+      sendNotification({ title: `${title}`, body: `${message || ""}` })
+    }
+  } catch (err) {
+    useNotification("Notification error", err)
   }
 }
