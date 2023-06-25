@@ -35,6 +35,7 @@ export type Pertandingan = {
 export type KelasPertandingan = {
   idKelas: string,
   namaKelas: string,
+  teams: Tim[],
   matches: Match[]
 }
 
@@ -59,4 +60,39 @@ export type Petarung = {
   namaPetarung: string,
   idTim?: string,
   namaTim?: string,
+}
+
+/**
+ * Team type definition
+ */
+export type Tim = {
+  idTim: string,
+  namaTim: string,
+  inisial: string,
+  asal: string,
+  anggota: string[]
+}
+
+/**
+ * Athlete type definition
+ */
+export type Atlet = {
+  idAtlet: string,
+  namaAtlet: string,
+  jenisKelamin: "m" | "f",
+  usia: number,
+  berat: number,
+  idTimSekarang: string
+  records: AthleteRecord
+}
+
+/**
+ * Athlete Record type definition
+ */
+export type AthleteRecord = {
+  wins: number,
+  losses: number,
+  yuko: number,
+  wazari: number,
+  ippon: number
 }
