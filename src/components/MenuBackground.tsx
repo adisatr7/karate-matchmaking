@@ -3,6 +3,7 @@ import Particles from "react-particles"
 import type { Container, Engine } from "tsparticles-engine"
 import { loadFull } from "tsparticles"
 import Sidebar from "./Sidebar"
+import { useAppSelector } from "../store"
 
 
 type PropsType = {
@@ -10,6 +11,8 @@ type PropsType = {
 }
 
 export default function MenuBackground({ children }: PropsType) {
+  const sidebarStatus = useAppSelector(state => state.sidebar.status)
+
   // const particlesInit = useCallback(async (engine: Engine) => {
   //   console.log(engine)
 
@@ -20,13 +23,14 @@ export default function MenuBackground({ children }: PropsType) {
   // }, [])
 
   return (
-    <div className="w-screen h-screen flex flex-row bg-cover bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900">
+    <div className={`w-screen h-screen flex flex-row bg-cover bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900`}>
       
       {/* Sidebar - left side, collapsible */}
       <Sidebar/>
 
-      <div className="flex flex-1 pl-[120px] pr-[20px] py-[28px] ">
-        <Particles
+      <div className={`flex flex-1 pl-[120px] pr-[20px] py-[28px] gap-[18px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
+        {children}
+        {/* <Particles
         id="particle-background"
         options={{
           particles: {
@@ -59,8 +63,7 @@ export default function MenuBackground({ children }: PropsType) {
               },
             },
           }
-        }}/>
-        {children}
+        }}/> */}
       </div>
       
     </div>

@@ -13,7 +13,6 @@ import athleteImage1 from "../assets/athlete1.png"
 import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
 import { useNavigate } from "react-router-dom"
-import { time } from "console"
 
 
 export default function LoginScreen() {
@@ -25,8 +24,6 @@ export default function LoginScreen() {
   const currentUser = useAppSelector(state => state.auth.currentUser)
   const registeredUsers = useAppSelector(state => state.auth.registeredUsers)
   const dispatch = useAppDispatch()
-
-  const sidebarStatus = useAppSelector(state => state.sidebar.status)
 
   const handleLogin = () => {
     // Check if inputs are empty
