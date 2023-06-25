@@ -1,5 +1,5 @@
 import { KelasPertandingan } from "../../types"
-import { getTournamentById, saveTournamentsData } from "./tournaments"
+import { getAllTournaments, getTournamentById, saveTournamentsData } from "./tournaments"
 import useNotification from "../../hooks/useNotification"
 
 
@@ -103,22 +103,58 @@ export const updateKelas = (tournamentId: string, updatedKelas: KelasPertandinga
  * @param idKelas ID of the kelas to delete
  */
 export const deleteKelas = (tournamentId: string, idKelas: string) => {
-  let tournament = getTournamentById(tournamentId)
+  const tournaments = getAllTournaments()
+
+  // Get the target tournament and kelas object
+  let tournament = tournaments.find(tournament => tournament.idPertandingan === tournamentId)
   let kelas = getAllKelas(tournamentId)
 
+  // Remove the kelas from the specified tournament
   if (tournament) {
     kelas = kelas.filter(kelas => kelas.idKelas !== idKelas)
     tournament.kelas = kelas
 
-    saveTournamentsData(tournament)
+    // Save all the changes to 'tournaments.json'
+    saveTournamentsData(tournaments)
   }
 
+  // If the tournament is not found
   else {
     useNotification("Terjadi kesalahan saat menghapus data kelas", "Tidak dapat menemukan data pertandingan!")
   }
 }
 
 
+/**
+ * Register a team to a kelas
+ * 
+ * @param tournamentId Tournament ID to register the team to
+ * @param idKelas ID of the kelas to register the team to
+ * @param idTeam ID of the team to be registered
+ */
 export const registerTeam = (tournamentId: string, idKelas: string, idTeam: string) => {
+  const kelas = getKelasById(tournamentId, idKelas)
   
+  if (kelas) {
+    kelas.daftarIdTim.push(idTeam)
+
+    updateKelas(tournamentId, kelas)
+  }
+}
+
+
+export const unregisterTeam = (tournamentId: string, idKelas: string, idTeam: string) => {
+  const kelas = getKelasById(tournamentId, idKelas)
+  
+  // Remove the team from the kelas
+  if (kelas) {
+    kelas.daftarIdTim = kelas.daftarIdTim.filter(id => id !== idTeam)
+    
+    // Update the kelas object
+    updateKelas(tournamentId, kelas)
+
+    // Save all the changes to 'tournaments.json'
+    const tournaments = getAllTournaments()
+    saveTournamentsData(tournaments)
+  }
 }

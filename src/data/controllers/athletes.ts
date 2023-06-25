@@ -2,7 +2,7 @@ import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-ap
 import useNotification from "../../hooks/useNotification"
 import { Atlet } from "../../types"
 import defaultAthletesData from "../defaults/defaultAthletes.json"
-import { addMember, getAllMembers, isMember, kickMember } from "./teams"
+import { addMember, isMember, kickMember } from "./teams"
 
 
 /**

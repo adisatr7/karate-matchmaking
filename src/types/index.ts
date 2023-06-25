@@ -35,7 +35,7 @@ export type Pertandingan = {
 export type KelasPertandingan = {
   idKelas: string,
   namaKelas: string,
-  teams: Tim[],
+  daftarIdTim: string[],
   matches: Match[]
 }
 
