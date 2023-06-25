@@ -1,0 +1,20 @@
+import { isPermissionGranted, requestPermission, sendNotification } from "@tauri-apps/api/notification"
+
+
+/**
+ * Send a notification to the user through the OS's notification system.
+ * 
+ * @param title The title of the notification.
+ * @param message The message of the notification.
+ */
+export default async function useNotification (title: any, message?: any) {
+  let permissionGranted = await isPermissionGranted()
+
+  if (!permissionGranted) {
+    const permission = await requestPermission()
+    permissionGranted = permission === "granted"
+  }
+  if (permissionGranted) {
+    sendNotification({ title: `${title}`, body: `${message || ""}` })
+  }
+}

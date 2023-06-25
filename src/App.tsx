@@ -3,7 +3,8 @@ import { useAppDispatch, useAppSelector } from "./store"
 
 import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-apps/api/fs"
 
-import { setCurrentUser } from "./store/slices/authSlice"
+import { setCurrentUser, setRegisteredUsers } from "./store/slices/authSlice"
+import useNotification from "./hooks/useNotification"
 
 
 export default function App() {
@@ -20,17 +21,21 @@ export default function App() {
     await createDir("data", { 
       dir: BaseDirectory.App, 
       recursive: true 
+    }).catch(err => {
+      useNotification("Terjadi kesalahan saat membuat folder baru", err)
     })
     
     // Create 'users.data' file
     await writeTextFile({
-      path: "users.data",
+      path: "./data/users.data",
       contents: JSON.stringify({
         currentUser: null,
         users: []
       })},
       { dir: BaseDirectory.App }
-    )
+    ).catch(err => {
+      useNotification("Terjadi kesalahan saat membuat file baru", err)
+    })
   }
 
   /**
@@ -39,13 +44,15 @@ export default function App() {
   const readUserData = async () => {
     try {
       const dataString = await readTextFile(
-          "users.data", {
+          "./data/users.data", {
           dir: BaseDirectory.App,
         }
       )
       
       const dataObject = JSON.parse(dataString)
       const currentUser = dataObject.currentUser
+
+      dispatch(setRegisteredUsers(dataObject.users))
   
       // Set current user inside Redux store
       if (dataObject.currentUser) {
@@ -53,6 +60,7 @@ export default function App() {
       }
     }
     catch (err) {
+      useNotification("Terjadi kesalahan saat membaca file", err)
       initiateUsersData()
     }
   }
@@ -68,7 +76,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-white h-screen w-screen justify-center items-center">
+    <div className="bg-stone-900 h-screen w-screen justify-center items-center">
     </div>
   )
 }

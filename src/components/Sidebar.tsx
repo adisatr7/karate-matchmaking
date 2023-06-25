@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useAppDispatch, useAppSelector } from "../store"
-import { toggleState } from "../store/slices/sidebarSlice"
+import { expandSidebar, collapseSidebar, hideSidebar } from "../store/slices/sidebarSlice"
 
 import * as Icons from "../assets/icons"
 import SidebarButton from "./SidebarButton"
@@ -8,17 +8,26 @@ import SidebarButton from "./SidebarButton"
 
 export default function Sidebar() {
   // State for whether the sidebar is expanded (true) or collapsed (false)
-  const isExpanded = useAppSelector(state => state.sidebar.isExpanded)
+  const sidebarStatus = useAppSelector(state => state.sidebar.status)
   const dispatch = useAppDispatch()
 
+  /**
+   * Toggle sidebar status between expanded and collapsed
+   */
   const toggleSideBar = () => {
-    dispatch(toggleState())
+    if (sidebarStatus === "collapsed")
+      dispatch(expandSidebar())
+
+    else if (sidebarStatus === "expanded")
+      dispatch(collapseSidebar())
   }
 
   return (
     <div 
       className={`flex flex-col items-end h-full w-fit px-[36px] py-[14px] left-0 bg-stone-900 text-white fixed 
-      ${isExpanded ? "translate-x-0 w-fit" : "-translate-x-[72%]"} 
+      ${sidebarStatus === "expanded" && "translate-x-0"}
+      ${sidebarStatus === "collapsed" &&  "-translate-x-[72%]"}
+      ${sidebarStatus === "hidden" && "translate-x-[-100%]"}
       duration-500 ease-in-out z-10`}>
 
       {/* Title and X icon container */}
@@ -31,10 +40,10 @@ export default function Sidebar() {
         <div className="w-[24px] h-[24px] flex justify-center items-center text-white hover:text-primary-opaque" onClick={toggleSideBar}>
           
           {/* Close button */}
-          <FontAwesomeIcon icon="xmark" width={20} className={`absolute cursor-pointer text-xl ${isExpanded ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ease-in-out`} />
+          <FontAwesomeIcon icon="xmark" width={20} className={`absolute cursor-pointer text-xl ${sidebarStatus === "expanded" ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ease-in-out`} />
           
           {/* Expand button */}
-          <FontAwesomeIcon icon="bars" width={20} className={`absolute cursor-pointer text-xl ${isExpanded ? "opacity-0" : "opacity-100"} transition-opacity duration-300 ease-in-out`} />
+          <FontAwesomeIcon icon="bars" width={20} className={`absolute cursor-pointer text-xl ${sidebarStatus === "expanded" ? "opacity-0" : "opacity-100"} transition-opacity duration-300 ease-in-out`} />
         </div>
       </div>
 

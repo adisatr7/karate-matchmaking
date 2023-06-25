@@ -22,13 +22,13 @@
         "removeDir": false,
         "removeFile": false,
         "renameFile": false,
-        "scope": ["$APP/*"],
+        "scope": ["$APP/**/*"],
         "writeFile": true
       },
       "path": {
         "all": true
       },
-      "os": {
+      "notification": {
         "all": true
       }
     },

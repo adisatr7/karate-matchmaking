@@ -10,14 +10,14 @@ type PropsType = {
 }
 
 export default function MenuBackground({ children }: PropsType) {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine)
+  // const particlesInit = useCallback(async (engine: Engine) => {
+  //   console.log(engine)
 
-    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine)
-  }, [])
+  //   // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
+  //   // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+  //   // starting from v2 you can add only the features you need reducing the bundle size
+  //   await loadFull(engine)
+  // }, [])
 
   return (
     <div className="w-screen h-screen flex flex-row bg-cover bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900">
