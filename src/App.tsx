@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "./store"
-
 import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-apps/api/fs"
-import { appDataDir } from "@tauri-apps/api/path"
-
+import { useAppDispatch, useAppSelector } from "./store"
 import { setCurrentUser, setRegisteredUsers } from "./store/slices/authSlice"
-import useNotification from "./hooks/useNotification"
-import { User } from "./types"
 import { collapseSidebar } from "./store/slices/sidebarSlice"
+import useNotification from "./hooks/useNotification"
 
 
 export default function App() {
   const navigate = useNavigate()
 
-  const currentUser = useAppSelector(state => state.auth.currentUser)
   const registeredUsers = useAppSelector(state => state.auth.registeredUsers)
   const dispatch = useAppDispatch()
 
@@ -60,7 +55,7 @@ export default function App() {
 
       // Set registered users list from 'users.data' into Redux store
       dispatch(setRegisteredUsers(dataObject.users))
-  
+
       // Set current user inside Redux store
       if (dataObject.currentUser) {
         dispatch(setCurrentUser(currentUser))

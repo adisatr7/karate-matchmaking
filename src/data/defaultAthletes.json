@@ -1,0 +1,16 @@
+[
+  {
+    "id_atlet": "",
+    "nama_atlet": "",
+    "jenis_kelamin": "",
+    "usia": 0,
+    "berat": 0,
+    "records": {
+      "wins": 0,
+      "losses": 0,
+      "yuko": 0,
+      "wazari": 0,
+      "ippon": 0
+    }
+  }
+]

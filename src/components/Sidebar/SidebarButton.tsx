@@ -1,7 +1,6 @@
-import React from "react"
-import { SVGIcon } from "../types"
-import { useAppDispatch, useAppSelector } from "../store"
-import { collapseSidebar } from "../store/slices/sidebarSlice"
+import { SVGIcon } from "../../types"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { collapseSidebar } from "../../store/slices/sidebarSlice"
 
 
 type PropsType = {
