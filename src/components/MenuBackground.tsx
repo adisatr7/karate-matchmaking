@@ -1,9 +1,9 @@
-import { useCallback } from "react"
 import Particles from "react-particles"
 import type { Container, Engine } from "tsparticles-engine"
 import { loadFull } from "tsparticles"
 import Sidebar from "./Sidebar"
-import { useAppSelector } from "../store"
+import { useAppDispatch, useAppSelector } from "../store"
+import { collapseSidebar } from "../store/slices/sidebarSlice"
 
 
 type PropsType = {
@@ -12,6 +12,12 @@ type PropsType = {
 
 export default function MenuBackground({ children }: PropsType) {
   const sidebarStatus = useAppSelector(state => state.sidebar.status)
+  const dispatch = useAppDispatch()
+
+  const handleDismissSidebar = () => {
+    if (sidebarStatus === "expanded")
+      dispatch(collapseSidebar())
+  }
 
   // const particlesInit = useCallback(async (engine: Engine) => {
   //   console.log(engine)
@@ -28,7 +34,9 @@ export default function MenuBackground({ children }: PropsType) {
       {/* Sidebar - left side, collapsible */}
       <Sidebar/>
 
-      <div className={`flex flex-1 flex-col pl-[120px] pr-[20px] py-[28px] gap-[18px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
+      <div
+        onClick={handleDismissSidebar}
+        className={`flex flex-1 flex-col pl-[120px] pr-[20px] py-[28px] gap-[18px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
         {children}
         {/* <Particles
         id="particle-background"
@@ -65,7 +73,6 @@ export default function MenuBackground({ children }: PropsType) {
           }
         }}/> */}
       </div>
-      
     </div>
   )
 }

@@ -32,7 +32,7 @@ const initialState: SidebarStates = {
  * Sidebar slice containing the reducer and actions for the sidebar
  */
 export const sidebarSlice = createSlice({
-  name: "auth",
+  name: "sidebar",
   initialState,
   reducers: {
 

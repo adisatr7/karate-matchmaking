@@ -1,0 +1,131 @@
+[
+  {
+    "id_pertandingan": "reg_open_cup",
+    "nama_pertandingan": "Regional Opan Cup",
+    "status": "selesai",
+    "penyelenggara": "Karate Foundation",
+    "kelas": [
+      {
+        "id_kelas": "min_45_m",
+        "nama_kelas": "Pemula Putra",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": [
+              {
+                "id": "",
+                "name": "",
+                "isWinner": false,
+                "status": "PLAYED",
+                "resultText": "0"
+              },
+              {
+                "id": "",
+                "name": "",
+                "isWinner": false,
+                "status": "PLAYED",
+                "resultText": "0"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id_kelas": "min_45_f",
+        "nama_kelas": "Pemula Putri",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": []
+          }
+        ]
+      },
+      {
+        "id_kelas": "min_50_m",
+        "nama_kelas": "Kadet Putra",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": []
+          }
+        ]
+      },
+      {
+        "id_kelas": "min_50_f",
+        "nama_kelas": "Kadet Putri",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": []
+          }
+        ]
+      },
+      {
+        "id_kelas": "min_55_m",
+        "nama_kelas": "Junior Putra",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": []
+          }
+        ]
+      },
+      {
+        "id_kelas": "min_55_f",
+        "nama_kelas": "Junior Putri",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id_pertandingan": "kd_ptdgn",
+    "nama_pertandingan": "Nama Pertandingan",
+    "status": "Selesai / Berlangsung / Akan Main / Pendaftaran / Diundur / Dibatalkan",
+    "penyelenggara": "",
+    "kelas": [
+      {
+        "id_kelas": "",
+        "nama_kelas": "",
+        "matches": [
+          {
+            "id": 0,
+            "name": "",
+            "nextMatchId": 0,
+            "startTime": "",
+            "state": "DONE",
+            "participants": []
+          }
+        ]
+      }
+    ]
+  }
+]
