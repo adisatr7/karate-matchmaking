@@ -1,4 +1,3 @@
-
 /**
  * SVG React Component type definition
 */
@@ -35,7 +34,7 @@ export type Pertandingan = {
 export type KelasPertandingan = {
   idKelas: string,
   namaKelas: string,
-  daftarIdTim: string[],
+  daftarTim: Pemain[],
   matches: Match[]
 }
 
@@ -49,15 +48,15 @@ export type Match = {
   waktuMain: string,
   status: "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   pemenang: "petarung1" | "petarung2" | "seri" | null
-  petarung: Petarung[]
+  petarung: Pemain[]
 }
 
 /**
  * Fighter type definition
  */
-export type Petarung = {
-  idPetarung: string,
-  namaPetarung: string,
+export type Pemain = {
+  idAtlet: string,
+  namaAtlet: string,
   idTim?: string,
   namaTim?: string,
 }

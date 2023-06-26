@@ -1,6 +1,8 @@
 import { KelasPertandingan } from "../../types"
 import { getAllTournaments, getTournamentById, saveTournamentsData } from "./tournaments"
 import useNotification from "../../hooks/useNotification"
+import { getTeamById } from "./teams"
+import { getAthleteById } from "./athletes"
 
 
 /**
@@ -130,25 +132,38 @@ export const deleteKelas = (tournamentId: string, idKelas: string) => {
  * 
  * @param tournamentId Tournament ID to register the team to
  * @param idKelas ID of the kelas to register the team to
- * @param idTeam ID of the team to be registered
+ * @param teamId ID of the team to be registered
  */
-export const registerTeam = (tournamentId: string, idKelas: string, idTeam: string) => {
+export const registerTeam = (tournamentId: string, idKelas: string, teamId: string, athleteId: string) => {
   const kelas = getKelasById(tournamentId, idKelas)
+  const athlete = getAthleteById(athleteId)
   
-  if (kelas) {
-    kelas.daftarIdTim.push(idTeam)
+  if (kelas && athlete) {
+    kelas.daftarTim.push({
+      idTim: teamId,
+      namaTim: getTeamById(teamId)?.namaTim,
+      idAtlet: athlete?.idAtlet,
+      namaAtlet: athlete?.namaAtlet
+    })
 
     updateKelas(tournamentId, kelas)
   }
 }
 
 
-export const unregisterTeam = (tournamentId: string, idKelas: string, idTeam: string) => {
+/**
+ * Remove a team from a kelas
+ * 
+ * @param tournamentId The tournament ID to unregister the team from
+ * @param idKelas The kelas ID to unregister the team from
+ * @param teamId The team ID to be unregistered
+ */
+export const unregisterTeam = (tournamentId: string, idKelas: string, teamId: string) => {
   const kelas = getKelasById(tournamentId, idKelas)
   
   // Remove the team from the kelas
   if (kelas) {
-    kelas.daftarIdTim = kelas.daftarIdTim.filter(id => id !== idTeam)
+    kelas.daftarTim = kelas.daftarTim.filter(team => team.idTim !== teamId)
     
     // Update the kelas object
     updateKelas(tournamentId, kelas)
