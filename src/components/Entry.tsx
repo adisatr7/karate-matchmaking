@@ -17,8 +17,8 @@ export default function Entry ({ leftIcon: LeftIcon, rightIcon: RightIcon, label
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <div className={`flex flex-row bg-gray-100 gap-[12px] rounded-md font-quicksand text-caption  border-2 ${isFocused && "border-red-500"} ${className}`}>
-      {LeftIcon && <LeftIcon className="w-6 h-6 fill-stone-500 opacity-50"/>}
+    <div className={`flex flex-row bg-gray-100 gap-[12px] rounded-md font-quicksand text-caption ring ${isFocused && "ring-red-500"} ${className}`}>
+      {LeftIcon && <LeftIcon className={iconStyle}/>}
       <input 
         type={type}
         inputMode={inputMode}
@@ -27,8 +27,10 @@ export default function Entry ({ leftIcon: LeftIcon, rightIcon: RightIcon, label
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="bg-transparent w-full h-[34px] rounded-md px-2 py-1 focus:outline-none"/>
-      {RightIcon && <RightIcon className="w-6 h-6 fill-stone-500 opacity-50"/>}
+        className="bg-transparent w-full h-[34px] rounded-md px-2 py-1 focus:outline-none text-black"/>
+      {RightIcon && <RightIcon className={iconStyle}/>}
     </div>
   )
 }
+
+const iconStyle = "w-6 h-6 fill-stone-500 opacity-50"

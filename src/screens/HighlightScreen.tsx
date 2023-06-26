@@ -5,7 +5,6 @@ import MenuBackground from "../components/MenuBackground"
 export default function HighlightScreen() {
   const currentUser = useAppSelector(state => state.auth.currentUser)
 
-
   return (
     <MenuBackground>
       
@@ -20,9 +19,9 @@ export default function HighlightScreen() {
 
       {/* Content - scrollable */}
       <div className="flex flex-col overflow-y-scroll">
-        
 
       </div>
+
     </MenuBackground>
   )
 }
