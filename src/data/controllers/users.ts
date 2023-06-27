@@ -35,21 +35,20 @@ export const assignDefaultUsersData = async () => {
  * 
  * @returns List of all registered users from 'users.data' file
  */
-export const getAllUsers = (): User[] => {
-  let users: User[] = []
-
-  readTextFile(
-    "data/users.data", {
-    dir: BaseDirectory.AppData
-  }).then(res => {
-    const data = JSON.parse(res)
-    users = data.users
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membaca file", err)
-    assignDefaultUsersData()
+export const getAllUsers = async (): Promise<User[]> => {
+  return new Promise((resolve, reject) => {
+    readTextFile("data/users.data", {
+      dir: BaseDirectory.AppData
+    })
+      .then(res => {
+        const data = JSON.parse(res)
+        resolve(data.users)
+      })
+      .catch(err => {
+        useNotification("Terjadi kesalahan saat membaca data pengguna", err)
+        reject(err)
+      })
   })
-
-  return users
 }
 
 

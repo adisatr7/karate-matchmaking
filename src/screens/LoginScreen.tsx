@@ -4,8 +4,6 @@ import { useAppDispatch, useAppSelector } from "../store"
 import { collapseSidebar } from "../store/slices/sidebarSlice"
 import { login } from "../store/slices/authSlice"
 
-import { createDir, writeTextFile, BaseDirectory } from "@tauri-apps/api/fs"
-
 import Entry from "../components/Entry"
 import Button from "../components/Button"
 
@@ -15,6 +13,7 @@ import useNotification from "../hooks/useNotification"
 import { useNavigate } from "react-router-dom"
 import { appDataDir } from "@tauri-apps/api/path"
 import { getAllUsers } from "../data/controllers/users"
+import { User } from "../types"
 
 
 export default function LoginScreen() {
@@ -25,20 +24,24 @@ export default function LoginScreen() {
 
   const currentUser = useAppSelector(state => state.auth.currentUser)
   const dispatch = useAppDispatch()
-
-  const registeredUsers = getAllUsers()
-
-  const handleLogin = () => {
+  
+  /**
+   * Handle login button click
+  */
+  const handleLogin = async () => {
     // Check if inputs are empty
     if (idPanitiaInput === "" || passwordInput === "") {
-        useNotification("ID panitia atau kata sandi kosong", "Silakan coba lagi")
+      useNotification("ID panitia atau kata sandi kosong", "Silakan coba lagi")
       // TODO: Implement in-app modal popup instead
       
       return
     }
 
     // Check if user exists
+    const registeredUsers = await getAllUsers()
     const user = registeredUsers.find(user => user.id === idPanitiaInput)
+
+    useNotification("Debug", JSON.stringify(registeredUsers))
 
     // If the user doesn't exist
     if (!user) {
