@@ -18,7 +18,7 @@ export const saveUsersData = async (currentUser: User, allUsers: User[] | any) =
   await createDataFolder()
 
   // Write into 'users.data' file
-  await writeInto({ currentUser, users: allUsers }, "users")
+  await writeInto({ currentUser: currentUser, users: allUsers }, "users")
 }
 
 
@@ -42,10 +42,12 @@ export const getAllUsers = async (): Promise<User[]> => {
     })
       .then(res => {
         const data = JSON.parse(res)
+        useNotification("Debug", res)
         resolve(data.users)
       })
       .catch(err => {
         useNotification("Terjadi kesalahan saat membaca data pengguna", err)
+        assignDefaultUsersData()
         reject(err)
       })
   })
@@ -71,19 +73,21 @@ export const getUserById = async (userId: string): Promise<User> => {
  * 
  * @returns The current user that is logged in to the app
  */
-export const getCurrentUser = (): User => {
-  let currentUser: User = null
-  
-  readTextFile(
-    "data/users.data", {
-    dir: BaseDirectory.AppData
-    }).then(res => {
-      const data = JSON.parse(res)
-      currentUser = data.currentUser
-    }
-  )
-
-  return currentUser ? currentUser : null
+export const getCurrentUser = async (): Promise<User> => {
+  return new Promise((resolve, reject) => {
+    readTextFile("data/users.data", {
+      dir: BaseDirectory.AppData
+    })
+      .then(res => {
+        const data = JSON.parse(res)
+        resolve(data.currentUser)
+      })
+      .catch(err => {
+        useNotification("Terjadi kesalahan saat membaca data pengguna", err)
+        assignDefaultUsersData()
+        reject(err)
+      })
+  })
 }
 
 

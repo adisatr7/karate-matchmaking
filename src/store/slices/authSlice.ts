@@ -7,14 +7,14 @@ import { getCurrentUser, setCurrentUser } from "../../data/controllers/users"
  * Auth states type definition
  */
 export interface AuthState {
-  currentUser: User | null
+  currentUser: User
 }
 
 /**
  * Auth initial state containing the current user and the list of registered users
  */
 const initialState: AuthState = {
-  currentUser: getCurrentUser()
+  currentUser: null
 }
 
 /**
@@ -30,7 +30,7 @@ export const authSlice = createSlice({
      * 
      * @param action The user object to be set as the current user
      */
-    login: (state, action: PayloadAction<User | null>) => {
+    login: (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload
       setCurrentUser(action.payload)
     },
