@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../store"
 
 import { collapseSidebar } from "../store/slices/sidebarSlice"
-import { setCurrentUser } from "../store/slices/authSlice"
+import { login } from "../store/slices/authSlice"
 
 import { createDir, writeTextFile, BaseDirectory } from "@tauri-apps/api/fs"
 
@@ -14,6 +14,7 @@ import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
 import { useNavigate } from "react-router-dom"
 import { appDataDir } from "@tauri-apps/api/path"
+import { getAllUsers } from "../data/controllers/users"
 
 
 export default function LoginScreen() {
@@ -23,8 +24,9 @@ export default function LoginScreen() {
   const [passwordInput, setPasswordInput] = useState("")
 
   const currentUser = useAppSelector(state => state.auth.currentUser)
-  const registeredUsers = useAppSelector(state => state.auth.registeredUsers)
   const dispatch = useAppDispatch()
+
+  const registeredUsers = getAllUsers()
 
   const handleLogin = () => {
     // Check if inputs are empty
@@ -52,26 +54,8 @@ export default function LoginScreen() {
       return
     }
     
-    // Create 'data' folder if it doesn't exist
-    createDir("data", {
-      dir: BaseDirectory.AppData,
-      recursive: true
-    })
-    
-    // Write current user to file
-    writeTextFile({
-      path: "data/users.data",
-      contents: JSON.stringify({
-        currentUser: user,
-        users: registeredUsers
-      })},
-      { dir: BaseDirectory.AppData }
-    ).catch(err => {
-      useNotification("Gagal menyimpan data", err)
-    })
-
     // If user exists, set the current user inside Redux store
-    dispatch(setCurrentUser(user))
+    dispatch(login(user))
     
     // Navigate to home screen
     navigate("/highlight")

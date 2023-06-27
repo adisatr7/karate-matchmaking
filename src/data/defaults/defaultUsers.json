@@ -2,6 +2,19 @@
   {
     "id": "admin",
     "name": "Admin",
-    "password": "admin"
+    "password": "admin",
+    "imageUrl": "https://www.giantbomb.com/a/uploads/scale_medium/39/392987/3054533-1138738037-axOyf.jpg"
+  },
+  {
+    "id": "veronichan",
+    "name": "Veronichan",
+    "password": "ver123",
+    "imageUrl": "https://dotesports.com/wp-content/uploads/2022/07/28205941/Feature-Image-74.jpg?w=1200"
+  },
+  {
+    "id": "sheep",
+    "name": "Shepard",
+    "password": "sheep123",
+    "imageUrl": "https://www.giantbomb.com/a/uploads/square_medium/8/80647/1813854-mark2s.jpg"
   }
 ]

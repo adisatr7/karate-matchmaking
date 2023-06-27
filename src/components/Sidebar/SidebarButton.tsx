@@ -6,7 +6,7 @@ import { collapseSidebar } from "../../store/slices/sidebarSlice"
 type PropsType = {
   icon: SVGIcon
   label: string,
-  onClick?: void,
+  onClick?: Function,
 }
 
 export default function SidebarButton({ icon: Icon, label, onClick }: PropsType) {

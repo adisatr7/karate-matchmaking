@@ -1,15 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useAppDispatch, useAppSelector } from "../../store"
-import { expandSidebar, collapseSidebar } from "../../store/slices/sidebarSlice"
+import { expandSidebar, collapseSidebar, hideSidebar } from "../../store/slices/sidebarSlice"
+import { hideModal, showModal } from "../../store/slices/modalSlice"
 
 import * as Icons from "../../assets/icons"
 import SidebarButton from "./SidebarButton"
+import Modal from "../Modal"
+import Button from "../Button"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Sidebar() {
-  // State for whether the sidebar is expanded (true) or collapsed (false)
+  // Redux states to see sidebar and modal status
   const sidebarStatus = useAppSelector(state => state.sidebar.status)
+  const modalStatus = useAppSelector(state => state.modal.isShown)
+
+  // Redux dispatch to control sidebar and modal status
   const dispatch = useAppDispatch()
+
+  // React router hook to navigate to other screens
+  const navigate = useNavigate()
 
   /**
    * Toggle sidebar status between expanded and collapsed
@@ -20,6 +30,11 @@ export default function Sidebar() {
 
     else if (sidebarStatus === "expanded")
       dispatch(collapseSidebar())
+  }
+
+  const handleLogout = () => {
+    dispatch(hideSidebar())
+    
   }
 
   return (
@@ -49,23 +64,25 @@ export default function Sidebar() {
 
       {/* Middle buttons container */}
       <div className="flex flex-col h-full my-[12px] transition-all w-full">
-
-        {/* Highlight | TODO: Implement Redux */}
         <SidebarButton icon={Icons.Highlight} label="Highlight"/>
-        {/* Tournaments */}
         <SidebarButton icon={Icons.Tournaments} label="Pertandingan"/>
-        {/* Teams */}
         <SidebarButton icon={Icons.Teams} label="Tim"/>
-        {/* Athletes */}
         <SidebarButton icon={Icons.Athletes} label="Atlet"/>
-        {/* Settings */}
         <SidebarButton icon={Icons.Settings} label="Pengaturan"/>
-        
       </div>
+
       {/* Logout button container */}
       <div className="flex flex-col h-fit my-[12px] transition-all w-full">
-        <SidebarButton icon={Icons.Logout} label="Keluar"/>
+        <SidebarButton icon={Icons.Logout} label="Keluar" onClick={() => dispatch(showModal())}/>
       </div>
+
+      { modalStatus && (
+        <Modal title="Konfirmasi" caption="Yakin ingin keluar?">
+          <Button label="Ya" onClick={handleLogout}/>
+          <Button label="Tidak" onClick={() => dispatch(hideModal())}/>
+        </Modal>
+      ) }
+
     </div>
   )
 }

@@ -14,7 +14,8 @@ export type SVGIcon = React.FunctionComponent<SVGComponent>
 export type User = {
   id: string,
   name: string,
-  password: string
+  password: string,
+  imageUrl: string
 }
 
 /**
@@ -69,7 +70,7 @@ export type Tim = {
   namaTim: string,
   inisial: string,
   asal: string,
-  anggota: string[]
+  idAnggota: string[]
 }
 
 /**

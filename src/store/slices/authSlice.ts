@@ -1,27 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { User } from "../../types"
+import { getCurrentUser, setCurrentUser } from "../../data/controllers/users"
 
 
 /**
  * Auth states type definition
  */
 export interface AuthState {
-  currentUser: User | null,
-  registeredUsers: User[]
+  currentUser: User | null
 }
 
 /**
  * Auth initial state containing the current user and the list of registered users
  */
 const initialState: AuthState = {
-  currentUser: null,
-  registeredUsers: [
-    {
-      id: "admin",
-      name: "Admin",
-      password: "admin"
-    }
-  ]
+  currentUser: getCurrentUser()
 }
 
 /**
@@ -35,38 +28,22 @@ export const authSlice = createSlice({
     /**
      * Set the current user
      * 
-     * @param action The user to be set as the current user
+     * @param action The user object to be set as the current user
      */
-    setCurrentUser: (state, action: PayloadAction<User>) => {
+    login: (state, action: PayloadAction<User | null>) => {
       state.currentUser = action.payload
+      setCurrentUser(action.payload)
     },
 
     /**
-     * Clear the current user
+     * Clear the current user and log out
      */
-    clearCurrentUser: (state) => {
+    logout: (state) => {
       state.currentUser = null
-    },
-
-    /**
-     * Set the registered users list
-     * 
-     * @param action 
-     */
-    setRegisteredUsers: (state, action: PayloadAction<User[]>) => {
-      state.registeredUsers = action.payload
-    },
-
-    /**
-     * Add a user to the registered users list
-     * 
-     * @param action 
-     */
-    addRegisteredUser: (state, action: PayloadAction<User>) => {
-      state.registeredUsers.push(action.payload)
+      setCurrentUser(null)
     }
   }
 })
 
 export default authSlice.reducer
-export const { setCurrentUser, clearCurrentUser, setRegisteredUsers, addRegisteredUser } = authSlice.actions
+export const { login, logout } = authSlice.actions
