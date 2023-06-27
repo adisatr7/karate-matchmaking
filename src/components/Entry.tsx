@@ -1,4 +1,4 @@
-import { HTMLAttributes, HTMLInputTypeAttribute, useState } from "react"
+import { HTMLAttributes, HTMLInputTypeAttribute, useEffect, useState } from "react"
 import { SVGIcon } from "../types"
 
 
@@ -17,7 +17,7 @@ export default function Entry ({ leftIcon: LeftIcon, rightIcon: RightIcon, label
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <div className={`flex flex-row bg-gray-100 gap-[4px] px-[12px] rounded-md items-center font-quicksand text-caption border-2 ${isFocused && "border-red-500"} ${className}`}>
+    <div className={`flex flex-row bg-gray-100 gap-[4px] px-[10px] rounded-md items-center font-quicksand text-caption border-2 ${isFocused && "border-red-500"} ${className}`}>
       {LeftIcon && <LeftIcon className={iconStyle}/>}
       <input 
         type={type}
@@ -33,4 +33,4 @@ export default function Entry ({ leftIcon: LeftIcon, rightIcon: RightIcon, label
   )
 }
 
-const iconStyle = "px-[2px] h-[8px] w-[8px] flex fill-stone-500 opacity-50"
+const iconStyle = "flex h-[24px] w-[24px] overflow-visible scale-1 fill-stone-500 opacity-50"
