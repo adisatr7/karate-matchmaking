@@ -11,24 +11,162 @@
         "matches": [
           {
             "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
+            "name": "Match 1",
+            "nextMatchId": 4,
+            "startTime": "2023-05-05",
             "state": "DONE",
             "participants": [
               {
-                "id": "",
-                "name": "",
-                "isWinner": false,
-                "status": "PLAYED",
-                "resultText": "0"
+                "id": "ryo",
+                "name": "RYO",
+                "isWinner": true,
+                "status": null,
+                "resultText": "8"
               },
               {
-                "id": "",
-                "name": "",
+                "id": "akr",
+                "name": "AKR",
                 "isWinner": false,
-                "status": "PLAYED",
-                "resultText": "0"
+                "status": null,
+                "resultText": "3"
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Match 2",
+            "nextMatchId": 4,
+            "startTime": "2023-05-05",
+            "state": "DONE",
+            "participants": [
+              {
+                "id": "ykr",
+                "name": "YKR",
+                "isWinner": false,
+                "status": null,
+                "resultText": "3"
+              },
+              {
+                "id": "hrs",
+                "name": "HRS",
+                "isWinner": true,
+                "status": null,
+                "resultText": "6"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Match 3",
+            "nextMatchId": 5,
+            "startTime": "2023-05-05",
+            "state": "DONE",
+            "participants": [
+              {
+                "id": "kzk",
+                "name": "KZK",
+                "isWinner": false,
+                "status": null,
+                "resultText": "4"
+              },
+              {
+                "id": "hrk",
+                "name": "HRK",
+                "isWinner": true, 
+                "status": null,
+                "resultText": "7"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Match 4",
+            "nextMatchId": 5,
+            "startTime": "2023-05-05",
+            "state": "NO_PARTY",
+            "participants": [
+              {
+                "id": "ryo",
+                "name": "RYO",
+                "isWinner": false,
+                "status": null,
+                "resultText": "8"
+              },
+              {
+                "id": "akr",
+                "name": "AKR",
+                "isWinner": false,
+                "status": null,
+                "resultText": "3"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "name": "Semi Final 1",
+            "nextMatchId": 6,
+            "startTime": "2023-05-05",
+            "state": "DONE",
+            "participants": [
+              {
+                "id": "ryo",
+                "name": "RYO",
+                "isWinner": true,
+                "status": null,
+                "resultText": "6"
+              },
+              {
+                "id": "hrk",
+                "name": "HRK",
+                "isWinner": false,
+                "status": null,
+                "resultText": "7"
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "name": "Semi Final 2",
+            "nextMatchId": null,
+            "startTime": "2023-05-05",
+            "state": "NO_PARTY",
+            "participants": [
+              {
+                "id": "hrs",
+                "name": "HRS",
+                "isWinner": true,
+                "status": null,
+                "resultText": "6"
+              },
+              {
+                "id": "hrk",
+                "name": "HRK",
+                "isWinner": false,
+                "status": null,
+                "resultText": "7"
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "name": "Final",
+            "nextMatchId": null,
+            "startTime": "2023-05-05",
+            "state": "NO_PARTY",
+            "participants": [
+              {
+                "id": "hrs",
+                "name": "HRS",
+                "isWinner": true,
+                "status": null,
+                "resultText": "6"
+              },
+              {
+                "id": "hrk",
+                "name": "HRK",
+                "isWinner": false,
+                "status": null,
+                "resultText": "7"
               }
             ]
           }
