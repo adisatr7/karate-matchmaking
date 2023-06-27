@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../store"
 
 import { collapseSidebar } from "../store/slices/sidebarSlice"
@@ -11,8 +11,7 @@ import athleteImage1 from "../assets/athlete1.png"
 import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
 import { useNavigate } from "react-router-dom"
-import { appDataDir } from "@tauri-apps/api/path"
-import { assignDefaultUsersData, getAllUsers } from "../data/controllers/users"
+import { getAllUsers } from "../data/controllers/users"
 
 
 export default function LoginScreen() {
