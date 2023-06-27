@@ -17,7 +17,7 @@ export default function Entry ({ leftIcon: LeftIcon, rightIcon: RightIcon, label
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <div className={`flex flex-row bg-gray-100 gap-[4px] px-[10px] rounded-md items-center font-quicksand text-caption border-2 ${isFocused && "border-red-500"} ${className}`}>
+    <div className={`flex flex-row bg-gray-100 px-[10px] rounded-md items-center font-quicksand text-caption border-2 ${isFocused && "border-red-500"} ${className}`}>
       {LeftIcon && <LeftIcon className={iconStyle}/>}
       <input 
         type={type}
