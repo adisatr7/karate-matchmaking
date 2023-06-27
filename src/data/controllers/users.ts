@@ -1,4 +1,4 @@
-import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-apps/api/fs"
+import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
 import { User } from "../../types"
 import defaultUsersData from "../defaults/defaultUsers.json"
@@ -42,7 +42,6 @@ export const getAllUsers = async (): Promise<User[]> => {
     })
       .then(res => {
         const data = JSON.parse(res)
-        useNotification("Debug", res)
         resolve(data.users)
       })
       .catch(err => {
@@ -108,8 +107,8 @@ export const setCurrentUser = async (user: User) => {
  * 
  * @param users List of all registered users to be saved to 'users.data' file
  */
-export const setAllUsers = (users: User[]) => {
-  const currentUser = getCurrentUser()
+export const setAllUsers = async (users: User[]) => {
+  const currentUser = await getCurrentUser()
   saveUsersData(currentUser, users)
 }
 

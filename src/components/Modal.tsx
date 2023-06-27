@@ -6,7 +6,7 @@ import { hideModal } from "../store/slices/modalSlice";
 type PropsType = {
   title: string,
   caption?: string,
-  children?: ReactNode,
+  children?: ReactNode
 }
 
 export default function Modal ({ children, title, caption }: PropsType) {
@@ -31,12 +31,12 @@ export default function Modal ({ children, title, caption }: PropsType) {
     <div
       onClick={dismissModal}
       className={`fixed top-0 left-0 w-screen h-screen bg-black ease-in-out duration-500 text-white font-quicksand flex flex-col justify-center items-center
-      ${animationState === 0 ? "bg-opacity-0" : "bg-opacity-50"}`}>
+      ${animationState === 0 ? "bg-opacity-0" : "bg-opacity-70"}`}>
 
       {/* Popup window */}
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`bg-stone-900 border border-stone-700 w-fit h-fit flex flex-col px-[22px] py-[24px] rounded-md gap-[6px] transition-all ease-in-out bg-opacity-70
+        className={`bg-stone-900 border border-stone-700 w-fit h-fit flex flex-col min-w-[300px] px-[22px] py-[24px] rounded-md gap-[10px] transition-all ease-in-out bg-opacity-70
         ${animationState === 0 ? "opacity-0 translate-y-10 duration-500" : "opacity-100 translate-y-0 duration-300"}`}>
 
         {/* Header */}

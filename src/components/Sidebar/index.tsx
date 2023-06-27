@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom"
 export default function Sidebar() {
   // Redux states to see sidebar and modal status
   const sidebarStatus = useAppSelector(state => state.sidebar.status)
-  const modalStatus = useAppSelector(state => state.modal.isShown)
 
   // Redux dispatch to control sidebar and modal status
   const dispatch = useAppDispatch()
@@ -32,10 +31,7 @@ export default function Sidebar() {
       dispatch(collapseSidebar())
   }
 
-  const handleLogout = () => {
-    dispatch(hideSidebar())
-    
-  }
+
 
   return (
     <div 
@@ -75,13 +71,6 @@ export default function Sidebar() {
       <div className="flex flex-col h-fit my-[12px] transition-all w-full">
         <SidebarButton icon={Icons.Logout} label="Keluar" onClick={() => dispatch(showModal())}/>
       </div>
-
-      { modalStatus && (
-        <Modal title="Konfirmasi" caption="Yakin ingin keluar?">
-          <Button label="Ya" onClick={handleLogout}/>
-          <Button label="Tidak" onClick={() => dispatch(hideModal())}/>
-        </Modal>
-      ) }
 
     </div>
   )

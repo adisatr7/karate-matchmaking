@@ -15,7 +15,7 @@ export default function SidebarButton({ icon: Icon, label, onClick }: PropsType)
 
   const handleButtonClick = () => {
     dispatch(collapseSidebar())
-    onClick
+    onClick!()
   }
 
   return (

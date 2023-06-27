@@ -38,8 +38,6 @@ export default function LoginScreen() {
     // Read registered users data
     const registeredUsers = await getAllUsers()
 
-    useNotification("Memuat data pengguna", JSON.stringify(registeredUsers))
-
     // If the data is null, assign default data
     if (registeredUsers.length === 0) {
       useNotification("Gagal memuat data", "Tidak dapat membaca data pengguna!")
