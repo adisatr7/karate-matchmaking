@@ -36,7 +36,7 @@ export default function MenuBackground({ children }: PropsType) {
 
       <div
         onClick={handleDismissSidebar}
-        className={`flex flex-1 flex-col pl-[120px] pr-[20px] py-[28px] gap-[18px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
+        className={`flex flex-1 flex-col pl-[120px] pr-[20px] py-[28px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
         {children}
         {/* <Particles
         id="particle-background"
