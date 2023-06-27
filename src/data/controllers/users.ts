@@ -2,6 +2,7 @@ import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-ap
 import useNotification from "../../hooks/useNotification"
 import { User } from "../../types"
 import defaultUsersData from "../defaults/defaultUsers.json"
+import { createDataFolder, writeInto } from "./utils"
 
 
 /**
@@ -14,22 +15,10 @@ import defaultUsersData from "../defaults/defaultUsers.json"
 export const saveUsersData = async (currentUser: User | null, allUsers: User[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
-  await createDir("data", {
-    dir: BaseDirectory.AppData,
-    recursive: true
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membuat folder baru", err)
-  })
+  await createDataFolder()
 
   // Write into 'users.data' file
-  await writeTextFile({
-    path: "data/users.data",
-    contents: JSON.stringify({ currentUser, allUsers })
-  },
-    { dir: BaseDirectory.AppData }
-  ).catch(err => {
-    useNotification("Terjadi kesalahan saat membuat file baru", err)
-  })
+  await writeInto({ currentUser, users: allUsers }, "users")
 }
 
 

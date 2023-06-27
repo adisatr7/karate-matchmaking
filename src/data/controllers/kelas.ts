@@ -1,4 +1,4 @@
-import { KelasPertandingan } from "../../types"
+import { TournamentClass } from "../../types"
 import { getAllTournaments, getTournamentById, saveTournamentsData } from "./tournaments"
 import useNotification from "../../hooks/useNotification"
 import { getTeamById } from "./teams"
@@ -11,9 +11,9 @@ import { getAthleteById } from "./athletes"
  * @param tournamentId Tournament ID to get all kelas from
  * @returns List of all kelas from the tournament
  */
-export const getAllKelas = (tournamentId: string): KelasPertandingan[] => {
+export const getAllKelas = (tournamentId: string): TournamentClass[] => {
   let tournament = getTournamentById(tournamentId)
-  let kelas: KelasPertandingan[] = []
+  let kelas: TournamentClass[] = []
 
   if (tournament) {
     kelas = tournament.kelas
@@ -37,7 +37,7 @@ export const getAllKelas = (tournamentId: string): KelasPertandingan[] => {
  * 
  * @returns The kelas object
  */
-export const getKelasById = (tournamentId: string, idKelas: string): KelasPertandingan | undefined => {
+export const getKelasById = (tournamentId: string, idKelas: string): TournamentClass | undefined => {
   let kelas = getAllKelas(tournamentId).find(kelas => kelas.idKelas === idKelas)
 
   // Check if kelas is found
@@ -58,7 +58,7 @@ export const getKelasById = (tournamentId: string, idKelas: string): KelasPertan
  * @param tournamentId Tournament ID to add the kelas to
  * @param newKelas The new kelas object
  */
-export const addKelas = (tournamentId: string, newKelas: KelasPertandingan) => {
+export const addKelas = (tournamentId: string, newKelas: TournamentClass) => {
   let tournament = getTournamentById(tournamentId)
   let kelas = getAllKelas(tournamentId)
 
@@ -81,7 +81,7 @@ export const addKelas = (tournamentId: string, newKelas: KelasPertandingan) => {
  * @param tournamentId Tournament ID to delete the kelas from
  * @param updatedKelas The updated kelas object
  */
-export const updateKelas = (tournamentId: string, updatedKelas: KelasPertandingan) => {
+export const updateKelas = (tournamentId: string, updatedKelas: TournamentClass) => {
   let tournament = getTournamentById(tournamentId)
   let kelas = getAllKelas(tournamentId)
 

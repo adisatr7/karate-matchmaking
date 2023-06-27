@@ -1,4 +1,4 @@
-import { Match, Pemain } from "../../types"
+import { Match, Participant } from "../../types"
 import { getAthleteById } from "./athletes"
 import { getKelasById } from "./kelas"
 import { getTeamById } from "./teams"
@@ -155,14 +155,14 @@ export const setMatches = (tournamentId: string, idKelas: string, matches: Match
  * @param kelasId The kelas ID to generate the matches for
  * @param participatingTeams The teams to generate the matches from
  */
-export const generateBracket = (tournamentId: string, kelasId: string, participatingTeams: Pemain[]) => {
+export const generateBracket = (tournamentId: string, kelasId: string, participatingTeams: Participant[]) => {
   const matches: Match[] = []
 
   // Calculate the total rounds needed based on the number of teams participating
   const totalRounds = Math.ceil(Math.log2(participatingTeams.length))
 
   // Create a list of teams that will be participating in the tournament
-  const teams: Pemain[] = participatingTeams.map((value) => ({
+  const teams: Participant[] = participatingTeams.map((value) => ({
     idAtlet: value.idAtlet,
     idTim: value.idTim,
     namaAtlet: value.namaAtlet,
@@ -223,7 +223,7 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
     // If there are odd number of teams, add a "Bye" team, which is a team that
     // will automatically advance to the next round
     if (teamsInRound < participatingTeams.length) {
-      const byeTeam: Pemain = {
+      const byeTeam: Participant = {
         idAtlet: "bye",
         idTim: "bye",
         namaAtlet: "Bye",

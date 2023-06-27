@@ -1,8 +1,9 @@
-import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-apps/api/fs"
+import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
-import { Atlet } from "../../types"
+import { Athlete } from "../../types"
 import defaultAthletesData from "../defaults/defaultAthletes.json"
 import { addMember, isMember, kickMember } from "./teams"
+import { createDataFolder, writeInto } from "./utils"
 
 
 /**
@@ -10,25 +11,9 @@ import { addMember, isMember, kickMember } from "./teams"
  * 
  * @param athletes List of all athletes to be saved to 'athletes.data' file
  */
-export const saveAthletesData = async (athletes: Atlet[] | any) => {
-
-  // Create 'data' folder (if it doesn't exist yet)
-  await createDir("data", {
-    dir: BaseDirectory.AppData,
-    recursive: true
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membuat folder baru", err)
-  })
-
-  // Write into 'athletes.data' file
-  await writeTextFile({
-    path: "data/athletes.data",
-    contents: JSON.stringify(athletes)
-  },
-    { dir: BaseDirectory.AppData }
-  ).catch(err => {
-    useNotification("Terjadi kesalahan saat membuat file baru", err)
-  })
+export const saveAthletesData = async (athletes: Athlete[] | any) => {
+  await createDataFolder()
+  await writeInto(athletes, "athletes")
 }
 
 
@@ -36,7 +21,7 @@ export const saveAthletesData = async (athletes: Atlet[] | any) => {
  * Initiate athletes data by creating the 'data' folder 
  * and 'athletes.data' file if they don't exist yet
  */
-export const setDefaultAthletesData = async () => {
+export const assignDefaultAthletesData = async () => {
   saveAthletesData(defaultAthletesData)
 }
 
@@ -46,8 +31,8 @@ export const setDefaultAthletesData = async () => {
  * 
  * @returns List of all athletes from 'athletes.data' file
  */
-const getAllAthletes = (): Atlet[] => {
-  let athletes: Atlet[] = []
+export const getAllAthletes = (): Athlete[] => {
+  let athletes: Athlete[] = []
 
   readTextFile(
     "data/athletes.data", {
@@ -68,7 +53,7 @@ const getAllAthletes = (): Atlet[] => {
  * @param id The id of the athlete to be searched
  * @returns The athlete object with the specified id
  */
-export const getAthleteById = (id: string): Atlet | undefined => {
+export const getAthleteById = (id: string): Athlete | undefined => {
   let atlet = getAllAthletes().find(atlet => atlet.idAtlet === id)
 
   // Return the athlete object if it exists
@@ -85,7 +70,7 @@ export const getAthleteById = (id: string): Atlet | undefined => {
  * 
  * @param athlete The athlete object to be added
  */
-export const addAthlete = async (athlete: Atlet) => {
+export const addAthlete = async (athlete: Athlete) => {
   let athletes = getAllAthletes()
   athletes.push(athlete)
 
@@ -98,7 +83,7 @@ export const addAthlete = async (athlete: Atlet) => {
  * 
  * @param athlete The athlete object to be deleted
  */
-export const updateAthlete = async (athlete: Atlet) => {
+export const updateAthlete = async (athlete: Athlete) => {
   let athletes = getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
@@ -113,7 +98,7 @@ export const updateAthlete = async (athlete: Atlet) => {
  * 
  * @param athlete The athlete object to be deleted
  */
-export const deleteAthlete = async (athlete: Atlet) => {
+export const deleteAthlete = async (athlete: Athlete) => {
   let athletes = getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
@@ -135,7 +120,7 @@ export const deleteAthlete = async (athlete: Atlet) => {
  * @param athlete Athlete object to be added to the team
  * @param teamId The id of the team to be joined
  */
-export const joinTeam = async (athlete: Atlet, teamId: string) => {
+export const joinTeam = async (athlete: Athlete, teamId: string) => {
   let athletes = getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
@@ -160,7 +145,7 @@ export const joinTeam = async (athlete: Atlet, teamId: string) => {
  * 
  * @param athlete Athlete object to be removed from the team
  */
-export const leaveTeam = async (athlete: Atlet) => {
+export const leaveTeam = async (athlete: Athlete) => {
   let athletes = getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 

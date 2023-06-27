@@ -21,21 +21,21 @@ export type User = {
 /**
  * Tournament type definition
  */
-export type Pertandingan = {
+export type Tournament = {
   idPertandingan: string,
   namaPertandingan: string,
   status: "pendaftaran" | "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   penyelenggara: string,
-  kelas: KelasPertandingan[]
+  kelas: TournamentClass[]
 }
  
 /**
 * Tournament subclass type definition
 */
-export type KelasPertandingan = {
+export type TournamentClass = {
   idKelas: string,
   namaKelas: string,
-  daftarTim: Pemain[],
+  daftarTim: Participant[],
   matches: Match[]
 }
 
@@ -49,13 +49,13 @@ export type Match = {
   waktuMain: string,
   status: "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   pemenang: "petarung1" | "petarung2" | "seri" | null
-  petarung: Pemain[]
+  petarung: Participant[]
 }
 
 /**
  * Fighter type definition
  */
-export type Pemain = {
+export type Participant = {
   idAtlet: string,
   namaAtlet: string,
   idTim?: string,
@@ -65,7 +65,7 @@ export type Pemain = {
 /**
  * Team type definition
  */
-export type Tim = {
+export type Team = {
   idTim: string,
   namaTim: string,
   inisial: string,
@@ -76,22 +76,22 @@ export type Tim = {
 /**
  * Athlete type definition
  */
-export type Atlet = {
+export type Athlete = {
   idAtlet: string,
   namaAtlet: string,
   jenisKelamin: "m" | "f",
   usia: number,
   berat: number,
   idTimSekarang: string
-  records: AthleteRecord
 }
 
 /**
- * Athlete Record type definition
+ * Match history type definition
  */
-export type AthleteRecord = {
-  wins: number,
-  losses: number,
+export type MatchHistory = {
+  idAtlet: string,
+  idMatch: string,
+  isWinning: boolean,
   yuko: number,
   wazari: number,
   ippon: number
