@@ -60,11 +60,11 @@ export default function Sidebar() {
 
       {/* Middle buttons container */}
       <div className="flex flex-col h-full my-[12px] transition-all w-full">
-        <SidebarButton icon={Icons.Highlight} label="Highlight"/>
-        <SidebarButton icon={Icons.Tournaments} label="Pertandingan"/>
-        <SidebarButton icon={Icons.Teams} label="Tim"/>
-        <SidebarButton icon={Icons.Athletes} label="Atlet"/>
-        <SidebarButton icon={Icons.Settings} label="Pengaturan"/>
+        <SidebarButton onClick={() => navigate("/highlight")} icon={Icons.Highlight} label="Highlight"/>
+        <SidebarButton onClick={() => navigate("/tournament/all")} icon={Icons.Tournaments} label="Pertandingan"/>
+        <SidebarButton onClick={() => navigate("/team/all")} icon={Icons.Teams} label="Tim"/>
+        <SidebarButton onClick={() => navigate("/athlete/all")} icon={Icons.Athletes} label="Atlet"/>
+        <SidebarButton onClick={() => navigate("/settings")} icon={Icons.Settings} label="Pengaturan"/>
       </div>
 
       {/* Logout button container */}

@@ -26,7 +26,8 @@ export type Tournament = {
   namaPertandingan: string,
   status: "pendaftaran" | "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   penyelenggara: string,
-  kelas: TournamentClass[]
+  kelas: TournamentClass[],
+  [key: string]: any    // Index signature to allow string indexing
 }
  
 /**
@@ -49,7 +50,7 @@ export type Match = {
   waktuMain: string,
   status: "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   pemenang: "petarung1" | "petarung2" | "seri" | null
-  petarung: Participant[]
+  idTim: string[]
 }
 
 /**
@@ -79,6 +80,7 @@ export type Team = {
 export type Athlete = {
   idAtlet: string,
   namaAtlet: string,
+  imageUrl?: string,
   jenisKelamin: "m" | "f",
   usia: number,
   berat: number,

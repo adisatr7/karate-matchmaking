@@ -24,8 +24,8 @@ export const saveTournamentsData = async (tournaments: Tournament[] | any) => {
  * Initiate tournaments data by creating the 'data' folder and 
  * 'tournaments.data' file if they don't exist yet
  */
-export const setDefaultTournamentsData = async () => {
-  saveTournamentsData(defaultTournamentsData)
+export const assignDefaultTournamentsData = async () => {
+  await saveTournamentsData(defaultTournamentsData)
 }
 
 
@@ -34,19 +34,22 @@ export const setDefaultTournamentsData = async () => {
  * 
  * @returns The list of tournaments
  */
-export const getAllTournaments = (): Tournament[] => {
-  let tournaments: Tournament[] = []
-
-  readTextFile(
-    "data/tournaments.data", {
-    dir: BaseDirectory.AppData,
-  }).then(data => {
-    tournaments = JSON.parse(data)
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membaca file `tournaments.data`", err)
+export const getAllTournaments = async (): Promise<Tournament[]> => {
+  return new Promise(async (resolve, reject) => {
+      readTextFile(
+        "data/tournaments.data", {
+        dir: BaseDirectory.AppData
+      }
+      ).then(res => {
+        const tournaments = JSON.parse(res)
+        resolve(tournaments)
+      }
+      ).catch(err => {
+        useNotification("Terjadi kesalahan saat membaca data pertandingan", err)
+        assignDefaultTournamentsData()
+        reject(err)
+      })
   })
-
-  return tournaments
 }
 
 
@@ -56,10 +59,17 @@ export const getAllTournaments = (): Tournament[] => {
  * @param id The id of the tournament
  * @returns  The tournament object
  */
-export const getTournamentById = (id: string): Tournament | undefined => {
-  const tournaments = getAllTournaments()
+export const getTournamentById = async (id: string): Promise<Tournament> => {
+  return new Promise(async (resolve, reject) => {
+    const tournaments = await getAllTournaments()
+    const tournament = tournaments.find(tournament => tournament!.idPertandingan === id)
 
-  return tournaments.find(tournament => tournament.idPertandingan === id)
+    if (tournament) {
+      resolve(tournament)
+    } else {
+      reject("Pertandingan tidak ditemukan")
+    }
+  })
 }
 
 
@@ -69,7 +79,7 @@ export const getTournamentById = (id: string): Tournament | undefined => {
  * @param tournament The tournament object to be added
  */
 export const addTournament = async (tournament: Tournament) => {
-  let tournaments = getAllTournaments()
+  let tournaments = await getAllTournaments()
   tournaments.push(tournament)
 
   saveTournamentsData(tournaments)
@@ -82,8 +92,8 @@ export const addTournament = async (tournament: Tournament) => {
  * @param newTournament The new tournament object
  */
 export const updateTournament = async (newTournament: Tournament) => {
-  let tournaments = getAllTournaments()
-  const tournamentIndex = tournaments.findIndex(tournament => tournament.idPertandingan === newTournament.idPertandingan)
+  let tournaments = await getAllTournaments()
+  const tournamentIndex = tournaments.findIndex(tournament => tournament!.idPertandingan === newTournament!.idPertandingan)
 
   tournaments[tournamentIndex] = newTournament
 
@@ -97,10 +107,31 @@ export const updateTournament = async (newTournament: Tournament) => {
  * @param id The id of the tournament to be deleted
  */
 export const deleteTournament = async (id: string) => {
-  let tournaments = getAllTournaments()
-  const tournamentIndex = tournaments.findIndex(tournament => tournament.idPertandingan === id)
+  let tournaments = await getAllTournaments()
+  const tournamentIndex = tournaments.findIndex(tournament => tournament!.idPertandingan === id)
 
   tournaments.splice(tournamentIndex, 1)
 
   saveTournamentsData(tournaments)
+}
+
+
+/**
+ * Get the total participants of a tournament of the given ID by summing 
+ * all participants inside all the tournament's kelas
+ * 
+ * @param tournamentId The id of the tournament
+ */
+export const getTotalParticipants = async (tournamentId: string) => {
+  const tournament = await getTournamentById(tournamentId)
+
+  if (tournament) {
+    let totalParticipants = 0
+
+    tournament.kelas.forEach(kelas => {
+      totalParticipants += kelas.daftarTim.length
+    })
+
+    return totalParticipants
+  }
 }

@@ -1,31 +1,46 @@
 [
   {
-    "id_pertandingan": "reg_open_cup",
-    "nama_pertandingan": "Regional Opan Cup",
-    "status": "selesai",
+    "idPertandingan": "reg_open_cup",
+    "namaPertandingan": "Regional Opan Cup",
+    "status": "berlangsung",
     "penyelenggara": "Karate Foundation",
     "kelas": [
       {
-        "id_kelas": "min_45_m",
-        "nama_kelas": "Pemula Putra",
+        "idKelas": "min_45_m",
+        "namaKelas": "Pemula Putra",
+        "daftarTim": [
+          {
+            "idAtlet": "",
+            "namaAtlet": "",
+            "idTim": "abcd1234",
+            "namaTim": "Samurai Karate Club"
+          },
+          {
+            "idAtlet": "",
+            "namaAtlet": "",
+            "idTim": "efgh5678",
+            "namaTim": "Garuda Karate Dojo"
+          }
+        ],
         "matches": [
           {
-            "id": 0,
-            "name": "Match 1",
-            "nextMatchId": 4,
-            "startTime": "2023-05-05",
-            "state": "DONE",
-            "participants": [
+            "idMatch": 0,
+            "namaMatch": "Match 1",
+            "idMatchBerikutnya": 4,
+            "waktuMain": "2023-05-05",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "ryo",
-                "name": "RYO",
+                "idMatch": "ryo",
+                "namaMatch": "RYO",
                 "isWinner": true,
                 "status": null,
                 "resultText": "8"
               },
               {
-                "id": "akr",
-                "name": "AKR",
+                "idMatch": "akr",
+                "namaMatch": "AKR",
                 "isWinner": false,
                 "status": null,
                 "resultText": "3"
@@ -33,22 +48,23 @@
             ]
           },
           {
-            "id": 1,
-            "name": "Match 2",
-            "nextMatchId": 4,
-            "startTime": "2023-05-05",
-            "state": "DONE",
-            "participants": [
+            "idMatch": 1,
+            "namaMatch": "Match 2",
+            "idMatchBerikutnya": 4,
+            "waktuMain": "2023-05-05",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "ykr",
-                "name": "YKR",
+                "idMatch": "ykr",
+                "namaMatch": "YKR",
                 "isWinner": false,
                 "status": null,
                 "resultText": "3"
               },
               {
-                "id": "hrs",
-                "name": "HRS",
+                "idMatch": "hrs",
+                "namaMatch": "HRS",
                 "isWinner": true,
                 "status": null,
                 "resultText": "6"
@@ -56,22 +72,23 @@
             ]
           },
           {
-            "id": 2,
-            "name": "Match 3",
-            "nextMatchId": 5,
-            "startTime": "2023-05-05",
-            "state": "DONE",
-            "participants": [
+            "idMatch": 2,
+            "namaMatch": "Match 3",
+            "idMatchBerikutnya": 5,
+            "waktuMain": "2023-05-05",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "kzk",
-                "name": "KZK",
+                "idMatch": "kzk",
+                "namaMatch": "KZK",
                 "isWinner": false,
                 "status": null,
                 "resultText": "4"
               },
               {
-                "id": "hrk",
-                "name": "HRK",
+                "idMatch": "hrk",
+                "namaMatch": "HRK",
                 "isWinner": true, 
                 "status": null,
                 "resultText": "7"
@@ -79,22 +96,23 @@
             ]
           },
           {
-            "id": 3,
-            "name": "Match 4",
-            "nextMatchId": 5,
-            "startTime": "2023-05-05",
-            "state": "NO_PARTY",
-            "participants": [
+            "idMatch": 3,
+            "namaMatch": "Match 4",
+            "idMatchBerikutnya": 5,
+            "waktuMain": "2023-05-05",
+            "status": "NO_PARTY",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "ryo",
-                "name": "RYO",
+                "idMatch": "ryo",
+                "namaMatch": "RYO",
                 "isWinner": false,
                 "status": null,
                 "resultText": "8"
               },
               {
-                "id": "akr",
-                "name": "AKR",
+                "idMatch": "akr",
+                "namaMatch": "AKR",
                 "isWinner": false,
                 "status": null,
                 "resultText": "3"
@@ -102,22 +120,23 @@
             ]
           },
           {
-            "id": 4,
-            "name": "Semi Final 1",
-            "nextMatchId": 6,
-            "startTime": "2023-05-05",
-            "state": "DONE",
-            "participants": [
+            "idMatch": 4,
+            "namaMatch": "Semi Final 1",
+            "idMatchBerikutnya": 6,
+            "waktuMain": "2023-05-05",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "ryo",
-                "name": "RYO",
+                "idMatch": "ryo",
+                "namaMatch": "RYO",
                 "isWinner": true,
                 "status": null,
                 "resultText": "6"
               },
               {
-                "id": "hrk",
-                "name": "HRK",
+                "idMatch": "hrk",
+                "namaMatch": "HRK",
                 "isWinner": false,
                 "status": null,
                 "resultText": "7"
@@ -125,22 +144,23 @@
             ]
           },
           {
-            "id": 5,
-            "name": "Semi Final 2",
-            "nextMatchId": null,
-            "startTime": "2023-05-05",
-            "state": "NO_PARTY",
-            "participants": [
+            "idMatch": 5,
+            "namaMatch": "Semi Final 2",
+            "idMatchBerikutnya": null,
+            "waktuMain": "2023-05-05",
+            "status": "NO_PARTY",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "hrs",
-                "name": "HRS",
+                "idMatch": "hrs",
+                "namaMatch": "HRS",
                 "isWinner": true,
                 "status": null,
                 "resultText": "6"
               },
               {
-                "id": "hrk",
-                "name": "HRK",
+                "idMatch": "hrk",
+                "namaMatch": "HRK",
                 "isWinner": false,
                 "status": null,
                 "resultText": "7"
@@ -148,22 +168,23 @@
             ]
           },
           {
-            "id": 6,
-            "name": "Final",
-            "nextMatchId": null,
-            "startTime": "2023-05-05",
-            "state": "NO_PARTY",
-            "participants": [
+            "idMatch": 6,
+            "namaMatch": "Final",
+            "idMatchBerikutnya": null,
+            "waktuMain": "2023-05-05",
+            "status": "NO_PARTY",
+            "pemenang": "",
+            "idTim": [
               {
-                "id": "hrs",
-                "name": "HRS",
+                "idMatch": "hrs",
+                "namaMatch": "HRS",
                 "isWinner": true,
                 "status": null,
                 "resultText": "6"
               },
               {
-                "id": "hrk",
-                "name": "HRK",
+                "idMatch": "hrk",
+                "namaMatch": "HRK",
                 "isWinner": false,
                 "status": null,
                 "resultText": "7"
@@ -173,94 +194,106 @@
         ]
       },
       {
-        "id_kelas": "min_45_f",
-        "nama_kelas": "Pemula Putri",
+        "idKelas": "min_45_f",
+        "namaKelas": "Pemula Putri",
+        "daftarTim": [],
         "matches": [
           {
-            "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
-            "state": "DONE",
-            "participants": []
+            "idMatch": 0,
+            "namaMatch": "",
+            "idMatchBerikutnya": 0,
+            "waktuMain": "",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": []
           }
         ]
       },
       {
-        "id_kelas": "min_50_m",
-        "nama_kelas": "Kadet Putra",
+        "idKelas": "min_50_m",
+        "namaKelas": "Kadet Putra",
+        "daftarTim": [],
         "matches": [
           {
-            "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
-            "state": "DONE",
-            "participants": []
+            "idMatch": 0,
+            "namaMatch": "",
+            "idMatchBerikutnya": 0,
+            "waktuMain": "",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": []
           }
         ]
       },
       {
-        "id_kelas": "min_50_f",
-        "nama_kelas": "Kadet Putri",
+        "idKelas": "min_50_f",
+        "namaKelas": "Kadet Putri",
+        "daftarTim": [],
         "matches": [
           {
-            "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
-            "state": "DONE",
-            "participants": []
+            "idMatch": 0,
+            "namaMatch": "",
+            "idMatchBerikutnya": 0,
+            "waktuMain": "",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": []
           }
         ]
       },
       {
-        "id_kelas": "min_55_m",
-        "nama_kelas": "Junior Putra",
+        "idKelas": "min_55_m",
+        "namaKelas": "Junior Putra",
+        "daftarTim": [],
         "matches": [
           {
-            "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
-            "state": "DONE",
-            "participants": []
+            "idMatch": 0,
+            "namaMatch": "",
+            "idMatchBerikutnya": 0,
+            "waktuMain": "",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": []
           }
         ]
       },
       {
-        "id_kelas": "min_55_f",
-        "nama_kelas": "Junior Putri",
+        "idKelas": "min_55_f",
+        "namaKelas": "Junior Putri",
+        "daftarTim": [],
         "matches": [
           {
-            "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
-            "state": "DONE",
-            "participants": []
+            "idMatch": 0,
+            "namaMatch": "",
+            "idMatchBerikutnya": 0,
+            "waktuMain": "",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": []
           }
         ]
       }
     ]
   },
   {
-    "id_pertandingan": "kd_ptdgn",
-    "nama_pertandingan": "Nama Pertandingan",
-    "status": "Selesai / Berlangsung / Akan Main / Pendaftaran / Diundur / Dibatalkan",
-    "penyelenggara": "",
+    "idPertandingan": "kd_ptdgn",
+    "namaPertandingan": "Nama Pertandingan",
+    "status": "selesai",
+    "penyelenggara": "Karateka",
     "kelas": [
       {
-        "id_kelas": "",
-        "nama_kelas": "",
+        "idKelas": "",
+        "namaKelas": "",
+        "daftarTim": [],
         "matches": [
           {
-            "id": 0,
-            "name": "",
-            "nextMatchId": 0,
-            "startTime": "",
-            "state": "DONE",
-            "participants": []
+            "idMatch": 0,
+            "namaMatch": "",
+            "idMatchBerikutnya": 0,
+            "waktuMain": "",
+            "status": "selesai",
+            "pemenang": "",
+            "idTim": []
           }
         ]
       }

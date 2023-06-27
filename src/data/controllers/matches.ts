@@ -203,7 +203,7 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
         waktuMain: "",
         status: "akan main",
         pemenang: null,
-        petarung: [
+        idTim: [
           {
             ...petarung1,
             namaAtlet: athlete1 ? athlete1.namaAtlet : "",
@@ -236,7 +236,7 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
         waktuMain: "",
         status: "akan main",
         pemenang: null,
-        petarung: [
+        idTim: [
           {
             ...byeTeam,
           },
