@@ -1,8 +1,9 @@
-import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-apps/api/fs"
-import { Atlet, Tim } from "../../types"
-import useNotification from "../../hooks/useNotification"
+import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
+import { Athlete, Team } from "../../types"
 import defaultTeamsData from "../defaults/defaultTeams.json"
 import { getAthleteById, joinTeam, leaveTeam } from "./athletes"
+import { createDataFolder, writeInto } from "./utils"
+import useNotification from "../../hooks/useNotification"
 
 
 /**
@@ -10,25 +11,9 @@ import { getAthleteById, joinTeam, leaveTeam } from "./athletes"
  * 
  * @param teams List of all teams to be saved to 'teams.data' file
  */
-export const saveTeamsData = async (teams: Tim[] | any) => {
-  
-    // Create 'data' folder (if it doesn't exist yet)
-    await createDir("data", {
-      dir: BaseDirectory.AppData,
-      recursive: true
-    }).catch(err => {
-      useNotification("Terjadi kesalahan saat membuat folder baru", err)
-    })
-  
-    // Write into 'teams.data' file
-    await writeTextFile({
-      path: "data/teams.data",
-      contents: JSON.stringify(teams)
-    },
-      { dir: BaseDirectory.AppData }
-    ).catch(err => {
-      useNotification("Terjadi kesalahan saat membuat file baru", err)
-    })
+export const saveTeamsData = async (teams: Team[] | any) => {
+    await createDataFolder()
+    await writeInto(teams, "teams")
 }
 
 
@@ -46,8 +31,8 @@ export const setDefaultTeamsData = async () => {
  * 
  * @returns List of all teams from 'teams.data' file
  */
-export const getAllTeams = (): Tim[] => {
-  let teams: Tim[] = []
+export const getAllTeams = (): Team[] => {
+  let teams: Team[] = []
 
   readTextFile(
     "data/teams.data", {
@@ -55,7 +40,7 @@ export const getAllTeams = (): Tim[] => {
   }).then(data => {
     teams = JSON.parse(data)
   }).catch(err => {
-    console.log("Terjadi kesalahan saat membaca file `teams.data`", err)
+    useNotification("Terjadi kesalahan saat membaca file `teams.data`", err)
   })
 
   return teams
@@ -68,7 +53,7 @@ export const getAllTeams = (): Tim[] => {
  * @param id Team's id to be searched
  * @returns Team object with the specified id
  */
-export const getTeamById = (id: string): Tim | undefined => {
+export const getTeamById = (id: string): Team | undefined => {
   const teams = getAllTeams()
   return teams.find(team => team.idTim === id)
 }
@@ -79,7 +64,7 @@ export const getTeamById = (id: string): Tim | undefined => {
  * 
  * @param newTeam Team object to be added
  */
-export const addTeam = (newTeam: Tim) => {
+export const addTeam = (newTeam: Team) => {
   const teams = getAllTeams()
   teams.push(newTeam)
 
@@ -92,7 +77,7 @@ export const addTeam = (newTeam: Tim) => {
  * 
  * @param updatedTeam Team object to be updated
  */
-export const updateTeam = (updatedTeam: Tim) => {
+export const updateTeam = (updatedTeam: Team) => {
   const teams = getAllTeams()
   const index = teams.findIndex(tim => tim.idTim === updatedTeam.idTim)
   teams[index] = updatedTeam
@@ -121,12 +106,12 @@ export const deleteTeam = (id: string) => {
  * @param teamId Team's id to get all members from
  * @returns List of all members object from the specified team
  */
-export const getAllMembers = (teamId: string): Atlet[] => {
+export const getAllMembers = (teamId: string): Athlete[] => {
   const teams = getAllTeams()
   const team = teams.find(team => team.idTim === teamId)
-  const members: Atlet[] = []
+  const members: Athlete[] = []
 
-  team?.anggota.forEach(memberId => {
+  team?.idAnggota.forEach(memberId => {
     const member = getAthleteById(memberId)
     if(member) members.push(member)
   })
@@ -144,7 +129,7 @@ export const getAllMembers = (teamId: string): Atlet[] => {
 export const getAllMembersId = (teamId: string): string[] => {
   const teams = getAllTeams()
   const team = teams.find(team => team.idTim === teamId)
-  return team?.anggota || []
+  return team?.idAnggota || []
 }
 
 
@@ -171,7 +156,7 @@ export const isMember = (teamId: string, memberId: string): boolean => {
 export const addMember = (teamId: string, newMemberId: string) => {
   const teams = getAllTeams()
   const team = teams.find(team => team.idTim === teamId)
-  team?.anggota.push(newMemberId)
+  team?.idAnggota.push(newMemberId)
 
   const newMember = getAthleteById(newMemberId)
 
@@ -198,8 +183,8 @@ export const addMember = (teamId: string, newMemberId: string) => {
 export const kickMember = (teamId: string, memberId: string) => {
   const teams = getAllTeams()
   const team = teams.find(team => team.idTim === teamId)
-  const index = team?.anggota.findIndex(id => id === memberId)
-  team?.anggota.splice(index!, 1)
+  const index = team?.idAnggota.findIndex(id => id === memberId)
+  team?.idAnggota.splice(index!, 1)
 
   // Update member's teamId
   const member = getAthleteById(memberId)
