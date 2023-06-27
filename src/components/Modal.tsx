@@ -36,7 +36,7 @@ export default function Modal ({ children, title, caption }: PropsType) {
       {/* Popup window */}
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`bg-stone-900 border border-stone-700 w-fit h-fit flex flex-col min-w-[300px] px-[22px] py-[24px] rounded-md gap-[10px] transition-all ease-in-out bg-opacity-70
+        className={`bg-stone-900 border border-stone-700 w-fit h-fit flex flex-col min-w-[300px] px-[22px] py-[24px] rounded-md gap-[10px] transition-all ease-in-out bg-opacity-70 backdrop-blur-sm
         ${animationState === 0 ? "opacity-0 translate-y-10 duration-500" : "opacity-100 translate-y-0 duration-300"}`}>
 
         {/* Header */}
