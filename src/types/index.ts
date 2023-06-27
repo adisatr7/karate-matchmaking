@@ -16,7 +16,7 @@ export type User = {
   name: string,
   password: string,
   imageUrl: string
-}
+} | null
 
 /**
  * Tournament type definition

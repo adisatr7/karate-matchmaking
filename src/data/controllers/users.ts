@@ -12,7 +12,7 @@ import { createDataFolder, writeInto } from "./utils"
  * @param currentUser The current user that is logged in to the app
  * @param allUsers List of all users to be saved to 'users.data' file
  */
-export const saveUsersData = async (currentUser: User | null, allUsers: User[] | any) => {
+export const saveUsersData = async (currentUser: User, allUsers: User[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
   await createDataFolder()
@@ -58,9 +58,9 @@ export const getAllUsers = async (): Promise<User[]> => {
  * @param userId The id of the user to be searched
  * @returns The user with the specified id
  */
-export const getUserById = (userId: string): User | null => {
-  const users = getAllUsers()
-  const user = users.find(user => user.id === userId)
+export const getUserById = async (userId: string): Promise<User> => {
+  const users = await getAllUsers()
+  const user = users.find(user => user?.id === userId)
 
   return user ? user : null
 }
@@ -71,8 +71,8 @@ export const getUserById = (userId: string): User | null => {
  * 
  * @returns The current user that is logged in to the app
  */
-export const getCurrentUser = (): User | null => {
-  let currentUser: User | null = null
+export const getCurrentUser = (): User => {
+  let currentUser: User = null
   
   readTextFile(
     "data/users.data", {
@@ -92,8 +92,8 @@ export const getCurrentUser = (): User | null => {
  * 
  * @param user The current user that is logged in to the app
  */
-export const setCurrentUser = (user: User | null) => {
-  const allUsers = getAllUsers()
+export const setCurrentUser = async (user: User) => {
+  const allUsers = await getAllUsers()
   saveUsersData(user, allUsers)
 }
 
@@ -115,16 +115,16 @@ export const setAllUsers = (users: User[]) => {
  * 
  * @param newUser The new user to be registered
  */
-export const registerNewUser = (newUser: User) => {
+export const registerNewUser = async (newUser: User) => {
 
   // Check for existing user with the same id
-  if (getUserById(newUser.id)) {
+  if (await getUserById(newUser!.id)) {
     useNotification("Pengguna dengan ID tersebut sudah terdaftar", "Silahkan gunakan ID lain!")
 
     return
   }
 
-  const allUsers = getAllUsers()
+  const allUsers = await getAllUsers()
   allUsers.push(newUser)
   setAllUsers(allUsers)
 }
@@ -135,10 +135,10 @@ export const registerNewUser = (newUser: User) => {
  * 
  * @param updatedUser The updated user data to be saved
  */
-export const updateUser = (updatedUser: User) => {
-  const allUsers = getAllUsers()
+export const updateUser = async (updatedUser: User) => {
+  const allUsers = await getAllUsers()
   const newUsers = allUsers.map(user => {
-    if (user.id === updatedUser.id) {
+    if (user!.id === updatedUser!.id) {
       return updatedUser
     }
     return user
@@ -152,8 +152,8 @@ export const updateUser = (updatedUser: User) => {
  * 
  * @param userId The id of the user to be deleted
  */
-export const deleteUser = (userId: string) => {
-  const allUsers = getAllUsers()
-  const newUsers = allUsers.filter(user => user.id !== userId)
+export const deleteUser = async (userId: string) => {
+  const allUsers = await getAllUsers()
+  const newUsers = allUsers.filter(user => user!.id !== userId)
   setAllUsers(newUsers)
 }

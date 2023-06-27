@@ -12,8 +12,7 @@ import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
 import { useNavigate } from "react-router-dom"
 import { appDataDir } from "@tauri-apps/api/path"
-import { getAllUsers } from "../data/controllers/users"
-import { User } from "../types"
+import { assignDefaultUsersData, getAllUsers } from "../data/controllers/users"
 
 
 export default function LoginScreen() {
@@ -37,11 +36,18 @@ export default function LoginScreen() {
       return
     }
 
-    // Check if user exists
+    // Read registered users data
     const registeredUsers = await getAllUsers()
-    const user = registeredUsers.find(user => user.id === idPanitiaInput)
 
-    useNotification("Debug", JSON.stringify(registeredUsers))
+    // If the data is null, assign default data
+    if (registeredUsers.length === 0) {
+      useNotification("Gagal memuat data", "Tidak dapat membaca data pengguna!")
+      assignDefaultUsersData()
+
+      return
+    }
+
+    const user = registeredUsers.find(user => user!.id === idPanitiaInput)
 
     // If the user doesn't exist
     if (!user) {
@@ -71,19 +77,6 @@ export default function LoginScreen() {
       dispatch(collapseSidebar())
     }, 300)
   }
-
-  const [debugText, setDebugText] = useState("")
-
-  const tempFunc = async() => {
-    return await appDataDir()
-  }
-
-  useEffect(() => {
-    const appDir = tempFunc()
-    appDir.then((dir) => {
-      setDebugText(dir)
-    })
-  })
 
   return (
     <div className="w-screen h-screen flex flex-row justify-center items-center bg-cover bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900">
