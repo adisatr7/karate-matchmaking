@@ -8,6 +8,13 @@ export type SVGComponent = React.SVGProps<SVGSVGElement>
 */
 export type SVGIcon = React.FunctionComponent<SVGComponent>
 
+
+/**
+ * Options for currentPath state
+ */
+export type PathOptions = "highlight" | "tournaments" | "teams" | "athletes" | "settings"
+
+
 /**
  * User data type definition used to login
  */

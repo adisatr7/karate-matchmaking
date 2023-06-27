@@ -3,7 +3,7 @@ import MenuBackground from "../components/MenuBackground"
 import Entry from "../components/Entry"
 import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
-import TournamentTable from "../components/Table"
+import TournamentTable from "../components/Tables/TournamentTable"
 
 
 export default function TournamentListScreen() {
@@ -32,7 +32,7 @@ export default function TournamentListScreen() {
           className="w-fit px-[18px]"/>
       </div>
 
-      {/* Table */}
+      {/* Table | TODO: Implement search function5 */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
         <TournamentTable/>
       </div>

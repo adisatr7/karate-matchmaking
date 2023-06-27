@@ -1,15 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { PathOptions } from "../../types"
 
 
 /**
  * Options for statusbar state
  */
 type SidebarStatusOptions = "expanded" | "collapsed" | "hidden"
-
-/**
- * Options for currentPath state
- */
-type PathOptions = "highlight" | "tournaments" | "teams" | "athletes" | "settings"
 
 /**
  * Sidebar states type definition

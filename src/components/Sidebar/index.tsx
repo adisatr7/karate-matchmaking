@@ -5,8 +5,6 @@ import { hideModal, showModal } from "../../store/slices/modalSlice"
 
 import * as Icons from "../../assets/icons"
 import SidebarButton from "./SidebarButton"
-import Modal from "../Modal"
-import Button from "../Button"
 import { useNavigate } from "react-router-dom"
 
 
@@ -48,7 +46,7 @@ export default function Sidebar() {
         <h1 className="font-bold text-heading pr-[40px] line-clamp-1">Karate Matcher</h1> 
         
         {/* Icon container */}
-        <div className="w-[24px] h-[24px] flex justify-center items-center text-white hover:text-primary-opaque" onClick={toggleSideBar}>
+        <div className="w-[24px] h-[24px] flex justify-center items-center text-stone-200 hover:text-white" onClick={toggleSideBar}>
           
           {/* Close button */}
           <FontAwesomeIcon icon="xmark" width={20} className={`absolute cursor-pointer text-xl ${sidebarStatus === "expanded" ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ease-in-out`} />
@@ -60,11 +58,31 @@ export default function Sidebar() {
 
       {/* Middle buttons container */}
       <div className="flex flex-col h-full my-[12px] transition-all w-full">
-        <SidebarButton onClick={() => navigate("/highlight")} icon={Icons.Highlight} label="Highlight"/>
-        <SidebarButton onClick={() => navigate("/tournament/all")} icon={Icons.Tournaments} label="Pertandingan"/>
-        <SidebarButton onClick={() => navigate("/team/all")} icon={Icons.Teams} label="Tim"/>
-        <SidebarButton onClick={() => navigate("/athlete/all")} icon={Icons.Athletes} label="Atlet"/>
-        <SidebarButton onClick={() => navigate("/settings")} icon={Icons.Settings} label="Pengaturan"/>
+        <SidebarButton 
+          icon={Icons.Highlight} 
+          label="Highlight"
+          path="highlight"
+          onClick={() => navigate("/highlight")}/>
+        <SidebarButton 
+          icon={Icons.Tournaments} 
+          label="Pertandingan"
+          path="tournaments"
+          onClick={() => navigate("/tournament/all")}/>
+        <SidebarButton 
+          icon={Icons.Teams}
+          label="Tim"
+          path="teams" 
+          onClick={() => navigate("/team/all")}/>
+        <SidebarButton 
+          icon={Icons.Athletes} 
+          label="Atlet"
+          path="athletes"
+          onClick={() => navigate("/athlete/all")} />
+        <SidebarButton 
+          icon={Icons.Settings} 
+          label="Pengaturan"
+          path="settings"
+          onClick={() => navigate("/settings")}/>
       </div>
 
       {/* Logout button container */}
