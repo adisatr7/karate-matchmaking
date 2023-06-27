@@ -1,16 +1,66 @@
 [
   {
-    "id_atlet": "",
-    "nama_atlet": "",
-    "jenis_kelamin": "",
-    "usia": 0,
-    "berat": 0,
-    "records": {
-      "wins": 0,
-      "losses": 0,
-      "yuko": 0,
-      "wazari": 0,
-      "ippon": 0
-    }
+    "idAtlet": "abcd1234",
+    "namaAtlet": "Rizky Maulana",
+    "jenisKelamin": "m",
+    "usia": 21,
+    "berat": 65,
+    "idTimSekarang": "abcd1234"
+  },
+  {
+    "idAtlet": "efgh5678",
+    "namaAtlet": "Siti Nurhayati",
+    "jenisKelamin": "f",
+    "usia": 20,
+    "berat": 53,
+    "idTimSekarang": "abcd1234"
+  },
+  {
+    "idAtlet": "ijkl9012",
+    "namaAtlet": "Budi Santoso",
+    "jenisKelamin": "m",
+    "usia": 22,
+    "berat": 70,
+    "idTimSekarang": "abcd1234"
+  },
+  {
+    "idAtlet": "mnop3456",
+    "namaAtlet": "Fitriani Putri",
+    "jenisKelamin": "f",
+    "usia": 21,
+    "berat": 58,
+    "idTimSekarang": "abcd1234"
+  },
+  {
+    "idAtlet": "qrst7890",
+    "namaAtlet": "Ahmad Hidayat",
+    "jenisKelamin": "m",
+    "usia": 20,
+    "berat": 68,
+    "idTimSekarang": "abcd1234"
+  },
+  {
+    "idAtlet": "abcd1234",
+    "namaAtlet": "Budi Santoso",
+    "jenisKelamin": "m",
+    "usia": 20,
+    "berat": 70,
+    "idTimSekarang": "efgh5678"
+  },
+  {
+    "idAtlet": "efgh5678",
+    "namaAtlet": "Siti Rahmawati",
+    "jenisKelamin": "f",
+    "usia": 21,
+    "berat": 65,
+    "idTimSekarang": "efgh5678"
+  },
+  {
+    "idAtlet": "ijkl9012",
+    "namaAtlet": "Ahmad Rahman",
+    "jenisKelamin": "m",
+    "usia": 19,
+    "berat": 75,
+    "idTimSekarang": "efgh5678"
   }
 ]

@@ -1,7 +1,8 @@
-import { BaseDirectory, createDir, readTextFile, writeTextFile } from "@tauri-apps/api/fs"
-import { Pertandingan } from "../../types"
-import useNotification from "../../hooks/useNotification"
+import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
+import { Tournament } from "../../types"
 import defaultTournamentsData from "../defaults/defaultTournaments.json"
+import { createDataFolder, writeInto } from "./utils"
+import useNotification from "../../hooks/useNotification"
 
 
 /**
@@ -9,25 +10,13 @@ import defaultTournamentsData from "../defaults/defaultTournaments.json"
  * 
  * @param tournaments List of all tournaments to be saved to 'tournaments.data' file
  */
-export const saveTournamentsData = async (tournaments: Pertandingan[] | any) => {
+export const saveTournamentsData = async (tournaments: Tournament[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
-  await createDir("data", {
-    dir: BaseDirectory.AppData,
-    recursive: true
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membuat folder baru", err)
-  })
+  await createDataFolder()
 
   // Write into 'tournaments.data' file
-  await writeTextFile({
-    path: "data/tournaments.data",
-    contents: JSON.stringify(tournaments)
-  },
-    { dir: BaseDirectory.AppData }
-  ).catch(err => {
-    useNotification("Terjadi kesalahan saat membuat file baru", err)
-  })
+  await writeInto(tournaments, "tournaments")
 }
 
 
@@ -45,8 +34,8 @@ export const setDefaultTournamentsData = async () => {
  * 
  * @returns The list of tournaments
  */
-export const getAllTournaments = (): Pertandingan[] => {
-  let tournaments: Pertandingan[] = []
+export const getAllTournaments = (): Tournament[] => {
+  let tournaments: Tournament[] = []
 
   readTextFile(
     "data/tournaments.data", {
@@ -54,7 +43,7 @@ export const getAllTournaments = (): Pertandingan[] => {
   }).then(data => {
     tournaments = JSON.parse(data)
   }).catch(err => {
-    console.log("Terjadi kesalahan saat membaca file `tournaments.data`", err)
+    useNotification("Terjadi kesalahan saat membaca file `tournaments.data`", err)
   })
 
   return tournaments
@@ -67,7 +56,7 @@ export const getAllTournaments = (): Pertandingan[] => {
  * @param id The id of the tournament
  * @returns  The tournament object
  */
-export const getTournamentById = (id: string): Pertandingan | undefined => {
+export const getTournamentById = (id: string): Tournament | undefined => {
   const tournaments = getAllTournaments()
 
   return tournaments.find(tournament => tournament.idPertandingan === id)
@@ -79,7 +68,7 @@ export const getTournamentById = (id: string): Pertandingan | undefined => {
  * 
  * @param tournament The tournament object to be added
  */
-export const addTournament = async (tournament: Pertandingan) => {
+export const addTournament = async (tournament: Tournament) => {
   let tournaments = getAllTournaments()
   tournaments.push(tournament)
 
@@ -92,7 +81,7 @@ export const addTournament = async (tournament: Pertandingan) => {
  * 
  * @param newTournament The new tournament object
  */
-export const updateTournament = async (newTournament: Pertandingan) => {
+export const updateTournament = async (newTournament: Tournament) => {
   let tournaments = getAllTournaments()
   const tournamentIndex = tournaments.findIndex(tournament => tournament.idPertandingan === newTournament.idPertandingan)
 
