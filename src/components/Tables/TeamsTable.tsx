@@ -66,7 +66,7 @@ export default function TeamsTable() {
                       {/* Render idPertandingan column conditionally */}
                       { label === "NO" ? teamIndex + 1 
                         : label === "NAMA TIM" ? toSentenceCase(namaTim)
-                        : label === "INISIAL" ? toSentenceCase(inisial.toUpperCase())
+                        : label === "INISIAL" ? inisial.toUpperCase()
                         : label === "ANGGOTA" ? idAnggota.length
                         : label === "ASAL" ? toSentenceCase(asal)
                         : ""

@@ -4,7 +4,6 @@ import defaultTeamsData from "../defaults/defaultTeams.json"
 import { getAthleteById, joinTeam, leaveTeam } from "./athletes"
 import { createDataFolder, writeInto } from "./utils"
 import useNotification from "../../hooks/useNotification"
-import { Teams } from "../../assets/icons"
 
 
 /**
@@ -129,8 +128,8 @@ export const getAllMembers = async (teamId: string): Promise<Athlete[]> => {
     const members: Athlete[] = []
 
     // Append each member object to the list
-    team?.idAnggota.forEach(memberId => {
-      const member = getAthleteById(memberId)
+    team?.idAnggota.forEach(async (memberId) => {
+      const member = await getAthleteById(memberId)
 
       if(member) 
         members.push(member)
@@ -177,9 +176,14 @@ export const getAllMembersId = async (teamId: string): Promise<string[]> => {
  */
 export const isMember = async (teamId: string, memberId: string): Promise<boolean> => {
   return new Promise(async (resolve, reject) => {
-    const team = await getTeamById(teamId)
-    const memberIds = team.idAnggota
-    resolve(memberIds.includes(memberId))
+    try {
+      const team = await getTeamById(teamId)
+      const memberIds = team.idAnggota
+      resolve(memberIds.includes(memberId))
+    } catch (err) {
+      useNotification("Terjadi kesalahan", err)
+      reject(err)
+    }
   })
 }
 
@@ -195,7 +199,7 @@ export const addMember = async (teamId: string, newMemberId: string) => {
   const team = teams.find(team => team.idTim === teamId)
   team?.idAnggota.push(newMemberId)
 
-  const newMember = getAthleteById(newMemberId)
+  const newMember = await getAthleteById(newMemberId)
 
   // If the member is already in a team
   if(newMember?.idTimSekarang !== teamId)
@@ -224,7 +228,7 @@ export const kickMember = async (teamId: string, memberId: string) => {
   team?.idAnggota.splice(index!, 1)
 
   // Update member's teamId
-  const member = getAthleteById(memberId)
+  const member = await getAthleteById(memberId)
 
   if(member?.idTimSekarang === teamId)
     leaveTeam(member!)
