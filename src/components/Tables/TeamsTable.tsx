@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { Team } from "../../types"
+import { TeamType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 import { getAllTeams } from "../../data/controllers/teams"
 
 
 export default function TeamsTable() {
-  const [teamsList, setTeamsList] = useState<Team[]>([])
+  const [teamsList, setTeamsList] = useState<TeamType[]>([])
 
   const navigate = useNavigate()
 
@@ -51,8 +51,8 @@ export default function TeamsTable() {
       </thead>
       
       <tbody>
-        { teamsList.map((team: Team, teamIndex: number) => {
-            const { idTim, namaTim, inisial, idAnggota, asal } = team
+        { teamsList.map((team: TeamType, teamIndex: number) => {
+            const { teamId: idTim, teamName: namaTim, initial: inisial, members: idAnggota, city: asal } = team
 
             return (
               <tr

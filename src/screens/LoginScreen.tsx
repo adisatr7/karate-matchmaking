@@ -45,7 +45,7 @@ export default function LoginScreen() {
       return
     }
 
-    const user = registeredUsers.find(user => user!.id === idPanitiaInput)
+    const user = registeredUsers.find(user => user!.userId === idPanitiaInput)
 
     // If the user doesn't exist
     if (!user) {
@@ -68,7 +68,7 @@ export default function LoginScreen() {
     navigate("/highlight")
     
     if (currentUser)
-    useNotification("Berhasil masuk", `Selamat datang, ${currentUser.name}!`)
+    useNotification("Berhasil masuk", `Selamat datang, ${currentUser.userName}!`)
     
     // Collapse sidebar
     setTimeout(() => {

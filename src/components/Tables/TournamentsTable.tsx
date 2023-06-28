@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { Tournament } from "../../types"
+import { TournamentType } from "../../types"
 import { getAllTournaments } from "../../data/controllers/tournaments"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 
 
 export default function TournamentsTable() {
-  const [tournamentsList, setTournamentsList] = useState<Tournament[]>([])
+  const [tournamentsList, setTournamentsList] = useState<TournamentType[]>([])
 
   const navigate = useNavigate()
 
@@ -34,11 +34,11 @@ export default function TournamentsTable() {
     setTournamentsList(tournaments)
   }
 
-  const fetchJmlPeserta = (tournament: Tournament) => {
+  const fetchJmlPeserta = (tournament: TournamentType) => {
     let totalParticipants = 0
 
-    tournament.kelas.forEach(kelas => {
-      totalParticipants += kelas.daftarTim.length
+    tournament.divisions.forEach(kelas => {
+      totalParticipants += kelas.registeredTeams.length
     })
     return totalParticipants
   }
@@ -60,8 +60,8 @@ export default function TournamentsTable() {
       </thead>
       
       <tbody>
-        { tournamentsList.map((tournament: Tournament, tournamentIndex: number) => {
-            const { idPertandingan, namaPertandingan, status, penyelenggara } = tournament
+        { tournamentsList.map((tournament: TournamentType, tournamentIndex: number) => {
+            const { tournamentId: idPertandingan, tournamentName: namaPertandingan, status, hostedBy: penyelenggara } = tournament
             const jmlPeserta = fetchJmlPeserta(tournament)
 
             return (

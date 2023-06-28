@@ -1,5 +1,5 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
-import { Tournament } from "../../types"
+import { TournamentType } from "../../types"
 import defaultTournamentsData from "../defaults/defaultTournaments.json"
 import { createDataFolder, writeInto } from "./utils"
 import useNotification from "../../hooks/useNotification"
@@ -10,7 +10,7 @@ import useNotification from "../../hooks/useNotification"
  * 
  * @param tournaments List of all tournaments to be saved to 'tournaments.data' file
  */
-export const saveTournamentsData = async (tournaments: Tournament[] | any) => {
+export const saveTournamentsData = async (tournaments: TournamentType[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
   await createDataFolder()
@@ -34,7 +34,7 @@ export const assignDefaultTournamentsData = async () => {
  * 
  * @returns The list of tournaments
  */
-export const getAllTournaments = async (): Promise<Tournament[]> => {
+export const getAllTournaments = async (): Promise<TournamentType[]> => {
   return new Promise(async (resolve, reject) => {
       readTextFile(
         "data/tournaments.data", {
@@ -59,10 +59,10 @@ export const getAllTournaments = async (): Promise<Tournament[]> => {
  * @param id The id of the tournament
  * @returns  The tournament object
  */
-export const getTournamentById = async (id: string): Promise<Tournament> => {
+export const getTournamentById = async (id: string): Promise<TournamentType> => {
   return new Promise(async (resolve, reject) => {
     const tournaments = await getAllTournaments()
-    const tournament = tournaments.find(tournament => tournament!.idPertandingan === id)
+    const tournament = tournaments.find(tournament => tournament!.tournamentId === id)
 
     if (tournament) {
       resolve(tournament)
@@ -78,7 +78,7 @@ export const getTournamentById = async (id: string): Promise<Tournament> => {
  * 
  * @param tournament The tournament object to be added
  */
-export const addTournament = async (tournament: Tournament) => {
+export const addTournament = async (tournament: TournamentType) => {
   let tournaments = await getAllTournaments()
   tournaments.push(tournament)
 
@@ -91,9 +91,9 @@ export const addTournament = async (tournament: Tournament) => {
  * 
  * @param newTournament The new tournament object
  */
-export const updateTournament = async (newTournament: Tournament) => {
+export const updateTournament = async (newTournament: TournamentType) => {
   let tournaments = await getAllTournaments()
-  const tournamentIndex = tournaments.findIndex(tournament => tournament!.idPertandingan === newTournament!.idPertandingan)
+  const tournamentIndex = tournaments.findIndex(tournament => tournament!.tournamentId === newTournament!.tournamentId)
 
   tournaments[tournamentIndex] = newTournament
 
@@ -108,7 +108,7 @@ export const updateTournament = async (newTournament: Tournament) => {
  */
 export const deleteTournament = async (id: string) => {
   let tournaments = await getAllTournaments()
-  const tournamentIndex = tournaments.findIndex(tournament => tournament!.idPertandingan === id)
+  const tournamentIndex = tournaments.findIndex(tournament => tournament!.tournamentId === id)
 
   tournaments.splice(tournamentIndex, 1)
 
@@ -128,8 +128,8 @@ export const getTotalParticipants = async (tournamentId: string) => {
   if (tournament) {
     let totalParticipants = 0
 
-    tournament.kelas.forEach(kelas => {
-      totalParticipants += kelas.daftarTim.length
+    tournament.divisions.forEach(kelas => {
+      totalParticipants += kelas.registeredTeams.length
     })
 
     return totalParticipants

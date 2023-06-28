@@ -1,4 +1,4 @@
-import { MatchHistory } from "../../types"
+import { MatchHistoryType } from "../../types"
 import { createDataFolder, writeInto } from "./utils"
 import defaultMatchHistoryData from "../defaults/defaultMatchHistory.json"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
@@ -9,7 +9,7 @@ import useNotification from "../../hooks/useNotification"
  * 
  * @param matchHistory 
  */
-export const saveMatchHistoryData = async (matchHistory: MatchHistory[]) => {
+export const saveMatchHistoryData = async (matchHistory: MatchHistoryType[]) => {
   await createDataFolder()
   await writeInto(matchHistory, "matchHistory")
 }
@@ -29,8 +29,8 @@ export const assignDefaultMatchHistoryData = async () => {
  * 
  * @returns Everyone's match history
  */
-const getAllMatchHistory = (): MatchHistory[] => {
-  let matchHistory: MatchHistory[] = []
+const getAllMatchHistory = (): MatchHistoryType[] => {
+  let matchHistory: MatchHistoryType[] = []
 
   readTextFile(
     "data/matchHistory.data", {
@@ -51,15 +51,15 @@ const getAllMatchHistory = (): MatchHistory[] => {
  * @param idAtlet The ID of the athlete the match history belongs to
  * @returns List of all match history of specified athlete
  */
-export const getMatchHistory = (idAtlet: string): MatchHistory[] => {
-  let matchHistory: MatchHistory[] = []
+export const getMatchHistory = (idAtlet: string): MatchHistoryType[] => {
+  let matchHistory: MatchHistoryType[] = []
 
   readTextFile(
     "data/matchHistory.data", {
     dir: BaseDirectory.AppData
   }).then(res => {
     const data = JSON.parse(res)
-    const filteredData = data.filter((match: MatchHistory) => {
+    const filteredData = data.filter((match: MatchHistoryType) => {
       match.idAtlet === idAtlet
     })
     matchHistory = filteredData
@@ -76,7 +76,7 @@ export const getMatchHistory = (idAtlet: string): MatchHistory[] => {
  * 
  * @param matchHistory The match history to be added
  */
-export const addMatchHistory = (matchHistory: MatchHistory) => {
+export const addMatchHistory = (matchHistory: MatchHistoryType) => {
   const data = getAllMatchHistory()
   data.push(matchHistory)
   saveMatchHistoryData(data)
@@ -88,9 +88,9 @@ export const addMatchHistory = (matchHistory: MatchHistory) => {
  * 
  * @param matchHistory The match history to be updated
  */
-export const updateMatchHistory = (matchHistory: MatchHistory) => {
+export const updateMatchHistory = (matchHistory: MatchHistoryType) => {
   const data = getAllMatchHistory()
-  const index = data.findIndex((match: MatchHistory) => {
+  const index = data.findIndex((match: MatchHistoryType) => {
     match.idMatch === matchHistory.idMatch && match.idAtlet === matchHistory.idAtlet
   })
   data[index] = matchHistory
@@ -105,7 +105,7 @@ export const updateMatchHistory = (matchHistory: MatchHistory) => {
  */
 export const deleteMatchHistory = (matchId: string) => {
   const data = getAllMatchHistory()
-  const filteredData = data.filter((match: MatchHistory) => {
+  const filteredData = data.filter((match: MatchHistoryType) => {
     match.idMatch !== matchId
   })
   saveMatchHistoryData(filteredData)
