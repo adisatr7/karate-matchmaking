@@ -18,9 +18,9 @@ export type PathOptions = "highlight" | "tournaments" | "teams" | "athletes" | "
 /**
  * User data type definition used to login
  */
-export type User = {
-  id: string,
-  name: string,
+export type UserType = {
+  userId: string,
+  userName: string,
   password: string,
   imageUrl: string
 } | null
@@ -28,78 +28,78 @@ export type User = {
 /**
  * Tournament type definition
  */
-export type Tournament = {
-  idPertandingan: string,
-  namaPertandingan: string,
+export type TournamentType = {
+  tournamentId: string,
+  tournamentName: string,
   desc: string,
   status: "pendaftaran" | "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
-  penyelenggara: string,
-  kelas: TournamentClass[],
+  hostedBy: string,
+  divisions: DivisionType[],
   [key: string]: any    // Index signature to allow string indexing
 }
  
 /**
 * Tournament subclass type definition
 */
-export type TournamentClass = {
-  idKelas: string,
-  namaKelas: string,
-  daftarTim: Contestant[],
-  matches: Match[]
+export type DivisionType = {
+  divisionId: string,
+  divisionName: string,
+  registeredTeams: ContestantType[],
+  matches: MatchType[]
 }
 
 /**
   * Match type definition
   */
-export type Match = {
-  idMatch: string,
-  namaMatch?: string,
-  idMatchBerikutnya: string,
-  waktuMain: string,
+export type MatchType = {
+  matchId: string,
+  matchName?: string,
+  nextMatchId: string,
+  playDate: string,
   status: "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
-  pemenang: "petarung1" | "petarung2" | "seri" | null
-  kontestan: Contestant[]
+  winner: "team1" | "team2" | "draw" | null
+  teams: ContestantType[]
 }
 
 /**
  * Contestant type definition
  */
-export type Contestant = {
-  idAtlet: string,
-  namaAtlet: string,
-  idTim: string,
-  namaTim: string,
+export type ContestantType = {
+  athleteId: string,
+  athleteName: string,
+  teamId: string,
+  teamName: string,
 }
 
 /**
  * Team type definition
  */
-export type Team = {
-  idTim: string,
-  namaTim: string,
-  inisial: string,
-  asal: string,
-  idAnggota: string[]
+export type TeamType = {
+  teamId: string,
+  teamName: string,
+  initial: string,
+  city: string,
+  members: AthleteType[]
 }
 
 /**
  * Athlete type definition
  */
-export type Athlete = {
-  idAtlet: string,
-  namaAtlet: string,
+export type AthleteType = {
+  athleteId: string,
+  athleteName: string,
   imageUrl?: string,
-  jenisKelamin: "m" | "f",
-  usia: number,
-  berat: number,
-  idTimSekarang: string
+  gender: "m" | "f",
+  age: number,
+  weight: number,
+  currentTeamId: string,
+  matchHistory: MatchHistoryType
 }
 
 /**
  * Match history type definition
  */
-export type MatchHistory = {
-  idAtlet: string,
+export type MatchHistoryType = {
   idMatch: string,
   isWinning: boolean,
   yuko: number,

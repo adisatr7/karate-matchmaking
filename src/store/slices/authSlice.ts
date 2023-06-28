@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { User } from "../../types"
+import { UserType } from "../../types"
 import { getCurrentUser, setCurrentUser } from "../../data/controllers/users"
 
 
@@ -7,7 +7,7 @@ import { getCurrentUser, setCurrentUser } from "../../data/controllers/users"
  * Auth states type definition
  */
 export interface AuthState {
-  currentUser: User
+  currentUser: UserType
 }
 
 /**
@@ -30,7 +30,7 @@ export const authSlice = createSlice({
      * 
      * @param action The user object to be set as the current user
      */
-    login: (state, action: PayloadAction<User>) => {
+    login: (state, action: PayloadAction<UserType>) => {
       state.currentUser = action.payload
       setCurrentUser(action.payload)
     },

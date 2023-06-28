@@ -1,6 +1,6 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
-import { User } from "../../types"
+import { UserType } from "../../types"
 import defaultUsersData from "../defaults/defaultUsers.json"
 import { createDataFolder, writeInto } from "./utils"
 
@@ -12,7 +12,7 @@ import { createDataFolder, writeInto } from "./utils"
  * @param currentUser The current user that is logged in to the app
  * @param allUsers List of all users to be saved to 'users.data' file
  */
-export const saveUsersData = async (currentUser: User, allUsers: User[] | any) => {
+export const saveUsersData = async (currentUser: UserType, allUsers: UserType[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
   await createDataFolder()
@@ -35,7 +35,7 @@ export const assignDefaultUsersData = async () => {
  * 
  * @returns List of all registered users from 'users.data' file
  */
-export const getAllUsers = async (): Promise<User[]> => {
+export const getAllUsers = async (): Promise<UserType[]> => {
   return new Promise((resolve, reject) => {
     readTextFile("data/users.data", {
       dir: BaseDirectory.AppData
@@ -59,9 +59,9 @@ export const getAllUsers = async (): Promise<User[]> => {
  * @param userId The id of the user to be searched
  * @returns The user with the specified id
  */
-export const getUserById = async (userId: string): Promise<User> => {
+export const getUserById = async (userId: string): Promise<UserType> => {
   const users = await getAllUsers()
-  const user = users.find(user => user.id === userId)
+  const user = users.find(user => user.userId === userId)
 
   return user ? user : null
 }
@@ -72,7 +72,7 @@ export const getUserById = async (userId: string): Promise<User> => {
  * 
  * @returns The current user that is logged in to the app
  */
-export const getCurrentUser = async (): Promise<User> => {
+export const getCurrentUser = async (): Promise<UserType> => {
   return new Promise((resolve, reject) => {
     readTextFile("data/users.data", {
       dir: BaseDirectory.AppData
@@ -95,7 +95,7 @@ export const getCurrentUser = async (): Promise<User> => {
  * 
  * @param user The current user that is logged in to the app
  */
-export const setCurrentUser = async (user: User) => {
+export const setCurrentUser = async (user: UserType) => {
   const allUsers = await getAllUsers()
   saveUsersData(user, allUsers)
 }
@@ -107,7 +107,7 @@ export const setCurrentUser = async (user: User) => {
  * 
  * @param users List of all registered users to be saved to 'users.data' file
  */
-export const setAllUsers = async (users: User[]) => {
+export const setAllUsers = async (users: UserType[]) => {
   const currentUser = await getCurrentUser()
   saveUsersData(currentUser, users)
 }
@@ -118,10 +118,10 @@ export const setAllUsers = async (users: User[]) => {
  * 
  * @param newUser The new user to be registered
  */
-export const registerNewUser = async (newUser: User) => {
+export const registerNewUser = async (newUser: UserType) => {
 
   // Check for existing user with the same id
-  if (await getUserById(newUser!.id)) {
+  if (await getUserById(newUser!.userId)) {
     useNotification("Pengguna dengan ID tersebut sudah terdaftar", "Silahkan gunakan ID lain!")
 
     return
@@ -138,10 +138,10 @@ export const registerNewUser = async (newUser: User) => {
  * 
  * @param updatedUser The updated user data to be saved
  */
-export const updateUser = async (updatedUser: User) => {
+export const updateUser = async (updatedUser: UserType) => {
   const allUsers = await getAllUsers()
   const newUsers = allUsers.map(user => {
-    if (user!.id === updatedUser!.id) {
+    if (user!.userId === updatedUser!.userId) {
       return updatedUser
     }
     return user
@@ -157,6 +157,6 @@ export const updateUser = async (updatedUser: User) => {
  */
 export const deleteUser = async (userId: string) => {
   const allUsers = await getAllUsers()
-  const newUsers = allUsers.filter(user => user!.id !== userId)
+  const newUsers = allUsers.filter(user => user!.userId !== userId)
   setAllUsers(newUsers)
 }

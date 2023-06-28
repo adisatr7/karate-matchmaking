@@ -1,5 +1,5 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
-import { Athlete, Team } from "../../types"
+import { AthleteType, TeamType } from "../../types"
 import defaultTeamsData from "../defaults/defaultTeams.json"
 import { getAthleteById, joinTeam, leaveTeam } from "./athletes"
 import { createDataFolder, writeInto } from "./utils"
@@ -11,7 +11,7 @@ import useNotification from "../../hooks/useNotification"
  * 
  * @param teams List of all teams to be saved to 'teams.data' file
  */
-export const saveTeamsData = async (teams: Team[] | any) => {
+export const saveTeamsData = async (teams: TeamType[] | any) => {
     await createDataFolder()
     await writeInto(teams, "teams")
 }
@@ -31,7 +31,7 @@ export const assignDefaultTeamsData = async () => {
  * 
  * @returns List of all teams from 'teams.data' file
  */
-export const getAllTeams = async (): Promise<Team[]> => {
+export const getAllTeams = async (): Promise<TeamType[]> => {
   return new Promise((resolve, reject) => {
     readTextFile(
       "data/teams.data", {
@@ -53,10 +53,10 @@ export const getAllTeams = async (): Promise<Team[]> => {
  * @param id Team's id to be searched
  * @returns Team object with the specified id
  */
-export const getTeamById = async (id: string): Promise<Team> => {
+export const getTeamById = async (id: string): Promise<TeamType> => {
   return new Promise(async (resolve, reject) => {
     await getAllTeams().then(teams => {
-      const team = teams.find(team => team.idTim === id)
+      const team = teams.find(team => team.teamId === id)
       if (team)
         resolve(team)
     })
@@ -73,7 +73,7 @@ export const getTeamById = async (id: string): Promise<Team> => {
  * 
  * @param newTeam Team object to be added
  */
-export const addTeam = async (newTeam: Team) => {
+export const addTeam = async (newTeam: TeamType) => {
   const teams = await getAllTeams()
   teams.push(newTeam)
 
@@ -86,9 +86,9 @@ export const addTeam = async (newTeam: Team) => {
  * 
  * @param updatedTeam Team object to be updated
  */
-export const updateTeam = async (updatedTeam: Team) => {
+export const updateTeam = async (updatedTeam: TeamType) => {
   const teams = await getAllTeams()
-  const index = teams.findIndex(tim => tim.idTim === updatedTeam.idTim)
+  const index = teams.findIndex(tim => tim.teamId === updatedTeam.teamId)
   teams[index] = updatedTeam
 
   saveTeamsData(teams)
@@ -102,7 +102,7 @@ export const updateTeam = async (updatedTeam: Team) => {
  */
 export const deleteTeam = async (id: string) => {
   const teams = await getAllTeams()
-  const index = teams.findIndex(team => team.idTim === id)
+  const index = teams.findIndex(team => team.teamId === id)
   teams.splice(index, 1)
 
   saveTeamsData(teams)
@@ -115,20 +115,20 @@ export const deleteTeam = async (id: string) => {
  * @param teamId Team's id to get all members from
  * @returns List of all members object from the specified team
  */
-export const getAllMembers = async (teamId: string): Promise<Athlete[]> => {
+export const getAllMembers = async (teamId: string): Promise<AthleteType[]> => {
   return new Promise(async (resolve, reject) => {
     const teams = await getAllTeams()
-    const team = teams.find(team => team.idTim === teamId)
+    const team = teams.find(team => team.teamId === teamId)
 
     // If team is not found, reject the promise
     if (!team) 
       reject("Team not found")
 
     // Create a list of members object from the specified team
-    const members: Athlete[] = []
+    const members: AthleteType[] = []
 
     // Append each member object to the list
-    team?.idAnggota.forEach(async (memberId) => {
+    team?.members.forEach(async (memberId) => {
       const member = await getAthleteById(memberId)
 
       if(member) 
@@ -154,7 +154,7 @@ export const getAllMembersId = async (teamId: string): Promise<string[]> => {
     const team = await getTeamById(teamId)
 
     // Get all members id from the specified team
-    const memberIds = team.idAnggota
+    const memberIds = team.members
 
     // If member is not found, reject the promise
     if (!memberIds)
@@ -178,7 +178,7 @@ export const isMember = async (teamId: string, memberId: string): Promise<boolea
   return new Promise(async (resolve, reject) => {
     try {
       const team = await getTeamById(teamId)
-      const memberIds = team.idAnggota
+      const memberIds = team.members
       resolve(memberIds.includes(memberId))
     } catch (err) {
       useNotification("Terjadi kesalahan", err)
@@ -196,16 +196,16 @@ export const isMember = async (teamId: string, memberId: string): Promise<boolea
  */
 export const addMember = async (teamId: string, newMemberId: string) => {
   const teams = await getAllTeams()
-  const team = teams.find(team => team.idTim === teamId)
-  team?.idAnggota.push(newMemberId)
+  const team = teams.find(team => team.teamId === teamId)
+  team?.members.push(newMemberId)
 
   const newMember = await getAthleteById(newMemberId)
 
   // If the member is already in a team
-  if(newMember?.idTimSekarang !== teamId)
+  if(newMember?.currentTeamId !== teamId)
 
     // Remove it from the previous team member list first
-    kickMember(newMember!.idTimSekarang, newMemberId)
+    kickMember(newMember!.currentTeamId, newMemberId)
 
     // Update member's active team ID
     joinTeam(newMember!, teamId)
@@ -223,14 +223,14 @@ export const addMember = async (teamId: string, newMemberId: string) => {
  */
 export const kickMember = async (teamId: string, memberId: string) => {
   const teams = await getAllTeams()
-  const team = teams.find(team => team.idTim === teamId)
-  const index = team?.idAnggota.findIndex(id => id === memberId)
-  team?.idAnggota.splice(index!, 1)
+  const team = teams.find(team => team.teamId === teamId)
+  const index = team?.members.findIndex(id => id === memberId)
+  team?.members.splice(index!, 1)
 
   // Update member's teamId
   const member = await getAthleteById(memberId)
 
-  if(member?.idTimSekarang === teamId)
+  if(member?.currentTeamId === teamId)
     leaveTeam(member!)
 
   // Save changes

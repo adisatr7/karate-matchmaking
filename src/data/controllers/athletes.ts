@@ -1,6 +1,6 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
-import { Athlete } from "../../types"
+import { AthleteType } from "../../types"
 import defaultAthletesData from "../defaults/defaultAthletes.json"
 import { addMember, isMember, kickMember } from "./teams"
 import { createDataFolder, writeInto } from "./utils"
@@ -11,7 +11,7 @@ import { createDataFolder, writeInto } from "./utils"
  * 
  * @param athletes List of all athletes to be saved to 'athletes.data' file
  */
-export const saveAthletesData = async (athletes: Athlete[] | any) => {
+export const saveAthletesData = async (athletes: AthleteType[] | any) => {
   await createDataFolder()
   await writeInto(athletes, "athletes")
 }
@@ -31,7 +31,7 @@ export const assignDefaultAthletesData = async () => {
  * 
  * @returns List of all athletes from 'athletes.data' file
  */
-export const getAllAthletes = async (): Promise<Athlete[]> => {
+export const getAllAthletes = async (): Promise<AthleteType[]> => {
   return new Promise((resolve, reject) => {
     readTextFile(
       "data/athletes.data", {
@@ -53,10 +53,10 @@ export const getAllAthletes = async (): Promise<Athlete[]> => {
  * @param id The id of the athlete to be searched
  * @returns The athlete object with the specified id
  */
-export const getAthleteById = async (id: string): Promise<Athlete> => {
+export const getAthleteById = async (id: string): Promise<AthleteType> => {
   return new Promise(async (resolve, reject) => {
     let athletes = await getAllAthletes()
-    let athlete = athletes.find(atlet => atlet.idAtlet === id)
+    let athlete = athletes.find(atlet => atlet.athleteId === id)
 
     if (athlete) resolve(athlete)
     else reject("Athlete not found")
@@ -69,7 +69,7 @@ export const getAthleteById = async (id: string): Promise<Athlete> => {
  * 
  * @param athlete The athlete object to be added
  */
-export const addAthlete = async (athlete: Athlete) => {
+export const addAthlete = async (athlete: AthleteType) => {
   let athletes = await getAllAthletes()
   athletes.push(athlete)
 
@@ -82,9 +82,9 @@ export const addAthlete = async (athlete: Athlete) => {
  * 
  * @param athlete The athlete object to be deleted
  */
-export const updateAthlete = async (athlete: Athlete) => {
+export const updateAthlete = async (athlete: AthleteType) => {
   let athletes = await getAllAthletes()
-  let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
+  let athleteIndex = athletes.findIndex(atlet => atlet.athleteId === athlete.athleteId)
 
   athletes[athleteIndex] = athlete
 
@@ -97,13 +97,13 @@ export const updateAthlete = async (athlete: Athlete) => {
  * 
  * @param athlete The athlete object to be deleted
  */
-export const deleteAthlete = async (athlete: Athlete) => {
+export const deleteAthlete = async (athlete: AthleteType) => {
   let athletes = await getAllAthletes()
-  let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
+  let athleteIndex = athletes.findIndex(atlet => atlet.athleteId === athlete.athleteId)
 
   // If the athlete is a part of a team, remove them from that team first
-  if (athletes[athleteIndex].idTimSekarang !== "")
-    kickMember(athlete.idTimSekarang, athlete.idAtlet)
+  if (athletes[athleteIndex].currentTeamId !== "")
+    kickMember(athlete.currentTeamId, athlete.athleteId)
 
   // Delete the athlete object
   athletes.splice(athleteIndex, 1)
@@ -119,20 +119,20 @@ export const deleteAthlete = async (athlete: Athlete) => {
  * @param athlete Athlete object to be added to the team
  * @param teamId The id of the team to be joined
  */
-export const joinTeam = async (athlete: Athlete, teamId: string) => {
+export const joinTeam = async (athlete: AthleteType, teamId: string) => {
   let athletes = await getAllAthletes()
-  let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
+  let athleteIndex = athletes.findIndex(atlet => atlet.athleteId === athlete.athleteId)
 
   // If the athlete is already a part of another team, remove them from that team first
-  if (athletes[athleteIndex].idTimSekarang !== "")
-    kickMember(athlete.idTimSekarang, athlete.idAtlet)
+  if (athletes[athleteIndex].currentTeamId !== "")
+    kickMember(athlete.currentTeamId, athlete.athleteId)
 
   // Add the athlete to the new team
-  athletes[athleteIndex].idTimSekarang = teamId
+  athletes[athleteIndex].currentTeamId = teamId
 
   // Also update the team's member list
-  if (!isMember(teamId, athlete.idAtlet))
-    addMember(teamId, athlete.idAtlet)
+  if (!isMember(teamId, athlete.athleteId))
+    addMember(teamId, athlete.athleteId)
 
   // Save the updated athletes data
   saveAthletesData(athletes)
@@ -144,13 +144,13 @@ export const joinTeam = async (athlete: Athlete, teamId: string) => {
  * 
  * @param athlete Athlete object to be removed from the team
  */
-export const leaveTeam = async (athlete: Athlete) => {
+export const leaveTeam = async (athlete: AthleteType) => {
   let athletes = await getAllAthletes()
-  let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
+  let athleteIndex = athletes.findIndex(atlet => atlet.athleteId === athlete.athleteId)
 
   // Remove the athlete from the team
-  kickMember(athlete.idTimSekarang, athlete.idAtlet)
-  athletes[athleteIndex].idTimSekarang = ""
+  kickMember(athlete.currentTeamId, athlete.athleteId)
+  athletes[athleteIndex].currentTeamId = ""
 
   // Save the updated athletes data
   saveAthletesData(athletes)

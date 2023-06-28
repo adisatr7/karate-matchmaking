@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Athlete } from "../../types"
+import { AthleteType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 import { getAllAthletes } from "../../data/controllers/athletes"
@@ -7,7 +7,7 @@ import { getTeamById } from "../../data/controllers/teams"
 
 
 export default function AthletesTable() {
-  const [athletesList, setAthletesList] = useState<Athlete[]>([])
+  const [athletesList, setAthletesList] = useState<AthleteType[]>([])
 
   const navigate = useNavigate()
 
@@ -61,8 +61,8 @@ export default function AthletesTable() {
       </thead>
       
       <tbody>
-        { athletesList.map((athlete: Athlete, teamIndex: number) => {
-            const { idAtlet, namaAtlet, idTimSekarang, jenisKelamin, usia, berat } = athlete
+        { athletesList.map((athlete: AthleteType, teamIndex: number) => {
+            const { athleteId: idAtlet, athleteName: namaAtlet, currentTeamId: idTimSekarang, gender: jenisKelamin, age: usia, weight: berat } = athlete
 
             const timSekarang = fetchTeamData(idTimSekarang)
             // const inisialTim = timSekarang.inisial    // TODO: Fix the async-await stuff
