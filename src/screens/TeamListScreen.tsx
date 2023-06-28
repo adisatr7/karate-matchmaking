@@ -10,22 +10,22 @@ export default function TeamListScreen() {
   const [searchKeyword, setSearchKeyword] = useState("")
 
   return (
-    <MenuBackground pageName="Daftar Pertandingan">
+    <MenuBackground pageName="Daftar Tim">
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px]">
         <Entry 
-          label="Cari nama pertandingan" 
+          label="Cari nama tim" 
           inputMode="text" 
           onChange={setSearchKeyword}
           leftIcon={SearchIcon}
           value={searchKeyword}
           className="flex-[2]"/>
         <Button 
-          label="CARI PERTANDINGAN"
+          label="CARI TIM"
           className="flex-[1]"/>
         <Button 
-          label="PERTANDINGAN BARU"
+          label="DAFTARKAN TIM BARU"
           className="flex-[1]"/>
         <Button 
           label="?"

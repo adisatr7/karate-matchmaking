@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { getAllTeams } from "../../data/controllers/teams"
 
 
-export default function TournamentTable() {
+export default function TeamsTable() {
   const [teamsList, setTeamsList] = useState<Team[]>([])
 
   const navigate = useNavigate()
@@ -21,30 +21,21 @@ export default function TournamentTable() {
 
   /**
    * Handler for when a row is clicked. The app will navigate to the 
-   * tournament profile screen.
+   * team profile screen.
    * 
-   * @param idTim ID of the tournament
+   * @param idTim ID of the team
    */
   const handleRowClick = (idTim: string) => {
     navigate(`/team/${idTim}`)
   } 
 
-  const fetchTournaments = async () => {
+  const fetchTeams = async () => {
     const teams = await getAllTeams()
     setTeamsList(teams)
   }
 
-  // const fetchJmlPeserta = (tournament: Tournament) => {
-  //   let totalParticipants = 0
-
-  //   tournament.kelas.forEach(kelas => {
-  //     totalParticipants += kelas.daftarTim.length
-  //   })
-  //   return totalParticipants
-  // }
-
   useEffect(() => {
-    fetchTournaments()
+    fetchTeams()
   }, [])
 
   return (

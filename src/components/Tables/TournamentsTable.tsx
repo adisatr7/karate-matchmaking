@@ -1,12 +1,11 @@
-import { ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Tournament } from "../../types"
-import { getAllTournaments, getTotalParticipants } from "../../data/controllers/tournaments"
-import useNotification from "../../hooks/useNotification"
+import { getAllTournaments } from "../../data/controllers/tournaments"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 
 
-export default function TournamentTable() {
+export default function TournamentsTable() {
   const [tournamentsList, setTournamentsList] = useState<Tournament[]>([])
 
   const navigate = useNavigate()
