@@ -1,5 +1,5 @@
 import { MatchHistoryType } from "../../types"
-import { createDataFolder, writeInto } from "./utils"
+import { createFolder, writeInto } from "../../utils/fileManager"
 import defaultMatchHistoryData from "../defaults/defaultMatchHistory.json"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
@@ -10,7 +10,7 @@ import useNotification from "../../hooks/useNotification"
  * @param matchHistory 
  */
 export const saveMatchHistoryData = async (matchHistory: MatchHistoryType[]) => {
-  await createDataFolder()
+  await createFolder()
   await writeInto(matchHistory, "matchHistory")
 }
 

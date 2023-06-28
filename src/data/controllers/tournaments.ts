@@ -1,7 +1,7 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { TournamentType } from "../../types"
 import defaultTournamentsData from "../defaults/defaultTournaments.json"
-import { createDataFolder, writeInto } from "./utils"
+import { createFolder, writeInto } from "../../utils/fileManager"
 import useNotification from "../../hooks/useNotification"
 
 
@@ -13,7 +13,7 @@ import useNotification from "../../hooks/useNotification"
 export const saveTournamentsData = async (tournaments: TournamentType[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
-  await createDataFolder()
+  await createFolder()
 
   // Write into 'tournaments.data' file
   await writeInto(tournaments, "tournaments")

@@ -3,7 +3,7 @@ import useNotification from "../../hooks/useNotification"
 import { AthleteType } from "../../types"
 import defaultAthletesData from "../defaults/defaultAthletes.json"
 import { addMember, isMember, kickMember } from "./teams"
-import { createDataFolder, writeInto } from "./utils"
+import { createFolder, writeInto } from "../../utils/fileManager"
 
 
 /**
@@ -12,7 +12,7 @@ import { createDataFolder, writeInto } from "./utils"
  * @param athletes List of all athletes to be saved to 'athletes.data' file
  */
 export const saveAthletesData = async (athletes: AthleteType[] | any) => {
-  await createDataFolder()
+  await createFolder()
   await writeInto(athletes, "athletes")
 }
 

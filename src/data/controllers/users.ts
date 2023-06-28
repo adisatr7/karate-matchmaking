@@ -2,7 +2,7 @@ import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
 import { UserType } from "../../types"
 import defaultUsersData from "../defaults/defaultUsers.json"
-import { createDataFolder, writeInto } from "./utils"
+import { createFolder, writeInto } from "../../utils/fileManager"
 
 
 /**
@@ -15,7 +15,7 @@ import { createDataFolder, writeInto } from "./utils"
 export const saveUsersData = async (currentUser: UserType, allUsers: UserType[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
-  await createDataFolder()
+  await createFolder()
 
   // Write into 'users.data' file
   await writeInto({ currentUser: currentUser, users: allUsers }, "users")

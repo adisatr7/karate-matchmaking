@@ -2,7 +2,7 @@ import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { AthleteType, TeamType } from "../../types"
 import defaultTeamsData from "../defaults/defaultTeams.json"
 import { getAthleteById, joinTeam, leaveTeam } from "./athletes"
-import { createDataFolder, writeInto } from "./utils"
+import { createFolder, writeInto } from "../../utils/fileManager"
 import useNotification from "../../hooks/useNotification"
 
 
@@ -12,7 +12,7 @@ import useNotification from "../../hooks/useNotification"
  * @param teams List of all teams to be saved to 'teams.data' file
  */
 export const saveTeamsData = async (teams: TeamType[] | any) => {
-    await createDataFolder()
+    await createFolder()
     await writeInto(teams, "teams")
 }
 
