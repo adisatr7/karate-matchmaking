@@ -61,7 +61,7 @@ export const getAllUsers = async (): Promise<User[]> => {
  */
 export const getUserById = async (userId: string): Promise<User> => {
   const users = await getAllUsers()
-  const user = users.find(user => user?.id === userId)
+  const user = users.find(user => user.id === userId)
 
   return user ? user : null
 }

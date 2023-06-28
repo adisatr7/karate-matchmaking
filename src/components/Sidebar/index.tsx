@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useAppDispatch, useAppSelector } from "../../store"
-import { expandSidebar, collapseSidebar, hideSidebar } from "../../store/slices/sidebarSlice"
-import { hideModal, showModal } from "../../store/slices/modalSlice"
+import { expandSidebar, collapseSidebar } from "../../store/slices/sidebarSlice"
+import { showModal } from "../../store/slices/modalSlice"
 
 import * as Icons from "../../assets/icons"
 import SidebarButton from "./SidebarButton"
