@@ -31,6 +31,7 @@ export type User = {
 export type Tournament = {
   idPertandingan: string,
   namaPertandingan: string,
+  desc: string,
   status: "pendaftaran" | "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   penyelenggara: string,
   kelas: TournamentClass[],
@@ -43,7 +44,7 @@ export type Tournament = {
 export type TournamentClass = {
   idKelas: string,
   namaKelas: string,
-  daftarTim: Participant[],
+  daftarTim: Contestant[],
   matches: Match[]
 }
 
@@ -57,17 +58,17 @@ export type Match = {
   waktuMain: string,
   status: "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
   pemenang: "petarung1" | "petarung2" | "seri" | null
-  idTim: string[]
+  kontestan: Contestant[]
 }
 
 /**
- * Fighter type definition
+ * Contestant type definition
  */
-export type Participant = {
+export type Contestant = {
   idAtlet: string,
   namaAtlet: string,
-  idTim?: string,
-  namaTim?: string,
+  idTim: string,
+  namaTim: string,
 }
 
 /**

@@ -1,4 +1,5 @@
-import { Match, Participant } from "../../types"
+import useNotification from "../../hooks/useNotification"
+import { Match, Contestant } from "../../types"
 import { getAthleteById } from "./athletes"
 import { getKelasById } from "./kelas"
 import { getTeamById } from "./teams"
@@ -12,16 +13,22 @@ import { getTournamentById, saveTournamentsData } from "./tournaments"
  * @param idKelas The kelas ID to get all matches from
  * @returns List of all matches from the kelas
  */
-export const getAllMatches = (tournamentId: string, idKelas: string): Match[] => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getKelasById(tournamentId, idKelas)
-  let matches: Match[] = []
+export const getAllMatches = async (tournamentId: string, idKelas: string): Promise<Match[]> => {
+  return new Promise(async (resolve, reject) => {
+    let tournament = await getTournamentById(tournamentId)
+    let kelas = await getKelasById(tournamentId, idKelas)
+    let matches: Match[] = []
 
-  // If tournament and kelas is found, get all the matches from the kelas
-  if (tournament && kelas)
-    matches = kelas.matches
-
-  return matches
+    // If tournament and kelas is found, get all the matches from the kelas
+    if (tournament && kelas) {
+      matches = kelas.matches
+      resolve(matches)
+    }
+    else {
+      useNotification("Terjadi kesalahan saat membaca data pertandingan", "Tidak dapat menemukan data pertandingan!")
+      reject("Tidak dapat menemukan data pertandingan!")
+    }
+  })
 }
 
 
@@ -33,13 +40,23 @@ export const getAllMatches = (tournamentId: string, idKelas: string): Match[] =>
  * @param idMatch The match ID to get
  * @returns The match object
  */
-export const getMatchById = (tournamentId: string, idKelas: string, idMatch: string): Match | undefined => {
+export const getMatchById = async (tournamentId: string, idKelas: string, idMatch: string): Promise<Match> => {
 
-  // Find the match by its ID
-  let match = getAllMatches(tournamentId, idKelas).find(match => match.idMatch === idMatch)
-
-  // Return the match if found, otherwise return undefined
-  return match || undefined
+  return new Promise(async (resolve, reject) => {
+    // Find the match by its ID
+    const matches = await getAllMatches(tournamentId, idKelas)
+    const match = matches.find(match => match.idMatch === idMatch)
+  
+    // Return the match if found, otherwise return undefined
+    if (match)
+      resolve(match)
+    
+    // If match is not found, send error notification and reject the promise
+    else {
+      useNotification("Terjadi kesalahan saat membaca data pertandingan", "Tidak dapat menemukan data pertandingan!")
+      reject("Tidak dapat menemukan data pertandingan!")
+    }
+  })
 }
 
 
@@ -52,9 +69,9 @@ export const getMatchById = (tournamentId: string, idKelas: string, idMatch: str
  * @param idKelas The kelas ID to add the match to
  * @param newMatch The new match object
  */
-export const addMatch = (tournamentId: string, idKelas: string, newMatch: Match) => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getKelasById(tournamentId, idKelas)
+export const addMatch = async (tournamentId: string, idKelas: string, newMatch: Match) => {
+  let tournament = await getTournamentById(tournamentId)
+  let kelas = await getKelasById(tournamentId, idKelas)
 
   // Check if tournament and kelas is found
   if (tournament && kelas) {
@@ -75,9 +92,9 @@ export const addMatch = (tournamentId: string, idKelas: string, newMatch: Match)
  * @param idKelas The kelas ID to delete the match from
  * @param updatedMatch The match object to delete
  */
-export const updateMatch = (tournamentId: string, idKelas: string, updatedMatch: Match) => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getKelasById(tournamentId, idKelas)
+export const updateMatch = async (tournamentId: string, idKelas: string, updatedMatch: Match) => {
+  let tournament = await getTournamentById(tournamentId)
+  let kelas = await getKelasById(tournamentId, idKelas)
 
   // Check if tournament and kelas is found
   if (tournament && kelas) {
@@ -103,9 +120,9 @@ export const updateMatch = (tournamentId: string, idKelas: string, updatedMatch:
  * @param idKelas The kelas ID to delete the match from
  * @param idMatch The match ID to delete
  */
-export const deleteMatch = (tournamentId: string, idKelas: string, idMatch: string) => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getKelasById(tournamentId, idKelas)
+export const deleteMatch = async (tournamentId: string, idKelas: string, idMatch: string) => {
+  let tournament = await getTournamentById(tournamentId)
+  let kelas = await getKelasById(tournamentId, idKelas)
 
   // Check if tournament and kelas is found
   if (tournament && kelas) {
@@ -131,9 +148,9 @@ export const deleteMatch = (tournamentId: string, idKelas: string, idMatch: stri
  * @param idKelas The kelas ID to set the matches to
  * @param matches The matches to set
  */
-export const setMatches = (tournamentId: string, idKelas: string, matches: Match[]) => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getKelasById(tournamentId, idKelas)
+export const setMatches = async (tournamentId: string, idKelas: string, matches: Match[]) => {
+  let tournament = await getTournamentById(tournamentId)
+  let kelas = await getKelasById(tournamentId, idKelas)
 
   // Check if tournament and kelas is found
   if (tournament && kelas) {
@@ -155,14 +172,14 @@ export const setMatches = (tournamentId: string, idKelas: string, matches: Match
  * @param kelasId The kelas ID to generate the matches for
  * @param participatingTeams The teams to generate the matches from
  */
-export const generateBracket = (tournamentId: string, kelasId: string, participatingTeams: Participant[]) => {
+export const generateBracket = async (tournamentId: string, kelasId: string, participatingTeams: Contestant[]) => {
   const matches: Match[] = []
 
   // Calculate the total rounds needed based on the number of teams participating
   const totalRounds = Math.ceil(Math.log2(participatingTeams.length))
 
   // Create a list of teams that will be participating in the tournament
-  const teams: Participant[] = participatingTeams.map((value) => ({
+  const teams: Contestant[] = participatingTeams.map((value) => ({
     idAtlet: value.idAtlet,
     idTim: value.idTim,
     namaAtlet: value.namaAtlet,
@@ -182,10 +199,10 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
       const petarung1 = teams[i * 2]
       const petarung2 = teams[i * 2 + 1]
 
-      const athlete1 = getAthleteById(petarung1.idAtlet)
-      const athlete2 = getAthleteById(petarung2.idAtlet)
-      const team1 = getTeamById(petarung1.idTim!)
-      const team2 = getTeamById(petarung2.idTim!)
+      const athlete1 = await getAthleteById(petarung1.idAtlet)
+      const athlete2 = await getAthleteById(petarung2.idAtlet)
+      const team1 = await getTeamById(petarung1.idTim)
+      const team2 = await getTeamById(petarung2.idTim)
 
       // Create the match name
       let matchName = ""
@@ -203,7 +220,7 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
         waktuMain: "",
         status: "akan main",
         pemenang: null,
-        idTim: [
+        kontestan: [
           {
             ...petarung1,
             namaAtlet: athlete1 ? athlete1.namaAtlet : "",
@@ -223,12 +240,19 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
     // If there are odd number of teams, add a "Bye" team, which is a team that
     // will automatically advance to the next round
     if (teamsInRound < participatingTeams.length) {
-      const byeTeam: Participant = {
+      const byeTeam: Contestant = {
         idAtlet: "bye",
         idTim: "bye",
         namaAtlet: "Bye",
         namaTim: "Bye",
       }
+
+      const atlet = await getAthleteById(teams[teams.length - 1].idAtlet)
+      const namaAtlet = atlet.namaAtlet
+
+      const tim = await getTeamById(teams[teams.length - 1].idTim!)
+      const namaTim = tim.namaTim
+
       const byeMatch: Match = {
         idMatch: `${matchId}`,
         namaMatch: `Bye ${matchId - 100}`,
@@ -236,14 +260,14 @@ export const generateBracket = (tournamentId: string, kelasId: string, participa
         waktuMain: "",
         status: "akan main",
         pemenang: null,
-        idTim: [
+        kontestan: [
           {
             ...byeTeam,
           },
           {
             ...teams[teams.length - 1],
-            namaAtlet: getAthleteById(teams[teams.length - 1].idAtlet)?.namaAtlet || "",
-            namaTim: getTeamById(teams[teams.length - 1].idTim!)?.namaTim || "",
+            namaAtlet: namaAtlet || "",
+            namaTim: namaTim || "",
           },
         ],
       }
