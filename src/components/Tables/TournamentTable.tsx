@@ -71,7 +71,7 @@ export default function TournamentTable() {
                 onClick={() => handleRowClick(idPertandingan)}
                 className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${tournamentIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
-                {/* Render table cells based on the header labels */}
+                {/* Render table cells based on the heaxder labels */}
                 { headerLabels.map((label: string, rowIndex: number) => (
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
                       {/* Render idPertandingan column conditionally */}

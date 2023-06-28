@@ -14,6 +14,7 @@ import LoginScreen from "./screens/LoginScreen.tsx"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
 import TournamentListScreen from "./screens/TournamentListScreen.tsx"
+import TeamListScreen from "./screens/TeamListScreen.tsx"
 
 
 /**
@@ -48,7 +49,7 @@ const screens = createBrowserRouter([
   },
   {
     path: "/team/all",
-    element: <></>
+    element: <TeamListScreen/>
   },
   {
     path: "/team/:idTim",

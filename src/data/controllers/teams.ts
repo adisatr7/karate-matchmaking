@@ -4,6 +4,7 @@ import defaultTeamsData from "../defaults/defaultTeams.json"
 import { getAthleteById, joinTeam, leaveTeam } from "./athletes"
 import { createDataFolder, writeInto } from "./utils"
 import useNotification from "../../hooks/useNotification"
+import { Teams } from "../../assets/icons"
 
 
 /**
@@ -21,7 +22,7 @@ export const saveTeamsData = async (teams: Team[] | any) => {
  * Initiate teams data by creating the 'data' folder and
  * 'teams.data' file if they don't exist yet
  */
-export const setDefaultTeamsData = async () => {
+export const assignDefaultTeamsData = async () => {
   saveTeamsData(defaultTeamsData)
 }
 
@@ -31,19 +32,19 @@ export const setDefaultTeamsData = async () => {
  * 
  * @returns List of all teams from 'teams.data' file
  */
-export const getAllTeams = (): Team[] => {
-  let teams: Team[] = []
-
-  readTextFile(
-    "data/teams.data", {
-    dir: BaseDirectory.AppData,
-  }).then(data => {
-    teams = JSON.parse(data)
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membaca file `teams.data`", err)
+export const getAllTeams = async (): Promise<Team[]> => {
+  return new Promise((resolve, reject) => {
+    readTextFile(
+      "data/teams.data", {
+      dir: BaseDirectory.AppData,
+    }).then(data => {
+      resolve(JSON.parse(data))
+    }).catch(err => {
+      useNotification("Terjadi kesalahan saat membaca file `teams.data`", err)
+      assignDefaultTeamsData()
+      reject(err)
+    })
   })
-
-  return teams
 }
 
 
@@ -53,9 +54,18 @@ export const getAllTeams = (): Team[] => {
  * @param id Team's id to be searched
  * @returns Team object with the specified id
  */
-export const getTeamById = (id: string): Team | undefined => {
-  const teams = getAllTeams()
-  return teams.find(team => team.idTim === id)
+export const getTeamById = async (id: string): Promise<Team> => {
+  return new Promise(async (resolve, reject) => {
+    await getAllTeams().then(teams => {
+      const team = teams.find(team => team.idTim === id)
+      if (team)
+        resolve(team)
+    })
+    .catch(err => {
+      useNotification("Terjadi kesalahan saat membaca file `teams.data`", err)
+      reject(err)
+    })
+  })
 }
 
 
@@ -64,8 +74,8 @@ export const getTeamById = (id: string): Team | undefined => {
  * 
  * @param newTeam Team object to be added
  */
-export const addTeam = (newTeam: Team) => {
-  const teams = getAllTeams()
+export const addTeam = async (newTeam: Team) => {
+  const teams = await getAllTeams()
   teams.push(newTeam)
 
   saveTeamsData(teams)
@@ -77,8 +87,8 @@ export const addTeam = (newTeam: Team) => {
  * 
  * @param updatedTeam Team object to be updated
  */
-export const updateTeam = (updatedTeam: Team) => {
-  const teams = getAllTeams()
+export const updateTeam = async (updatedTeam: Team) => {
+  const teams = await getAllTeams()
   const index = teams.findIndex(tim => tim.idTim === updatedTeam.idTim)
   teams[index] = updatedTeam
 
@@ -91,8 +101,8 @@ export const updateTeam = (updatedTeam: Team) => {
  * 
  * @param id Team's id to be deleted
  */
-export const deleteTeam = (id: string) => {
-  const teams = getAllTeams()
+export const deleteTeam = async (id: string) => {
+  const teams = await getAllTeams()
   const index = teams.findIndex(team => team.idTim === id)
   teams.splice(index, 1)
 
@@ -106,17 +116,29 @@ export const deleteTeam = (id: string) => {
  * @param teamId Team's id to get all members from
  * @returns List of all members object from the specified team
  */
-export const getAllMembers = (teamId: string): Athlete[] => {
-  const teams = getAllTeams()
-  const team = teams.find(team => team.idTim === teamId)
-  const members: Athlete[] = []
+export const getAllMembers = async (teamId: string): Promise<Athlete[]> => {
+  return new Promise(async (resolve, reject) => {
+    const teams = await getAllTeams()
+    const team = teams.find(team => team.idTim === teamId)
 
-  team?.idAnggota.forEach(memberId => {
-    const member = getAthleteById(memberId)
-    if(member) members.push(member)
+    // If team is not found, reject the promise
+    if (!team) 
+      reject("Team not found")
+
+    // Create a list of members object from the specified team
+    const members: Athlete[] = []
+
+    // Append each member object to the list
+    team?.idAnggota.forEach(memberId => {
+      const member = getAthleteById(memberId)
+
+      if(member) 
+        members.push(member)
+    })
+
+    // Resolve the promise with the list of members object
+    resolve(members)
   })
-
-  return members
 }
 
 
@@ -126,10 +148,22 @@ export const getAllMembers = (teamId: string): Athlete[] => {
  * @param teamId Team's id to get all members from
  * @returns List of all members id from the specified team
  */
-export const getAllMembersId = (teamId: string): string[] => {
-  const teams = getAllTeams()
-  const team = teams.find(team => team.idTim === teamId)
-  return team?.idAnggota || []
+export const getAllMembersId = async (teamId: string): Promise<string[]> => {
+  return new Promise(async (resolve, reject) => {
+
+    // Get the specified team data
+    const team = await getTeamById(teamId)
+
+    // Get all members id from the specified team
+    const memberIds = team.idAnggota
+
+    // If member is not found, reject the promise
+    if (!memberIds)
+      reject("Team not found")
+
+    // Resolve the promise with the list of members id
+    resolve(memberIds!)
+  })
 }
 
 
@@ -141,9 +175,12 @@ export const getAllMembersId = (teamId: string): string[] => {
  * 
  * @returns True if the member belongs to the team, false otherwise
  */
-export const isMember = (teamId: string, memberId: string): boolean => {
-  const members = getAllMembersId(teamId)
-  return members.includes(memberId)
+export const isMember = async (teamId: string, memberId: string): Promise<boolean> => {
+  return new Promise(async (resolve, reject) => {
+    const team = await getTeamById(teamId)
+    const memberIds = team.idAnggota
+    resolve(memberIds.includes(memberId))
+  })
 }
 
 
@@ -153,8 +190,8 @@ export const isMember = (teamId: string, memberId: string): boolean => {
  * @param teamId Team's ID the new member will be added to
  * @param newMemberId The new member ID to be added to the team
  */
-export const addMember = (teamId: string, newMemberId: string) => {
-  const teams = getAllTeams()
+export const addMember = async (teamId: string, newMemberId: string) => {
+  const teams = await getAllTeams()
   const team = teams.find(team => team.idTim === teamId)
   team?.idAnggota.push(newMemberId)
 
@@ -180,8 +217,8 @@ export const addMember = (teamId: string, newMemberId: string) => {
  * @param teamId Team's id the member will be removed from
  * @param memberId Member's id to be removed from the team
  */
-export const kickMember = (teamId: string, memberId: string) => {
-  const teams = getAllTeams()
+export const kickMember = async (teamId: string, memberId: string) => {
+  const teams = await getAllTeams()
   const team = teams.find(team => team.idTim === teamId)
   const index = team?.idAnggota.findIndex(id => id === memberId)
   team?.idAnggota.splice(index!, 1)
