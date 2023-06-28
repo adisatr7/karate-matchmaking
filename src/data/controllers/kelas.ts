@@ -11,21 +11,27 @@ import { getAthleteById } from "./athletes"
  * @param tournamentId Tournament ID to get all kelas from
  * @returns List of all kelas from the tournament
  */
-export const getAllKelas = (tournamentId: string): TournamentClass[] => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas: TournamentClass[] = []
+export const getAllKelas = async (tournamentId: string): Promise<TournamentClass[]> => {
+  return new Promise(async (resolve, reject) => {
 
-  if (tournament) {
-    kelas = tournament.kelas
+    // Get the specified tournament data
+    let tournament = await getTournamentById(tournamentId)
 
-    return kelas
-  }
+    // Create a list of kelas from the specified tournament
+    let kelas: TournamentClass[] = []
 
-  else {
-    useNotification("Terjadi kesalahan saat membaca data kelas", "Tidak dapat menemukan data pertandingan!")
+    // If tournament is found, get all kelas from the tournament and resolve the promise with the list of kelas
+    if (tournament) {
+      kelas = tournament.kelas
+      resolve(kelas)
+    }
 
-    return []
-  }
+    // If tournament is not found, send error notification and reject the promise
+    else {
+      useNotification("Terjadi kesalahan saat membaca data kelas", "Tidak dapat menemukan data pertandingan!")
+      reject("Tidak dapat menemukan data pertandingan!")
+    }
+  })
 }
 
 
@@ -37,18 +43,20 @@ export const getAllKelas = (tournamentId: string): TournamentClass[] => {
  * 
  * @returns The kelas object
  */
-export const getKelasById = (tournamentId: string, idKelas: string): TournamentClass | undefined => {
-  let kelas = getAllKelas(tournamentId).find(kelas => kelas.idKelas === idKelas)
+export const getKelasById = async (tournamentId: string, idKelas: string): Promise<TournamentClass> => {
+  return new Promise(async (resolve, reject) => {
 
-  // Check if kelas is found
-  if (kelas)
-    return kelas
+    const daftarKelas = await getAllKelas(tournamentId)    
+    const kelas = daftarKelas.find(kelas => kelas.idKelas === idKelas)
 
-  else {
-    useNotification("Terjadi kesalahan saat membaca data kelas", "Tidak dapat menemukan data kelas!")
+    if (kelas)
+      resolve(kelas)
 
-    return undefined
-  }
+    else {
+      useNotification("Terjadi kesalahan saat membaca data kelas", "Tidak dapat menemukan data kelas!")
+      reject("")
+    }
+  })
 }
 
 
@@ -58,9 +66,9 @@ export const getKelasById = (tournamentId: string, idKelas: string): TournamentC
  * @param tournamentId Tournament ID to add the kelas to
  * @param newKelas The new kelas object
  */
-export const addKelas = (tournamentId: string, newKelas: TournamentClass) => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getAllKelas(tournamentId)
+export const addKelas = async (tournamentId: string, newKelas: TournamentClass) => {
+  let tournament = await getTournamentById(tournamentId)
+  let kelas = await getAllKelas(tournamentId)
 
   if (tournament) {
     kelas.push(newKelas)
@@ -81,9 +89,9 @@ export const addKelas = (tournamentId: string, newKelas: TournamentClass) => {
  * @param tournamentId Tournament ID to delete the kelas from
  * @param updatedKelas The updated kelas object
  */
-export const updateKelas = (tournamentId: string, updatedKelas: TournamentClass) => {
-  let tournament = getTournamentById(tournamentId)
-  let kelas = getAllKelas(tournamentId)
+export const updateKelas = async (tournamentId: string, updatedKelas: TournamentClass) => {
+  let tournament = await getTournamentById(tournamentId)
+  let kelas = await getAllKelas(tournamentId)
 
   if (tournament) {
     kelas = kelas.map(kelas => kelas.idKelas === updatedKelas.idKelas ? updatedKelas : kelas)
@@ -104,12 +112,12 @@ export const updateKelas = (tournamentId: string, updatedKelas: TournamentClass)
  * @param tournamentId Tournament ID to delete the kelas from
  * @param idKelas ID of the kelas to delete
  */
-export const deleteKelas = (tournamentId: string, idKelas: string) => {
-  const tournaments = getAllTournaments()
+export const deleteKelas = async (tournamentId: string, idKelas: string) => {
+  const tournaments = await getAllTournaments()
 
   // Get the target tournament and kelas object
   let tournament = tournaments.find(tournament => tournament.idPertandingan === tournamentId)
-  let kelas = getAllKelas(tournamentId)
+  let kelas = await getAllKelas(tournamentId)
 
   // Remove the kelas from the specified tournament
   if (tournament) {
@@ -134,18 +142,21 @@ export const deleteKelas = (tournamentId: string, idKelas: string) => {
  * @param idKelas ID of the kelas to register the team to
  * @param teamId ID of the team to be registered
  */
-export const registerTeam = (tournamentId: string, idKelas: string, teamId: string, athleteId: string) => {
-  const kelas = getKelasById(tournamentId, idKelas)
-  const athlete = getAthleteById(athleteId)
+export const registerTeam = async (tournamentId: string, idKelas: string, teamId: string, athleteId: string) => {
+
+  // Get the kelas, athlete, and team object
+  const kelas = await getKelasById(tournamentId, idKelas)
+  const athlete = await getAthleteById(athleteId)
+  const team = await getTeamById(teamId)
   
-  if (kelas && athlete) {
+  // If the kelas, athlete, and team is found, register the team and athlete to the kelas
+  if (kelas && athlete && team) {
     kelas.daftarTim.push({
       idTim: teamId,
-      namaTim: getTeamById(teamId)?.namaTim,
+      namaTim: team.namaTim,
       idAtlet: athlete?.idAtlet,
       namaAtlet: athlete?.namaAtlet
     })
-
     updateKelas(tournamentId, kelas)
   }
 }
@@ -158,18 +169,16 @@ export const registerTeam = (tournamentId: string, idKelas: string, teamId: stri
  * @param idKelas The kelas ID to unregister the team from
  * @param teamId The team ID to be unregistered
  */
-export const unregisterTeam = (tournamentId: string, idKelas: string, teamId: string) => {
-  const kelas = getKelasById(tournamentId, idKelas)
+export const unregisterTeam = async (tournamentId: string, idKelas: string, teamId: string) => {
+
+  // Get the kelas object
+  const kelas = await getKelasById(tournamentId, idKelas)
   
-  // Remove the team from the kelas
+  // If kelas is found, remove the team from the kelas
   if (kelas) {
     kelas.daftarTim = kelas.daftarTim.filter(team => team.idTim !== teamId)
     
     // Update the kelas object
     updateKelas(tournamentId, kelas)
-
-    // Save all the changes to 'tournaments.json'
-    const tournaments = getAllTournaments()
-    saveTournamentsData(tournaments)
   }
 }
