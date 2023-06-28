@@ -7,7 +7,7 @@ import { createFolder, writeInto } from "../../utils/fileManager"
 
 /**
  * Save all users and current user data that is logged in to the app into
- * 'users.data' file
+ * 'auth/users.data' file
  * 
  * @param currentUser The current user that is logged in to the app
  * @param allUsers List of all users to be saved to 'users.data' file
@@ -15,10 +15,10 @@ import { createFolder, writeInto } from "../../utils/fileManager"
 export const saveUsersData = async (currentUser: UserType, allUsers: UserType[] | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
-  await createFolder()
+  await createFolder("auth")
 
   // Write into 'users.data' file
-  await writeInto({ currentUser: currentUser, users: allUsers }, "users")
+  await writeInto({ currentUser: currentUser, users: allUsers }, "auth/users")
 }
 
 
@@ -61,7 +61,7 @@ export const getAllUsers = async (): Promise<UserType[]> => {
  */
 export const getUserById = async (userId: string): Promise<UserType> => {
   const users = await getAllUsers()
-  const user = users.find(user => user.userId === userId)
+  const user = users.find(user => user?.userId === userId)
 
   return user ? user : null
 }

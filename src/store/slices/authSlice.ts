@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { UserType } from "../../types"
-import { getCurrentUser, setCurrentUser } from "../../data/controllers/users"
+import { setCurrentUser } from "../../data/controllers/users"
 
 
 /**
