@@ -26,13 +26,18 @@ export type UserType = {
 } | null
 
 /**
+ * Tournament status options type definition
+ */
+export type TournamentStatusOptions = "pendaftaran" | "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan"
+
+/**
  * Tournament type definition
  */
 export type TournamentType = {
   tournamentId: string,
   tournamentName: string,
   desc: string,
-  status: "pendaftaran" | "akan main" | "berlangsung" | "selesai" | "ditunda" | "dibatalkan",
+  status: TournamentStatusOptions,
   hostedBy: string,
   divisions: DivisionType[],
   [key: string]: any    // Index signature to allow string indexing

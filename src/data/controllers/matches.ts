@@ -1,7 +1,7 @@
 import useNotification from "../../hooks/useNotification"
 import { MatchType, ContestantType } from "../../types"
 import { getAthleteById } from "./athletes"
-import { getKelasById } from "./kelas"
+import { getKelasById } from "./divisions"
 import { getTeamById } from "./teams"
 import { getTournamentById, saveTournamentsData } from "./tournaments"
 
