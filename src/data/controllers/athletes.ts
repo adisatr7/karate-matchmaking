@@ -31,19 +31,19 @@ export const assignDefaultAthletesData = async () => {
  * 
  * @returns List of all athletes from 'athletes.data' file
  */
-export const getAllAthletes = (): Athlete[] => {
-  let athletes: Athlete[] = []
-
-  readTextFile(
-    "data/athletes.data", {
-    dir: BaseDirectory.AppData
-  }).then(res => {
-    athletes = JSON.parse(res)
-  }).catch(err => {
-    useNotification("Terjadi kesalahan saat membaca file", err)
+export const getAllAthletes = async (): Promise<Athlete[]> => {
+  return new Promise((resolve, reject) => {
+    readTextFile(
+      "data/athletes.data", {
+      dir: BaseDirectory.AppData
+    }).then(res => {
+      resolve(JSON.parse(res))
+    }).catch(err => {
+      useNotification("Terjadi kesalahan saat membaca file", err)
+      assignDefaultAthletesData()
+      reject(err)
+    })
   })
-
-  return athletes
 }
 
 
@@ -53,15 +53,14 @@ export const getAllAthletes = (): Athlete[] => {
  * @param id The id of the athlete to be searched
  * @returns The athlete object with the specified id
  */
-export const getAthleteById = (id: string): Athlete | undefined => {
-  let atlet = getAllAthletes().find(atlet => atlet.idAtlet === id)
+export const getAthleteById = async (id: string): Promise<Athlete> => {
+  return new Promise(async (resolve, reject) => {
+    let athletes = await getAllAthletes()
+    let athlete = athletes.find(atlet => atlet.idAtlet === id)
 
-  // Return the athlete object if it exists
-  if (atlet)
-    return atlet
-
-  // Return undefined if the athlete object doesn't exist
-  return undefined
+    if (athlete) resolve(athlete)
+    else reject("Athlete not found")
+  })
 }
 
 
@@ -71,7 +70,7 @@ export const getAthleteById = (id: string): Athlete | undefined => {
  * @param athlete The athlete object to be added
  */
 export const addAthlete = async (athlete: Athlete) => {
-  let athletes = getAllAthletes()
+  let athletes = await getAllAthletes()
   athletes.push(athlete)
 
   saveAthletesData(athletes)
@@ -84,7 +83,7 @@ export const addAthlete = async (athlete: Athlete) => {
  * @param athlete The athlete object to be deleted
  */
 export const updateAthlete = async (athlete: Athlete) => {
-  let athletes = getAllAthletes()
+  let athletes = await getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
   athletes[athleteIndex] = athlete
@@ -99,7 +98,7 @@ export const updateAthlete = async (athlete: Athlete) => {
  * @param athlete The athlete object to be deleted
  */
 export const deleteAthlete = async (athlete: Athlete) => {
-  let athletes = getAllAthletes()
+  let athletes = await getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
   // If the athlete is a part of a team, remove them from that team first
@@ -121,7 +120,7 @@ export const deleteAthlete = async (athlete: Athlete) => {
  * @param teamId The id of the team to be joined
  */
 export const joinTeam = async (athlete: Athlete, teamId: string) => {
-  let athletes = getAllAthletes()
+  let athletes = await getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
   // If the athlete is already a part of another team, remove them from that team first
@@ -146,7 +145,7 @@ export const joinTeam = async (athlete: Athlete, teamId: string) => {
  * @param athlete Athlete object to be removed from the team
  */
 export const leaveTeam = async (athlete: Athlete) => {
-  let athletes = getAllAthletes()
+  let athletes = await getAllAthletes()
   let athleteIndex = athletes.findIndex(atlet => atlet.idAtlet === athlete.idAtlet)
 
   // Remove the athlete from the team
