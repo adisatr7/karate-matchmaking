@@ -28,7 +28,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-stone-900 h-screen w-screen justify-center items-center">
+    <div className="items-center justify-center w-screen h-screen bg-stone-900">
     </div>
   )
 }

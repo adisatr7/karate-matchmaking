@@ -45,7 +45,7 @@ export default function LoginScreen() {
       return
     }
 
-    const user = registeredUsers.find(user => user!.userId === idPanitiaInput)
+    const user = registeredUsers.find(user => user!.id === idPanitiaInput)
 
     // If the user doesn't exist
     if (!user) {

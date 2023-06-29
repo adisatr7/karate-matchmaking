@@ -19,7 +19,7 @@ export type PathOptions = "highlight" | "tournaments" | "teams" | "athletes" | "
  * User data type definition used to login
  */
 export type UserType = {
-  userId: string,                 // Unique ID - Customizable
+  id: string,                 // Unique ID - Customizable
   name: string,
   password: string,
   imageUrl: string

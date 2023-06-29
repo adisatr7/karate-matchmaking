@@ -26,7 +26,7 @@ export const saveUsersData = async (currentUser: UserType, allUsers: UserType[] 
  * Initiate users data by creating the 'data' folder
  */
 export const assignDefaultUsersData = async () => {
-  saveUsersData(null, defaultUsersData)
+  await saveUsersData(null, defaultUsersData)
 }
 
 
@@ -36,17 +36,17 @@ export const assignDefaultUsersData = async () => {
  * @returns List of all registered users from 'users.data' file
  */
 export const getAllUsers = async (): Promise<UserType[]> => {
-  return new Promise((resolve, reject) => {
-    readTextFile("data/users.data", {
+  return new Promise(async (resolve, reject) => {
+    await readTextFile("auth/users.data", {
       dir: BaseDirectory.AppData
     })
       .then(res => {
         const data = JSON.parse(res)
         resolve(data.users)
       })
-      .catch(err => {
+      .catch(async (err) => {
         useNotification("Terjadi kesalahan saat membaca data pengguna", err)
-        assignDefaultUsersData()
+        await assignDefaultUsersData()
         reject(err)
       })
   })
@@ -61,7 +61,7 @@ export const getAllUsers = async (): Promise<UserType[]> => {
  */
 export const getUserById = async (userId: string): Promise<UserType> => {
   const users = await getAllUsers()
-  const user = users.find(user => user?.userId === userId)
+  const user = users.find(user => user?.id === userId)
 
   return user ? user : null
 }
@@ -73,17 +73,17 @@ export const getUserById = async (userId: string): Promise<UserType> => {
  * @returns The current user that is logged in to the app
  */
 export const getCurrentUser = async (): Promise<UserType> => {
-  return new Promise((resolve, reject) => {
-    readTextFile("data/users.data", {
+  return new Promise(async (resolve, reject) => {
+    await readTextFile("auth/users.data", {
       dir: BaseDirectory.AppData
     })
       .then(res => {
         const data = JSON.parse(res)
         resolve(data.currentUser)
       })
-      .catch(err => {
+      .catch(async (err) => {
         useNotification("Terjadi kesalahan saat membaca data pengguna", err)
-        assignDefaultUsersData()
+        await assignDefaultUsersData()
         reject(err)
       })
   })
@@ -121,7 +121,7 @@ export const setAllUsers = async (users: UserType[]) => {
 export const registerNewUser = async (newUser: UserType) => {
 
   // Check for existing user with the same id
-  if (await getUserById(newUser!.userId)) {
+  if (await getUserById(newUser!.id)) {
     useNotification("Pengguna dengan ID tersebut sudah terdaftar", "Silahkan gunakan ID lain!")
 
     return
@@ -141,7 +141,7 @@ export const registerNewUser = async (newUser: UserType) => {
 export const updateUser = async (updatedUser: UserType) => {
   const allUsers = await getAllUsers()
   const newUsers = allUsers.map(user => {
-    if (user!.userId === updatedUser!.userId) {
+    if (user!.id === updatedUser!.id) {
       return updatedUser
     }
     return user
@@ -157,6 +157,6 @@ export const updateUser = async (updatedUser: UserType) => {
  */
 export const deleteUser = async (userId: string) => {
   const allUsers = await getAllUsers()
-  const newUsers = allUsers.filter(user => user!.userId !== userId)
+  const newUsers = allUsers.filter(user => user!.id !== userId)
   setAllUsers(newUsers)
 }

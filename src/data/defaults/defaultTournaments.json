@@ -1,304 +1,34 @@
 [
   {
-    "idPertandingan": "reg_open_cup",
-    "namaPertandingan": "Regional Opan Cup",
-    "desc": "",
-    "status": "berlangsung",
-    "penyelenggara": "Karate Foundation",
-    "kelas": [
-      {
-        "idKelas": "min_45_m",
-        "namaKelas": "Pemula Putra",
-        "daftarTim": [
-          {
-            "idAtlet": "",
-            "namaAtlet": "",
-            "idTim": "abcd1234",
-            "namaTim": "Samurai Karate Club"
-          },
-          {
-            "idAtlet": "",
-            "namaAtlet": "",
-            "idTim": "efgh5678",
-            "namaTim": "Garuda Karate Dojo"
-          }
-        ],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "Match 1",
-            "idMatchBerikutnya": 4,
-            "waktuMain": "2023-05-05",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "ryo",
-                "namaMatch": "RYO",
-                "isWinner": true,
-                "status": null,
-                "resultText": "8"
-              },
-              {
-                "idMatch": "akr",
-                "namaMatch": "AKR",
-                "isWinner": false,
-                "status": null,
-                "resultText": "3"
-              }
-            ]
-          },
-          {
-            "idMatch": 1,
-            "namaMatch": "Match 2",
-            "idMatchBerikutnya": 4,
-            "waktuMain": "2023-05-05",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "ykr",
-                "namaMatch": "YKR",
-                "isWinner": false,
-                "status": null,
-                "resultText": "3"
-              },
-              {
-                "idMatch": "hrs",
-                "namaMatch": "HRS",
-                "isWinner": true,
-                "status": null,
-                "resultText": "6"
-              }
-            ]
-          },
-          {
-            "idMatch": 2,
-            "namaMatch": "Match 3",
-            "idMatchBerikutnya": 5,
-            "waktuMain": "2023-05-05",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "kzk",
-                "namaMatch": "KZK",
-                "isWinner": false,
-                "status": null,
-                "resultText": "4"
-              },
-              {
-                "idMatch": "hrk",
-                "namaMatch": "HRK",
-                "isWinner": true, 
-                "status": null,
-                "resultText": "7"
-              }
-            ]
-          },
-          {
-            "idMatch": 3,
-            "namaMatch": "Match 4",
-            "idMatchBerikutnya": 5,
-            "waktuMain": "2023-05-05",
-            "status": "NO_PARTY",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "ryo",
-                "namaMatch": "RYO",
-                "isWinner": false,
-                "status": null,
-                "resultText": "8"
-              },
-              {
-                "idMatch": "akr",
-                "namaMatch": "AKR",
-                "isWinner": false,
-                "status": null,
-                "resultText": "3"
-              }
-            ]
-          },
-          {
-            "idMatch": 4,
-            "namaMatch": "Semi Final 1",
-            "idMatchBerikutnya": 6,
-            "waktuMain": "2023-05-05",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "ryo",
-                "namaMatch": "RYO",
-                "isWinner": true,
-                "status": null,
-                "resultText": "6"
-              },
-              {
-                "idMatch": "hrk",
-                "namaMatch": "HRK",
-                "isWinner": false,
-                "status": null,
-                "resultText": "7"
-              }
-            ]
-          },
-          {
-            "idMatch": 5,
-            "namaMatch": "Semi Final 2",
-            "idMatchBerikutnya": null,
-            "waktuMain": "2023-05-05",
-            "status": "NO_PARTY",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "hrs",
-                "namaMatch": "HRS",
-                "isWinner": true,
-                "status": null,
-                "resultText": "6"
-              },
-              {
-                "idMatch": "hrk",
-                "namaMatch": "HRK",
-                "isWinner": false,
-                "status": null,
-                "resultText": "7"
-              }
-            ]
-          },
-          {
-            "idMatch": 6,
-            "namaMatch": "Final",
-            "idMatchBerikutnya": null,
-            "waktuMain": "2023-05-05",
-            "status": "NO_PARTY",
-            "pemenang": "",
-            "kontestan": [
-              {
-                "idMatch": "hrs",
-                "namaMatch": "HRS",
-                "isWinner": true,
-                "status": null,
-                "resultText": "6"
-              },
-              {
-                "idMatch": "hrk",
-                "namaMatch": "HRK",
-                "isWinner": false,
-                "status": null,
-                "resultText": "7"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "idKelas": "min_45_f",
-        "namaKelas": "Pemula Putri",
-        "daftarTim": [],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "",
-            "idMatchBerikutnya": 0,
-            "waktuMain": "",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": []
-          }
-        ]
-      },
-      {
-        "idKelas": "min_50_m",
-        "namaKelas": "Kadet Putra",
-        "daftarTim": [],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "",
-            "idMatchBerikutnya": 0,
-            "waktuMain": "",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": []
-          }
-        ]
-      },
-      {
-        "idKelas": "min_50_f",
-        "namaKelas": "Kadet Putri",
-        "daftarTim": [],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "",
-            "idMatchBerikutnya": 0,
-            "waktuMain": "",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": []
-          }
-        ]
-      },
-      {
-        "idKelas": "min_55_m",
-        "namaKelas": "Junior Putra",
-        "daftarTim": [],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "",
-            "idMatchBerikutnya": 0,
-            "waktuMain": "",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": []
-          }
-        ]
-      },
-      {
-        "idKelas": "min_55_f",
-        "namaKelas": "Junior Putri",
-        "daftarTim": [],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "",
-            "idMatchBerikutnya": 0,
-            "waktuMain": "",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": []
-          }
-        ]
-      }
-    ]
+    "tournamentId": "abc123",
+    "tournamentName": "Kejuaraan Karate Indonesia",
+    "desc": "Kejuaraan karate tingkat nasional yang diadakan setiap tahun oleh Persatuan Karate Indonesia. Turnamen ini merupakan ajang prestisius bagi para atlet karate dari seluruh Indonesia untuk memperlihatkan kemampuan mereka. Dalam kejuaraan ini, para atlet akan berkompetisi dalam berbagai kategori dan tingkatan, mulai dari pemula hingga tingkat profesional. Selain itu, turnamen ini juga menjadi ajang seleksi untuk membentuk tim nasional karate yang akan mewakili Indonesia dalam kompetisi internasional.",
+    "status": "pendaftaran",
+    "hostedBy": "Persatuan Karate Indonesia",
+    "divisionIds": []
   },
   {
-    "idPertandingan": "kd_ptdgn",
-    "namaPertandingan": "Nama Pertandingan",
-    "desc": "",
+    "tournamentId": "def456",
+    "tournamentName": "Kejuaraan Karate Tokyo",
+    "desc": "Kejuaraan karate yang diselenggarakan di Tokyo, Jepang oleh Federasi Karate Jepang. Turnamen ini menjadi salah satu event karate terbesar di Jepang, menarik partisipasi dari atlet-atlet karate terbaik di seluruh negeri. Dalam kompetisi ini, para atlet akan berhadapan dalam pertarungan sengit untuk meraih gelar juara di berbagai kategori dan tingkatan. Kejuaraan Karate Tokyo juga menjadi ajang untuk mempromosikan budaya karate Jepang kepada dunia.",
+    "status": "akan main",
+    "hostedBy": "Federasi Karate Jepang",
+    "divisionIds": []
+  },
+  {
+    "tournamentId": "ghi789",
+    "tournamentName": "Piala Karate Jakarta",
+    "desc": "Turnamen karate bergengsi di Jakarta yang diorganisir oleh Persatuan Olahraga Karate DKI Jakarta. Piala Karate Jakarta menjadi ajang yang dinantikan oleh para karateka di wilayah Jakarta dan sekitarnya. Kompetisi ini menampilkan pertandingan karate yang menarik dan penuh aksi dari atlet-atlet terbaik di ibu kota. Dalam turnamen ini, peserta akan berkompetisi dalam berbagai kategori dan tingkatan, memberikan penonton pengalaman yang tak terlupakan.",
+    "status": "berlangsung",
+    "hostedBy": "Persatuan Olahraga Karate DKI Jakarta",
+    "divisionIds": []
+  },
+  {
+    "tournamentId": "jkl012",
+    "tournamentName": "Kejuaraan Karate Bali",
+    "desc": "Kejuaraan karate yang diadakan di Bali oleh Asosiasi Karate Bali. Turnamen ini merupakan salah satu event olahraga terbesar di pulau Dewata, mengundang partisipasi dari atlet-atlet karate dari seluruh Indonesia. Kejuaraan Karate Bali tidak hanya menjadi ajang kompetisi yang seru, tetapi juga menjadi kesempatan bagi atlet untuk merasakan keindahan alam dan budaya Bali. Dalam turnamen ini, para peserta akan bertarung dengan semangat juang dan mengukir prestasi yang membanggakan.",
     "status": "selesai",
-    "penyelenggara": "Karateka",
-    "kelas": [
-      {
-        "idKelas": "",
-        "namaKelas": "",
-        "daftarTim": [],
-        "matches": [
-          {
-            "idMatch": 0,
-            "namaMatch": "",
-            "idMatchBerikutnya": 0,
-            "waktuMain": "",
-            "status": "selesai",
-            "pemenang": "",
-            "kontestan": []
-          }
-        ]
-      }
-    ]
+    "hostedBy": "Asosiasi Karate Bali",
+    "divisionIds": []
   }
 ]
