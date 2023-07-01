@@ -16,7 +16,7 @@ export default async function useNotification (title: any, message?: any) {
       permissionGranted = permission === "granted"
     }
     if (permissionGranted) {
-      sendNotification({ title: `${title}`, body: `${message || ""}` })
+      sendNotification({ title: `${JSON.stringify(title)}`, body: `${JSON.stringify(message) || ""}` })
     }
   } catch (err) {
     useNotification("Notification error", err)
