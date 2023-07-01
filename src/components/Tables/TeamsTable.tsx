@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react"
-import { TeamType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-import { getAllTeams } from "../../../.trash/controllers/teams"
+import { Team } from "../../data/classes/Team"
 
 
-export default function TeamsTable() {
-  const [teamsList, setTeamsList] = useState<TeamType[]>([])
+type PropsType = {
+  data: Team[]
+}
 
+export default function TeamsTable({ data: teamList }: PropsType) {
+
+  // Navigation hook so the app can navigate to other screens
   const navigate = useNavigate()
 
+  // Style for the header row
   const headerLabels: string[] = [
     "NO", 
     "NAMA TIM", 
@@ -29,20 +32,11 @@ export default function TeamsTable() {
     navigate(`/team/${idTim}`)
   } 
 
-  const fetchTeams = async () => {
-    const teams = await getAllTeams()
-    setTeamsList(teams)
-  }
-
-  useEffect(() => {
-    fetchTeams()
-  }, [])
-
   return (
-    <table className="table-auto w-full h-fit bg-dark-glass border border-separate border-stone-600 rounded-md bg-opacity-50 backdrop-blur-md text-white font-quicksand">
+    <table className="w-full text-white bg-opacity-50 border border-separate rounded-md table-auto h-fit bg-dark-glass border-stone-600 backdrop-blur-md font-quicksand">
       
       {/* Header */}
-      <thead className="sticky top-0 rounded-t-lg bg-dark-glass hover:bg-stone-700 border border-separate border-stone-600 rounded-md">
+      <thead className="sticky top-0 border border-separate rounded-md rounded-t-lg bg-dark-glass hover:bg-stone-700 border-stone-600">
         <tr className="">
           { headerLabels.map((value: string, index: number) => {
             return ( <td key={index} className={headerRowStyle}>{value}</td> )
@@ -51,13 +45,12 @@ export default function TeamsTable() {
       </thead>
       
       <tbody>
-        { teamsList.map((team: TeamType, teamIndex: number) => {
-            const { teamId: idTim, teamName: namaTim, initial: inisial, members: idAnggota, city: asal } = team
+        { teamList.map((t: Team, teamIndex: number) => {
 
             return (
               <tr
                 key={teamIndex}
-                onClick={() => handleRowClick(idTim)}
+                onClick={() => handleRowClick(t.getId())}
                 className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${teamIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                 {/* Render table cells based on the header labels */}
@@ -65,10 +58,10 @@ export default function TeamsTable() {
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
                       {/* Render idPertandingan column conditionally */}
                       { label === "NO" ? teamIndex + 1 
-                        : label === "NAMA TIM" ? toSentenceCase(namaTim)
-                        : label === "INISIAL" ? inisial.toUpperCase()
-                        : label === "ANGGOTA" ? idAnggota.length
-                        : label === "ASAL" ? toSentenceCase(asal)
+                        : label === "NAMA TIM" ? toSentenceCase(t.getName())
+                        : label === "INISIAL" ? t.getInitial().toUpperCase()
+                        : label === "ANGGOTA" ? t.getMemberIds().length
+                        : label === "ASAL" ? toSentenceCase(t.getCity())
                         : ""
                       }
                     </td>

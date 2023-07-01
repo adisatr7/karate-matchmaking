@@ -83,6 +83,10 @@ export class Team {
     return this.city
   }
 
+  public getMemberIds(): string[] {
+    return this.memberIds
+  }
+
   /**
    * Get list of Athlete data.
    *
@@ -120,5 +124,17 @@ export class Team {
 
   public removeMemberId(memberId: string): void {
     this.memberIds = this.memberIds.filter((id) => id !== memberId)
+  }
+
+  public setTeamName(newName: string): void {
+    this.teamName = newName
+  }
+
+  public setInitial(newInitial: string): void {
+    this.initial = newInitial
+  }
+
+  public setCity(newCity: string): void {
+    this.city = newCity
   }
 }

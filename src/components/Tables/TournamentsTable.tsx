@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import Tournament from "../../data/classes/Tournament"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
