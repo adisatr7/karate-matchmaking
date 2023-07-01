@@ -123,19 +123,8 @@ export default class Division {
    *
    * @returns Amount of registered teams
    */
-  public async getContestantAmount(): Promise<number> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        // Get registered teams data
-        const teams: Team[] = await this.getRegisteredTeams()
-
-        // Resolve the promise with the amount of teams
-        resolve(teams.length)
-      } catch (err) {
-        // In the case of an error, reject the promise
-        reject(err)
-      }
-    })
+  public getContestantAmount(): number {
+    return this.registeredTeams.length
   }
 
   public getDivisionId(): string {

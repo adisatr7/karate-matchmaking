@@ -84,23 +84,32 @@ export default class Tournament {
   }
 
   /**
-   * Get all divisions that belong to this tournament.
+   * Count the amount of contestants that belong to this tournament.
    *
-   * @returns A list of Division objects that belong to this tournament.
+   * @returns Amount of contestants
    */
   public async getContestantAmount(): Promise<number> {
     return new Promise(async (resolve, reject) => {
+      
       // Get all divisions that belong to this tournament
       await this.getDivisions()
 
         // Get all contestants from each division
         .then(async (divisions) => {
-          divisions.forEach(async (division) => {
-            const contestantAmount = await division.getContestantAmount()
 
-            // Resolve the promise
-            resolve(contestantAmount)
+          // Create a variable to store the total amount of contestants
+          let totalContestantAmount = 0
+
+          // Count the amount of contestants from each division
+          divisions.forEach(division => {
+            const contestantAmount = division.getContestantAmount()
+
+            // Add the amount of contestants to the total amount
+            totalContestantAmount += contestantAmount
           })
+
+          // Resolve the promise
+          resolve(totalContestantAmount)
         })
 
         // If error occured, reject the promise
