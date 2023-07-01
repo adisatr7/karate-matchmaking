@@ -1,142 +1,104 @@
 [
   {
-    "idTim": "abcd1234",
-    "namaTim": "Samurai Karate Club",
-    "inisial": "SAM",
-    "asal": "Jakarta",
-    "idAnggota": []
+    "teamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+    "teamName": "Samurai Karate Club",
+    "initial": "SAM",
+    "city": "Jakarta",
+    "memberIds": [
+      "a-eb73a78f-d678-55ea-8018-3364821cfae8",
+      "a-f948fb82-3085-5b08-aafd-9bfd6f227233",
+      "a-8f294db8-5e71-5b6c-b3ec-6797a16b3372",
+      "a-49cee47f-6029-5bfd-b6af-87ad99b210e1",
+      "a-21aa8874-d9f2-5dad-a9d8-e05a894374c0"
+    ]
   },
   {
-    "idTim": "efgh5678",
-    "namaTim": "Garuda Karate Dojo",
-    "inisial": "GAR",
-    "asal": "Surabaya",
-    "idAnggota": []
+    "teamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
+    "teamName": "Garuda Karate Dojo",
+    "initial": "GAR",
+    "city": "Surabaya",
+    "memberIds": [
+      "a-80a22d46-1e45-5377-ab4a-a6fb0d8ae02e",
+      "a-0f504d37-f9f1-5e59-8467-27f77662297f"
+    ]
   },
   {
-    "idTim": "ijkl9012",
-    "namaTim": "Raja Singa Martial Arts",
-    "inisial": "RAJ",
-    "asal": "Bandung",
-    "idAnggota": []
+    "teamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
+    "teamName": "Raja Singa Martial Arts",
+    "initial": "RAJ",
+    "city": "Bandung",
+    "memberIds": [
+      "a-872faf7a-3642-54c3-b4b7-15990e48ac98",
+      "a-324a6e5b-bdd8-518d-a6f3-b34bce4ff558"
+    ]
   },
   {
-    "idTim": "mnop3456",
-    "namaTim": "Naga Putih Karate Academy",
-    "inisial": "DRA",
-    "asal": "Medan",
-    "idAnggota": []
+    "teamId": "t-93b5242a-1d69-57e6-8b7b-9f3c2e3eaf8b",
+    "teamName": "Si Naga Putih Karate Academy",
+    "initial": "NAG",
+    "city": "Medan",
+    "memberIds": [
+      "a-bd30eed4-3ee3-5b59-b09d-79c8a838b616",
+      "a-2450313e-3a0c-55e2-bc71-69e37d849523"
+    ]
   },
   {
-    "idTim": "qrst7890",
-    "namaTim": "Elang Merah Karate Team",
-    "inisial": "ELA",
-    "asal": "Yogyakarta",
-    "idAnggota": []
+    "teamId": "t-eb84326b-37a4-55e7-8a4f-7c8dfc1a9365",
+    "teamName": "Elang Merah Karate Team",
+    "initial": "ELA",
+    "city": "Yogyakarta",
+    "memberIds": [
+      "a-7ea8f581-01e5-5c89-a8dd-773c8bc068e5",
+      "a-219b344e-bb96-5b4e-8fa3-1859081d9182"
+    ]
   },
   {
-    "idTim": "uvwx1234",
-    "namaTim": "Harimau Martial Arts",
-    "inisial": "HAM",
-    "asal": "Sumatera Utara",
-    "idAnggota": []
+    "teamId": "t-65050761-1c71-548b-bccf-a9dc95c110b6",
+    "teamName": "Harimau Martial Arts",
+    "initial": "HAM",
+    "city": "Sumatera Utara",
+    "memberIds": [
+      "a-481347ff-f3ea-591e-a574-1638bc3dde29",
+      "a-c4338b01-3bf0-55c7-a975-7f96bba75a34"
+    ]
   },
   {
-    "idTim": "yzab5678",
-    "namaTim": "Aing Maung Karate Club",
-    "inisial": "AUM",
-    "asal": "Bandung",
-    "idAnggota": []
+    "teamId": "t-2ea143d4-7a3f-5279-afe9-a6ad38831c0b",
+    "teamName": "Aing Maung Karate Club",
+    "initial": "AUM",
+    "city": "Bandung",
+    "memberIds": [
+      "a-e679396e-2606-5ea0-9ba4-9ff479c884a7",
+      "a-be663bac-752d-5d7f-8eb8-86c4e469ec92"
+    ]
   },
   {
-    "idTim": "cdef9012",
-    "namaTim": "Lion Martial Arts",
-    "inisial": "LIO",
-    "asal": "Semarang",
-    "idAnggota": []
+    "teamId": "t-3c2e3a3e-c62e-5baa-aec9-1c560a601e3d",
+    "teamName": "Semarts - Semarang Martial Arts",
+    "initial": "LIO",
+    "city": "Semarang",
+    "memberIds": [
+      "a-c43d1087-ef2a-5e0e-a31c-03ada33fdc46"
+    ]
   },
   {
-    "idTim": "ghij3456",
-    "namaTim": "Cobra Dojo",
-    "inisial": "COB",
-    "asal": "Palembang",
-    "idAnggota": []
+    "teamId":  "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
+    "teamName": "Cobra Dojo",
+    "initial": "COB",
+    "city": "Palembang",
+    "memberIds": [
+      "a-ffb7db95-f875-5fc0-a8dd-fb9aa8d70611",
+      "a-7ff6cac9-57bb-5694-8028-a89055251377"
+    ]
   },
   {
-    "idTim": "klmn7890",
-    "namaTim": "Shark Karate Academy",
-    "inisial": "SHA",
-    "asal": "Makassar",
-    "idAnggota": []
-  },
-  {
-    "idTim": "opqr1234",
-    "namaTim": "Perguruan Cawan Suci",
-    "inisial": "CAW",
-    "asal": "Bogor",
-    "idAnggota": []
-  },
-  {
-    "idTim": "stuv5678",
-    "namaTim": "Leopard Martial Arts",
-    "inisial": "LEO",
-    "asal": "Malang",
-    "idAnggota": []
-  },
-  {
-    "idTim": "wxyz9012",
-    "namaTim": "Jaguar Karate Team",
-    "inisial": "JAG",
-    "asal": "Padang",
-    "idAnggota": []
-  },
-  {
-    "idTim": "1234abcd",
-    "namaTim": "Perguruan Python",
-    "inisial": "PPY",
-    "asal": "Tangerang",
-    "idAnggota": []
-  },
-  {
-    "idTim": "5678efgh",
-    "namaTim": "Panthera Martial Arts",
-    "inisial": "PAN",
-    "asal": "Batam",
-    "idAnggota": []
-  },
-  {
-    "idTim": "9012ijkl",
-    "namaTim": "Karate Dojo Pekanbaru",
-    "inisial": "KDP",
-    "asal": "Pekanbaru",
-    "idAnggota": []
-  },
-  {
-    "idTim": "3456mnop",
-    "namaTim": "Perguruan Badak Bercula Satu",
-    "inisial": "BBS",
-    "asal": "Sumatera Selatan",
-    "idAnggota": []
-  },
-  {
-    "idTim": "7890qrst",
-    "namaTim": "Judo Karate Academy",
-    "inisial": "JUD",
-    "asal": "Manado",
-    "idAnggota": []
-  },
-  {
-    "idTim": "1234uvwx",
-    "namaTim": "Tae Kwon Do Club",
-    "inisial": "TAE",
-    "asal": "Balikpapan",
-    "idAnggota": []
-  },
-  {
-    "idTim": "5678yzab",
-    "namaTim": "Karatekas Indonesia",
-    "inisial": "KAR",
-    "asal": "Banda Aceh",
-    "idAnggota": []
+    "teamId": "t-8ed9a54b-d9d5-59a0-a1de-09e17ae62d03",
+    "teamName": "Shark Karate Academy",
+    "initial": "SHA",
+    "city": "Makassar",
+    "memberIds": [
+      "a-7a203ed6-647d-5fcd-924c-a496b35d04e7",
+      "a-c30e0838-89ca-55ce-aba9-b9dff6160a4a"
+    ]
   }
 ]
