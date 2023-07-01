@@ -9,7 +9,7 @@ import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
 import { useAppDispatch, useAppSelector } from "../store"
 import Modal from "../components/Modal"
-import { showModal } from "../store/slices/modalSlice"
+import { setModal } from "../store/slices/modalSlice"
 
 
 export default function TournamentListScreen() {
@@ -18,7 +18,7 @@ export default function TournamentListScreen() {
   
   const [searchKeyword, setSearchKeyword] = useState("")
 
-  const modalIsShown = useAppSelector(state => state.modal.isShown)
+  const modal = useAppSelector(state => state.modal.showing)
   const dispatch = useAppDispatch()
 
   
@@ -79,7 +79,7 @@ export default function TournamentListScreen() {
   }
 
   const handleHelp = () => {
-    dispatch(showModal())
+    dispatch(setModal("help"))
   }
   
 
@@ -113,10 +113,17 @@ export default function TournamentListScreen() {
       </div>
 
       {
-        modalIsShown && (
+        modal === "help" && (
           <Modal 
-            title="Pertandingan" 
-            caption="Pada layar ini, Anda dapat melihat semua pertandingan yang terdaftar di sistem."/>
+            title="Daftar Pertandingan">
+            <p>Pada layar ini, Anda dapat melihat semua pertandingan yang terdaftar di sistem.</p>
+            {/* <div className="flex flex-row items-center mt-[2px] gap-[10px]">
+              <SearchIcon/>
+              <p className="text-subheading">Pencarian</p>
+            </div>
+            
+            <p>Ketikkan nama pertandingan yang ingin dicari, lalu klik "Cari Pertandingan"</p>  */}
+          </Modal>
         )
       }
 
