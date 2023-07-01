@@ -4,7 +4,6 @@ import { useAppDispatch } from "./store"
 import { getCurrentUser } from "./utils/authService"
 import { login } from "./store/slices/authSlice"
 import { collapseSidebar } from "./store/slices/sidebarSlice"
-import { verifyData } from "./data/defaults"
 
 
 export default function App() {
@@ -15,6 +14,8 @@ export default function App() {
    * Fetches all users data from the `auth/users.data` file
    */
   const checkIfLoggedIn = async () => {
+
+    // Get current user data from the `auth/currentUser.data` file
     const currentUser = await getCurrentUser()
 
     // If the user is logged in, redirect to the highlight screen
@@ -30,8 +31,11 @@ export default function App() {
   }
   
   useEffect(() => {
-    verifyData()
     checkIfLoggedIn()
+
+    setTimeout(() => {
+      checkIfLoggedIn()
+    }, 100)
   }, [])
 
   return (

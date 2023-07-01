@@ -3,6 +3,7 @@ import useNotification from "../hooks/useNotification"
 import { UserType } from "../types"
 import defaultUsersData from "../data/defaults/defaultUsers.json"
 import { createFolder, writeInto } from "./fileManager"
+import { assignDefaultAthletesData, assignDefaultDivisionsData, assignDefaultTeamsData, assignDefaultTournamentsData } from "../data/defaults"
 
 /**
  * Save all users and current user data that is logged in to the app into
@@ -25,8 +26,15 @@ export const saveUsersData = async (
 /**
  * Initiate users data by creating the 'data' folder
  */
-export const assignDefaultUsersData = async () => {
+export const assignDefaultData = async () => {
   await saveUsersData(null, defaultUsersData)
+
+  // ! Experimental: Assign default data for other folders
+  await assignDefaultTournamentsData()
+  await assignDefaultDivisionsData()
+  await assignDefaultAthletesData()
+  await assignDefaultTeamsData()
+  // assignDefaultMatchesData()
 }
 
 /**
@@ -45,7 +53,7 @@ export const getAllUsers = async (): Promise<UserType[]> => {
       })
       .catch(async (err) => {
         useNotification("Terjadi kesalahan saat membaca data pengguna", err)
-        await assignDefaultUsersData()
+        await assignDefaultData()
         reject(err)
       })
   })
@@ -80,7 +88,7 @@ export const getCurrentUser = async (): Promise<UserType> => {
       })
       .catch(async (err) => {
         useNotification("Terjadi kesalahan saat membaca data pengguna", err)
-        await assignDefaultUsersData()
+        await assignDefaultData()
         reject(err)
       })
   })

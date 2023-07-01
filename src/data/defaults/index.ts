@@ -7,6 +7,7 @@ import defaultDivisions from "./defaultDivisions.json"
 // import defaultMatches from "./defaultMatches.json"
 import defaultTeams from "./defaultTeams.json"
 import defaultAthletes from "./defaultAthletes.json"
+import useNotification from "../../hooks/useNotification"
 
 
 /**
@@ -17,40 +18,41 @@ import defaultAthletes from "./defaultAthletes.json"
  * * On macOS: `/Users/<username>/Library/Application Support/`
  * * On Linux: `/home/<username>/.local/share/`
  */
-export const verifyData = async () => {
+export const verifyData = async (): Promise<void> => {
 
+  
   /**
    * Checks if a folder exists in the app data directory.
    * 
    * @param folderName The name of the folder to check
    * @returns `true` if the folder exists, `false` otherwise
-   */
+  */
   const isExists = async (folderName: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
-
-      // Read the folder
-      await readDir(
-        folderName, { 
-        dir: BaseDirectory.AppData, 
-        recursive: false 
-      })
-
-      // If the folder is not empty
-      .then((files) => {
-
-        // If the folder contains files, resolve to true
-        if (files.length > 0)
+      try {
+          
+        // Read the folder
+        const dirs = await readDir(
+          folderName, { 
+            dir: BaseDirectory.AppData, 
+            recursive: true 
+          })
+          
+        useNotification("Verify data is running!")
+        // If the folder is not empty
+        if (dirs) {
           resolve(true)
+        }
 
-        // If the folder is empty, resolve to false
+        // If the folder is empty
         else
           resolve(false)
-      })
+      }
 
-      // If the folder does not exist, resolve to false
-      .catch((err) => {
-        reject(err)
-      })
+      // In case of an error, reject the promise
+      catch (error) {
+        reject(error)
+      }
     })
   }
 
