@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { AthleteType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-import { getAllAthletes } from "../../data/controllers/athletes"
-import { getTeamById } from "../../data/controllers/teams"
+import { getAllAthletes } from "../../../.trash/controllers/athletes"
+import { getTeamById } from "../../../.trash/controllers/teams"
 
 
 export default function AthletesTable() {

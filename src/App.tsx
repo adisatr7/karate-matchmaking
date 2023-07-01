@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "./store"
-import { getCurrentUser } from "./data/controllers/users"
+import { getCurrentUser } from "./utils/authService"
 import { login } from "./store/slices/authSlice"
 import { collapseSidebar } from "./store/slices/sidebarSlice"
 import { verifyData } from "./data/defaults"

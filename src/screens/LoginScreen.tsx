@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../store"
 
 import { collapseSidebar } from "../store/slices/sidebarSlice"
@@ -10,8 +11,7 @@ import Button from "../components/Button"
 import athleteImage1 from "../assets/athlete1.png"
 import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
-import { useNavigate } from "react-router-dom"
-import { getAllUsers } from "../data/controllers/users"
+import { getAllUsers } from "../utils/authService"
 
 
 export default function LoginScreen() {
@@ -68,7 +68,7 @@ export default function LoginScreen() {
     navigate("/highlight")
     
     if (currentUser)
-    useNotification("Berhasil masuk", `Selamat datang, ${currentUser.userName}!`)
+    useNotification("Berhasil masuk", `Selamat datang, ${currentUser.name}!`)
     
     // Collapse sidebar
     setTimeout(() => {

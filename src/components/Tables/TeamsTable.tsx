@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { TeamType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-import { getAllTeams } from "../../data/controllers/teams"
+import { getAllTeams } from "../../../.trash/controllers/teams"
 
 
 export default function TeamsTable() {

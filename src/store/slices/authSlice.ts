@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { UserType } from "../../types"
-import { setCurrentUser } from "../../data/controllers/users"
-
+import { setCurrentUser } from "../../utils/authService"
 
 /**
  * Auth states type definition
@@ -14,7 +13,7 @@ export interface AuthState {
  * Auth initial state containing the current user and the list of registered users
  */
 const initialState: AuthState = {
-  currentUser: null
+  currentUser: null,
 }
 
 /**
@@ -24,10 +23,9 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-
     /**
      * Set the current user
-     * 
+     *
      * @param action The user object to be set as the current user
      */
     login: (state, action: PayloadAction<UserType>) => {
@@ -41,8 +39,8 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.currentUser = null
       setCurrentUser(null)
-    }
-  }
+    },
+  },
 })
 
 export default authSlice.reducer

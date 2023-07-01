@@ -4,7 +4,7 @@ import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
-import { assignDefaultTournamentsData } from "../../data/controllers/tournaments"
+import { assignDefaultTournamentsData } from "../../../.trash/controllers/tournaments"
 
 
 export default function TournamentsTable() {

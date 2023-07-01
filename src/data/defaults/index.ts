@@ -4,7 +4,7 @@ import { createFolder, writeInto } from "../../utils/fileManager"
 import defaultUsers from "./defaultUsers.json"
 import defaultTournaments from "./defaultTournaments.json"
 import defaultDivisions from "./defaultDivisions.json"
-import defaultMatches from "./defaultMatches.json"
+// import defaultMatches from "./defaultMatches.json"
 import defaultTeams from "./defaultTeams.json"
 import defaultAthletes from "./defaultAthletes.json"
 
@@ -63,8 +63,8 @@ export const verifyData = async () => {
   if (await isExists("divisions"))
     assignDefaultDivisionsData()
 
-  if (await isExists("matches"))
-    assignDefaultMatchesData()
+  // if (await isExists("matches"))
+  //   assignDefaultMatchesData()
 
   if (await isExists("athletes"))
     assignDefaultAthletesData()
@@ -72,8 +72,8 @@ export const verifyData = async () => {
   if (await isExists("teams"))
     assignDefaultTeamsData()
   
-  if (await isExists("matchHistory"))
-    assignDefaultMatchHistoryData()
+  // if (await isExists("matchHistory"))
+  //   assignDefaultMatchHistoryData()
 }
 
 
@@ -113,13 +113,13 @@ export const assignDefaultDivisionsData = async () => {
 /**
  * Assign default matches data and save it to 'matches/<matchId>.data'
  */
-export const assignDefaultMatchesData = async () => {
-  await createFolder("matches")
+// export const assignDefaultMatchesData = async () => {
+//   await createFolder("matches")
 
-  defaultMatches.forEach(async (match) => {
-    await writeInto(match, `matches/${match.matchId}`)
-  })
-}
+//   defaultMatches.forEach(async (match) => {
+//     await writeInto(match, `matches/${match.matchId}`)
+//   })
+// }
 
 
 /**
