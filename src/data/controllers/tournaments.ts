@@ -8,15 +8,15 @@ import useNotification from "../../hooks/useNotification"
 /**
  * Save passed argument into 'tournaments.data' file
  * 
- * @param tournaments List of all tournaments to be saved to 'tournaments.data' file
+ * @param tournament List of all tournaments to be saved to 'tournaments.data' file
  */
-export const saveTournamentsData = async (tournaments: TournamentType[] | any) => {
+export const saveTournamentDate = async (tournament: TournamentType | any) => {
 
   // Create 'data' folder (if it doesn't exist yet)
-  await createFolder()
+  await createFolder("tournaments")
 
   // Write into 'tournaments.data' file
-  await writeInto(tournaments, "tournaments")
+  await writeInto(tournament, `tournaments/${tournament.tournamentId}`)
 }
 
 
@@ -25,7 +25,9 @@ export const saveTournamentsData = async (tournaments: TournamentType[] | any) =
  * 'tournaments.data' file if they don't exist yet
  */
 export const assignDefaultTournamentsData = async () => {
-  await saveTournamentsData(defaultTournamentsData)
+  defaultTournamentsData.forEach(async tournament => {
+    await saveTournamentDate(tournament)
+  })
 }
 
 
@@ -82,7 +84,7 @@ export const addTournament = async (tournament: TournamentType) => {
   let tournaments = await getAllTournaments()
   tournaments.push(tournament)
 
-  saveTournamentsData(tournaments)
+  saveTournamentDate(tournaments)
 }
 
 
@@ -97,7 +99,7 @@ export const updateTournament = async (newTournament: TournamentType) => {
 
   tournaments[tournamentIndex] = newTournament
 
-  saveTournamentsData(tournaments)
+  saveTournamentDate(tournaments)
 }
 
 
@@ -112,26 +114,5 @@ export const deleteTournament = async (id: string) => {
 
   tournaments.splice(tournamentIndex, 1)
 
-  saveTournamentsData(tournaments)
-}
-
-
-/**
- * Get the total participants of a tournament of the given ID by summing 
- * all participants inside all the tournament's kelas
- * 
- * @param tournamentId The id of the tournament
- */
-export const getTotalParticipants = async (tournamentId: string) => {
-  const tournament = await getTournamentById(tournamentId)
-
-  if (tournament) {
-    let totalParticipants = 0
-
-    tournament.divisions.forEach(kelas => {
-      totalParticipants += kelas.registeredTeams.length
-    })
-
-    return totalParticipants
-  }
+  saveTournamentDate(tournaments)
 }

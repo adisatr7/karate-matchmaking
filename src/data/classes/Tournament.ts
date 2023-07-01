@@ -1,44 +1,20 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { TournamentStatusOptions, TournamentType } from "../../types"
 import { writeInto } from "../../utils/fileManager"
-import generateID from "../../utils/generateID"
+import { generateID } from "../../utils/idGenerator"
+import Division from "./Division"
 
-
-export class Tournament {
-  
-  /** 
-   * Tournament ID. Should always be automatically generated 
-   * using `generateID()` method when creating a whole new 
-   * tournament object.
-   */
+export default class Tournament {
   private tournamentId: string
-
-  /** Tournament name. */
   private tournamentName: string
-
-  /** Tournament description. */
   private desc: string
-
-  /** 
-   * Tournament status. Can only be one of these:
-   * - "pendaftaran"
-   * - "akan main"
-   * - "selesai"
-   * - "ditunda"
-   * - "dibatalkan"
-   */
   private status: TournamentStatusOptions
-
-  /** Tournament host. */
   private hostedBy: string
-
-  /** A list of Division IDs that belong to this tournament.. */
   private divisionIds: string[]
 
-  
   /**
    * Tournament constructor, used to create new Tournament object
-   * 
+   *
    * @param tournamentId Tournament ID
    * @param tournamentName Tournament name
    * @param desc Tournament description
@@ -46,8 +22,15 @@ export class Tournament {
    * @param hostedBy Tournament host
    * @param divisionIds Tournament divisions
    */
-  constructor(tournamentId?: string, tournamentName: string = "", desc: string = "", status: TournamentStatusOptions = "pendaftaran", hostedBy: string = "", divisionIds: string[] = []) {
-    this.tournamentId = tournamentId || generateID()
+  constructor(
+    tournamentId?: string,
+    tournamentName: string = "",
+    desc: string = "",
+    status: TournamentStatusOptions = "pendaftaran",
+    hostedBy: string = "",
+    divisionIds: string[] = []
+  ) {
+    this.tournamentId = tournamentId || generateID("p")
     this.tournamentName = tournamentName
     this.desc = desc
     this.status = status
@@ -57,7 +40,7 @@ export class Tournament {
 
   /**
    * Serialize Tournament object to JSON string
-   * 
+   *
    * @returns Tournament object in JSON string
    */
   public save() {
@@ -66,39 +49,88 @@ export class Tournament {
 
   /**
    * Read from filesystem and deserialize it into a Tournament object.
-   * 
+   *
    * @param tournamentId Tournament ID
    * @returns Tournament object
    */
   public static async load(tournamentId: string): Promise<Tournament> {
     return new Promise(async (resolve, reject) => {
-      readTextFile(
-        `tournaments/${tournamentId}.data`, {
-        dir: BaseDirectory.AppData
+      readTextFile(`tournaments/${tournamentId}.data`, {
+        dir: BaseDirectory.AppData,
       })
+        // If file is found, parse its content
+        .then((data) => {
+          const parsedObject: TournamentType = JSON.parse(data)
 
-      // If file is found, parse its content
-      .then(data => {
-        const parsedObject: TournamentType = JSON.parse(data)
+          // Create a new Tournament object
+          const tournament = new Tournament(
+            parsedObject.tournamentId,
+            parsedObject.tournamentName,
+            parsedObject.desc,
+            parsedObject.status,
+            parsedObject.hostedBy,
+            parsedObject.divisionIds
+          )
 
-        // Create a new Tournament object
-        const tournament = new Tournament(
-          parsedObject.tournamentId,
-          parsedObject.tournamentName,
-          parsedObject.desc,
-          parsedObject.status,
-          parsedObject.hostedBy,
-          parsedObject.divisionIds
-        )
+          // Resolve the promise
+          resolve(tournament)
+        })
+
+        // If file is not found, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+
+  /**
+   * Get all divisions that belong to this tournament.
+   *
+   * @returns A list of Division objects that belong to this tournament.
+   */
+  public async getContestantAmount(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      // Get all divisions that belong to this tournament
+      await this.getDivisions()
+
+        // Get all contestants from each division
+        .then(async (divisions) => {
+          divisions.forEach(async (division) => {
+            const contestantAmount = await division.getContestantAmount()
+
+            // Resolve the promise
+            resolve(contestantAmount)
+          })
+        })
+
+        // If error occured, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+
+  /**
+   * Get all divisions data that belong to this tournament.
+   */
+  public async getDivisions(): Promise<Division[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Create a list of Division objects
+        const divisions: Division[] = []
+
+        // Get all divisions
+        this.divisionIds.forEach(async (divisionId) => {
+          const division = await Division.load(divisionId)
+          divisions.push(division)
+        })
 
         // Resolve the promise
-        resolve(tournament)
-      })
-
-      // If file is not found, reject the promise
-      .catch(err => {
+        resolve(divisions)
+      } catch (err) {
+        // If error occured, reject the promise
         reject(err)
-      })
+      }
     })
   }
 
@@ -122,7 +154,7 @@ export class Tournament {
     return this.hostedBy
   }
 
-  public getDivisions(): string[] {
+  public getDivisionIds(): string[] {
     return this.divisionIds
   }
 
@@ -148,7 +180,7 @@ export class Tournament {
 
   /**
    * Set tournament divisions.
-   * 
+   *
    * @param divisions A list of Division IDs that belong to this tournament.
    */
   public setDivisions(divisions: string[]): void {
@@ -157,7 +189,7 @@ export class Tournament {
 
   /**
    * Add a division to this tournament.
-   * 
+   *
    * @param divisionId A Division ID that belongs to this tournament.
    */
   public addDivision(divisionId: string): void {
@@ -166,10 +198,12 @@ export class Tournament {
 
   /**
    * Remove a division of the given ID from this tournament.
-   * 
+   *
    * @param divisionId A Division ID that belongs to this tournament.
    */
   public removeDivision(divisionId: string): void {
-    this.divisionIds = this.divisionIds.filter((division) => division !== divisionId)
+    this.divisionIds = this.divisionIds.filter(
+      (division) => division !== divisionId
+    )
   }
 }

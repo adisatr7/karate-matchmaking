@@ -1,8 +1,12 @@
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
-import { MatchStatusOptions, MatchWinnerOptions } from "../../types"
+import {
+  ContestantType,
+  MatchStatusOptions,
+  MatchWinnerOptions,
+} from "../../types"
 import { writeInto } from "../../utils/fileManager"
-import generateID from "../../utils/generateID"
-
+import { generateID } from "../../utils/idGenerator"
+import Division from "./Division"
 
 export class Match {
   private divisionId: string
@@ -12,11 +16,20 @@ export class Match {
   private playDate: string
   private status: MatchStatusOptions
   private winner: MatchWinnerOptions
-  private contestants: Contestant[]
+  private contestants: ContestantType[]
 
-  constructor(divisionId: string, matchId?: string, matchName: string = "", nextMatchId: string = "", playDate: string = "", status: MatchStatusOptions = "akan main", winner: MatchWinnerOptions = "tbd", contestants: Contestant[] = []) {
+  constructor(
+    divisionId: string,
+    matchId?: string,
+    matchName: string = "",
+    nextMatchId: string = "",
+    playDate: string = "",
+    status: MatchStatusOptions = "akan main",
+    winner: MatchWinnerOptions = "tbd",
+    contestants: ContestantType[] = []
+  ) {
     this.divisionId = divisionId
-    this.matchId = matchId || generateID()
+    this.matchId = matchId || generateID("m")
     this.matchName = matchName
     this.nextMatchId = nextMatchId
     this.playDate = playDate
@@ -31,37 +44,34 @@ export class Match {
 
   public static async load(matchId: string): Promise<Match> {
     return new Promise(async (resolve, reject) => {
-
       // Read from filesystem
-      await readTextFile(
-        `matches/${matchId}.data`, {
-        dir: BaseDirectory.AppData
+      await readTextFile(`matches/${matchId}.data`, {
+        dir: BaseDirectory.AppData,
       })
-      
-      // If file is found, parse its content
-      .then(data => {
-        const parsedData = JSON.parse(data)
+        // If file is found, parse its content
+        .then((data) => {
+          const parsedData = JSON.parse(data)
 
-        // Create a new Match object
-        const match = new Match(
-          parsedData.divisionId,
-          parsedData.matchId,
-          parsedData.matchName,
-          parsedData.nextMatchId,
-          parsedData.playDate,
-          parsedData.status,
-          parsedData.winner,
-          parsedData.contestants
-        )
+          // Create a new Match object
+          const match = new Match(
+            parsedData.divisionId,
+            parsedData.matchId,
+            parsedData.matchName,
+            parsedData.nextMatchId,
+            parsedData.playDate,
+            parsedData.status,
+            parsedData.winner,
+            parsedData.contestants
+          )
 
-        // Resolve the promise with the new Match object
-        resolve(match)
-      })
+          // Resolve the promise with the new Match object
+          resolve(match)
+        })
 
-      // If data is not found, reject the promise with the error
-      .catch(err => {
-        reject(err)
-      })
+        // If data is not found, reject the promise with the error
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
@@ -70,44 +80,48 @@ export class Match {
    */
   public async delete(): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      await removeFile(
-        `matches/${this.matchId}.data`, {
-        dir: BaseDirectory.AppData
-      }).then(() => {
-        resolve()
-      }).catch(err => {
-        reject(err)
+      await removeFile(`matches/${this.matchId}.data`, {
+        dir: BaseDirectory.AppData,
       })
+        .then(() => {
+          resolve()
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
-  public async getDivision() : Promise<Division> {
+  public async getDivision(): Promise<Division> {
     return new Promise(async (resolve, reject) => {
-      await Division.load(this.divisionId).then(division: Division => {
-        resolve(division)
-      }).catch(err => {
-        reject(err)
-      })
+      await Division.load(this.divisionId)
+        .then((division: Division) => {
+          resolve(division)
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
   /**
    * Get the next match object
-   * 
+   *
    * @returns The next match data
    */
   public async getNextMatch(): Promise<Match> {
     return new Promise(async (resolve, reject) => {
       await Match.load(this.nextMatchId)
-      .then((match: Match) => {
-        resolve(match)
-      }).catch(err => {
-        reject(err)
-      })
+        .then((match: Match) => {
+          resolve(match)
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
-  public getDivisionId() : string {
+  public getDivisionId(): string {
     return this.divisionId
   }
 
@@ -118,7 +132,7 @@ export class Match {
   public getMatchName(): string {
     return this.matchName
   }
-  
+
   public getNextMatchId(): string {
     return this.nextMatchId
   }
@@ -136,7 +150,7 @@ export class Match {
     return this.winner
   }
 
-  public getContestants(): Contestant[] {
+  public getContestants(): ContestantType[] {
     return this.contestants
   }
 
@@ -164,7 +178,7 @@ export class Match {
     this.winner = winner
   }
 
-  public setContestants(newContestants: Contestant[]) {
+  public setContestants(newContestants: ContestantType[]) {
     this.contestants = newContestants
   }
 }

@@ -1,6 +1,6 @@
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
-import generateID from "../../utils/generateID"
+import { generateID } from "../../utils/idGenerator"
 import { Team } from "./Team"
 import { Gender } from "../../types"
 import { MatchHistory } from "./MatchHistory"
@@ -15,8 +15,17 @@ export class Athlete {
   private currentTeamId: string
   private matchHistoryIds: string[]
 
-  constructor(athleteId?: string, athleteName: string = "", imageUrl: string = "", gender: Gender = "m", age: number = 0, weight: number = 0, currentTeamId: string = "", matchHistoryIds: string[] = []) {
-    this.athleteId = athleteId || generateID()
+  constructor(
+    athleteId?: string,
+    athleteName: string = "",
+    imageUrl: string = "",
+    gender: Gender = "m",
+    age: number = 0,
+    weight: number = 0,
+    currentTeamId: string = "",
+    matchHistoryIds: string[] = []
+  ) {
+    this.athleteId = athleteId || generateID("a")
     this.athleteName = athleteName
     this.imageUrl = imageUrl
     this.gender = gender
@@ -35,43 +44,40 @@ export class Athlete {
 
   /**
    * Read Athlete data from filesystem.
-   * 
+   *
    * @param athleteId Athlete ID
    * @returns Athlete data
    */
   public static async load(athleteId: string): Promise<Athlete> {
     return new Promise(async (resolve, reject) => {
-
       // Read from filesystem
-      await readTextFile(
-        `athletes/${athleteId}.data`, {
-        dir: BaseDirectory.AppData
+      await readTextFile(`athletes/${athleteId}.data`, {
+        dir: BaseDirectory.AppData,
       })
+        // If file is found, parse its content
+        .then((data) => {
+          const parsedData: Athlete = JSON.parse(data)
 
-      // If file is found, parse its content
-      .then(data => {
-        const parsedData: Athlete = JSON.parse(data)
+          // Create a new Athlete object
+          const athlete = new Athlete(
+            parsedData.athleteId,
+            parsedData.athleteName,
+            parsedData.imageUrl,
+            parsedData.gender,
+            parsedData.age,
+            parsedData.weight,
+            parsedData.currentTeamId,
+            parsedData.matchHistoryIds
+          )
 
-        // Create a new Athlete object
-        const athlete = new Athlete(
-          parsedData.athleteId,
-          parsedData.athleteName,
-          parsedData.imageUrl,
-          parsedData.gender,
-          parsedData.age,
-          parsedData.weight,
-          parsedData.currentTeamId,
-          parsedData.matchHistoryIds
-        )
+          // Resolve the promise with the Athlete object
+          resolve(athlete)
+        })
 
-        // Resolve the promise with the Athlete object
-        resolve(athlete)
-      })
-
-      // If file is not found, reject the promise
-      .catch(err => {
-        reject(err)
-      })
+        // If file is not found, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
@@ -80,24 +86,23 @@ export class Athlete {
    */
   public async delete(): Promise<void> {
     return new Promise(async (resolve, reject) => {
-
       // Delete the Athlete object from filesystem
       await removeFile(`athletes/${this.athleteId}.data`, {
-        dir: BaseDirectory.AppData
+        dir: BaseDirectory.AppData,
       })
 
       // Delete the Athlete object from its current team
       await this.getCurrentTeam()
 
-      // If Athlete is found in a team, delete it
-      .then(team => {
-        team.removeMemberId(this.athleteId)
-      })
+        // If Athlete is found in a team, delete it
+        .then((team) => {
+          team.removeMemberId(this.athleteId)
+        })
 
-      // If Athlete is not found in a team, reject the promise
-      .catch(err => {
-        reject(err)
-      })
+        // If Athlete is not found in a team, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
 
       // Resolve the promise
       resolve()
@@ -106,35 +111,31 @@ export class Athlete {
 
   /**
    * Get the athlete's total wins.
-   * 
+   *
    * @returns Total wins
    */
   public async calculateTotalWins(): Promise<number> {
     return new Promise(async (resolve, reject) => {
       try {
-
-        
         // Load all match histories
         const matchHistories = await Promise.all(
-          this.matchHistoryIds.map(async id => {
-              return await MatchHistory.load(id)
+          this.matchHistoryIds.map(async (id) => {
+            return await MatchHistory.load(id)
           })
         )
 
         // Calculate total wins
         let totalWins = 0
-        matchHistories.forEach(matchHistory => {
+        matchHistories.forEach((matchHistory) => {
           if (matchHistory.getIsWinning()) {
             totalWins++
           }
         })
-        
+
         // Resolve the promise
         resolve(totalWins)
-      }
-
-      // If an error occurs, reject the promise
-      catch (err) {
+      } catch (err) {
+        // If an error occurs, reject the promise
         reject(err)
       }
     })
@@ -142,13 +143,12 @@ export class Athlete {
 
   /**
    * Get the athlete's win rate ratio.
-   * 
+   *
    * @returns Win rate
    */
   public async calculateWinRate(): Promise<number> {
     return new Promise(async (resolve, reject) => {
       try {
-
         // Get total wins
         const totalWins = await this.calculateTotalWins()
 
@@ -157,10 +157,8 @@ export class Athlete {
 
         // Resolve the promise
         resolve(winRate)
-      }
-
-      // If an error occurs, reject the promise
-      catch (err) {
+      } catch (err) {
+        // If an error occurs, reject the promise
         reject(err)
       }
     })
@@ -168,24 +166,23 @@ export class Athlete {
 
   /**
    * Get the team data the athlete is currently in.
-   * 
+   *
    * @returns Team data
    */
   public async getCurrentTeam(): Promise<Team> {
     return new Promise(async (resolve, reject) => {
-
       // Load the current team
       await Team.load(this.currentTeamId)
 
-      // If team is found, resolve the promise
-      .then(team => {
-        resolve(team)
-      })
+        // If team is found, resolve the promise
+        .then((team) => {
+          resolve(team)
+        })
 
-      // If team is not found, reject the promise
-      .catch(err => {
-        reject(err)
-      })
+        // If team is not found, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
@@ -252,6 +249,8 @@ export class Athlete {
   }
 
   public removeMatchHistoryId(matchHistoryId: string) {
-    this.matchHistoryIds = this.matchHistoryIds.filter(id => id !== matchHistoryId)
+    this.matchHistoryIds = this.matchHistoryIds.filter(
+      (id) => id !== matchHistoryId
+    )
   }
 }

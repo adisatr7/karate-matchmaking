@@ -1,6 +1,6 @@
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
-import generateID from "../../utils/generateID"
+import { generateID } from "../../utils/idGenerator"
 import { Athlete } from "./Athlete"
 import { Match } from "./Match"
 
@@ -13,8 +13,16 @@ export class MatchHistory {
   private wazari: number
   private ippon: number
 
-  constructor(matchHistoryId?: string, athleteId: string = "", matchId: string = "", isWinning: boolean = false, yuko: number = 0, wazari: number = 0, ippon: number = 0) {
-    this.matchHistoryId = matchHistoryId || generateID()
+  constructor(
+    matchHistoryId?: string,
+    athleteId: string = "",
+    matchId: string = "",
+    isWinning: boolean = false,
+    yuko: number = 0,
+    wazari: number = 0,
+    ippon: number = 0
+  ) {
+    this.matchHistoryId = matchHistoryId || generateID("h")
     this.athleteId = athleteId
     this.matchId = matchId
     this.isWinning = isWinning
@@ -31,112 +39,104 @@ export class MatchHistory {
   }
 
   /**
-   * 
-   * @param matchHistoryId 
-   * @returns 
+   *
+   * @param matchHistoryId
+   * @returns
    */
   public static async load(matchHistoryId: string): Promise<MatchHistory> {
     return new Promise(async (resolve, reject) => {
-
       // Read from filesystem
-      await readTextFile(
-        `matchHistories/${matchHistoryId}.data`, {
-        dir: BaseDirectory.AppData
+      await readTextFile(`matchHistories/${matchHistoryId}.data`, {
+        dir: BaseDirectory.AppData,
       })
+        // If file is found, parse its content
+        .then((data) => {
+          const parsedData: MatchHistory = JSON.parse(data)
 
-      // If file is found, parse its content
-      .then(data => {
-        const parsedData: MatchHistory = JSON.parse(data)
+          // Create a new MatchHistory object
+          const matchHistory = new MatchHistory(
+            parsedData.matchHistoryId,
+            parsedData.athleteId,
+            parsedData.matchId,
+            parsedData.isWinning,
+            parsedData.yuko,
+            parsedData.wazari,
+            parsedData.ippon
+          )
 
-        // Create a new MatchHistory object
-        const matchHistory = new MatchHistory(
-          parsedData.matchHistoryId,
-          parsedData.athleteId,
-          parsedData.matchId,
-          parsedData.isWinning,
-          parsedData.yuko,
-          parsedData.wazari,
-          parsedData.ippon
-        )
+          // Resolve promise
+          resolve(matchHistory)
+        })
 
-        // Resolve promise
-        resolve(matchHistory)
-      })
-
-      // If file is not found, reject the promise
-      .catch(err => {
-        reject(err)
-      })
+        // If file is not found, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
   /**
    * Delete MatchHistory data from filesystem.
-   * 
+   *
    * @returns Promise that resolves to an array of MatchHistory objects
    */
   public async delete(): Promise<void> {
     return new Promise(async (resolve, reject) => {
-
       // Delete MatchHistory data from filesystem
-      await removeFile(
-        `matchHistories/${this.matchHistoryId}.data`, {
-        dir: BaseDirectory.AppData
+      await removeFile(`matchHistories/${this.matchHistoryId}.data`, {
+        dir: BaseDirectory.AppData,
       })
+        // If MatchHistory data is deleted, resolve the promise
+        .then(() => {
+          resolve()
+        })
 
-      // If MatchHistory data is deleted, resolve the promise
-      .then(() => {
-        resolve()
-      })
-
-      // If there's an error, reject the promise
-      .catch(err => {
-        reject(err)
-      })
+        // If there's an error, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
   /**
    * Get the athlete data that is associated with this match history.
-   * 
+   *
    * @returns Athlete data
    */
   public async getAthleteData(): Promise<Athlete> {
     return new Promise(async (resolve, reject) => {
-
       // Load Athlete data from filesystem
       await Athlete.load(this.athleteId)
 
-      // If Athlete data is found, resolve the promise
-      .then(athlete => {
-        resolve(athlete)
-      })
+        // If Athlete data is found, resolve the promise
+        .then((athlete) => {
+          resolve(athlete)
+        })
 
-      // If Athlete data is not found, reject the promise
-      .catch(err => {
-        reject(err)
-      })
+        // If Athlete data is not found, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
   /**
    * Get the match data that is associated with this match history.
-   * 
+   *
    * @returns Match data
    */
   public async getMatchData(): Promise<Match> {
     return new Promise(async (resolve, reject) => {
-        
-        // Load Match data from filesystem
-        await Match.load(this.matchId)
-  
+      // Load Match data from filesystem
+      await Match.load(this.matchId)
+
         // If Match data is found, resolve the promise
-        .then(match => {
+        .then((match) => {
           resolve(match)
         })
-  
+
         // If Match data is not found, reject the promise
-        .catch(err => {
+        .catch((err) => {
           reject(err)
         })
     })

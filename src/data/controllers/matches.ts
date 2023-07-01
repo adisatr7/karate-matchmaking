@@ -3,7 +3,7 @@ import { MatchType, ContestantType } from "../../types"
 import { getAthleteById } from "./athletes"
 import { getKelasById } from "./divisions"
 import { getTeamById } from "./teams"
-import { getTournamentById, saveTournamentsData } from "./tournaments"
+import { getTournamentById, saveTournamentDate } from "./tournaments"
 
 
 /**
@@ -80,7 +80,7 @@ export const addMatch = async (tournamentId: string, idKelas: string, newMatch: 
     kelas.matches.push(newMatch)
 
     // Save the changes to `tournaments.data`
-    saveTournamentsData(tournament)
+    saveTournamentDate(tournament)
   }
 }
 
@@ -107,7 +107,7 @@ export const updateMatch = async (tournamentId: string, idKelas: string, updated
       kelas.matches[matchIndex] = updatedMatch
 
       // Save the changes to `tournaments.data`
-      saveTournamentsData(tournament)
+      saveTournamentDate(tournament)
     }
   }
 }
@@ -135,7 +135,7 @@ export const deleteMatch = async (tournamentId: string, idKelas: string, idMatch
       kelas.matches.splice(matchIndex, 1)
 
       // Save the changes to `tournaments.data`
-      saveTournamentsData(tournament)
+      saveTournamentDate(tournament)
     }
   }
 }
@@ -159,7 +159,7 @@ export const setMatches = async (tournamentId: string, idKelas: string, matches:
     kelas.matches = matches
 
     // Save the changes to `tournaments.data`
-    saveTournamentsData(tournament)
+    saveTournamentDate(tournament)
   }
 }
 

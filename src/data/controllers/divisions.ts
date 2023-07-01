@@ -1,5 +1,5 @@
 import { DivisionType } from "../../types"
-import { getAllTournaments, getTournamentById, saveTournamentsData } from "./tournaments"
+import { getAllTournaments, getTournamentById, saveTournamentDate } from "./tournaments"
 import useNotification from "../../hooks/useNotification"
 import { getTeamById } from "./teams"
 import { getAthleteById } from "./athletes"
@@ -74,7 +74,7 @@ export const addDivision = async (tournamentId: string, newDivision: DivisionTyp
     division.push(newDivision)
     tournament.divisions = division
 
-    saveTournamentsData(tournament)
+    saveTournamentDate(tournament)
   }
 
   else {
@@ -97,7 +97,7 @@ export const updateDivision = async (tournamentId: string, updatedDivision: Divi
     division = division.map(division => division.divisionId === updatedDivision.divisionId ? updatedDivision : division)
     tournament.divisions = division
 
-    saveTournamentsData(tournament)
+    saveTournamentDate(tournament)
   }
 
   else {
@@ -125,7 +125,7 @@ export const deleteDivision = async (tournamentId: string, idDivision: string) =
     tournament.divisions = division
 
     // Save all the changes to 'tournaments.json'
-    saveTournamentsData(tournaments)
+    saveTournamentDate(tournaments)
   }
 
   // If the tournament is not found
