@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react"
-import { AthleteType } from "../../types"
+import { Athlete } from "../../data/classes/Athlete"
+import { Team } from "../../data/classes/Team"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-import { getAllAthletes } from "../../../.trash/controllers/athletes"
-import { getTeamById } from "../../../.trash/controllers/teams"
 
 
-export default function AthletesTable() {
-  const [athletesList, setAthletesList] = useState<AthleteType[]>([])
+type PropsType = {
+  data: Athlete[],
+  teamsList: Team[]
+}
+
+export default function AthletesTable({ data: athletesList, teamsList }: PropsType) {
 
   const navigate = useNavigate()
 
@@ -26,66 +28,50 @@ export default function AthletesTable() {
    * Handler for when a row is clicked. The app will navigate to the 
    * athlete profile screen.
    * 
-   * @param idAtlet ID of the athlete
+   * @param athleteId ID of the athlete
    */
-  const handleRowClick = (idAtlet: string) => {
-    navigate(`/athlete/${idAtlet}`)
-  } 
-
-  /**
-   * 
-   */
-  const fetchAthletes = async () => {
-    const athletes = await getAllAthletes()
-    setAthletesList(athletes)
+  const handleRowClick = (athleteId: string) => {
+    navigate(`/athlete/${athleteId}`)
   }
-
-  const fetchTeamData = async (idTim: string) => {
-    return await getTeamById(idTim)
-  }
-
-  useEffect(() => {
-    fetchAthletes()
-  }, [])
 
   return (
-    <table className="table-auto w-full h-fit bg-dark-glass border border-separate border-stone-600 rounded-md bg-opacity-50 backdrop-blur-md text-white font-quicksand">
+    <table className="w-full text-white bg-opacity-50 border border-separate rounded-md table-auto h-fit bg-dark-glass border-stone-600 backdrop-blur-md font-quicksand">
       
       {/* Header */}
-      <thead className="sticky top-0 rounded-t-lg bg-dark-glass hover:bg-stone-700 border border-separate border-stone-600 rounded-md">
+      <thead className="sticky top-0 border border-separate rounded-md rounded-t-lg bg-dark-glass hover:bg-stone-700 border-stone-600">
         <tr className="">
-          { headerLabels.map((value: string, index: number) => {
-            return ( <td key={index} className={headerRowStyle}>{value}</td> )
+          { headerLabels.map((label: string, index: number) => {
+            return ( <td key={index} className={headerRowStyle}>{label}</td> )
           })}
         </tr>
       </thead>
       
       <tbody>
-        { athletesList.map((athlete: AthleteType, teamIndex: number) => {
-            const { athleteId: idAtlet, athleteName: namaAtlet, currentTeamId: idTimSekarang, gender: jenisKelamin, age: usia, weight: berat } = athlete
+        { athletesList.map((a: Athlete, athleteIndex: number) => {
 
-            const timSekarang = fetchTeamData(idTimSekarang)
-            // const inisialTim = timSekarang.inisial    // TODO: Fix the async-await stuff
+            // Get the athlete's team
+            const team = teamsList[athleteIndex]
 
+            // Render the table row
             return (
               <tr
-                key={teamIndex}
-                onClick={() => handleRowClick(idAtlet)}
-                className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${teamIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
+                key={athleteIndex}
+                onClick={() => handleRowClick(a.getAthleteId())}
+                className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${athleteIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                 {/* Render table cells based on the header labels */}
                 { headerLabels.map((label: string, rowIndex: number) => (
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
                       {/* Render idPertandingan column conditionally */}
-                      { label === "NO" ? teamIndex + 1 
-                        : label === "NAMA ATLET" ? toSentenceCase(namaAtlet)
-                        // : label === "TIM" ? toSentenceCase(inisialTim)
+                      { label === "NO" ? athleteIndex + 1 
+                        : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
+                        : label === "TIM" ? team?.getName()
                         : label === "JENIS KELAMIN" 
-                          ? jenisKelamin === "m" 
+                          ? a.getGender() === "m" 
                             ? "Laki-laki" 
                             : "Perempuan"
-                        : label === "USIA" ? usia
-                        : label === "BERAT (Kg)" ? berat
+                        : label === "USIA" ? a.getAge()
+                        : label === "BERAT (Kg)" ? a.getWeight()
                         : ""
                       }
                     </td>

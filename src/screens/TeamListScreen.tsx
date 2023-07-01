@@ -31,10 +31,10 @@ export default function TeamListScreen() {
       files.forEach(async (file) => {
         
         // Remove the file extension
-        const filename = file.name!.split(".")[0]
+        const filename: string = file.name!.split(".")[0]
         
         // Load the team data
-        const team = await Team.load(filename)
+        const team: Team = await Team.load(filename)
 
         // Add the team data to the list
         teams.push(team)
