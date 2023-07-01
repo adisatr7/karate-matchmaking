@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../store"
-import { hideModal } from "../store/slices/modalSlice"
+import { closeModal } from "../store/slices/modalSlice"
 import { logout } from "../store/slices/authSlice"
 import Sidebar from "./Sidebar"
 import { collapseSidebar, hideSidebar } from "../store/slices/sidebarSlice"
@@ -17,7 +17,7 @@ type PropsType = {
 
 export default function MenuBackground({ pageName, children }: PropsType) {
   const sidebarStatus = useAppSelector(state => state.sidebar.status)
-  const modalStatus = useAppSelector(state => state.modal.isShown)
+  const modalStatus = useAppSelector(state => state.modal.showing)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export default function MenuBackground({ pageName, children }: PropsType) {
 
   const handleLogout = () => {
     dispatch(hideSidebar())
-    dispatch(hideModal())
+    dispatch(closeModal())
     dispatch(logout())
     setTimeout(() => {
       navigate("/login")    // TODO: Add better transition animation
@@ -53,11 +53,11 @@ export default function MenuBackground({ pageName, children }: PropsType) {
         </div>
 
         {/* Logout modal prompt */}
-        { modalStatus && (
+        { modalStatus === "exit" && (
         <Modal title="Konfirmasi" caption="Yakin ingin keluar?">
           <div className="flex flex-row w-full h-full justify-center items-center gap-[10px]">
             <Button className="w-full h-full" label="Ya" onClick={handleLogout}/>
-            <Button className="w-full h-full" label="Tidak" onClick={() => dispatch(hideModal())}/>
+            <Button className="w-full h-full" label="Tidak" onClick={() => dispatch(closeModal())}/>
           </div>
         </Modal>
         ) }
