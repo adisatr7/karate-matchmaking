@@ -3,6 +3,7 @@ import { Athlete } from "./Athlete"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 
+
 export class Team {
   private teamId: string
   private teamName: string
@@ -53,7 +54,7 @@ export class Team {
             parsedData.teamName,
             parsedData.initial,
             parsedData.city,
-            parsedData.members
+            parsedData.memberIds
           )
 
           // Resolve promise
