@@ -1,6 +1,5 @@
-import MenuBackground from "../components/MenuBackground"
+import MainLayout from "../components/MainLayout"
 import Button from "../components/Button"
-import Header from "../components/Header"
 
 
 export default function HighlightScreen() {
@@ -10,11 +9,11 @@ export default function HighlightScreen() {
   }
 
   return (
-    <MenuBackground pageName="Highlight">
+    <MainLayout currentPageName="Highlight">
 
       {/* Bracket */}
       <div className="flex flex-col justify-center items-center h-[500px] w-full bg-dark-glass bg-opacity-80 backdrop-blur-sm rounded-md gap-[12px] mt-[24px]">
-        <p className="font-quicksilver text-body text-white">Bracket placeholder</p>
+        <p className="text-white font-quicksilver text-body">Bracket placeholder</p>
       </div>
 
       {/* Buttons container */}
@@ -25,6 +24,6 @@ export default function HighlightScreen() {
         <Button label="DAFTAR PESERTA" className="w-full" onClick={handleBroadcast}/>
       </div>
 
-    </MenuBackground>
+    </MainLayout>
   )
 }

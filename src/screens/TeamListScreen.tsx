@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import MenuBackground from "../components/MenuBackground"
+import MainLayout from "../components/MainLayout"
 import Entry from "../components/Entry"
 import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
@@ -56,7 +56,7 @@ export default function TeamListScreen() {
   }, [])
 
   return (
-    <MenuBackground pageName="Daftar Tim">
+    <MainLayout currentPageName="Daftar Tim">
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px]">
@@ -83,6 +83,6 @@ export default function TeamListScreen() {
         <TeamsTable data={teamList}/>
       </div>
 
-    </MenuBackground>
+    </MainLayout>
   )
 }

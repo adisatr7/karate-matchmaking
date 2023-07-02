@@ -36,10 +36,10 @@ export default function TournamentsTable({ data: tournamentList, contestantAmoun
    * Handler for when a row is clicked. The app will navigate to the 
    * tournament profile screen.
    * 
-   * @param idPertandingan ID of the tournament
+   * @param tournamentId ID of the tournament
    */
-  const handleRowClick = (idPertandingan: string) => {
-    navigate(`/tournament/${idPertandingan}`)
+  const handleRowClick = (tournamentId: string) => {
+    navigate(`/tournament/${tournamentId}`)
   }
   
 

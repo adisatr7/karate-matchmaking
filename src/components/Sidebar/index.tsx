@@ -30,7 +30,6 @@ export default function Sidebar() {
   }
 
 
-
   return (
     <div 
       className={`flex flex-col items-end h-full w-fit px-[36px] py-[14px] left-0 bg-stone-900 text-white fixed 

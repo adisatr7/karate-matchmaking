@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import MenuBackground from "../components/MenuBackground"
+import MainLayout from "../components/MainLayout"
 import Entry from "../components/Entry"
 import Button from "../components/Button"
 import AthletesTable from "../components/Tables/AthletesTable"
@@ -58,7 +58,7 @@ export default function AthleteListScreen() {
   }, [])
 
   return (
-    <MenuBackground pageName="Daftar Atlet">
+    <MainLayout currentPageName="Daftar Atlet">
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px]">
@@ -85,6 +85,6 @@ export default function AthleteListScreen() {
         <AthletesTable data={athletesList} teamsList={teamsList}/>
       </div>
 
-    </MenuBackground>
+    </MainLayout>
   )
 }

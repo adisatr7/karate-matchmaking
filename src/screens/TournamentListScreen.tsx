@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import MenuBackground from "../components/MenuBackground"
+import MainLayout from "../components/MainLayout"
 import Entry from "../components/Entry"
 import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
@@ -7,9 +7,8 @@ import TournamentsTable from "../components/Tables/TournamentsTable"
 import Tournament from "../data/classes/Tournament"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
-import { useAppDispatch, useAppSelector } from "../store"
-import Modal from "../components/Modal"
-import { setModal } from "../store/slices/modalSlice"
+import { useAppSelector } from "../store"
+import Modal from "../components/Modal/Modal"
 
 
 export default function TournamentListScreen() {
@@ -19,7 +18,6 @@ export default function TournamentListScreen() {
   const [searchKeyword, setSearchKeyword] = useState("")
 
   const modal = useAppSelector(state => state.modal.showing)
-  const dispatch = useAppDispatch()
 
   
   /**
@@ -78,13 +76,13 @@ export default function TournamentListScreen() {
     
   }
 
-  const handleHelp = () => {
-    dispatch(setModal("help"))
-  }
+  // const handleHelp = () => {
+  //   dispatch(setModal("help"))
+  // }
   
 
   return (
-    <MenuBackground pageName="Daftar Pertandingan">
+    <MainLayout currentPageName="Daftar Pertandingan">
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px]">
@@ -101,10 +99,10 @@ export default function TournamentListScreen() {
         <Button 
           label="PERTANDINGAN BARU"
           className="flex-[1]"/>
-        <Button 
+        {/* <Button 
           label="?"
           onClick={handleHelp}
-          className="w-fit px-[18px]"/>
+          className="w-fit px-[18px]"/> */}
       </div>
 
       {/* Table | TODO: Implement search function5 */}
@@ -127,6 +125,6 @@ export default function TournamentListScreen() {
         )
       }
 
-    </MenuBackground>
+    </MainLayout>
   )
 }

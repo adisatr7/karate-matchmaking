@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useAppDispatch } from "../store";
-import { closeModal } from "../store/slices/modalSlice";
+import { ReactNode, useEffect, useState } from "react"
+import { useAppDispatch } from "../../store"
+import { closeModal } from "../../store/slices/modalSlice"
 
 
 type PropsType = {
