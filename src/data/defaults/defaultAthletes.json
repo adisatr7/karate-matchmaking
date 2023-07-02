@@ -7,6 +7,7 @@
     "gender": "m",
     "age": 21,
     "weight": 65,
+    "height": 171,
     "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
   },
   {
@@ -17,6 +18,7 @@
     "gender": "f",
     "age": 20,
     "weight": 53,
+    "height": 162,
     "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
   },
   {
@@ -27,6 +29,7 @@
     "gender": "m",
     "age": 22,
     "weight": 70,
+    "height": 164,
     "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
   },
   {
@@ -37,6 +40,7 @@
     "gender": "f",
     "age": 21,
     "weight": 58,
+    "height": 161,
     "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
   },
   {
@@ -47,6 +51,7 @@
     "gender": "m",
     "age": 20,
     "weight": 68,
+    "height": 157,
     "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
   },
 
@@ -58,6 +63,7 @@
     "gender": "m",
     "age": 20,
     "weight": 70,
+    "height": 162,
     "currentTeamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f"
   },
   {
@@ -68,6 +74,7 @@
     "gender": "f",
     "age": 21,
     "weight": 65,
+    "height": 172,
     "currentTeamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f"
   },
 
@@ -79,6 +86,7 @@
     "gender": "m",
     "age": 19,
     "weight": 75,
+    "height": 151,
     "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
   },
   {
@@ -89,6 +97,7 @@
     "gender": "m",
     "age": 21,
     "weight": 78,
+    "height": 155,
     "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
   },
 
@@ -100,6 +109,7 @@
     "gender": "f",
     "age": 20,
     "weight": 60,
+    "height": 156,
     "currentTeamId": "t-93b5242a-1d69-57e6-8b7b-9f3c2e3eaf8b",
     "matchHistoryIds": []
   },
@@ -111,6 +121,7 @@
     "gender": "m",
     "age": 20,
     "weight": 70,
+    "height": 171,
     "currentTeamId": "t-93b5242a-1d69-57e6-8b7b-9f3c2e3eaf8b",
     "matchHistoryIds": []
   },
@@ -123,6 +134,7 @@
     "gender": "m",
     "age": 24,
     "weight": 70,
+    "height": 159,
     "currentTeamId": "t-eb84326b-37a4-55e7-8a4f-7c8dfc1a9365",
     "matchHistoryIds": []
   },
@@ -134,6 +146,7 @@
     "gender": "m",
     "age": 20,
     "weight": 70,
+    "height": 156,
     "currentTeamId": "t-eb84326b-37a4-55e7-8a4f-7c8dfc1a9365",
     "matchHistoryIds": []
   },
@@ -146,6 +159,7 @@
     "gender": "f",
     "age": 21,
     "weight": 60,
+    "height": 160,
     "currentTeamId": "t-65050761-1c71-548b-bccf-a9dc95c110b6",
     "matchHistoryIds": []
   },
@@ -157,6 +171,7 @@
     "gender": "m",
     "age": 21,
     "weight": 80,
+    "height": 163,
     "currentTeamId": "t-65050761-1c71-548b-bccf-a9dc95c110b6",
     "matchHistoryIds": []
   },
@@ -169,6 +184,7 @@
     "gender": "f",
     "age": 23,
     "weight": 65,
+    "height": 168,
     "currentTeamId": "t-2ea143d4-7a3f-5279-afe9-a6ad38831c0b",
     "matchHistoryIds": []
   },
@@ -180,6 +196,7 @@
     "gender": "m",
     "age": 22,
     "weight": 70,
+    "height": 155,
     "currentTeamId": "t-2ea143d4-7a3f-5279-afe9-a6ad38831c0b",
     "matchHistoryIds": []
   },
@@ -192,6 +209,7 @@
     "gender": "f",
     "age": 22,
     "weight": 69,
+    "height": 163,
     "currentTeamId": "t-3c2e3a3e-c62e-5baa-aec9-1c560a601e3d",
     "matchHistoryIds": []
   },
@@ -204,6 +222,7 @@
     "gender": "m",
     "age": 21,
     "weight": 70,
+    "height": 173,
     "currentTeamId": "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
     "matchHistoryIds": []
   },
@@ -215,6 +234,7 @@
     "gender": "m",
     "age": 22,
     "weight": 72,
+    "height": 165,
     "currentTeamId": "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
     "matchHistoryIds": []
   },
@@ -227,6 +247,7 @@
     "gender": "f",
     "age": 20,
     "weight": 63,
+    "height": 151,
     "currentTeamId": "t-8ed9a54b-d9d5-59a0-a1de-09e17ae62d03",
     "matchHistoryIds": []
   },
@@ -238,6 +259,7 @@
     "gender": "f",
     "age": 21,
     "weight": 62,
+    "height": 155,
     "currentTeamId": "t-8ed9a54b-d9d5-59a0-a1de-09e17ae62d03",
     "matchHistoryIds": []
   }

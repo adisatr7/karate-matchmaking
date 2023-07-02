@@ -13,6 +13,7 @@ export default class Athlete {
   private gender: Gender
   private age: number
   private weight: number
+  private height: number
   private currentTeamId: string
   private matchHistoryIds: string[]
 
@@ -24,6 +25,7 @@ export default class Athlete {
     gender: Gender = "m",
     age: number = 0,
     weight: number = 0,
+    height: number = 0,
     currentTeamId: string = "",
     matchHistoryIds: string[] = []
   ) {
@@ -34,6 +36,7 @@ export default class Athlete {
     this.gender = gender
     this.age = age
     this.weight = weight
+    this.height = height
     this.currentTeamId = currentTeamId
     this.matchHistoryIds = matchHistoryIds
   }
@@ -70,6 +73,7 @@ export default class Athlete {
             parsedData.gender,
             parsedData.age,
             parsedData.weight,
+            parsedData.height,
             parsedData.currentTeamId,
             parsedData.matchHistoryIds
           )
@@ -229,6 +233,10 @@ export default class Athlete {
     return this.weight
   }
 
+  public getHeight(): number {
+    return this.height
+  }
+
   public getCurrentTeamId(): string {
     return this.currentTeamId
   }
@@ -259,6 +267,10 @@ export default class Athlete {
 
   public setWeight(weight: number) {
     this.weight = weight
+  }
+
+  public setHeight(height: number) {
+    this.height = height
   }
 
   public setCurrentTeamId(newTeamId: string) {
