@@ -64,9 +64,11 @@ export default function AthleteDetailScreen() {
 
         {/* Profile Picture */}
         <div
-          className="bg-cover h-full w-[500px] bg-primary-opaque border border-primary-opaque rounded-md">
+          style={{ backgroundImage: currentAthlete?.getImageUrl() }}
+          className="h-[280px] w-[500px] bg-primary-opaque border border-primary-opaque rounded-md hover:brightness-90 hover:cursor-pointer">
           <img 
-            src={currentAthlete?.getImageUrl()}/>
+            className="object-cover w-full h-full"
+            src={currentAthlete?.getImageUrl()}/> 
         </div>
 
         {/* Bio section */}
@@ -74,18 +76,17 @@ export default function AthleteDetailScreen() {
           <h2 className={subheadingTextStyle}>Bio</h2>
           
           {/* Current team text */}
-          <div className="flex flex-row items-center gap-[8px] h-fit"><p className={captionTextStyle}>Tim saat ini:</p>
+          <div className="flex flex-row items-center gap-[8px] h-fit"><p className={`${captionTextStyle} ${semiTransparentText}`}>Tim saat ini:</p>
             <Link to={`/team/${currentTeam?.getId()}`}>
               <p className={`hover:underline font-bold ${captionTextStyle}`}>{currentTeam?.getTeamName()}</p>
             </Link>
           </div>
 
-          <p className={captionTextStyle}>Jenis kelamin: {currentAthlete?.getGender() === "m" ? "Laki-laki" : "Perempuan"}</p> 
-          {/* TODO: Restructure the Athlete class AGAIN! */}
-          <p className={captionTextStyle}>Usia: {currentAthlete?.getAge()} tahun</p>
-          <p className={captionTextStyle}>Tempat & tanggal lahir: [NOT IMPLEMENTED]</p>
-          <p className={captionTextStyle}>Berat badan: {currentAthlete?.getWeight()} kg</p>
-          <p className={captionTextStyle}>Tinggi badan: [NOT IMPLEMENTED] cm</p>
+          <p className={captionTextStyle}><span className={semiTransparentText}>Jenis kelamin:</span> {currentAthlete?.getGender() === "m" ? "Laki-laki" : "Perempuan"}</p> 
+          <p className={captionTextStyle}><span className={semiTransparentText}>Usia:</span> {currentAthlete?.getAge()} tahun</p>
+          <p className={captionTextStyle}><span className={semiTransparentText}>Tempat & tanggal lahir:</span> {currentAthlete?.getTtl()}</p>
+          <p className={captionTextStyle}><span className={semiTransparentText}>Berat badan:</span> {currentAthlete?.getWeight()} kg</p>
+          <p className={captionTextStyle}><span className={semiTransparentText}>Tinggi badan:</span> {currentAthlete?.getHeight()} cm</p>
 
           {/* Edit profile button */}
           <Button label="PERBARUI BIODATA" className="text-caption w-[280px] mt-[10px]"/>
@@ -114,6 +115,8 @@ export default function AthleteDetailScreen() {
           </div>
         </div>
 
+        {/* TODO: Match history section */}
+
       </div>
     </MainLayout>
   )
@@ -121,3 +124,4 @@ export default function AthleteDetailScreen() {
 
 const captionTextStyle = "text-white font-quicksand text-caption"
 const subheadingTextStyle = "text-white font-quicksand text-subheading"
+const semiTransparentText = "opacity-70"
