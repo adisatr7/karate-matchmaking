@@ -23,7 +23,7 @@ export default function Header({ currentPageName, prevPageName, prevPageUrl }: P
 
             {/* Prev page button */}
             <Link to={prevPageUrl}>
-              <h2 className="text-stone-300 hover:text-white font-quicksand text-subheading">
+              <h2 className="text-stone-300 hover:text-white hover:underline font-quicksand text-subheading">
                 {prevPageName}
               </h2>
             </Link>
