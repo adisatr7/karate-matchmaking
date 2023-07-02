@@ -10,6 +10,7 @@ export default function App() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
+  
   /**
    * Fetches all users data from the `auth/users.data` file
    */
@@ -29,8 +30,32 @@ export default function App() {
     else
       navigate("/login")
   }
+
+
+  /**
+   * Disables the default browser-like right-click menu
+   */
+  const disableBrowserRightClick = () => {
+    
+    // Define a custom handler function for the contextmenu event
+    const handleContextMenu = (e) => {
+      // Prevent the right-click menu from appearing
+      e.preventDefault()
+    }
+
+    // Attach the event listener to  the document object
+    document.addEventListener("contextmenu", handleContextMenu)
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu)
+    }
+  }
   
+  
+  // Check if the user is logged in when the component mounts
   useEffect(() => {
+    disableBrowserRightClick()
     checkIfLoggedIn()
 
     setTimeout(() => {
