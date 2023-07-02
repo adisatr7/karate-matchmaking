@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import ProfileButton from "../../components/ProfileButton"
-import BackButton from "../../components/BackButton"
+import ProfileButton from "./ProfileButton"
+import BackButton from "./BackButton"
 
 
 type PropsType = {

@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { useAppDispatch, useAppSelector } from "../store"
 import Sidebar from "./Sidebar/"
 import { collapseSidebar } from "../store/slices/sidebarSlice"
-import Header from "../data/classes/Header"
+import Header from "./Header"
 import LogoutPrompt from "./Modal/LogoutPrompt"
 
 
