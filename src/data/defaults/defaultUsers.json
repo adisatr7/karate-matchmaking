@@ -13,6 +13,18 @@
     "imageUrl": "https://dotesports.com/wp-content/uploads/2022/07/28205941/Feature-Image-74.jpg?w=1200"
   },
   {
+    "id": "monica",
+    "name": "Monica La Roche",
+    "password": "justmonika",
+    "imageUrl": "https://images.generated.photos/fThbXq5u6N7ihYfdWXjtLe7J8pMejJpGb4MEeOStURM/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy8wNTk3/MzE2LmpwZw.jpg"
+  },
+  {
+    "id": "jeff",
+    "name": "Jeffords Peralta",
+    "password": "jeff123",
+    "imageUrl": "https://static.wikia.nocookie.net/brooklynnine-nine/images/9/9a/S8_Raymond_Holt_-_Andre_Braugher.jpg"
+  },
+  {
     "id": "sheep",
     "name": "Shepard",
     "password": "sheep123",
