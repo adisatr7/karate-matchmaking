@@ -9,6 +9,7 @@ export default class Athlete {
   private athleteId: string
   private athleteName: string
   private imageUrl: string
+  private ttl: string
   private gender: Gender
   private age: number
   private weight: number
@@ -19,6 +20,7 @@ export default class Athlete {
     athleteId?: string,
     athleteName: string = "",
     imageUrl: string = "",
+    ttl: string = "",
     gender: Gender = "m",
     age: number = 0,
     weight: number = 0,
@@ -28,6 +30,7 @@ export default class Athlete {
     this.athleteId = athleteId || generateID("a")
     this.athleteName = athleteName
     this.imageUrl = imageUrl
+    this.ttl = ttl
     this.gender = gender
     this.age = age
     this.weight = weight
@@ -63,6 +66,7 @@ export default class Athlete {
             parsedData.athleteId,
             parsedData.athleteName,
             parsedData.imageUrl,
+            parsedData.ttl,
             parsedData.gender,
             parsedData.age,
             parsedData.weight,
@@ -210,6 +214,10 @@ export default class Athlete {
     return this.imageUrl
   }
 
+  public getTtl(): string {
+    return this.ttl
+  }
+
   public getGender(): "m" | "f" {
     return this.gender
   }
@@ -235,6 +243,10 @@ export default class Athlete {
 
   public setImageUrl(newUrl: string) {
     this.imageUrl = newUrl
+  }
+
+  public setTtl(newTtl: string) {
+    this.ttl = newTtl
   }
 
   public setGender(gender: Gender) {
