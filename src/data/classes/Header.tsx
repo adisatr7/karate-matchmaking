@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import ProfileButton from "../../components/ProfileButton"
-import { Back as BackButton } from "../../assets/icons"
+import BackButton from "../../components/BackButton"
 
 
 type PropsType = {
@@ -16,12 +16,10 @@ export default function Header({ currentPageName, prevPageName, prevPageUrl }: P
       <div className="flex flex-row items-center">
         { // If prev page name and url is provided
           prevPageName && prevPageUrl &&
-          <div className="flex flex-row items-center gap-[10px]">
+          <div className="flex flex-row items-center gap-[12px]">
           
             {/* Back button */}
-            <BackButton
-              onClick={() => window.history.back()}
-              className="text-gray-400 bg-cover hover:text-white hover:cursor-pointer"/>
+            <BackButton/>
 
             {/* Prev page button */}
             <Link to={prevPageUrl}>
@@ -29,7 +27,7 @@ export default function Header({ currentPageName, prevPageName, prevPageUrl }: P
                 {prevPageName}
               </h2>
             </Link>
-            <p className="text-white font-quicksand text-subheading mr-[10px]">/</p>
+            <p className="text-white font-quicksand text-subheading mr-[13px]">/</p>
                     
           </div>
         }
