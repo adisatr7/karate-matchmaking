@@ -2,7 +2,7 @@
   {
     "athleteId": "a-eb73a78f-d678-55ea-8018-3364821cfae8",
     "athleteName": "Rizky Maulana",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/564x/bd/e1/a0/bde1a017cb94f70c9fba699b4b6406ea.jpg",
     "ttl": "Bekasi, 17 Mei 2002",
     "gender": "m",
     "age": 21,
@@ -12,8 +12,8 @@
   },
   {
     "athleteId": "a-f948fb82-3085-5b08-aafd-9bfd6f227233",
-    "athleteName": "Siti Nurhayati",
-    "imageUrl": "",
+    "athleteName": "Christina Angel",
+    "imageUrl": "https://i.pinimg.com/originals/3b/84/99/3b84996d695085f5f1ca839b3ec851de.jpg",
     "ttl": "Bandung, 19 Desember 2003",
     "gender": "f",
     "age": 20,
@@ -23,8 +23,8 @@
   },
   {
     "athleteId": "a-8f294db8-5e71-5b6c-b3ec-6797a16b3372",
-    "athleteName": "Budi Santoso",
-    "imageUrl": "",
+    "athleteName": "Bagus Santoso",
+    "imageUrl": "https://i.pinimg.com/originals/75/fd/56/75fd56c5f6c72fc8aa519747d8bd413e.jpg",
     "ttl": "Depok, 4 Juli 2001",
     "gender": "m",
     "age": 22,
@@ -35,7 +35,7 @@
   {
     "athleteId": "a-49cee47f-6029-5bfd-b6af-87ad99b210e1",
     "athleteName": "Fitriani Putri",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/1f/92/ef/1f92ef3db4472ae6d73fc2d2a08f9be7.jpg",
     "ttl": "Cirebon, 24 Februari 2002",
     "gender": "f",
     "age": 21,
@@ -46,7 +46,7 @@
   {
     "athleteId": "a-21aa8874-d9f2-5dad-a9d8-e05a894374c0",
     "athleteName": "Ahmad Hidayat",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/6f/29/4b/6f294b87edbdd3143c7d69ef9de45b66.jpg",
     "ttl": "Tangerang Selatan, 15 Oktober 2003",
     "gender": "m",
     "age": 20,
@@ -58,7 +58,7 @@
   {
     "athleteId": "a-80a22d46-1e45-5377-ab4a-a6fb0d8ae02e",
     "athleteName": "Christian Budi",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/c1/1e/cd/c11ecd9df334a0d0f8eefaae315ec42b.jpg",
     "ttl": "Bumiayu, 7 Juli 2003",
     "gender": "m",
     "age": 20,
@@ -68,8 +68,8 @@
   },
   {
     "athleteId": "a-0f504d37-f9f1-5e59-8467-27f77662297f",
-    "athleteName": "Siti Rahmawati",
-    "imageUrl": "",
+    "athleteName": "Annisa Rahmawati",
+    "imageUrl": "https://i.pinimg.com/originals/2f/8b/f7/2f8bf73af49f9ef20b1f5ea0b2fc16b8.jpg",
     "ttl": "Sidoarjo, 16 Maret 2002",
     "gender": "f",
     "age": 21,
@@ -81,7 +81,7 @@
   {
     "athleteId": "a-872faf7a-3642-54c3-b4b7-15990e48ac98",
     "athleteName": "Ahmad Rahman",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/39/68/7a/39687a328bea6980a95ed8c2588a276c.jpg",
     "ttl": "Sukabumi, 28 Juni 2004",
     "gender": "m",
     "age": 19,
@@ -92,10 +92,10 @@
   {
     "athleteId": "a-324a6e5b-bdd8-518d-a6f3-b34bce4ff558",
     "athleteName": "Ahmad Nabawi",
-    "imageUrl": "",
-    "ttl": "Bandung, 11 Desember 2002",
+    "imageUrl": "https://i.pinimg.com/originals/18/f9/52/18f9526b551ff4dd5122112c81a46223.jpg",
+    "ttl": "Bandung, 11 Desember 1999",
     "gender": "m",
-    "age": 21,
+    "age": 24,
     "weight": 78,
     "height": 155,
     "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
@@ -104,7 +104,7 @@
   {
     "athleteId": "a-bd30eed4-3ee3-5b59-b09d-79c8a838b616",
     "athleteName": "Maria Natalia",
-    "imageUrl": "",
+    "imageUrl": "https://cdn.discordapp.com/attachments/629457937965907979/1125075432035844126/yakisa.insta_CROPED.jpg",
     "ttl": "Medan, 21 Desember 2003",
     "gender": "f",
     "age": 20,
@@ -116,7 +116,7 @@
   {
     "athleteId": "a-2450313e-3a0c-55e2-bc71-69e37d849523",
     "athleteName": "Frederick Saragih",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/564x/34/53/6a/34536afa64f1e26375d0ebe98342c28f.jpg",
     "ttl": "14 Januari 2003",
     "gender": "m",
     "age": 20,
@@ -129,7 +129,7 @@
   {
     "athleteId": "a-7ea8f581-01e5-5c89-a8dd-773c8bc068e5",
     "athleteName": "Arief Setiawan",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/564x/b7/6f/83/b76f83da8422185a85f34683d2279bea.jpg",
     "ttl": "Magelang, 10 Mei 1999",
     "gender": "m",
     "age": 24,
@@ -141,7 +141,7 @@
   {
     "athleteId": "a-219b344e-bb96-5b4e-8fa3-1859081d9182",
     "athleteName": "Reza Subagio",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/564x/97/ee/77/97ee77c6545878a809ef8d3da59034ac.jpg",
     "ttl": "Yogyakarta, 22 September 2003",
     "gender": "m",
     "age": 20,
@@ -154,7 +154,7 @@
   {
     "athleteId": "a-481347ff-f3ea-591e-a574-1638bc3dde29",
     "athleteName": "Siti Aisyah",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/6d/72/e9/6d72e9c3743c673f977b584ff4165ad3.jpg",
     "ttl": "Aceh, 29 Agustus 2002",
     "gender": "f",
     "age": 21,
@@ -166,8 +166,8 @@
   {
     "athleteId": "a-c4338b01-3bf0-55c7-a975-7f96bba75a34",
     "athleteName": "Andi Prasetyo",
-    "imageUrl": "Sibolga, 17 Mei 2002",
-    "ttl": "",
+    "imageUrl": "https://i.pinimg.com/564x/9c/9d/93/9c9d933a8c99620a7ac1523acffc60ea.jpg",
+    "ttl": "Sibolga, 17 Mei 2002",
     "gender": "m",
     "age": 21,
     "weight": 80,
@@ -179,7 +179,7 @@
   {
     "athleteId": "a-e679396e-2606-5ea0-9ba4-9ff479c884a7",
     "athleteName": "Rina Fitriani",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/a3/14/fa/a314fa0f4de9a37c3297e731f3bad454.jpg",
     "ttl": "Cimahi, 6 Februari 2000",
     "gender": "f",
     "age": 23,
@@ -191,7 +191,7 @@
   {
     "athleteId": "a-be663bac-752d-5d7f-8eb8-86c4e469ec92",
     "athleteName": "Hikari Nur Cahya",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/95/b6/8b/95b68b7c50dbd26127402328dcca0fd6.jpg",
     "ttl": "Bandung, 12 November 2001",
     "gender": "m",
     "age": 22,
@@ -204,7 +204,7 @@
   {
     "athleteId": "a-c43d1087-ef2a-5e0e-a31c-03ada33fdc46",
     "athleteName": "Maya Agustina",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/9f/b7/5e/9fb75e4e2f62a207d7df922acaa970bf.jpg",
     "ttl": "Semarang, 24 Agustus 2001",
     "gender": "f",
     "age": 22,
@@ -217,7 +217,7 @@
   {
     "athleteId": "a-ffb7db95-f875-5fc0-a8dd-fb9aa8d70611",
     "athleteName": "Indra Maulana",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/88/3c/1b/883c1b86ab2c98343d9b113c17f4b41a.jpg",
     "ttl": "Palembang, 17 Januari 2002",
     "gender": "m",
     "age": 21,
@@ -228,8 +228,8 @@
   },
   {
     "athleteId": "a-7ff6cac9-57bb-5694-8028-a89055251377",
-    "athleteName": "Daruna Nainggolan",
-    "imageUrl": "",
+    "athleteName": "Doanta Nainggolan",
+    "imageUrl": "https://i.pinimg.com/564x/92/11/9d/92119d43ff79ed30f18d59d3c56cbcfd.jpg",
     "ttl": "Palemmbang, 9 November 2001",
     "gender": "m",
     "age": 22,
@@ -242,7 +242,7 @@
   {
     "athleteId": "a-7a203ed6-647d-5fcd-924c-a496b35d04e7",
     "athleteName": "Bella Pertiwi",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/1b/35/25/1b35259884decf66da9141b6270f1797.jpg",
     "ttl": "Makassar, 21 Februari 2003",
     "gender": "f",
     "age": 20,
@@ -254,7 +254,7 @@
   {
     "athleteId": "a-c30e0838-89ca-55ce-aba9-b9dff6160a4a",
     "athleteName": "Suci Rizki Andini",
-    "imageUrl": "",
+    "imageUrl": "https://i.pinimg.com/originals/d3/1e/dc/d31edce431c7f82dcb82b4725bda8ec8.jpg",
     "ttl": "Makassar, 26 Juni 2002",
     "gender": "f",
     "age": 21,
