@@ -1,19 +1,65 @@
-import { useState } from "react"
-import MenuBackground from "../components/MenuBackground"
+import { useEffect, useState } from "react"
+import MainLayout from "../components/MainLayout"
 import Entry from "../components/Entry"
 import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
 import TeamsTable from "../components/Tables/TeamsTable"
+import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
+import Team from "../data/classes/Team"
+import useNotification from "../hooks/useNotification"
 
 
 export default function TeamListScreen() {
+  const [teamList, setTeamsList] = useState<Team[]>([])
   const [searchKeyword, setSearchKeyword] = useState("")
 
+  /**
+   * Fetch the teams data from the teams directory
+   */
+  const fetchTeams = async () => {
+    const teams: Team[] = []
+
+    // Read the teams directory
+    await readDir(
+      "teams", {
+        dir: BaseDirectory.AppData,
+        recursive: false
+    })
+
+    // If the directory is not empty, load the teams data one by one
+    .then(async (files) => {
+      files.forEach(async (file) => {
+        
+        // Remove the file extension
+        const filename: string = file.name!.split(".")[0]
+        
+        // Load the team data
+        const team: Team = await Team.load(filename)
+
+        // Add the team data to the list
+        teams.push(team)
+
+        // Update the state
+        setTeamsList(teams)
+      })
+    })
+
+    // If the directory is empty, create a default team
+    .catch(err => {
+      useNotification("Tidak dapat membaca data tim", err)
+    })
+  }
+
+  // Fetch the teams data when the screen is loaded
+  useEffect(() => {
+    fetchTeams()
+  }, [])
+
   return (
-    <MenuBackground pageName="Daftar Tim">
+    <MainLayout currentPageName="Daftar Tim">
 
       {/* Search bar and its buttons */}
-      <div className="flex flex-row h-fit w-full gap-[10px]">
+      <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
         <Entry 
           label="Cari nama tim" 
           inputMode="text" 
@@ -34,9 +80,9 @@ export default function TeamListScreen() {
 
       {/* Table | TODO: Implement search function5 */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
-        <TeamsTable/>
+        <TeamsTable data={teamList}/>
       </div>
 
-    </MenuBackground>
+    </MainLayout>
   )
 }

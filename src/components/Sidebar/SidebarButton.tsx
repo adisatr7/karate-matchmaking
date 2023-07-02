@@ -1,4 +1,4 @@
-import { PathOptions, SVGIcon } from "../../types"
+import { SidebarOptions, SVGIcon } from "../../types"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { collapseSidebar, setCurrentPath } from "../../store/slices/sidebarSlice"
 
@@ -6,7 +6,7 @@ import { collapseSidebar, setCurrentPath } from "../../store/slices/sidebarSlice
 type PropsType = {
   icon: SVGIcon
   label: string,
-  path?: PathOptions,
+  path?: SidebarOptions,
   onClick?: Function,
 }
 

@@ -16,6 +16,10 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
 import TournamentListScreen from "./screens/TournamentListScreen.tsx"
 import TeamListScreen from "./screens/TeamListScreen.tsx"
 import AthleteListScreen from "./screens/AthleteListScreen.tsx"
+import TournamentDetailScreen from "./screens/TournamentDetailScreen.tsx"
+import UnderConstructionScreen from "./screens/UnderConstructionScreen.tsx"
+import TeamDetailScreen from "./screens/TeamDetailScreen.tsx"
+import AthleteDetailScreen from "./screens/AthleteProfileScreen.tsx"
 
 
 /**
@@ -45,28 +49,28 @@ const screens = createBrowserRouter([
     element: <TournamentListScreen/>
   },
   {
-    path: "/tournament/:idPertandingan",
-    element: <></>
+    path: "/tournament/:tournamentId",
+    element: <TournamentDetailScreen/>
   },
   {
     path: "/team/all",
     element: <TeamListScreen/>
   },
   {
-    path: "/team/:idTim",
-    element: <></>
+    path: "/team/:teamId",
+    element: <TeamDetailScreen/>
   },
   {
     path: "/athlete/all",
     element: <AthleteListScreen/>
   },
   {
-    path: "/athlete/:idAtlet",
-    element: <></>
+    path: "/athlete/:athleteId",
+    element: <AthleteDetailScreen/>
   },
   {
     path: "/settings",
-    element: <></>
+    element: <UnderConstructionScreen/>
   }
 ])
 

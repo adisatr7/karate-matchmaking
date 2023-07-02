@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { PathOptions } from "../../types"
-
+import { SidebarOptions } from "../../types"
 
 /**
  * Options for statusbar state
@@ -11,17 +10,17 @@ type SidebarStatusOptions = "expanded" | "collapsed" | "hidden"
  * Sidebar states type definition
  */
 export interface SidebarStates {
-  status: SidebarStatusOptions,
-  currentPath: PathOptions
+  status: SidebarStatusOptions
+  currentPath: SidebarOptions
 }
 
 /**
- * Sidebar initial state containing the status whether the sidebar is 
+ * Sidebar initial state containing the status whether the sidebar is
  * expanded, collapsed, or hidden and the current path (screen) the app is in
  */
 const initialState: SidebarStates = {
   status: "hidden",
-  currentPath: "highlight"
+  currentPath: "highlight",
 }
 
 /**
@@ -31,7 +30,6 @@ export const sidebarSlice = createSlice({
   name: "sidebar",
   initialState,
   reducers: {
-
     /**
      * Expand the sidebar
      */
@@ -55,14 +53,15 @@ export const sidebarSlice = createSlice({
 
     /**
      * Set the current path (screen) the app is in
-     * 
+     *
      * @param action The path to be set as the current path
      */
-    setCurrentPath: (state, action: PayloadAction<PathOptions>) => {
+    setCurrentPath: (state, action: PayloadAction<SidebarOptions>) => {
       state.currentPath = action.payload
-    }
-  }
+    },
+  },
 })
 
 export default sidebarSlice.reducer
-export const { expandSidebar, collapseSidebar, hideSidebar, setCurrentPath } = sidebarSlice.actions
+export const { expandSidebar, collapseSidebar, hideSidebar, setCurrentPath } =
+  sidebarSlice.actions

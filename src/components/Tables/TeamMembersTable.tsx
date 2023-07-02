@@ -1,22 +1,23 @@
 import Athlete from "../../data/classes/Athlete"
-import Team from "../../data/classes/Team"
+import { useAppDispatch } from "../../store"
+import { setCurrentPath } from "../../store/slices/sidebarSlice"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 
 
 type PropsType = {
   data: Athlete[],
-  teamsList: Team[]
+  winRates?: number[]
 }
 
-export default function AthletesTable({ data: athletesList, teamsList }: PropsType) {
-
+export default function TeamMembersTable({ data: athletesList, winRates }: PropsType) {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const headerLabels: string[] = [
     "NO", 
-    "NAMA ATLET", 
-    "TIM",
+    "NAMA ATLET",
+    "RASIO KEMENANGAN",
     // "BERTANDING DI",
     // "KELAS",
     "JENIS KELAMIN",
@@ -31,6 +32,7 @@ export default function AthletesTable({ data: athletesList, teamsList }: PropsTy
    * @param athleteId ID of the athlete
    */
   const handleRowClick = (athleteId: string) => {
+    dispatch(setCurrentPath(""))
     navigate(`/athlete/${athleteId}`)
   }
 
@@ -49,9 +51,6 @@ export default function AthletesTable({ data: athletesList, teamsList }: PropsTy
       <tbody>
         { athletesList.map((a: Athlete, athleteIndex: number) => {
 
-            // Get the athlete's team
-            const team = teamsList[athleteIndex]
-
             // Render the table row
             return (
               <tr
@@ -65,11 +64,11 @@ export default function AthletesTable({ data: athletesList, teamsList }: PropsTy
                       {/* Render idPertandingan column conditionally */}
                       { label === "NO" ? athleteIndex + 1 
                         : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
-                        : label === "TIM" ? team?.getTeamName()
                         : label === "JENIS KELAMIN" 
                           ? a.getGender() === "m" 
                             ? "Laki-laki" 
                             : "Perempuan"
+                        : label === "RASIO KEMENANGAN" ? winRates![athleteIndex]
                         : label === "USIA" ? a.getAge()
                         : label === "BERAT (Kg)" ? a.getWeight()
                         : ""
