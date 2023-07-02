@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { expandSidebar, collapseSidebar } from "../../store/slices/sidebarSlice"
-import { showModal } from "../../store/slices/modalSlice"
+import { setModal } from "../../store/slices/modalSlice"
 
 import * as Icons from "../../assets/icons"
 import SidebarButton from "./SidebarButton"
@@ -28,7 +28,6 @@ export default function Sidebar() {
     else if (sidebarStatus === "expanded")
       dispatch(collapseSidebar())
   }
-
 
 
   return (
@@ -87,7 +86,7 @@ export default function Sidebar() {
 
       {/* Logout button container */}
       <div className="flex flex-col h-fit my-[12px] transition-all w-full">
-        <SidebarButton icon={Icons.Logout} label="Keluar" onClick={() => dispatch(showModal())}/>
+        <SidebarButton icon={Icons.Logout} label="Keluar" onClick={() => dispatch(setModal("exit"))}/>
       </div>
 
     </div>

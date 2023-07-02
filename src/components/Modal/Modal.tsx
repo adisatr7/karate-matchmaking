@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useAppDispatch } from "../store";
-import { hideModal } from "../store/slices/modalSlice";
+import { ReactNode, useEffect, useState } from "react"
+import { useAppDispatch } from "../../store"
+import { closeModal } from "../../store/slices/modalSlice"
 
 
 type PropsType = {
@@ -23,7 +23,7 @@ export default function Modal ({ children, title, caption }: PropsType) {
   const dismissModal = () => {
     setAnimationState(0)
     setTimeout(() => {
-      dispatch(hideModal())
+      dispatch(closeModal())
     }, 500)
   }
 
@@ -36,12 +36,12 @@ export default function Modal ({ children, title, caption }: PropsType) {
       {/* Popup window */}
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`bg-stone-900 border border-stone-700 w-fit h-fit flex flex-col min-w-[300px] px-[22px] py-[24px] rounded-md gap-[10px] transition-all ease-in-out bg-opacity-70 backdrop-blur-sm
+        className={`bg-stone-900 border border-stone-700 w-fit max-w-3xl h-fit max-h-xl overflow-y-clip flex flex-col min-w-[300px] px-[22px] py-[24px] rounded-md gap-[10px] transition-all ease-in-out bg-opacity-70 backdrop-blur-sm
         ${animationState === 0 ? "opacity-0 translate-y-10 duration-500" : "opacity-100 translate-y-0 duration-300"}`}>
 
         {/* Header */}
         <div className="flex flex-row justify-between items-start gap-[18px] w-full h-fit">
-          <h1 className="text-heading text-center w-full">{title}</h1>
+          <h1 className="w-full text-center text-heading">{title}</h1>
           <button
             onClick={dismissModal}
             className="text-2xl hover:text-gray-400 absolute right-0 top-0 pt-[24px] pr-[24px]">
@@ -50,10 +50,12 @@ export default function Modal ({ children, title, caption }: PropsType) {
         </div>
 
         {/* Caption */}
-        { caption && <p className="text-body text-left w-full">{caption}</p> }
+        { caption && <p className="w-full text-left text-body">{caption}</p> }
 
         {/* Content */}
-        {children}
+        <div className="flex flex-col w-full h-full overflow-y-scroll font-quicksand text-caption">
+          {children}
+        </div>
       </div>
     </div>
   )

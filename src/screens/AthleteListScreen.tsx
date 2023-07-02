@@ -1,16 +1,64 @@
-import { useState } from "react"
-import MenuBackground from "../components/MenuBackground"
-import Entry from "../components/Entry"
-import Button from "../components/Button"
+import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
+import { useEffect, useState } from "react"
 import { Search as SearchIcon } from "../assets/icons"
+import Button from "../components/Button"
+import Entry from "../components/Entry"
+import MainLayout from "../components/MainLayout"
 import AthletesTable from "../components/Tables/AthletesTable"
+import Athlete from "../data/classes/Athlete"
+import Team from "../data/classes/Team"
 
 
 export default function AthleteListScreen() {
+  const [athletesList, setAthletesList] = useState<Athlete[]>([])
+  const [teamsList, setTeamsList] = useState<Team[]>([])
   const [searchKeyword, setSearchKeyword] = useState("")
 
+  /**
+   * Fetch the list  of athletes to be rendered in the table.
+   */
+  const fetchAthletes = async () => {
+    
+    // Fetch the list of athletes
+    await readDir(
+      "athletes", {
+        dir: BaseDirectory.AppData,
+        recursive: false
+    })
+
+      // If the list is not empty, fetch the athlete data
+      .then(result => {
+
+        // Prepare an empty list to store the athlete data
+        const athleteList: Athlete[] = []
+        const teams: Team[] = []
+
+        // For each athlete, fetch the athlete data
+        result.forEach(async (file) => {
+          const athleteId: string = file.name!.split(".")[0]
+
+          // Create an Athlete object from the athlete data
+          const athleteData: Athlete = await Athlete.load(athleteId!)
+          const teamData: Team = await athleteData.getCurrentTeam()
+
+          // Push the athlete data to the list
+          athleteList.push(athleteData)
+          teams.push(teamData)
+  
+          // Set the list of athletes and teams to the state
+          setAthletesList(athleteList)
+          setTeamsList(teams)
+        })
+      })
+  }
+
+  // Fetch the list of athletes and teams when the screen is loaded
+  useEffect(() => {
+    fetchAthletes()
+  }, [])
+
   return (
-    <MenuBackground pageName="Daftar Atlet">
+    <MainLayout currentPageName="Daftar Atlet">
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px]">
@@ -34,9 +82,9 @@ export default function AthleteListScreen() {
 
       {/* Table | TODO: Implement search function5 */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
-        <AthletesTable/>
+        <AthletesTable data={athletesList} teamsList={teamsList}/>
       </div>
 
-    </MenuBackground>
+    </MainLayout>
   )
 }

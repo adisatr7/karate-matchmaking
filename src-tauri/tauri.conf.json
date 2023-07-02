@@ -17,7 +17,7 @@
         "copyFile": false,
         "createDir": true,
         "exists": false,
-        "readDir": false,
+        "readDir": true,
         "readFile": true,
         "removeDir": false,
         "removeFile": false,
@@ -47,7 +47,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.r7.karate-matcher",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
