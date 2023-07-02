@@ -25,7 +25,7 @@
     ]
   },
   {
-    "teamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
+    "teamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a",
     "teamName": "Raja Singa Martial Arts",
     "desc": "",
     "initial": "RAJ",
@@ -83,14 +83,12 @@
     "teamId": "t-3c2e3a3e-c62e-5baa-aec9-1c560a601e3d",
     "teamName": "Semarts - Semarang Martial Arts",
     "desc": "",
-    "initial": "LIO",
+    "initial": "SMA",
     "city": "Semarang",
-    "memberIds": [
-      "a-c43d1087-ef2a-5e0e-a31c-03ada33fdc46"
-    ]
+    "memberIds": ["a-c43d1087-ef2a-5e0e-a31c-03ada33fdc46"]
   },
   {
-    "teamId":  "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
+    "teamId": "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
     "teamName": "Cobra Dojo",
     "desc": "",
     "initial": "COB",
