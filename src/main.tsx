@@ -18,6 +18,8 @@ import TeamListScreen from "./screens/TeamListScreen.tsx"
 import AthleteListScreen from "./screens/AthleteListScreen.tsx"
 import TournamentDetailScreen from "./screens/TournamentDetailScreen.tsx"
 import UnderConstructionScreen from "./screens/UnderConstructionScreen.tsx"
+import TeamDetailScreen from "./screens/TeamDetailScreen.tsx"
+import AthleteDetailScreen from "./screens/AthleteProfileScreen.tsx"
 
 
 /**
@@ -56,7 +58,7 @@ const screens = createBrowserRouter([
   },
   {
     path: "/team/:teamId",
-    element: <UnderConstructionScreen/>
+    element: <TeamDetailScreen/>
   },
   {
     path: "/athlete/all",
@@ -64,7 +66,7 @@ const screens = createBrowserRouter([
   },
   {
     path: "/athlete/:athleteId",
-    element: <UnderConstructionScreen/>
+    element: <AthleteDetailScreen/>
   },
   {
     path: "/settings",

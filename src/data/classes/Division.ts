@@ -1,10 +1,10 @@
+import Match from "./Match"
+import Team from "./Team"
+import Tournament from "./Tournament"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { ContestantType, DivisionType } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
-import Tournament from "./Tournament"
-import { Match } from "./Match"
-import { Team } from "./Team"
 
 export default class Division {
   private tournamentId: string

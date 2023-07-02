@@ -1,10 +1,10 @@
+import Athlete from "./Athlete"
+import Match from "./Match"
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
-import { Athlete } from "./Athlete"
-import { Match } from "./Match"
 
-export class MatchHistory {
+export default class MatchHistory {
   private matchHistoryId: string
   private athleteId: string
   private matchId: string

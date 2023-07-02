@@ -1,12 +1,13 @@
+import Athlete from "./Athlete"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
-import { Athlete } from "./Athlete"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 
 
-export class Team {
+export default class Team {
   private teamId: string
   private teamName: string
+  private desc: string
   private initial: string
   private city: string
   private memberIds: string[]
@@ -14,12 +15,14 @@ export class Team {
   constructor(
     teamId?: string,
     teamName: string = "",
+    desc: string = "",
     initial: string = "",
     city: string = "",
     memberIds: string[] = []
   ) {
     this.teamId = teamId ? teamId : generateID("t")
     this.teamName = teamName
+    this.desc = desc
     this.initial = initial
     this.city = city
     this.memberIds = memberIds
@@ -52,6 +55,7 @@ export class Team {
           const team = new Team(
             parsedData.teamId,
             parsedData.teamName,
+            parsedData.desc,
             parsedData.initial,
             parsedData.city,
             parsedData.memberIds
@@ -72,8 +76,12 @@ export class Team {
     return this.teamId
   }
 
-  public getName(): string {
+  public getTeamName(): string {
     return this.teamName
+  }
+
+  public getDesc(): string {
+    return this.desc
   }
 
   public getInitial(): string {
@@ -129,6 +137,10 @@ export class Team {
 
   public setTeamName(newName: string): void {
     this.teamName = newName
+  }
+
+  public setDesc(desc: string): void {
+    this.desc = desc
   }
 
   public setInitial(newInitial: string): void {

@@ -1,3 +1,4 @@
+import Division from "./Division"
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
 import {
   ContestantType,
@@ -6,9 +7,8 @@ import {
 } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
-import Division from "./Division"
 
-export class Match {
+export default class Match {
   private divisionId: string
   private matchId: string
   private matchName: string

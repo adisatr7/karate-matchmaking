@@ -5,7 +5,7 @@ import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
 import TeamsTable from "../components/Tables/TeamsTable"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-import { Team } from "../data/classes/Team"
+import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
 
 

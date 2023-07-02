@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react"
-import MainLayout from "../components/MainLayout"
-import Entry from "../components/Entry"
-import Button from "../components/Button"
-import AthletesTable from "../components/Tables/AthletesTable"
-import { Athlete } from "../data/classes/Athlete"
-import { Team } from "../data/classes/Team"
-import { Search as SearchIcon } from "../assets/icons"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
+import { useEffect, useState } from "react"
+import { Search as SearchIcon } from "../assets/icons"
+import Button from "../components/Button"
+import Entry from "../components/Entry"
+import MainLayout from "../components/MainLayout"
+import AthletesTable from "../components/Tables/AthletesTable"
+import Athlete from "../data/classes/Athlete"
+import Team from "../data/classes/Team"
 
 
 export default function AthleteListScreen() {

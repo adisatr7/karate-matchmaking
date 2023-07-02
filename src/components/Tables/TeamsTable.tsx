@@ -1,6 +1,6 @@
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-import { Team } from "../../data/classes/Team"
+import Team from "../../data/classes/Team"
 
 
 type PropsType = {
@@ -26,10 +26,10 @@ export default function TeamsTable({ data: teamList }: PropsType) {
    * Handler for when a row is clicked. The app will navigate to the 
    * team profile screen.
    * 
-   * @param idTim ID of the team
+   * @param teamId ID of the team
    */
-  const handleRowClick = (idTim: string) => {
-    navigate(`/team/${idTim}`)
+  const handleRowClick = (teamId: string) => {
+    navigate(`/team/${teamId}`)
   } 
 
   return (
@@ -58,7 +58,7 @@ export default function TeamsTable({ data: teamList }: PropsType) {
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
                       {/* Render idPertandingan column conditionally */}
                       { label === "NO" ? teamIndex + 1 
-                        : label === "NAMA TIM" ? toSentenceCase(t.getName())
+                        : label === "NAMA TIM" ? toSentenceCase(t.getTeamName())
                         : label === "INISIAL" ? t.getInitial().toUpperCase()
                         : label === "ANGGOTA" ? t.getMemberIds().length
                         : label === "ASAL" ? toSentenceCase(t.getCity())

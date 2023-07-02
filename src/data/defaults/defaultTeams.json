@@ -2,6 +2,7 @@
   {
     "teamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
     "teamName": "Samurai Karate Club",
+    "desc": "",
     "initial": "SAM",
     "city": "Jakarta",
     "memberIds": [
@@ -15,6 +16,7 @@
   {
     "teamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
     "teamName": "Garuda Karate Dojo",
+    "desc": "",
     "initial": "GAR",
     "city": "Surabaya",
     "memberIds": [
@@ -25,6 +27,7 @@
   {
     "teamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
     "teamName": "Raja Singa Martial Arts",
+    "desc": "",
     "initial": "RAJ",
     "city": "Bandung",
     "memberIds": [
@@ -35,6 +38,7 @@
   {
     "teamId": "t-93b5242a-1d69-57e6-8b7b-9f3c2e3eaf8b",
     "teamName": "Si Naga Putih Karate Academy",
+    "desc": "",
     "initial": "NAG",
     "city": "Medan",
     "memberIds": [
@@ -45,6 +49,7 @@
   {
     "teamId": "t-eb84326b-37a4-55e7-8a4f-7c8dfc1a9365",
     "teamName": "Elang Merah Karate Team",
+    "desc": "",
     "initial": "ELA",
     "city": "Yogyakarta",
     "memberIds": [
@@ -55,6 +60,7 @@
   {
     "teamId": "t-65050761-1c71-548b-bccf-a9dc95c110b6",
     "teamName": "Harimau Martial Arts",
+    "desc": "",
     "initial": "HAM",
     "city": "Sumatera Utara",
     "memberIds": [
@@ -65,6 +71,7 @@
   {
     "teamId": "t-2ea143d4-7a3f-5279-afe9-a6ad38831c0b",
     "teamName": "Aing Maung Karate Club",
+    "desc": "",
     "initial": "AUM",
     "city": "Bandung",
     "memberIds": [
@@ -75,6 +82,7 @@
   {
     "teamId": "t-3c2e3a3e-c62e-5baa-aec9-1c560a601e3d",
     "teamName": "Semarts - Semarang Martial Arts",
+    "desc": "",
     "initial": "LIO",
     "city": "Semarang",
     "memberIds": [
@@ -84,6 +92,7 @@
   {
     "teamId":  "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
     "teamName": "Cobra Dojo",
+    "desc": "",
     "initial": "COB",
     "city": "Palembang",
     "memberIds": [
@@ -94,6 +103,7 @@
   {
     "teamId": "t-8ed9a54b-d9d5-59a0-a1de-09e17ae62d03",
     "teamName": "Shark Karate Academy",
+    "desc": "",
     "initial": "SHA",
     "city": "Makassar",
     "memberIds": [

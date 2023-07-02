@@ -1,11 +1,12 @@
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
-import { Team } from "./Team"
 import { Gender } from "../../types"
-import { MatchHistory } from "./MatchHistory"
+import MatchHistory from "./MatchHistory"
+import Team from "./Team"
 
-export class Athlete {
+
+export default class Athlete {
   private athleteId: string
   private athleteName: string
   private imageUrl: string

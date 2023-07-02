@@ -1,5 +1,5 @@
-import { Athlete } from "../../data/classes/Athlete"
-import { Team } from "../../data/classes/Team"
+import Athlete from "../../data/classes/Athlete"
+import Team from "../../data/classes/Team"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
 
@@ -65,7 +65,7 @@ export default function AthletesTable({ data: athletesList, teamsList }: PropsTy
                       {/* Render idPertandingan column conditionally */}
                       { label === "NO" ? athleteIndex + 1 
                         : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
-                        : label === "TIM" ? team?.getName()
+                        : label === "TIM" ? team?.getTeamName()
                         : label === "JENIS KELAMIN" 
                           ? a.getGender() === "m" 
                             ? "Laki-laki" 
