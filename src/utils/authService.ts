@@ -3,7 +3,7 @@ import useNotification from "../hooks/useNotification"
 import { UserType } from "../types"
 import defaultUsersData from "../data/defaults/defaultUsers.json"
 import { createFolder, writeInto } from "./fileManager"
-import { assignDefaultAthletesData, assignDefaultDivisionsData, assignDefaultTeamsData, assignDefaultTournamentsData } from "../data/defaults"
+import { assignDefaultAthletesData, assignDefaultDivisionsData, assignDefaultMatchData, assignDefaultMatchHistoryData, assignDefaultTeamsData, assignDefaultTournamentsData } from "../data/defaults"
 
 /**
  * Save all users and current user data that is logged in to the app into
@@ -32,9 +32,10 @@ export const assignDefaultData = async () => {
   // ! Experimental: Assign default data for other folders
   await assignDefaultTournamentsData()
   await assignDefaultDivisionsData()
-  await assignDefaultAthletesData()
+  await assignDefaultMatchData()
   await assignDefaultTeamsData()
-  // assignDefaultMatchesData()
+  await assignDefaultAthletesData()
+  await assignDefaultMatchHistoryData()
 }
 
 /**
