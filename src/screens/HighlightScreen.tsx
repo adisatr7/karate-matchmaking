@@ -17,7 +17,7 @@ export default function HighlightScreen() {
       </div>
 
       {/* Buttons container */}
-      <div className="flex flex-row h-fit w-full gap-[12px]">
+      <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
         <Button label="BROADCAST" className="w-full" onClick={handleBroadcast}/>
         <Button label="DETAIL PERTANDINGAN" className="w-full" onClick={handleBroadcast}/>
         <Button label="DAFTAR TIM" className="w-full" onClick={handleBroadcast}/>

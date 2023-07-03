@@ -48,7 +48,7 @@ export default function TeamDetailScreen() {
       setMembers(athletes)
 
       // Calculate the win rate of said athlete and push it to its own list
-      tempWinRates.push(await member.calculateWinRate())
+      tempWinRates.push(await member.getWinRateRatio())
       setWinRates(tempWinRates)
     })
   }
