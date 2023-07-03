@@ -5,6 +5,10 @@ import MainLayout from "../components/MainLayout"
 import Team from "../data/classes/Team"
 import Button from "../components/Button"
 import NumericDisplay from "../components/NumericDisplay"
+import MatchHistory from "../data/classes/MatchHistory"
+import MatchHistoryTable from "../components/Tables/MatchHistoryTable"
+import Match from "../data/classes/Match"
+import useNotification from "../hooks/useNotification"
 
 
 type ParamsType = {
@@ -15,6 +19,8 @@ export default function AthleteDetailScreen() {
   const params = useParams<ParamsType>()
   const [currentAthlete, setCurrentAthlete] = useState<Athlete | undefined>()
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>()
+  const [matchHistory, setMatchHistory] = useState<MatchHistory[]>([])
+  const [prevMatches, setPrevMatches] = useState<Match[]>([])
   const [winrate, setWinrate] = useState<number>(0)
   
   /**
@@ -30,6 +36,7 @@ export default function AthleteDetailScreen() {
       await Athlete.load(id!)
         .then(athleteData => setCurrentAthlete(athleteData))
       
+      // Calculate the winrate and set it to the state
       await currentAthlete!.calculateWinRate()
         .then(winrate => setWinrate(winrate))
     }
@@ -45,14 +52,49 @@ export default function AthleteDetailScreen() {
    */
   const fetchTeamData = async () => {
     await currentAthlete!.getCurrentTeam()
-    .then(team => setCurrentTeam(team))
+      .then(team => setCurrentTeam(team))
   }
 
-  // Fetch the team data when the athlete data is loaded
+  /**
+   * Fetch the match history data of the current athlete from the `matchHistory` directory
+   */
+  const fetchMatchHistory = async () => {
+    await currentAthlete!.getMatchHistories()
+      .then(history => setMatchHistory(history))
+      .catch(err => useNotification("Terjadi kesalahan saat mengambil data riwayat pertandingan", err))
+  }
+
+  // Fetch other data once the athlete data is loaded
   useEffect(() => {
     fetchTeamData()
+    fetchMatchHistory()
   }, [currentAthlete])
 
+  /**
+   * Fetch the match data of the current athlete from the `matches` directory based on the match history
+   */
+  const fetchMatchData = async () => {
+    let temp: Match[] = []
+    
+    matchHistory.forEach(async (history: MatchHistory) => {
+      await history.getMatchData()
+        .then(data => {
+          temp.push(data)
+          setPrevMatches(temp)
+        })
+
+        // In case of error, show the error message through the OS' notification
+        .catch(err => {
+          useNotification("Terjadi kesalahan saat membaca data riwayat pertandingan", err)
+        })
+    })
+  }
+
+  // Fetch the match data once the match history data is loaded
+  useEffect(() => {
+    fetchMatchData()
+  }, [matchHistory])
+  
   return (
     <MainLayout
       currentPageName={currentAthlete ? currentAthlete.getAthleteName() : "Memuat..."}
@@ -115,9 +157,15 @@ export default function AthleteDetailScreen() {
           </div>
         </div>
 
-        {/* TODO: Match history section */}
 
       </div>
+
+      {/* Table container */}
+      <p className={subheadingTextStyle}>Riwayat Pertandingan</p>
+      <div className="flex flex-col w-full overflow-y-scroll h-fit">
+        <MatchHistoryTable matchHistory={matchHistory} matches={prevMatches}/>
+      </div>
+      
     </MainLayout>
   )
 }

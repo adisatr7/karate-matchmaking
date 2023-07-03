@@ -2,6 +2,7 @@
   {
     "matchHistoryId": "h-4675528d-d702-5dd4-9016-e02e54f28e84",
     "athleteId": "a-8f294db8-5e71-5b6c-b3ec-6797a16b3372",
+    "matchId": "m-7a73d4e2-48a6-5e29-8907-7b976e3652f3",
     "isWinning": true,
     "yuko": 3,
     "wazari": 0,
@@ -44,7 +45,7 @@
     "ippon": 1
   },
   {
-    "matchHistoryId": "h-68cad40f-736c-5e10-a6cc-b36202d69330",
+    "matchHistoryId": "h-5d9b742f-f975-5602-9661-ae7e47b846bf",
     "athleteId": "a-7ff6cac9-57bb-5694-8028-a89055251377",
     "matchId": "m-b927d4fe-be1c-5072-94da-15caffd3af1b",
     "isWinning": false,

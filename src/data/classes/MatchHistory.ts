@@ -35,7 +35,7 @@ export default class MatchHistory {
    * Save MatchHistory data to filesystem.
    */
   public save() {
-    writeInto(this, `matchHistories/${this.matchHistoryId}`)
+    writeInto(this, `matchHistory/${this.matchHistoryId}`)
   }
 
   /**
@@ -46,7 +46,7 @@ export default class MatchHistory {
   public static async load(matchHistoryId: string): Promise<MatchHistory> {
     return new Promise(async (resolve, reject) => {
       // Read from filesystem
-      await readTextFile(`matchHistories/${matchHistoryId}.data`, {
+      await readTextFile(`matchHistory/${matchHistoryId}.data`, {
         dir: BaseDirectory.AppData,
       })
         // If file is found, parse its content
@@ -83,7 +83,7 @@ export default class MatchHistory {
   public async delete(): Promise<void> {
     return new Promise(async (resolve, reject) => {
       // Delete MatchHistory data from filesystem
-      await removeFile(`matchHistories/${this.matchHistoryId}.data`, {
+      await removeFile(`matchHistory/${this.matchHistoryId}.data`, {
         dir: BaseDirectory.AppData,
       })
         // If MatchHistory data is deleted, resolve the promise

@@ -55,7 +55,7 @@ export const verifyData = async (): Promise<void> => {
 
   if (await isExists("divisions")) assignDefaultDivisionsData()
 
-  if (await isExists("matches")) assignDefaultMatchesData()
+  if (await isExists("matches")) assignDefaultMatchData()
 
   if (await isExists("athletes")) assignDefaultAthletesData()
 
@@ -95,7 +95,7 @@ export const assignDefaultDivisionsData = async () => {
 }
 
 /**
- * Assign default match history data and save it to 'matchHistory/<matchId>.data'
+ * Assign default match history data and save it to 'matches/<matchId>.data'
  */
 export const assignDefaultMatchData = async () => {
   await createFolder("matches")

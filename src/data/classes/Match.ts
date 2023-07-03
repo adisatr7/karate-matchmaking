@@ -23,7 +23,7 @@ export default class Match {
     matchId?: string,
     matchName: string = "",
     nextMatchId: string = "",
-    playDate: string = "",
+    playDate: string = "01-01-1970 00:00:00",
     status: MatchStatusOptions = "akan main",
     winner: MatchWinnerOptions = "tbd",
     contestants: ContestantType[] = []

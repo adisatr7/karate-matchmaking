@@ -32,6 +32,8 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
       <tbody>
         { matchHistory.map((mh: MatchHistory, historyIndex: number) => {
 
+          const time = matches[historyIndex]?.getPlayDate() || ""
+
             // Render the table row
             return (
               <tr
@@ -43,7 +45,7 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
                       { 
                         label === "NO" ? historyIndex + 1 
-                          : label === "WAKTU TANDING" ? matches[historyIndex].getPlayDate()
+                          : label === "WAKTU TANDING" ? time
                           : label === "STATUS" 
                             ? mh.getIsWinning() 
                               ? "Menang"

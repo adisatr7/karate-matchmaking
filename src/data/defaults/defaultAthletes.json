@@ -8,7 +8,8 @@
     "age": 21,
     "weight": 65,
     "height": 171,
-    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
+    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+    "matchHistoryIds": []
   },
   {
     "athleteId": "a-f948fb82-3085-5b08-aafd-9bfd6f227233",
@@ -19,7 +20,11 @@
     "age": 20,
     "weight": 53,
     "height": 162,
-    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
+    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+    "matchHistoryIds": [
+      "h-66e63373-cc16-57e0-9798-955b5031182e",
+      "h-5527698b-1dfb-5990-8d36-8821017becf2"
+    ]
   },
   {
     "athleteId": "a-8f294db8-5e71-5b6c-b3ec-6797a16b3372",
@@ -30,7 +35,11 @@
     "age": 22,
     "weight": 70,
     "height": 164,
-    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
+    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+    "matchHistoryIds": [
+      "h-4675528d-d702-5dd4-9016-e02e54f28e84",
+      "h-4d76fc2f-2d1f-5f5c-8036-a1f53ae905fd"
+    ]
   },
   {
     "athleteId": "a-49cee47f-6029-5bfd-b6af-87ad99b210e1",
@@ -41,7 +50,8 @@
     "age": 21,
     "weight": 58,
     "height": 161,
-    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
+    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+    "matchHistoryIds": []
   },
   {
     "athleteId": "a-21aa8874-d9f2-5dad-a9d8-e05a894374c0",
@@ -52,7 +62,8 @@
     "age": 20,
     "weight": 68,
     "height": 157,
-    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115"
+    "currentTeamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+    "matchHistoryIds": []
   },
 
   {
@@ -64,7 +75,8 @@
     "age": 20,
     "weight": 70,
     "height": 162,
-    "currentTeamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f"
+    "currentTeamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
+    "matchHistoryIds": []
   },
   {
     "athleteId": "a-0f504d37-f9f1-5e59-8467-27f77662297f",
@@ -75,7 +87,10 @@
     "age": 21,
     "weight": 65,
     "height": 172,
-    "currentTeamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f"
+    "currentTeamId": "t-efc73d06-c7bc-5dfc-beb0-360827fbf77f",
+    "matchHistoryIds": [
+      "h-639774db-017e-532e-bede-d7f66f0b8bc3"
+    ]
   },
 
   {
@@ -87,7 +102,10 @@
     "age": 19,
     "weight": 75,
     "height": 151,
-    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
+    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a",
+    "matchHistoryIds": [
+      "h-f049ba72-0670-5a74-a676-e50fb51f7758"
+    ]
   },
   {
     "athleteId": "a-324a6e5b-bdd8-518d-a6f3-b34bce4ff558",
@@ -98,7 +116,8 @@
     "age": 24,
     "weight": 78,
     "height": 162,
-    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
+    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a",
+    "matchHistoryIds": []
   },
   {
     "athleteId": "a-db372005-6a67-5a7a-b89b-994994ea86bc",
@@ -109,7 +128,11 @@
     "age": 22,
     "weight": 60,
     "height": 159,
-    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
+    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a",
+    "matchHistoryIds": [
+      "h-cf644d1e-8628-5d9d-869e-bc63bf5ae432",
+      "h-74025e57-c1c7-5172-a532-a08c3d1172f9"
+    ]
   },
 
   {
@@ -122,7 +145,10 @@
     "weight": 60,
     "height": 156,
     "currentTeamId": "t-93b5242a-1d69-57e6-8b7b-9f3c2e3eaf8b",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-f519fb9f-81bd-527c-8810-a96782d00f87",
+      "h-f835c7ae-adb5-532f-a0de-9d8513ef64a8"
+    ]
   },
   {
     "athleteId": "a-2450313e-3a0c-55e2-bc71-69e37d849523",
@@ -172,7 +198,9 @@
     "weight": 60,
     "height": 160,
     "currentTeamId": "t-65050761-1c71-548b-bccf-a9dc95c110b6",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-e8c430e3-6f52-5f52-b359-4be1c5b722a8"
+    ]
   },
   {
     "athleteId": "a-c4338b01-3bf0-55c7-a975-7f96bba75a34",
@@ -197,7 +225,9 @@
     "weight": 65,
     "height": 168,
     "currentTeamId": "t-2ea143d4-7a3f-5279-afe9-a6ad38831c0b",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-72836007-1dd2-5118-aa04-c3211a8a772f"
+    ]
   },
   {
     "athleteId": "a-be663bac-752d-5d7f-8eb8-86c4e469ec92",
@@ -209,7 +239,9 @@
     "weight": 70,
     "height": 155,
     "currentTeamId": "t-2ea143d4-7a3f-5279-afe9-a6ad38831c0b",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-329694e5-6e72-509b-8f63-a042259a5d52"
+    ]
   },
 
   {
@@ -222,7 +254,10 @@
     "weight": 69,
     "height": 163,
     "currentTeamId": "t-3c2e3a3e-c62e-5baa-aec9-1c560a601e3d",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-ba722eba-11e9-5bd8-8580-527e56caaad4",
+      "h-b36b70c4-9eda-5f17-886e-f06aa63a5ea0"
+    ]
   },
 
   {
@@ -247,7 +282,10 @@
     "weight": 72,
     "height": 165,
     "currentTeamId": "t-69a57d34-42c3-5cc6-9b7c-ad8d5e5f2afc",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-68cad40f-736c-5e10-a6cc-b36202d69330",
+      "h-5d9b742f-f975-5602-9661-ae7e47b846bf"
+    ]
   },
 
   {
@@ -260,7 +298,9 @@
     "weight": 63,
     "height": 151,
     "currentTeamId": "t-8ed9a54b-d9d5-59a0-a1de-09e17ae62d03",
-    "matchHistoryIds": []
+    "matchHistoryIds": [
+      "h-238f8eaf-e488-5886-a4e2-2461e9313704"
+    ]
   },
   {
     "athleteId": "a-c30e0838-89ca-55ce-aba9-b9dff6160a4a",

@@ -67,7 +67,7 @@ export default function TeamDetailScreen() {
       prevPageUrl="/team/all">
 
       <div className="flex flex-col gap-[8px] mr-[14px] text-white font-quicksand">
-        <p className="text-body">Asal: <b>{currentTeam?.getCity()}</b></p>
+        <p className="text-body"><span className="opacity-70">Asal:</span> {currentTeam?.getCity()}</p>
         <p className="text-body">{currentTeam?.getDesc()}</p>
         <Button
           label="UBAH DESKRIPSI TIM"
