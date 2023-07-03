@@ -91,7 +91,7 @@ export default class Athlete {
 
   /**
    * Delete Athlete data from filesystem.
-   * 
+   *
    * ! Warning: Do not use. May break references.
    */
   public async delete(): Promise<void> {
@@ -108,7 +108,7 @@ export default class Athlete {
         .catch((err) => {
           reject(err)
         })
-      
+
       // Delete all match histories related to this athlete
       await Promise.all(
         this.matchHistoryIds.map(async (id) => {
@@ -165,9 +165,9 @@ export default class Athlete {
   /**
    * Get the athlete's win rate ratio.
    *
-   * @returns Win rate
+   * @returns Win rate ratio
    */
-  public async calculateWinRate(): Promise<number> {
+  public async getWinRateRatio(): Promise<number> {
     return new Promise(async (resolve, reject) => {
       try {
         // Get total wins
@@ -178,6 +178,120 @@ export default class Athlete {
 
         // Resolve the promise
         resolve(winRate)
+      } catch (err) {
+        // If an error occurs, reject the promise
+        reject(err)
+      }
+    })
+  }
+
+  /**
+   * Get the athlete's win rate percentage.
+   *
+   * @returns Win rate percentage
+   */
+  public async getWinRatePercent(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      // Get win rate ratio
+      await this.getWinRateRatio()
+        .then((winRateRatio) => {
+          // Calculate win rate percent
+          const winRatePercent = winRateRatio * 100
+
+          // Resolve the promise
+          resolve(winRatePercent)
+        })
+
+        // If an error occurs, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+
+  /**
+   * Get the athlete's total yuko score.
+   *
+   * @returns Total yuko
+   */
+  public async getTotalYuko(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Load all match histories
+        const matchHistories = await Promise.all(
+          this.matchHistoryIds.map(async (id) => {
+            return await MatchHistory.load(id)
+          })
+        )
+
+        // Calculate total yuko
+        let totalYuko = 0
+        matchHistories.forEach((matchHistory) => {
+          totalYuko += matchHistory.getYuko()
+        })
+
+        // Resolve the promise
+        resolve(totalYuko)
+      } catch (err) {
+        // If an error occurs, reject the promise
+        reject(err)
+      }
+    })
+  }
+
+  /**
+   * Get the athlete's total wazari score.
+   *
+   * @returns Total wazari
+   */
+  public async getTotalWazari(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Load all match histories
+        const matchHistories = await Promise.all(
+          this.matchHistoryIds.map(async (id) => {
+            return await MatchHistory.load(id)
+          })
+        )
+
+        // Calculate total wazari
+        let totalWazari = 0
+        matchHistories.forEach((matchHistory) => {
+          totalWazari += matchHistory.getWazari()
+        })
+
+        // Resolve the promise
+        resolve(totalWazari)
+      } catch (err) {
+        // If an error occurs, reject the promise
+        reject(err)
+      }
+    })
+  }
+
+  /**
+   * Get the athlete's total ippon score.
+   *
+   * @returns Total ippon
+   */
+  public async getTotalIppon(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Load all match histories
+        const matchHistories = await Promise.all(
+          this.matchHistoryIds.map(async (id) => {
+            return await MatchHistory.load(id)
+          })
+        )
+
+        // Calculate total ippon
+        let totalIppon = 0
+        matchHistories.forEach((matchHistory) => {
+          totalIppon += matchHistory.getIppon()
+        })
+
+        // Resolve the promise
+        resolve(totalIppon)
       } catch (err) {
         // If an error occurs, reject the promise
         reject(err)
@@ -209,7 +323,7 @@ export default class Athlete {
 
   /**
    * Get the athlete's match histories.
-   * 
+   *
    * @returns Match histories
    */
   public async getMatchHistories(): Promise<MatchHistory[]> {
@@ -221,15 +335,15 @@ export default class Athlete {
         })
       )
 
-      // If match histories are found, resolve the promise
-      .then((matchHistories) => {
-        resolve(matchHistories)
-      })
+        // If match histories are found, resolve the promise
+        .then((matchHistories) => {
+          resolve(matchHistories)
+        })
 
-      // If match histories are not found, reject the promise
-      .catch((err) => {
-        reject(err)
-      })
+        // If match histories are not found, reject the promise
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 
