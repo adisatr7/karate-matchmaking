@@ -61,7 +61,7 @@ export default function AthleteListScreen() {
     <MainLayout currentPageName="Daftar Atlet">
 
       {/* Search bar and its buttons */}
-      <div className="flex flex-row h-fit w-full gap-[10px]">
+      <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
         <Entry 
           label="Cari nama atlet" 
           inputMode="text" 
@@ -75,9 +75,9 @@ export default function AthleteListScreen() {
         <Button 
           label="DAFTARKAN ATLET BARU"
           className="flex-[1]"/>
-        <Button 
+        {/* <Button 
           label="?"
-          className="w-fit px-[18px]"/>
+          className="w-fit px-[18px]"/> */}
       </div>
 
       {/* Table | TODO: Implement search function5 */}

@@ -73,9 +73,9 @@ export default function TeamListScreen() {
         <Button 
           label="DAFTARKAN TIM BARU"
           className="flex-[1]"/>
-        <Button 
+        {/* <Button 
           label="?"
-          className="w-fit px-[18px]"/>
+          className="w-fit px-[18px]"/> */}
       </div>
 
       {/* Table | TODO: Implement search function5 */}

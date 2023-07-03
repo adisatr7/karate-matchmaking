@@ -85,7 +85,7 @@ export default function TournamentListScreen() {
     <MainLayout currentPageName="Daftar Pertandingan">
 
       {/* Search bar and its buttons */}
-      <div className="flex flex-row h-fit w-full gap-[10px]">
+      <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
         <Entry 
           label="Cari nama pertandingan" 
           inputMode="text" 
