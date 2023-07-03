@@ -9,7 +9,7 @@ export default function ProfileButton() {
       <h1 className="text-white font-quicksand text-body">{currentUser?.name}</h1>
       <img
         src={currentUser?.imageUrl}
-        className="rounded-full bg-cover bg-gray-500 w-[30px] h-[30px] outline-0"/>
+        className="rounded-full object-cover bg-gray-500 w-[30px] h-[30px] outline-0"/>
     </button>
   )
 }
