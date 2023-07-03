@@ -9,7 +9,7 @@ export default function Button({ label, onClick, className }: PropsType) {
     <button 
       onClick={onClick}
       className={`flex flex-row bg-secondary-gradient hover:bg-primary-gradient rounded-md py-[8px] justify-center items-center ${className}`}>
-      <p className="font-quicksand text-white text-center">{label}</p>
+      <p className="text-center text-white font-quicksand text-caption">{label}</p>
     </button>
   )
 }
