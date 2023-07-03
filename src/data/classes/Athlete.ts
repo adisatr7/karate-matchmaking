@@ -207,6 +207,32 @@ export default class Athlete {
     })
   }
 
+  /**
+   * Get the athlete's match histories.
+   * 
+   * @returns Match histories
+   */
+  public async getMatchHistories(): Promise<MatchHistory[]> {
+    return new Promise(async (resolve, reject) => {
+      // Load all match histories
+      await Promise.all(
+        this.matchHistoryIds.map(async (id) => {
+          return await MatchHistory.load(id)
+        })
+      )
+
+      // If match histories are found, resolve the promise
+      .then((matchHistories) => {
+        resolve(matchHistories)
+      })
+
+      // If match histories are not found, reject the promise
+      .catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
   public getAthleteId(): string {
     return this.athleteId
   }
