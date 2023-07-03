@@ -32,12 +32,13 @@
     "city": "Bandung",
     "memberIds": [
       "a-872faf7a-3642-54c3-b4b7-15990e48ac98",
-      "a-324a6e5b-bdd8-518d-a6f3-b34bce4ff558"
+      "a-324a6e5b-bdd8-518d-a6f3-b34bce4ff558",
+      "a-db372005-6a67-5a7a-b89b-994994ea86bc"
     ]
   },
   {
     "teamId": "t-93b5242a-1d69-57e6-8b7b-9f3c2e3eaf8b",
-    "teamName": "Si Naga Putih Karate Academy",
+    "teamName": "Buah Naga Putih Karate Academy",
     "desc": "",
     "initial": "NAG",
     "city": "Medan",

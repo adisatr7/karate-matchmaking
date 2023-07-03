@@ -97,7 +97,18 @@
     "gender": "m",
     "age": 24,
     "weight": 78,
-    "height": 155,
+    "height": 162,
+    "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
+  },
+  {
+    "athleteId": "a-db372005-6a67-5a7a-b89b-994994ea86bc",
+    "athleteName": "Stephanie Clarith",
+    "imageUrl": "https://i.pinimg.com/originals/7c/f2/ce/7cf2ceef1ada3e48ffd9b580a6c95d38.jpg",
+    "ttl": "Bekasi, 16 April 2001",
+    "gender": "f",
+    "age": 22,
+    "weight": 60,
+    "height": 159,
     "currentTeamId": "t-496f7899-3480-5f6b-a9be-a710461cae0a"
   },
 
@@ -230,7 +241,7 @@
     "athleteId": "a-7ff6cac9-57bb-5694-8028-a89055251377",
     "athleteName": "Doanta Nainggolan",
     "imageUrl": "https://i.pinimg.com/564x/92/11/9d/92119d43ff79ed30f18d59d3c56cbcfd.jpg",
-    "ttl": "Palemmbang, 9 November 2001",
+    "ttl": "Palembang, 9 November 2001",
     "gender": "m",
     "age": 22,
     "weight": 72,
