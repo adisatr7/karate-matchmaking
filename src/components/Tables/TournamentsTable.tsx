@@ -1,10 +1,6 @@
 import Tournament from "../../data/classes/Tournament"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-// import useNotification from "../../hooks/useNotification"
-// import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-// import useNotification from "../../hooks/useNotification"
-// import { assignDefaultTournamentsData } from "../../../.trash/controllers/tournaments"
 
 
 type PropsType = {

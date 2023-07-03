@@ -62,17 +62,17 @@ export default function AthletesTable({ data: athletesList, teamsList }: PropsTy
                 {/* Render table cells based on the header labels */}
                 { headerLabels.map((label: string, rowIndex: number) => (
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
-                      {/* Render idPertandingan column conditionally */}
-                      { label === "NO" ? athleteIndex + 1 
-                        : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
-                        : label === "TIM" ? team?.getTeamName()
-                        : label === "JENIS KELAMIN" 
-                          ? a.getGender() === "m" 
-                            ? "Laki-laki" 
-                            : "Perempuan"
-                        : label === "USIA" ? a.getAge()
-                        : label === "BERAT (Kg)" ? a.getWeight()
-                        : ""
+                      { 
+                        label === "NO" ? athleteIndex + 1 
+                          : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
+                          : label === "TIM" ? team?.getTeamName()
+                          : label === "JENIS KELAMIN" 
+                            ? a.getGender() === "m" 
+                              ? "Laki-laki" 
+                              : "Perempuan"
+                          : label === "USIA" ? a.getAge()
+                          : label === "BERAT (Kg)" ? a.getWeight()
+                          : ""
                       }
                     </td>
                 ))}
