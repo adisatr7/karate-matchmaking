@@ -30,7 +30,7 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
       </thead>
       
       <tbody>
-        { matchHistory.map((mh: MatchHistory, historyIndex: number) => {
+        { matchHistory.length > 0 ? matchHistory.map((mh: MatchHistory, historyIndex: number) => {
 
           const time = matches[historyIndex]?.getPlayDate() || ""
 
@@ -58,7 +58,13 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
                     </td>
                 ))}
               </tr>
-        )})}
+            )})
+
+          // If there is no match history, render a single row with a message
+          : <tr className="rounded-full bg-opacity-40 hover:bg-stone-700 bg-stone-800">
+              <td className="px-[10px] text-center text-caption py-[12px] opacity-60" colSpan={headerLabels.length}>Riwayat pertandingan kosong</td>
+            </tr>
+        }
       </tbody>
     </table>
   )
