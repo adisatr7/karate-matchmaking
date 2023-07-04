@@ -12,6 +12,7 @@ import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
 import { AthletePerformance } from "../types"
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
+import { message, open } from "@tauri-apps/api/dialog"
 
 
 type ParamsType = {
@@ -138,6 +139,27 @@ export default function AthleteDetailScreen() {
   const handleGoToTeamPageButton = () => {
     navigate(`/team/${currentTeam?.getId()}`)
   }
+
+  /**
+   * Handle the button click to go to the
+   */
+  const handleChangePicture = async () => {
+    const selected = await open({
+      multiple: false,
+      filters: [{
+        name: "Image",
+        extensions: ["png", "jpeg"]
+      }]
+    });
+    // If user selected a files
+    if (selected) {
+      message("Normalnya, foto atlet akan diubah. Namun, fitur ini belum tersedia di fase prototype ini.", { title: "Mohon maaf" })
+    }
+    
+    // If user cancelled the selection
+    else {
+    }
+  }
   
   if (currentAthlete)
     return (
@@ -158,13 +180,14 @@ export default function AthleteDetailScreen() {
             <div style={{ backgroundImage: `url(${currentAthlete?.getImageUrl()})` }} className="h-full w-full bg-cover rounded-md flex justify-center items-center">
             {
               profPictIsHovered && (
-                <div className="flex flex-col h-full w-full bg-black bg-opacity-50 justify-center items-center text-white font-quicksand text-caption">
+                <div
+                  onClick={handleChangePicture}
+                  className="flex flex-col h-full w-full bg-black bg-opacity-50 justify-center items-center text-white font-quicksand text-caption">
                   <PhotoCameraRoundedIcon/>
                   <p>Ubah foto</p>
                 </div>
               )
             }
-
             </div>
           </div>
 

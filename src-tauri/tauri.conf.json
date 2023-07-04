@@ -30,6 +30,10 @@
       },
       "notification": {
         "all": true
+      },
+      "dialog": {
+        "open": true,
+        "message": true
       }
     },
     "bundle": {
