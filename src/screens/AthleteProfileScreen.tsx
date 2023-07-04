@@ -1,16 +1,17 @@
-import { Link, useNavigate, useParams } from "react-router-dom"
-import Athlete from "../data/classes/Athlete"
 import { useEffect, useState } from "react"
-import MainLayout from "../components/MainLayout"
-import Team from "../data/classes/Team"
+import { useNavigate, useParams } from "react-router-dom"
 import Button from "../components/Button"
+import MainLayout from "../components/MainLayout"
 import NumericDisplay from "../components/NumericDisplay"
-import MatchHistory from "../data/classes/MatchHistory"
-import MatchHistoryTable from "../components/Tables/MatchHistoryTable"
-import Match from "../data/classes/Match"
-import useNotification from "../hooks/useNotification"
 import PerformanceChart from "../components/PerformanceChart"
+import MatchHistoryTable from "../components/Tables/MatchHistoryTable"
+import Athlete from "../data/classes/Athlete"
+import Match from "../data/classes/Match"
+import MatchHistory from "../data/classes/MatchHistory"
+import Team from "../data/classes/Team"
+import useNotification from "../hooks/useNotification"
 import { AthletePerformance } from "../types"
+import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
 
 
 type ParamsType = {
@@ -18,16 +19,17 @@ type ParamsType = {
 }
 
 export default function AthleteDetailScreen() {
+  const navigate = useNavigate()
   const params = useParams<ParamsType>()
+
   const [currentAthlete, setCurrentAthlete] = useState<Athlete | undefined>()
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>()
   const [matchHistory, setMatchHistory] = useState<MatchHistory[]>([])
   const [prevMatches, setPrevMatches] = useState<Match[]>([])
   const [winrate, setWinrate] = useState<number>(0)
-  const [performance, setPerformance] = useState<AthletePerformance | undefined>(undefined)
+  const [performance, setPerformance] = useState<AthletePerformance | undefined>()
+  const [profPictIsHovered, setProfPictIsHovered] = useState<boolean>(false)
 
-  const navigate = useNavigate()
-  
   /**
    * Fetch the athlete data from the `athletes` directory
    */
@@ -150,10 +152,20 @@ export default function AthleteDetailScreen() {
           {/* Profile Picture */}
           <div
             style={{ backgroundImage: currentAthlete?.getImageUrl() }}
-            className="h-[280px] w-[500px] bg-primary-opaque border border-primary-opaque rounded-md hover:brightness-90 hover:cursor-pointer">
-            <img 
-              className="object-cover w-full h-full"
-              src={currentAthlete?.getImageUrl()}/> 
+            onMouseEnter={() => setProfPictIsHovered(true)}
+            onMouseLeave={() => setProfPictIsHovered(false)}
+            className="h-[280px] w-[500px] bg-gray-500 border hover:border-2 border-primary-opaque rounded-md hover:cursor-pointer">
+            <div style={{ backgroundImage: `url(${currentAthlete?.getImageUrl()})` }} className="h-full w-full bg-cover rounded-md flex justify-center items-center">
+            {
+              profPictIsHovered && (
+                <div className="flex flex-col h-full w-full bg-black bg-opacity-50 justify-center items-center text-white font-quicksand text-caption">
+                  <PhotoCameraRoundedIcon/>
+                  <p>Ubah foto</p>
+                </div>
+              )
+            }
+
+            </div>
           </div>
 
           {/* Bio section */}
