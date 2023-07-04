@@ -9,8 +9,8 @@ import MatchHistory from "../data/classes/MatchHistory"
 import MatchHistoryTable from "../components/Tables/MatchHistoryTable"
 import Match from "../data/classes/Match"
 import useNotification from "../hooks/useNotification"
-import { useAppDispatch } from "../store"
-import { setCurrentPath } from "../store/slices/sidebarSlice"
+import PerformanceChart from "../components/PerformanceChart"
+import { AthletePerformance } from "../types"
 
 
 type ParamsType = {
@@ -24,12 +24,9 @@ export default function AthleteDetailScreen() {
   const [matchHistory, setMatchHistory] = useState<MatchHistory[]>([])
   const [prevMatches, setPrevMatches] = useState<Match[]>([])
   const [winrate, setWinrate] = useState<number>(0)
-  const [yuko, setYuko] = useState<number>(0)
-  const [wazari, setWazari] = useState<number>(0)
-  const [ippon, setIppon] = useState<number>(0)
+  const [performance, setPerformance] = useState<AthletePerformance | undefined>(undefined)
 
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
   
   /**
    * Fetch the athlete data from the `athletes` directory
@@ -54,18 +51,27 @@ export default function AthleteDetailScreen() {
   /**
    * Fetch the athlete performance data 
    */
-  const fetchAthletePerformance = async () => {    
+  const fetchAthletePerformance = async () => {
+    let tempObj: AthletePerformance = {
+      yuko: 0,
+      wazari: 0,
+      ippon: 0
+    }
+
     // Calculate the yuko score and set it to the state
     await currentAthlete!.getTotalYuko()
-    .then(yuko => setYuko(yuko))
+      .then(yuko => tempObj!.yuko = yuko)
     
     // Calculate the wazari score and set it to the state
     await currentAthlete!.getTotalWazari()
-    .then(wazari => setWazari(wazari))
+      .then(wazari => tempObj!.wazari = wazari)
     
     // Calculate the ippon score and set it to the state
     await currentAthlete!.getTotalIppon()
-    .then(ippon => setIppon(ippon))
+      .then(ippon => tempObj!.ippon = ippon)
+
+    // Set the performance data to the state
+    setPerformance(tempObj)
     
     // Calculate the winrate and set it to the state
     await currentAthlete!.getWinRatePercent()
@@ -116,7 +122,7 @@ export default function AthleteDetailScreen() {
         .catch(err => {
           useNotification("Terjadi kesalahan saat membaca data riwayat pertandingan", err)
         })
-    })
+    })  
   }
 
   // Fetch the match data once the match history data is loaded
@@ -179,16 +185,16 @@ export default function AthleteDetailScreen() {
               {/* Numeric stats */}
               <div className="flex flex-col w-full">
                 
-                <NumericDisplay label="Yuko" value={yuko}/>
-                <NumericDisplay label="Wazari" value={wazari}/>
-                <NumericDisplay label="Ippon" value={ippon}/>
+                <NumericDisplay label="Yuko" value={performance?.yuko}/>
+                <NumericDisplay label="Wazari" value={performance?.wazari}/>
+                <NumericDisplay label="Ippon" value={performance?.ippon}/>
                 <NumericDisplay label="Winrate" value={`${winrate}%`}/>
               </div>
 
               {/* Radar chart */}
-              <div className="flex flex-col w-full">  
-                {/* TODO: Put <RadarChart/> component here */}
-                <div className="flex flex-row items-center justify-center text-white rounded-full bg-opacity-80 h-[200px] w-[200px] bg-dark-glass">Placeholder</div>
+              <div className="flex flex-col w-full">
+                <PerformanceChart performanceData={performance}/>
+                {/* <div className="flex flex-row items-center justify-center text-white rounded-full bg-opacity-80 h-[200px] w-[200px] bg-dark-glass">Placeholder</div> */}
               </div>
             </div>
           </div>

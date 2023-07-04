@@ -145,3 +145,12 @@ export type MatchHistoryType = {
   wazari: number
   ippon: number
 }
+
+/**
+ * Dataset type definition for the polar chart in the athlete profile screen
+ */
+export type AthletePerformance = {
+  yuko: number,
+  wazari: number,
+  ippon: number
+} | undefined
