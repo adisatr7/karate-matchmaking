@@ -12,6 +12,7 @@ import athleteImage1 from "../assets/athlete1.png"
 import athleteImage2 from "../assets/athlete2.png"
 import useNotification from "../hooks/useNotification"
 import { getAllUsers } from "../utils/authService"
+import { message } from "@tauri-apps/api/dialog"
 
 
 export default function LoginScreen() {
@@ -29,8 +30,7 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     // Check if inputs are empty
     if (idPanitiaInput === "" || passwordInput === "") {
-      useNotification("ID panitia atau kata sandi kosong", "Silakan coba lagi")
-      // TODO: Implement in-app modal popup instead
+      message("ID panitia dan kata sandi tidak boleh kosong!", { title: "Perhatian", type: "error" })
       
       return
     }
@@ -49,14 +49,14 @@ export default function LoginScreen() {
 
     // If the user doesn't exist
     if (!user) {
-      useNotification("ID panitia tidak terdaftar", "Silakan coba lagi")
+      message("ID panitia tidak ditemukan!", { title: "Perhatian", type: "error" })
 
       return
     }
 
     // If the user exists but the password is wrong
     if (user.password !== passwordInput) {
-      useNotification("Kata sandi salah", "Silakan coba lagi")
+      message("Kata sandi salah!", { title: "Perhatian", type: "error" })
 
       return
     }
@@ -68,7 +68,7 @@ export default function LoginScreen() {
     navigate("/highlight")
     
     if (currentUser)
-    useNotification("Berhasil masuk", `Selamat datang, ${currentUser.name}!`)
+      useNotification("Berhasil masuk", `Selamat datang, ${currentUser.name}!`)
     
     // Collapse sidebar
     setTimeout(() => {
