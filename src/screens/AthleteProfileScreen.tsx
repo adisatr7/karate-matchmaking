@@ -12,7 +12,8 @@ import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
 import { AthletePageParams, AthletePerformance } from "../types"
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
-import { message, open } from "@tauri-apps/api/dialog"
+import { ask, message, open } from "@tauri-apps/api/dialog"
+import { EMPTY_TEAM_ID } from "../constants"
 
 
 export default function AthleteDetailScreen() {
@@ -154,6 +155,30 @@ export default function AthleteDetailScreen() {
     }
   }
 
+  const handleQuitTeam = async () => {
+    const namaAtlet = currentAthlete?.getAthleteName()
+    const namaTim = currentTeam?.getTeamName()
+
+    const confirm = await ask(
+      `Apakah Anda yakin ingin mengeluarkan ${namaAtlet} dari ${namaTim}?`, 
+      { title: "Konfirmasi", type: "warning" })
+      
+    if (confirm) {
+      // Remove the team ID from the athlete data
+      currentAthlete!.setCurrentTeamId(EMPTY_TEAM_ID)
+
+      // Remove the athlete from the team member list
+      currentTeam?.removeMemberId(currentAthlete!.getAthleteId())
+      
+      // Save all changes to local filesystem
+      currentAthlete?.save()
+      currentTeam?.save()
+      
+      // Show the success message
+      useNotification("Berhasil", `${namaAtlet} berhasil keluar dari ${namaTim}!`)
+    }
+  }
+
   /**
    * Handle the button click to go to the edit profile page of the current athlete
    */
@@ -196,12 +221,6 @@ export default function AthleteDetailScreen() {
           {/* Bio section */}
           <div className="flex flex-col h-full w-full gap-[2px] mb-[6px]">
             <h2 className={subheadingTextStyle}>Bio</h2>
-            
-            {/* Current team text */}
-            <div className="flex flex-row items-center gap-[8px] h-fit">
-              <p className={`${captionTextStyle} ${semiTransparentText}`}>Tim saat ini:</p>
-              <p onClick={handleGoToTeamPageButton} className={`hover:underline font-bold hover:cursor-pointer ${captionTextStyle}`}>{currentTeam?.getTeamName()}</p>
-            </div>
 
             <p className={captionTextStyle}><span className={semiTransparentText}>Jenis kelamin:</span> {currentAthlete!.getGender() === "m" ? "Laki-laki" : "Perempuan"}</p> 
             <p className={captionTextStyle}><span className={semiTransparentText}>Usia:</span> {currentAthlete!.getAge()} tahun</p>
@@ -242,8 +261,29 @@ export default function AthleteDetailScreen() {
 
         </div>
 
-        {/* Table container */}
+        {/* Current team text */}
         <p className={subheadingTextStyle}>Riwayat Pertandingan</p>
+        <div className="flex flex-row items-center w-full h-fit">
+          { currentTeam?.getId() !== EMPTY_TEAM_ID
+            
+            // If the athlete is in a team
+            ? ( <div className="flex flex-row items-center w-full h-fit gap-[8px]">
+                  <p className={`${captionTextStyle}`}>Tim saat ini:</p>
+                  <p onClick={handleGoToTeamPageButton} className={`font-bold hover:underline hover:cursor-pointer ${captionTextStyle}`}>{currentTeam?.getTeamName()}</p>
+
+                  <p className={`${captionTextStyle} ${semiTransparentText} mx-[4px] font-bold`}>|</p>
+
+                  {/* Quit Team Button */}
+                  <p onClick={handleQuitTeam} className={`${captionTextStyle} ${semiTransparentText} hover:cursor-pointer hover:underline`}>Keluar</p>
+                </div>
+              )
+
+              // If the athlete is NOT in a team
+              : <p className={`${captionTextStyle} ${semiTransparentText}`}>{currentAthlete.getAthleteName()} tidak sedang berada di tim manapun</p>
+            }
+        </div>
+        
+        {/* Table container */}
         <div className="flex flex-col w-full overflow-y-scroll h-fit">
           <MatchHistoryTable matchHistory={matchHistory} matches={prevMatches}/>
         </div>
