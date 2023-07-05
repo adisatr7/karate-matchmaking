@@ -4,6 +4,7 @@ import { generateID } from "../../utils/idGenerator"
 import { Gender } from "../../types"
 import MatchHistory from "./MatchHistory"
 import Team from "./Team"
+import useNotification from "../../hooks/useNotification"
 
 export default class Athlete {
   private athleteId: string
@@ -11,7 +12,6 @@ export default class Athlete {
   private imageUrl: string
   private ttl: string
   private gender: Gender
-  private age: number
   private weight: number
   private height: number
   private currentTeamId: string
@@ -21,9 +21,8 @@ export default class Athlete {
     athleteId?: string,
     athleteName: string = "",
     imageUrl: string = "",
-    ttl: string = "",
+    ttl: string = "Bumi, 1 Januari 1970",
     gender: Gender = "m",
-    age: number = 0,
     weight: number = 0,
     height: number = 0,
     currentTeamId: string = "",
@@ -34,7 +33,6 @@ export default class Athlete {
     this.imageUrl = imageUrl
     this.ttl = ttl
     this.gender = gender
-    this.age = age
     this.weight = weight
     this.height = height
     this.currentTeamId = currentTeamId
@@ -71,7 +69,6 @@ export default class Athlete {
             parsedData.imageUrl,
             parsedData.ttl,
             parsedData.gender,
-            parsedData.age,
             parsedData.weight,
             parsedData.height,
             parsedData.currentTeamId,
@@ -169,19 +166,25 @@ export default class Athlete {
    */
   public async getWinRateRatio(): Promise<number> {
     return new Promise(async (resolve, reject) => {
-      try {
         // Get total wins
-        const totalWins = await this.calculateTotalWins()
+        await this.calculateTotalWins()
+          .then((totalWins: number) => {
 
-        // Calculate win rate
-        const winRate = totalWins / this.matchHistoryIds.length
+            // Calculate win rate
+            const winrate = totalWins / this.matchHistoryIds.length
+    
+            // Resolve the promise
+            if (winrate)
+              resolve(winrate)
+              
+            else
+              reject()
+          })
 
-        // Resolve the promise
-        resolve(winRate)
-      } catch (err) {
-        // If an error occurs, reject the promise
-        reject(err)
-      }
+          .catch(err => {
+            reject(err)
+            useNotification("Winrate rejected")
+          })
     })
   }
 
@@ -367,7 +370,22 @@ export default class Athlete {
   }
 
   public getAge(): number {
-    return this.age
+    try {
+      const currentYear = new Date().getFullYear()
+      const birthYear = this.getTtl().split(",")[1].split(" ")[3]
+
+      return currentYear - parseInt(birthYear)
+    }
+
+    catch (err) {
+        useNotification(
+          "Terjadi kesalahan saat menghitung umur", 
+          `Data TTL mungkin tidak menggunakan format yang benar (${this.getTtl()})`
+        )
+        
+      return -1
+    }
+
   }
   public getWeight(): number {
     return this.weight
@@ -399,10 +417,6 @@ export default class Athlete {
 
   public setGender(gender: Gender) {
     this.gender = gender
-  }
-
-  public setAge(age: number) {
-    this.age = age
   }
 
   public setWeight(weight: number) {

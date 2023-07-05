@@ -154,3 +154,11 @@ export type AthletePerformance = {
   wazari: number,
   ippon: number
 } | undefined
+
+/**
+ * Athlete page params type definition for the bar chart in the athlete profile screen
+ */
+export type AthletePageParams = {
+  athleteId: string
+  mode: "edit" | "add"
+}

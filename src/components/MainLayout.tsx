@@ -11,9 +11,10 @@ type PropsType = {
   currentPageName: string,
   prevPageName?: string,
   prevPageUrl?: string,
+  backButton?: boolean
 }
 
-export default function MainLayout({ children, currentPageName, prevPageName, prevPageUrl }: PropsType) {
+export default function MainLayout({ children, currentPageName, prevPageName, prevPageUrl, backButton }: PropsType) {
   const sidebarStatus = useAppSelector(state => state.sidebar.status)
 
   const dispatch = useAppDispatch()
@@ -24,7 +25,7 @@ export default function MainLayout({ children, currentPageName, prevPageName, pr
   }
 
   return (
-    <div className={`w-screen h-screen flex flex-row bg-cover bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900`}>
+    <div className={`w-screen h-screen flex flex-row bg-cover hover:cursor-default bg-gradient-to-br from-pink-900 via-[18%] via-indigo-900 to-purple-900`}>
       
       {/* Sidebar - left side, collapsible */}
       <Sidebar/>
@@ -37,7 +38,8 @@ export default function MainLayout({ children, currentPageName, prevPageName, pr
         <Header 
           currentPageName={currentPageName}
           prevPageName={prevPageName}
-          prevPageUrl={prevPageUrl}/>
+          prevPageUrl={prevPageUrl}
+          backButton={backButton}/>
 
         {/* Page content */}
         <div className="flex flex-col py-[12px] gap-[12px] overflow-clip">

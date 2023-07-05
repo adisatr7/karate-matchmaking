@@ -7,9 +7,12 @@ import MainLayout from "../components/MainLayout"
 import AthletesTable from "../components/Tables/AthletesTable"
 import Athlete from "../data/classes/Athlete"
 import Team from "../data/classes/Team"
+import { useNavigate } from "react-router-dom"
 
 
 export default function AthleteListScreen() {
+  const navigate = useNavigate()
+
   const [athletesList, setAthletesList] = useState<Athlete[]>([])
   const [teamsList, setTeamsList] = useState<Team[]>([])
   const [searchKeyword, setSearchKeyword] = useState("")
@@ -27,7 +30,7 @@ export default function AthleteListScreen() {
     })
 
       // If the list is not empty, fetch the athlete data
-      .then(result => {
+      .then(async (result) => {
 
         // Prepare an empty list to store the athlete data
         const athleteList: Athlete[] = []
@@ -57,6 +60,13 @@ export default function AthleteListScreen() {
     fetchAthletes()
   }, [])
 
+  /**
+   * Handler for the "Daftarkan Atlet Baru" button.
+   */
+  const handleNewAthlete = () => {
+    navigate("/athlete/new/add")
+  }
+
   return (
     <MainLayout currentPageName="Daftar Atlet">
 
@@ -73,6 +83,7 @@ export default function AthleteListScreen() {
           label="CARI ATLET"
           className="flex-[1]"/>
         <Button 
+          onClick={handleNewAthlete}
           label="DAFTARKAN ATLET BARU"
           className="flex-[1]"/>
         {/* <Button 

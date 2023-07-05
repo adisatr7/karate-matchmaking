@@ -28,9 +28,10 @@ export default function TournamentDetailScreen() {
 
   return (
     <MainLayout
-      currentPageName={tournament ? tournament.getTournamentName() : "Memuat..."}
+      backButton
       prevPageName="Pertandingan"
-      prevPageUrl="/tournament/all">
+      prevPageUrl="/tournament/all"
+      currentPageName={tournament ? tournament.getTournamentName() : "Memuat..."}>
 
       <div className="flex flex-col gap-4 mr-[14px]">
         <p className="text-white font-quicksand text-body">{tournament?.getDesc()}</p>

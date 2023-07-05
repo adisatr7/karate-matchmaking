@@ -10,18 +10,14 @@ import Match from "../data/classes/Match"
 import MatchHistory from "../data/classes/MatchHistory"
 import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
-import { AthletePerformance } from "../types"
+import { AthletePageParams, AthletePerformance } from "../types"
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
 import { message, open } from "@tauri-apps/api/dialog"
 
 
-type ParamsType = {
-  athleteId: string
-}
-
 export default function AthleteDetailScreen() {
   const navigate = useNavigate()
-  const params = useParams<ParamsType>()
+  const params = useParams<AthletePageParams>()
 
   const [currentAthlete, setCurrentAthlete] = useState<Athlete | undefined>()
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>()
@@ -148,25 +144,31 @@ export default function AthleteDetailScreen() {
       multiple: false,
       filters: [{
         name: "Image",
-        extensions: ["png", "jpeg"]
+        extensions: ["png", "jpeg", "jpg", "webp", "gif"]
       }]
-    });
+    })
     // If user selected a files
     if (selected) {
-      message("Normalnya, foto atlet akan diubah. Namun, fitur ini belum tersedia di fase prototype ini.", { title: "Mohon maaf" })
-    }
-    
-    // If user cancelled the selection
-    else {
+      useNotification("Berhasil", "Foto profil berhasil diubah!")
+      message("Normalnya, foto atlet akan diubah. Namun, fitur ini belum tersedia di fase prototype ini.", { title: "Berhasil!" })
     }
   }
+
+  /**
+   * Handle the button click to go to the edit profile page of the current athlete
+   */
+  const handleEditProfile = () => {
+    navigate(`/athlete/${params.athleteId}/edit`)
+  }
   
+
   if (currentAthlete)
     return (
       <MainLayout
-        currentPageName={currentAthlete ? currentAthlete.getAthleteName() : "Memuat..."}
+        backButton
         prevPageName="Atlet"
-        prevPageUrl="/athlete/all">
+        prevPageUrl="/athlete/all"
+        currentPageName={currentAthlete ? currentAthlete.getAthleteName() : "Memuat..."}>
 
         {/* Container, goes to the --> */}
         <div className="flex flex-row gap-4 mr-[14px] items-start mt-[12px]">
@@ -177,12 +179,12 @@ export default function AthleteDetailScreen() {
             onMouseEnter={() => setProfPictIsHovered(true)}
             onMouseLeave={() => setProfPictIsHovered(false)}
             className="h-[280px] w-[500px] bg-gray-500 border hover:border-2 border-primary-opaque rounded-md hover:cursor-pointer">
-            <div style={{ backgroundImage: `url(${currentAthlete?.getImageUrl()})` }} className="h-full w-full bg-cover rounded-md flex justify-center items-center">
+            <div style={{ backgroundImage: `url(${currentAthlete?.getImageUrl()})` }} className="flex items-center justify-center w-full h-full bg-cover rounded-md">
             {
               profPictIsHovered && (
                 <div
                   onClick={handleChangePicture}
-                  className="flex flex-col h-full w-full bg-black bg-opacity-50 justify-center items-center text-white font-quicksand text-caption">
+                  className="flex flex-col items-center justify-center w-full h-full text-white bg-black bg-opacity-50 font-quicksand text-caption">
                   <PhotoCameraRoundedIcon/>
                   <p>Ubah foto</p>
                 </div>
@@ -208,7 +210,10 @@ export default function AthleteDetailScreen() {
             <p className={captionTextStyle}><span className={semiTransparentText}>Tinggi badan:</span> {currentAthlete!.getHeight()} cm</p>
 
             {/* Edit profile button */}
-            <Button label="PERBARUI BIODATA" className="text-caption w-[280px] mt-[10px]"/>
+            <Button
+              onClick={handleEditProfile}
+              label="PERBARUI BIODATA" 
+              className="text-caption w-[280px] mt-[10px]"/>
           </div>
 
           {/* Performance section */}

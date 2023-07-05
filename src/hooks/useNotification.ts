@@ -16,7 +16,12 @@ export default async function useNotification (title: any, message?: any) {
       permissionGranted = permission === "granted"
     }
     if (permissionGranted) {
-      sendNotification({ title: `${JSON.stringify(title)}`, body: `${JSON.stringify(message) || ""}` })
+
+      // Converts the title and message to a string if they are not already.
+      title = typeof title === "string" ? title : JSON.stringify(title)
+      message = typeof message === "string" ? message : JSON.stringify(message)
+
+      sendNotification({ title: title, body: `${message || ""}` })
     }
   } catch (err) {
     useNotification("Notification error", err)

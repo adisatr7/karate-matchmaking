@@ -82,7 +82,7 @@ export default function PerformanceChart({ performanceData }: PropsType) {
   return (
     <PolarArea 
       data={data}
-      className="flex items-center justify-container bg-opacity-50 rounded-full bg-dark-glass w-[24px] h-[24px] border border-blue-800 border-opacity-50"
+      className="flex items-center justify-container bg-opacity-60 rounded-full bg-dark-glass w-[24px] h-[24px] border border-gray-700"
       options={{
         plugins: {
           legend: {

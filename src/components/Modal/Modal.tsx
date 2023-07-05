@@ -42,18 +42,18 @@ export default function Modal ({ children, title, caption }: PropsType) {
         {/* Header */}
         <div className="flex flex-row justify-between items-start gap-[18px] w-full h-fit">
           <h1 className="w-full text-center text-heading">{title}</h1>
-          <button
+          {/* <button
             onClick={dismissModal}
             className="text-2xl hover:text-gray-400 absolute right-0 top-0 pt-[24px] pr-[24px]">
             x
-          </button>
+          </button> */}
         </div>
 
         {/* Caption */}
         { caption && <p className="w-full text-left text-body">{caption}</p> }
 
         {/* Content */}
-        <div className="flex flex-col w-full h-full overflow-y-scroll font-quicksand text-caption">
+        <div className="flex flex-col w-full h-full font-quicksand text-caption">
           {children}
         </div>
       </div>

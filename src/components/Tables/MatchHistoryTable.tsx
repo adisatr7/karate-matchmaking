@@ -38,7 +38,7 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
             return (
               <tr
                 key={historyIndex}
-                className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${historyIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
+                className={`bg-opacity-40 hover:bg-stone-700 rounded-full ${historyIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                 {/* Render table cells based on the header labels */}
                 { headerLabels.map((label: string, rowIndex: number) => (

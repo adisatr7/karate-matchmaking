@@ -20,6 +20,7 @@ import TournamentDetailScreen from "./screens/TournamentDetailScreen.tsx"
 import UnderConstructionScreen from "./screens/UnderConstructionScreen.tsx"
 import TeamDetailScreen from "./screens/TeamDetailScreen.tsx"
 import AthleteDetailScreen from "./screens/AthleteProfileScreen.tsx"
+import AthleteFormScreen from "./screens/AthleteFormScreen.tsx"
 
 
 /**
@@ -34,7 +35,7 @@ library.add(faBars, faXmark)
 const screens = createBrowserRouter([
   {
     path: "/",
-    element: <App/>
+    element: <App/>,
   },
   {
     path: "/login",
@@ -67,6 +68,10 @@ const screens = createBrowserRouter([
   {
     path: "/athlete/:athleteId",
     element: <AthleteDetailScreen/>
+  },
+  {
+    path: "/athlete/:athleteId/:mode",
+    element: <AthleteFormScreen/>
   },
   {
     path: "/settings",

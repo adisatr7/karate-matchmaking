@@ -7,6 +7,7 @@ import TeamsTable from "../components/Tables/TeamsTable"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
+import { EMPTY_TEAM_ID } from "../constants"
 
 
 export default function TeamListScreen() {
@@ -37,7 +38,8 @@ export default function TeamListScreen() {
         const team: Team = await Team.load(filename)
 
         // Add the team data to the list
-        teams.push(team)
+        if (team.getId() !== EMPTY_TEAM_ID)
+          teams.push(team)
 
         // Update the state
         setTeamsList(teams)

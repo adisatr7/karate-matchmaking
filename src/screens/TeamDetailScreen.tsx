@@ -5,6 +5,7 @@ import MainLayout from "../components/MainLayout"
 import Button from "../components/Button"
 import Athlete from "../data/classes/Athlete"
 import TeamMembersTable from "../components/Tables/TeamMembersTable"
+import useNotification from "../hooks/useNotification"
 
 
 type ParamsType = {
@@ -46,10 +47,6 @@ export default function TeamDetailScreen() {
       const member = await Athlete.load(id)
       athletes.push(member)
       setMembers(athletes)
-
-      // Calculate the win rate of said athlete and push it to its own list
-      tempWinRates.push(await member.getWinRateRatio())
-      setWinRates(tempWinRates)
     })
   }
 
@@ -60,11 +57,26 @@ export default function TeamDetailScreen() {
     fetchMembers()
   }, [currentTeam])
 
+  const fetchWinRates = async () => {
+    let tempWinRates: number[] = []
+    // Calculate the win rate of said athlete and push it to its own list
+    members.forEach(async (member) => {
+      const winRate = await member.getWinRateRatio()
+      tempWinRates.push(winRate)
+      setWinRates(tempWinRates)
+    })
+  }
+
+  useEffect(() => {
+    fetchWinRates()
+  }, [members])
+
   return (
     <MainLayout
-      currentPageName={currentTeam ? currentTeam.getTeamName() : "Memuat..."}
+      backButton
       prevPageName="Tim"
-      prevPageUrl="/team/all">
+      prevPageUrl="/team/all"
+      currentPageName={currentTeam ? currentTeam.getTeamName() : "Memuat..."}>
 
       <div className="flex flex-col gap-[8px] mr-[14px] text-white font-quicksand">
         <p className="text-body"><span className="opacity-70">Asal:</span> {currentTeam?.getCity()}</p>
