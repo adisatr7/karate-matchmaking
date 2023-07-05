@@ -1,4 +1,4 @@
-import { HTMLAttributes, HTMLInputTypeAttribute, useEffect, useState } from "react"
+import { HTMLAttributes, HTMLInputTypeAttribute, useState } from "react"
 import { SVGIcon } from "../types"
 
 
