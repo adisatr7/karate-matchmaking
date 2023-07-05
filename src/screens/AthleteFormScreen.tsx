@@ -14,6 +14,7 @@ import { setModal } from "../store/slices/modalSlice"
 import Modal from "../components/Modal/Modal"
 import { CircularProgress } from "@mui/material"
 import useNotification from "../hooks/useNotification"
+import athletePicture from "../assets/athlete3.png"
 
 
 export default function AthleteFormScreen() {
@@ -235,10 +236,10 @@ export default function AthleteFormScreen() {
         mode === "add" ? "Daftarkan Atlet Baru" 
         : "Error: Unknown Mode" }>
 
-      <div className="flex flex-row h-full w-[540px] ml-[20px] mt-[12px]">
+      <div className="flex flex-row h-full w-full ml-[20px] mt-[12px]">
 
         {/* Left column */}
-        <div className={formContainerStyle}>
+        <div className="flex flex-col flex-[5] h-fit px-[8px] gap-[12px]">
           <FormInput 
             label="Nama Lengkap"
             onChange={(value) => setNameInput(value)}
@@ -305,21 +306,12 @@ export default function AthleteFormScreen() {
 
 
         {/* Separator line */}
-        <div className="flex w-[2px] h-[422px] rounded-full bg-gray-500 bg-opacity-50"/>
+        {/* <div className="flex w-[4px] h-full rounded-full bg-gray-500 bg-opacity-50 z-10"/> */}
 
         {/* Right column */}
-        {/* <div className={formContainerStyle}>
-          <FormInput 
-            label="Berat Badan (Kg)"
-            type="number"
-            onChange={(value) => setNameInput(value)}
-            value={nameInput}/>
-          <FormInput
-            label="Tinggi Badan (cm)"
-            type="number"
-            onChange={(value) => setNameInput(value)}
-            value={nameInput}/>
-        </div> */}
+        <div className="flex flex-col flex-[4] px-[8px] gap-[12px]">
+          <img src={athletePicture} className="absolute top-0 right-0 h-full mix-blend-screen opacity-10"/>
+        </div>
 
       </div>
       {
@@ -334,5 +326,3 @@ export default function AthleteFormScreen() {
     </MainLayout>
   )
 }
-
-const formContainerStyle = "flex flex-col w-full h-fit px-[8px] gap-[12px]"
