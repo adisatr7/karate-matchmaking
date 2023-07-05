@@ -1,5 +1,13 @@
 [
   {
+    "teamId": "t-00000000-0000-0000-0000-000000000000",
+    "teamName": "No team",
+    "desc": "",
+    "initial": "",
+    "city": "",
+    "memberIds": []
+  },
+  {
     "teamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
     "teamName": "Samurai Karate Club",
     "desc": "",
