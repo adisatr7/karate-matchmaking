@@ -7,8 +7,8 @@ import TournamentsTable from "../components/Tables/TournamentsTable"
 import Tournament from "../data/classes/Tournament"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
-import { useAppSelector } from "../store"
-import Modal from "../components/Modal/Modal"
+// import { useAppSelector } from "../store"
+// import Modal from "../components/Modal/Modal"
 
 
 export default function TournamentListScreen() {
@@ -16,8 +16,10 @@ export default function TournamentListScreen() {
   const [contestantAmount, setContestantAmount] = useState<number[]>([])
   
   const [searchKeyword, setSearchKeyword] = useState("")
+  const [filteredTournaments, setFilteredTeams] = useState<Tournament[]>([])
+  const [filteredContestantAmount, setFilteredContestantAmount] = useState<number[]>([])
 
-  const modal = useAppSelector(state => state.modal.showing)
+  // const modal = useAppSelector(state => state.modal.showing)
 
   
   /**
@@ -66,10 +68,25 @@ export default function TournamentListScreen() {
     fetchTournaments()
   }, [])
 
-  
-  const handleSearch = () => {
-    
+
+  const filterTournaments = () => {
+    const filteredTeams: Tournament[] = []
+    const filteredContestantAmount: number[] = []
+
+    tournamentList.forEach((tournament, index) => {
+      if (tournament.getTournamentName().toLowerCase().includes(searchKeyword.toLowerCase())) {
+        filteredTeams.push(tournament)
+        filteredContestantAmount.push(contestantAmount[index])
+      }
+    })
+
+    setFilteredTeams(filteredTeams)
+    setFilteredContestantAmount(filteredContestantAmount)
   }
+
+  useEffect(() => {
+    filterTournaments()
+  }, [searchKeyword])
 
   
   const handleAddTournament = () => {
@@ -107,22 +124,22 @@ export default function TournamentListScreen() {
 
       {/* Table | TODO: Implement search function5 */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
-        <TournamentsTable data={tournamentList} contestantAmount={contestantAmount}/>
+        <TournamentsTable data={searchKeyword ? filteredTournaments : tournamentList} contestantAmount={searchKeyword ? filteredContestantAmount :contestantAmount}/>
       </div>
 
       {
-        modal === "help" && (
-          <Modal 
-            title="Daftar Pertandingan">
-            <p>Pada layar ini, Anda dapat melihat semua pertandingan yang terdaftar di sistem.</p>
-            {/* <div className="flex flex-row items-center mt-[2px] gap-[10px]">
-              <SearchIcon/>
-              <p className="text-subheading">Pencarian</p>
-            </div>
+        // modal === "help" && (
+        //   <Modal 
+        //     title="Daftar Pertandingan">
+        //     <p>Pada layar ini, Anda dapat melihat semua pertandingan yang terdaftar di sistem.</p>
+        //     {/* <div className="flex flex-row items-center mt-[2px] gap-[10px]">
+        //       <SearchIcon/>
+        //       <p className="text-subheading">Pencarian</p>
+        //     </div>
             
-            <p>Ketikkan nama pertandingan yang ingin dicari, lalu klik "Cari Pertandingan"</p>  */}
-          </Modal>
-        )
+        //     <p>Ketikkan nama pertandingan yang ingin dicari, lalu klik "Cari Pertandingan"</p>  */}
+        //   </Modal>
+        // )
       }
 
     </MainLayout>
