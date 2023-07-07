@@ -17,7 +17,7 @@ export default function LogoutPrompt() {
     dispatch(closeModal())
     dispatch(logout())
     setTimeout(() => {
-      navigate("/login")    // TODO: Add better transition animation
+      navigate("/login")
     }, 500)
   }
 

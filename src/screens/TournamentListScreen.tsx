@@ -7,8 +7,6 @@ import TournamentsTable from "../components/Tables/TournamentsTable"
 import Tournament from "../data/classes/Tournament"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
-// import { useAppSelector } from "../store"
-// import Modal from "../components/Modal/Modal"
 
 
 export default function TournamentListScreen() {
@@ -19,9 +17,6 @@ export default function TournamentListScreen() {
   const [filteredTournaments, setFilteredTeams] = useState<Tournament[]>([])
   const [filteredContestantAmount, setFilteredContestantAmount] = useState<number[]>([])
 
-  // const modal = useAppSelector(state => state.modal.showing)
-
-  
   /**
    * Fetch the tournaments data from the tournaments directory
    */
@@ -93,11 +88,6 @@ export default function TournamentListScreen() {
     
   }
 
-  // const handleHelp = () => {
-  //   dispatch(setModal("help"))
-  // }
-  
-
   return (
     <MainLayout currentPageName="Daftar Pertandingan">
 
@@ -122,25 +112,10 @@ export default function TournamentListScreen() {
           className="w-fit px-[18px]"/> */}
       </div>
 
-      {/* Table | TODO: Implement search function5 */}
+      {/* Table */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
         <TournamentsTable data={searchKeyword ? filteredTournaments : tournamentList} contestantAmount={searchKeyword ? filteredContestantAmount :contestantAmount}/>
       </div>
-
-      {
-        // modal === "help" && (
-        //   <Modal 
-        //     title="Daftar Pertandingan">
-        //     <p>Pada layar ini, Anda dapat melihat semua pertandingan yang terdaftar di sistem.</p>
-        //     {/* <div className="flex flex-row items-center mt-[2px] gap-[10px]">
-        //       <SearchIcon/>
-        //       <p className="text-subheading">Pencarian</p>
-        //     </div>
-            
-        //     <p>Ketikkan nama pertandingan yang ingin dicari, lalu klik "Cari Pertandingan"</p>  */}
-        //   </Modal>
-        // )
-      }
 
     </MainLayout>
   )
