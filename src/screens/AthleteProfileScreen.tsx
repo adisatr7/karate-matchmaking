@@ -14,6 +14,7 @@ import { AthletePageParams, AthletePerformance } from "../types"
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
 import { ask, message, open } from "@tauri-apps/api/dialog"
 import { EMPTY_TEAM_ID } from "../constants"
+import { BaseDirectory, copyFile, createDir } from "@tauri-apps/api/fs"
 
 
 export default function AthleteProfileScreen() {
@@ -148,8 +149,22 @@ export default function AthleteProfileScreen() {
         extensions: ["png", "jpeg", "jpg", "webp", "gif"]
       }]
     })
+    
     // If user selected a files
     if (selected) {
+      // const destination = `portraits/${currentAthlete?.getAthleteId()}.png`
+
+      // // Create the `portraits` directory if it doesn't exist
+      // await createDir("portraits", { dir: BaseDirectory.AppData, recursive: true })
+
+      // // Copy the selected file to the `portraits` directory
+      // await copyFile(selected, destination, { dir: BaseDirectory.AppData })
+
+      // // Set the image URL to the athlete data
+      // currentAthlete?.setImageUrl(`%APPDATA%/com.r7.karate-matcher/${destination}`)
+      // currentAthlete?.save()
+
+      // Save the changes to local filesystem
       useNotification("Berhasil", "Foto profil berhasil diubah!")
       message("Normalnya, foto atlet akan diubah. Namun, fitur ini belum tersedia di fase prototype ini.", { title: "Berhasil!" })
     }
@@ -208,7 +223,6 @@ export default function AthleteProfileScreen() {
 
           {/* Profile Picture */}
           <div
-            style={{ backgroundImage: currentAthlete?.getImageUrl() }}
             onMouseEnter={() => setProfPictIsHovered(true)}
             onMouseLeave={() => setProfPictIsHovered(false)}
             className="h-[280px] w-[500px] bg-gray-400 border hover:border-2 border-primary-opaque rounded-md hover:cursor-pointer">
