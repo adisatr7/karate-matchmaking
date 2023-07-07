@@ -12,6 +12,7 @@
     "teamName": "Samurai Karate Club",
     "desc": "Klub Karate Samurai adalah sebuah tim yang berbasis di Jakarta. Klub ini terdiri dari beberapa anggota yang berdedikasi dan memiliki keterampilan dalam seni bela diri karate.",
     "initial": "SAM",
+    "dateCreated": "6 April 2012",
     "city": "Jakarta",
     "memberIds": [
       "a-eb73a78f-d678-55ea-8018-3364821cfae8",
@@ -26,6 +27,7 @@
     "teamName": "Garuda Karate Dojo",
     "desc": "Garuda Karate Dojo adalah sebuah tim karate yang berlokasi di Surabaya. Dojo ini dikenal karena mengajarkan teknik-teknik karate yang kuat dan mengedepankan nilai-nilai etika dan disiplin.",
     "initial": "GAR",
+    "dateCreated": "7 Agustus 2018",
     "city": "Surabaya",
     "memberIds": [
       "a-80a22d46-1e45-5377-ab4a-a6fb0d8ae02e",
@@ -37,6 +39,7 @@
     "teamName": "Raja Singa Martial Arts",
     "desc": "Raja Singa Martial Arts adalah tim seni bela diri yang berbasis di Bandung. Tim ini dikenal karena menggabungkan teknik-teknik dari berbagai aliran bela diri untuk menciptakan gaya bertarung yang unik dan efektif.",
     "initial": "RAJ",
+    "dateCreated": "19 Juni 2017",
     "city": "Bandung",
     "memberIds": [
       "a-872faf7a-3642-54c3-b4b7-15990e48ac98",
@@ -49,6 +52,7 @@
     "teamName": "Buah Naga Putih Karate Academy",
     "desc": "Buah Naga Putih Karate Academy adalah sebuah tim karate yang berbasis di Medan. Tim ini terkenal karena mengajarkan gaya karate yang fokus pada teknik bertarung yang presisi dan kuat.",
     "initial": "NAG",
+    "dateCreated": "8 Juni 2021",
     "city": "Medan",
     "memberIds": [
       "a-bd30eed4-3ee3-5b59-b09d-79c8a838b616",
@@ -60,6 +64,7 @@
     "teamName": "Elang Merah Karate Team",
     "desc": "Elang Merah Karate Team adalah sebuah tim karate yang berbasis di Yogyakarta. Tim ini terdiri dari para anggota yang memiliki keahlian dalam seni bela diri karate dan sering berpartisipasi dalam kompetisi tingkat nasional.",
     "initial": "ELA",
+    "dateCreated": "15 Januari 2022",
     "city": "Yogyakarta",
     "memberIds": [
       "a-7ea8f581-01e5-5c89-a8dd-773c8bc068e5",
@@ -71,6 +76,7 @@
     "teamName": "Harimau Martial Arts",
     "desc": "Harimau Martial Arts adalah sebuah tim seni bela diri yang berbasis di Sumatera Utara. Tim ini mengajarkan teknik-teknik bertarung yang terinspirasi dari gerakan harimau, termasuk kecepatan dan kekuatan.",
     "initial": "HAM",
+    "dateCreated": "14 July 2019",
     "city": "Sumatera Utara",
     "memberIds": [
       "a-481347ff-f3ea-591e-a574-1638bc3dde29",
@@ -82,6 +88,7 @@
     "teamName": "Aing Maung Karate Club",
     "desc": "Aing Maung Karate Club adalah sebuah tim karate yang berbasis di Bandung. Tim ini terdiri dari para anggota yang berdedikasi dan memiliki semangat tinggi dalam belajar dan mengembangkan keterampilan mereka dalam seni bela diri karate.",
     "initial": "AUM",
+    "dateCreated": "29 September 2021",
     "city": "Bandung",
     "memberIds": [
       "a-e679396e-2606-5ea0-9ba4-9ff479c884a7",
@@ -93,6 +100,7 @@
     "teamName": "Semarts - Semarang Martial Arts",
     "desc": "Semarts - Semarang Martial Arts adalah sebuah tim seni bela diri yang berbasis di Semarang. Tim ini memiliki fokus pada pengembangan keterampilan bertarung dan kedisiplinan melalui pelatihan intensif dalam berbagai teknik bela diri.",
     "initial": "SMA",
+    "dateCreated": "10 Agustus 2022",
     "city": "Semarang",
     "memberIds": ["a-c43d1087-ef2a-5e0e-a31c-03ada33fdc46"]
   },
@@ -101,6 +109,7 @@
     "teamName": "Cobra Dojo",
     "desc": "Cobra Dojo adalah sebuah tim seni bela diri yang berbasis di Palembang. Tim ini dikenal karena mengajarkan teknik-teknik bela diri yang berfokus pada kecepatan, kelincahan, dan ketepatan dalam bertarung.",
     "initial": "COB",
+    "dateCreated": "2 September 2021",
     "city": "Palembang",
     "memberIds": [
       "a-ffb7db95-f875-5fc0-a8dd-fb9aa8d70611",
@@ -112,6 +121,7 @@
     "teamName": "Shark Karate Academy",
     "desc": "Shark Karate Academy adalah sebuah tim karate yang berbasis di Makassar. Tim ini dikenal karena mengajarkan gaya bertarung yang agresif dan cepat dengan menggabungkan teknik-teknik dari berbagai aliran bela diri.",
     "initial": "SHA",
+    "dateCreated": "2 January 2020",
     "city": "Makassar",
     "memberIds": [
       "a-7a203ed6-647d-5fcd-924c-a496b35d04e7",

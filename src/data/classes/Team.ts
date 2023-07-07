@@ -3,12 +3,12 @@ import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 
-
 export default class Team {
   private teamId: string
   private teamName: string
   private desc: string
   private initial: string
+  private dateCreated: string
   private city: string
   private memberIds: string[]
 
@@ -17,6 +17,7 @@ export default class Team {
     teamName: string = "",
     desc: string = "",
     initial: string = "",
+    dateCreated: string = new Date().toISOString(),
     city: string = "",
     memberIds: string[] = []
   ) {
@@ -24,6 +25,7 @@ export default class Team {
     this.teamName = teamName
     this.desc = desc
     this.initial = initial
+    this.dateCreated = dateCreated
     this.city = city
     this.memberIds = memberIds
   }
@@ -57,6 +59,7 @@ export default class Team {
             parsedData.teamName,
             parsedData.desc,
             parsedData.initial,
+            parsedData.dateCreated,
             parsedData.city,
             parsedData.memberIds
           )
@@ -72,7 +75,7 @@ export default class Team {
     })
   }
 
-  public getId(): string {
+  public getTeamId(): string {
     return this.teamId
   }
 
@@ -86,6 +89,10 @@ export default class Team {
 
   public getInitial(): string {
     return this.initial
+  }
+
+  public getDateCreated(): string {
+    return this.dateCreated
   }
 
   public getCity(): string {
@@ -149,6 +156,10 @@ export default class Team {
 
   public setInitial(newInitial: string): void {
     this.initial = newInitial
+  }
+
+  public setDateCreated(newDate: string): void {
+    this.dateCreated = newDate
   }
 
   public setCity(newCity: string): void {
