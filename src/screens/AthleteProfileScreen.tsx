@@ -185,6 +185,14 @@ export default function AthleteDetailScreen() {
   const handleEditProfile = () => {
     navigate(`/athlete/${params.athleteId}/edit`)
   }
+
+  
+  /**
+   * Handle the button click to join the team
+   */
+  const handleJoinTeam = () => {
+    navigate(`/athlete/${params.athleteId}/jointeam`)
+  }
   
 
   if (currentAthlete)
@@ -203,7 +211,7 @@ export default function AthleteDetailScreen() {
             style={{ backgroundImage: currentAthlete?.getImageUrl() }}
             onMouseEnter={() => setProfPictIsHovered(true)}
             onMouseLeave={() => setProfPictIsHovered(false)}
-            className="h-[280px] w-[500px] bg-gray-500 border hover:border-2 border-primary-opaque rounded-md hover:cursor-pointer">
+            className="h-[280px] w-[500px] bg-gray-400 border hover:border-2 border-primary-opaque rounded-md hover:cursor-pointer">
             <div style={{ backgroundImage: `url(${currentAthlete?.getImageUrl()})` }} className="flex items-center justify-center w-full h-full bg-cover rounded-md">
             {
               profPictIsHovered && (
@@ -219,7 +227,7 @@ export default function AthleteDetailScreen() {
           </div>
 
           {/* Bio section */}
-          <div className="flex flex-col h-full w-full gap-[2px] mb-[6px]">
+          <div className="flex flex-col h-full w-full gap-[6px] mb-[6px]">
             <h2 className={subheadingTextStyle}>Bio</h2>
 
             <p className={captionTextStyle}><span className={semiTransparentText}>Jenis kelamin:</span> {currentAthlete!.getGender() === "m" ? "Laki-laki" : "Perempuan"}</p> 
@@ -271,15 +279,25 @@ export default function AthleteDetailScreen() {
                   <p className={`${captionTextStyle}`}>Tim saat ini:</p>
                   <p onClick={handleGoToTeamPageButton} className={`font-bold hover:underline hover:cursor-pointer ${captionTextStyle}`}>{currentTeam?.getTeamName()}</p>
 
+                  {/* Separator line */}
                   <p className={`${captionTextStyle} ${semiTransparentText} mx-[4px] font-bold`}>|</p>
 
-                  {/* Quit Team Button */}
+                  {/* Quit Team button */}
                   <p onClick={handleQuitTeam} className={`${captionTextStyle} ${semiTransparentText} hover:cursor-pointer hover:underline`}>Keluar</p>
                 </div>
-              )
+              ) :
 
               // If the athlete is NOT in a team
-              : <p className={`${captionTextStyle} ${semiTransparentText}`}>{currentAthlete.getAthleteName()} tidak sedang berada di tim manapun</p>
+              ( <div className="flex flex-row items-center w-full h-fit gap-[8px]">
+                  <p className={`${captionTextStyle} ${semiTransparentText}`}>{currentAthlete.getAthleteName()} sedang tidak berada di tim manapun</p>
+
+                  {/* Separator line */}
+                  <p className={`${captionTextStyle} ${semiTransparentText} mx-[4px] font-bold`}>|</p>
+                  
+                  {/* Join Team button */}
+                  <p onClick={handleJoinTeam} className={`${captionTextStyle} font-bold hover:cursor-pointer hover:underline`}>Gabung</p>
+                </div>  
+              ) 
             }
         </div>
         

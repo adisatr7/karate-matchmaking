@@ -21,6 +21,7 @@ import UnderConstructionScreen from "./screens/UnderConstructionScreen.tsx"
 import TeamDetailScreen from "./screens/TeamDetailScreen.tsx"
 import AthleteDetailScreen from "./screens/AthleteProfileScreen.tsx"
 import AthleteFormScreen from "./screens/AthleteFormScreen.tsx"
+import JoinTeamScreen from "./screens/JoinTeamScreen.tsx"
 
 
 /**
@@ -72,6 +73,10 @@ const screens = createBrowserRouter([
   {
     path: "/athlete/:athleteId/:mode",
     element: <AthleteFormScreen/>
+  },
+  {
+    path: "athlete/:athleteId/jointeam",
+    element: <JoinTeamScreen/>
   },
   {
     path: "/settings",

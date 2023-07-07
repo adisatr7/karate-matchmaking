@@ -12,7 +12,7 @@ export default function TeamsTable({ data: teamList }: PropsType) {
   // Navigation hook so the app can navigate to other screens
   const navigate = useNavigate()
 
-  // Style for the header row
+  // Labels for the header row
   const headerLabels: string[] = [
     "NO", 
     "NAMA TIM", 
