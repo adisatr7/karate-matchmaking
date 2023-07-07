@@ -1,4 +1,3 @@
-import { isMember } from "./../../../.trash/controllers/teams";
 import Athlete from "./Athlete"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
