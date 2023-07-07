@@ -12,6 +12,7 @@ import { EMPTY_TEAM_ID } from "../constants"
 
 export default function TeamListScreen() {
   const [teamList, setTeamsList] = useState<Team[]>([])
+  const [filteredTeams, setFilteredTeams] = useState<Team[]>([])
   const [searchKeyword, setSearchKeyword] = useState("")
 
   /**
@@ -57,6 +58,25 @@ export default function TeamListScreen() {
     fetchTeams()
   }, [])
 
+  /**
+   * Filter the teams based on the search keyword
+   */
+  const filterTeams = () => {
+    const filteredTeams: Team[] = []
+
+    teamList.forEach((team) => {
+      if (team.getTeamName().toLowerCase().includes(searchKeyword.toLowerCase()))
+        filteredTeams.push(team)
+    })
+
+    setFilteredTeams(filteredTeams)
+  }
+
+  // Filter the teams when the search keyword is changed
+  useEffect(() => {
+    filterTeams()
+  }, [searchKeyword])
+
   return (
     <MainLayout currentPageName="Daftar Tim">
 
@@ -82,7 +102,7 @@ export default function TeamListScreen() {
 
       {/* Table | TODO: Implement search function5 */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
-        <TeamsTable data={teamList}/>
+        <TeamsTable data={searchKeyword ? filteredTeams : teamList}/>
       </div>
 
     </MainLayout>
