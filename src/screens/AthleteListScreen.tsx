@@ -1,5 +1,6 @@
-import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import { Search as SearchIcon } from "../assets/icons"
 import Button from "../components/Button"
 import Entry from "../components/Entry"
@@ -7,7 +8,6 @@ import MainLayout from "../components/MainLayout"
 import AthletesTable from "../components/Tables/AthletesTable"
 import Athlete from "../data/classes/Athlete"
 import Team from "../data/classes/Team"
-import { useNavigate } from "react-router-dom"
 
 
 export default function AthleteListScreen() {
@@ -15,7 +15,10 @@ export default function AthleteListScreen() {
 
   const [athletesList, setAthletesList] = useState<Athlete[]>([])
   const [teamsList, setTeamsList] = useState<Team[]>([])
+  
   const [searchKeyword, setSearchKeyword] = useState("")
+  const [filteredAthletes, setFilteredAthletes] = useState<Athlete[]>([])
+  const [filteredTeams, setFilteredTeams] = useState<Team[]>([])
 
   /**
    * Fetch the list  of athletes to be rendered in the table.
@@ -61,6 +64,41 @@ export default function AthleteListScreen() {
   }, [])
 
   /**
+   * Filter the list of athletes based on the search keyword.
+   */
+  const filterAthletes = () => {
+    const filteredAthletes: Athlete[] = athletesList.filter((athlete) => {
+      return athlete.getAthleteName().toLowerCase().includes(searchKeyword.toLowerCase())
+    })
+
+    setFilteredAthletes(filteredAthletes)
+  }
+
+  // Filter the list of athletes when the search keyword is changed
+  useEffect(() => {
+    filterAthletes()
+  }, [searchKeyword])
+
+  /**
+   * Filter the list of teams
+   */
+  const filterTeams = async () => {
+    const filteredTeams: Team[] = []
+
+    filteredAthletes.forEach(async (athlete) => {
+      const team: Team = await athlete.getCurrentTeam()
+
+      filteredTeams.push(team)
+      setFilteredTeams(filteredTeams)
+    })
+  }
+
+  // Filter the list of teams when the search keyword is changed
+  useEffect(() => {
+    filterTeams()
+  }, [filteredAthletes])
+
+  /**
    * Handler for the "Daftarkan Atlet Baru" button.
    */
   const handleNewAthlete = () => {
@@ -93,7 +131,7 @@ export default function AthleteListScreen() {
 
       {/* Table | TODO: Implement search function5 */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
-        <AthletesTable data={athletesList} teamsList={teamsList}/>
+        <AthletesTable data={searchKeyword ? filteredAthletes : athletesList} teamsList={searchKeyword ? filteredTeams : teamsList }/>
       </div>
 
     </MainLayout>

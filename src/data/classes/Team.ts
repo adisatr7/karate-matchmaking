@@ -1,3 +1,4 @@
+import { isMember } from "./../../../.trash/controllers/teams";
 import Athlete from "./Athlete"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
@@ -125,6 +126,10 @@ export default class Team {
       // Resolve the promise with the list of Athlete data
       resolve(members)
     })
+  }
+
+  public isMember(memberId: string): boolean {
+    return this.memberIds.includes(memberId)
   }
 
   public addMemberId(memberId: string): void {
