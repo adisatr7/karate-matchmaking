@@ -178,7 +178,7 @@ export default class Athlete {
               resolve(winrate)
               
             else
-              reject()
+              resolve(0)
           })
 
           .catch(err => {

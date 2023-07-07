@@ -45,11 +45,21 @@ export default function TeamDetailScreen() {
 
     // Prepare temporary variables to store the data
     let athletes: Athlete[] = []
+    let winRates: number[] = []
 
     // For each member id, load the data and push it to the list
     currentTeam?.getMemberIds().forEach(async (id) => {
+
+      // Load the member data
       const member = await Athlete.load(id)
+      const winRate = await member.getWinRateRatio()
+      
+      // Push the member data to the list
       athletes.push(member)
+      winRates.push(winRate)
+      
+      // Set the list of members and their win rates to the state
+      setWinRates(winRates)
       setMembers(athletes)
     })
   }
@@ -60,24 +70,6 @@ export default function TeamDetailScreen() {
   useEffect(() => {
     fetchMembers()
   }, [currentTeam])
-
-  /**
-   * Fetch the win rates of each member
-   */
-  const fetchWinRates = async () => {
-    let tempWinRates: number[] = []
-    // Calculate the win rate of said athlete and push it to its own list
-    members.forEach(async (member) => {
-      const winRate = await member.getWinRateRatio()
-      tempWinRates.push(winRate)
-      setFilteredWinrates(tempWinRates)
-    })
-  }
-
-  // Fetch the win rates when the members data is loaded
-  useEffect(() => {
-    fetchWinRates()
-  }, [members])
 
   /**
    * Filter the members and their winrate based on the search keyword
@@ -93,7 +85,7 @@ export default function TeamDetailScreen() {
       }
     })
     setFilteredMembers(filteredMembers)
-    setWinRates(filteredWinRates)
+    setFilteredWinrates(filteredWinRates)
   }
 
   // Filter the members when the search keyword is changed
@@ -146,7 +138,9 @@ export default function TeamDetailScreen() {
             className="flex-[1]"/>
         </div>
         
-        <TeamMembersTable data={searchKeyword ? filteredMembers : members} winRates={searchKeyword ? filteredWinrates : winRates}/>
+        <div className="flex flex-col w-full max-h-full overflow-y-scroll text-caption">
+          <TeamMembersTable data={searchKeyword ? filteredMembers : members} winRates={searchKeyword ? filteredWinrates : winRates}/>
+        </div>
       </div>
 
     </MainLayout>
