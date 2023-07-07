@@ -100,7 +100,7 @@ export default function TeamListScreen() {
           className="w-fit px-[18px]"/> */}
       </div>
 
-      {/* Table | TODO: Implement search function5 */}
+      {/* Table */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
         <TeamsTable data={searchKeyword ? filteredTeams : teamList}/>
       </div>

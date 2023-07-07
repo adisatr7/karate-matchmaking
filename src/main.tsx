@@ -19,7 +19,7 @@ import AthleteListScreen from "./screens/AthleteListScreen.tsx"
 import TournamentDetailScreen from "./screens/TournamentDetailScreen.tsx"
 import UnderConstructionScreen from "./screens/UnderConstructionScreen.tsx"
 import TeamDetailScreen from "./screens/TeamDetailScreen.tsx"
-import AthleteDetailScreen from "./screens/AthleteProfileScreen.tsx"
+import AthleteProfileScreen from "./screens/AthleteProfileScreen.tsx"
 import AthleteFormScreen from "./screens/AthleteFormScreen.tsx"
 import JoinTeamScreen from "./screens/JoinTeamScreen.tsx"
 
@@ -68,7 +68,7 @@ const screens = createBrowserRouter([
   },
   {
     path: "/athlete/:athleteId",
-    element: <AthleteDetailScreen/>
+    element: <AthleteProfileScreen/>
   },
   {
     path: "/athlete/:athleteId/:mode",

@@ -124,12 +124,9 @@ export default function AthleteListScreen() {
           onClick={handleNewAthlete}
           label="DAFTARKAN ATLET BARU"
           className="flex-[1]"/>
-        {/* <Button 
-          label="?"
-          className="w-fit px-[18px]"/> */}
       </div>
 
-      {/* Table | TODO: Implement search function5 */}
+      {/* Table */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
         <AthletesTable data={searchKeyword ? filteredAthletes : athletesList} teamsList={searchKeyword ? filteredTeams : teamsList }/>
       </div>

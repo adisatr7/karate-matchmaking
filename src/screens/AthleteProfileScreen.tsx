@@ -16,7 +16,7 @@ import { ask, message, open } from "@tauri-apps/api/dialog"
 import { EMPTY_TEAM_ID } from "../constants"
 
 
-export default function AthleteDetailScreen() {
+export default function AthleteProfileScreen() {
   const navigate = useNavigate()
   const params = useParams<AthletePageParams>()
 
