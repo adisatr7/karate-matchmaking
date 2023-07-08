@@ -1,23 +1,18 @@
-import Entry from "./Entry"
+import Input from "./Input"
 
-/**
- * Prop types for Input component
- */
-type InputProps = {
+
+type PropsType = {
   label: string,
   onChange: (value: string) => void,
   value: string,
   type?: "text" | "number" | "password"
 }
 
-/**
- * Input component
- */
-export default function FormInput({ label, onChange, value, type }: InputProps) {
+export default function FormInput({ label, onChange, value, type }: PropsType) {
   return (
     <div className="flex flex-col gap-[8px] w-full h-fit px-[10px]">
-      <p className="font-quicksand text-body text-white">{label}</p>
-      <Entry label="" onChange={onChange} value={value} type={type || "text"}/>
+      <p className="text-white font-quicksand text-body">{label}</p>
+      <Input label="" onChange={onChange} value={value} type={type || "text"}/>
     </div>
   )
 }

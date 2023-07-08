@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import { Search as SearchIcon } from "../assets/icons"
 import Button from "../components/Button"
-import Entry from "../components/Entry"
+import Input from "../components/Input"
 import MainLayout from "../components/MainLayout"
 import AthletesTable from "../components/Tables/AthletesTable"
 import Athlete from "../data/classes/Athlete"
@@ -110,7 +110,7 @@ export default function AthleteListScreen() {
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
-        <Entry 
+        <Input 
           label="Cari nama atlet" 
           inputMode="text" 
           onChange={setSearchKeyword}

@@ -50,7 +50,7 @@ export default function TeamsTable({ data: teamList }: PropsType) {
             return (
               <tr
                 key={teamIndex}
-                onClick={() => handleRowClick(t.getId())}
+                onClick={() => handleRowClick(t.getTeamId())}
                 className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${teamIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                 {/* Render table cells based on the header labels */}

@@ -37,7 +37,7 @@ export default function TeamMembersTable({ data: athletesList, winRates }: Props
   }
 
   return (
-    <table className="w-full text-white bg-opacity-50 border border-separate rounded-md table-auto h-fit bg-dark-glass border-stone-600 backdrop-blur-md font-quicksand">
+    <table className="w-full text-white bg-opacity-50 border border-separate rounded-md table-auto text-caption h-fit bg-dark-glass border-stone-600 backdrop-blur-md font-quicksand">
       
       {/* Header */}
       <thead className="sticky top-0 border border-separate rounded-md rounded-t-lg bg-dark-glass hover:bg-stone-700 border-stone-600">

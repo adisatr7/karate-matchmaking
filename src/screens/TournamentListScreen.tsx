@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import MainLayout from "../components/MainLayout"
-import Entry from "../components/Entry"
+import Input from "../components/Input"
 import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
 import TournamentsTable from "../components/Tables/TournamentsTable"
@@ -93,7 +93,7 @@ export default function TournamentListScreen() {
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
-        <Entry 
+        <Input 
           label="Cari nama pertandingan" 
           inputMode="text" 
           onChange={setSearchKeyword}

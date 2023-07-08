@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import MainLayout from "../components/MainLayout"
-import Entry from "../components/Entry"
+import Input from "../components/Input"
 import Button from "../components/Button"
 import { Search as SearchIcon } from "../assets/icons"
 import TeamsTable from "../components/Tables/TeamsTable"
@@ -39,7 +39,7 @@ export default function TeamListScreen() {
         const team: Team = await Team.load(filename)
 
         // Add the team data to the list
-        if (team.getId() !== EMPTY_TEAM_ID)
+        if (team.getTeamId() !== EMPTY_TEAM_ID)
           teams.push(team)
 
         // Update the state
@@ -82,7 +82,7 @@ export default function TeamListScreen() {
 
       {/* Search bar and its buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
-        <Entry 
+        <Input 
           label="Cari nama tim" 
           inputMode="text" 
           onChange={setSearchKeyword}

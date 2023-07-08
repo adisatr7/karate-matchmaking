@@ -13,7 +13,7 @@ type PropsType = {
   inputMode?: HTMLAttributes<HTMLInputElement>["inputMode"],
 }
 
-export default function Entry ({ leftIcon: LeftIcon, rightIcon: RightIcon, label, onChange, value, className="", type="text", inputMode="text" }: PropsType) {
+export default function Input ({ leftIcon: LeftIcon, rightIcon: RightIcon, label, onChange, value, className="", type="text", inputMode="text" }: PropsType) {
   const [isFocused, setIsFocused] = useState(false)
 
   return (

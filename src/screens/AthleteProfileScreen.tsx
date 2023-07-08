@@ -10,7 +10,7 @@ import Match from "../data/classes/Match"
 import MatchHistory from "../data/classes/MatchHistory"
 import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
-import { AthletePageParams, AthletePerformance } from "../types"
+import { FormPageParams, AthletePerformance } from "../types"
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
 import { ask, message, open } from "@tauri-apps/api/dialog"
 import { EMPTY_TEAM_ID } from "../constants"
@@ -19,7 +19,7 @@ import { BaseDirectory, copyFile, createDir } from "@tauri-apps/api/fs"
 
 export default function AthleteProfileScreen() {
   const navigate = useNavigate()
-  const params = useParams<AthletePageParams>()
+  const params = useParams<FormPageParams>()
 
   const [currentAthlete, setCurrentAthlete] = useState<Athlete | undefined>()
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>()
@@ -35,7 +35,7 @@ export default function AthleteProfileScreen() {
   const fetchAthleteData = async () => {
 
     // Get the athlete ID from the URL
-    const id = params.athleteId
+    const id = params.id
     
     // Load the athlete data from the `athletes` directory and set it to the state
     while (currentAthlete === undefined) {
@@ -135,7 +135,7 @@ export default function AthleteProfileScreen() {
    * Handle the button click to go to the team page of the current athlete
    */
   const handleGoToTeamPageButton = () => {
-    navigate(`/team/${currentTeam?.getId()}`)
+    navigate(`/team/${currentTeam?.getTeamId()}`)
   }
 
   /**
@@ -198,7 +198,7 @@ export default function AthleteProfileScreen() {
    * Handle the button click to go to the edit profile page of the current athlete
    */
   const handleEditProfile = () => {
-    navigate(`/athlete/${params.athleteId}/edit`)
+    navigate(`/athlete/${params.id}/edit`)
   }
 
   
@@ -206,7 +206,7 @@ export default function AthleteProfileScreen() {
    * Handle the button click to join the team
    */
   const handleJoinTeam = () => {
-    navigate(`/athlete/${params.athleteId}/jointeam`)
+    navigate(`/athlete/${params.id}/jointeam`)
   }
   
 
@@ -286,7 +286,7 @@ export default function AthleteProfileScreen() {
         {/* Current team text */}
         <p className={subheadingTextStyle}>Riwayat Pertandingan</p>
         <div className="flex flex-row items-center w-full h-fit">
-          { currentTeam?.getId() !== EMPTY_TEAM_ID
+          { currentTeam?.getTeamId() !== EMPTY_TEAM_ID
             
             // If the athlete is in a team
             ? ( <div className="flex flex-row items-center w-full h-fit gap-[8px]">

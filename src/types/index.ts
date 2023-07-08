@@ -149,16 +149,18 @@ export type MatchHistoryType = {
 /**
  * Dataset type definition for the polar chart in the athlete profile screen
  */
-export type AthletePerformance = {
-  yuko: number,
-  wazari: number,
-  ippon: number
-} | undefined
+export type AthletePerformance =
+  | {
+      yuko: number
+      wazari: number
+      ippon: number
+    }
+  | undefined
 
 /**
- * Athlete page params type definition for the bar chart in the athlete profile screen
+ * Form page params type definition
  */
-export type AthletePageParams = {
-  athleteId: string
+export type FormPageParams = {
+  id: string
   mode: "edit" | "add"
 }

@@ -56,7 +56,7 @@ export default function JoinTeamScreen() {
         const team: Team = await Team.load(filename)
 
         // Add the team data to the list
-        if (team.getId() !== EMPTY_TEAM_ID)
+        if (team.getTeamId() !== EMPTY_TEAM_ID)
           teams.push(team)
 
         // Update the state
@@ -158,7 +158,7 @@ export default function JoinTeamScreen() {
                 return (
                   <tr
                     key={teamIndex}
-                    onClick={() => handleRowClick(t.getId())}
+                    onClick={() => handleRowClick(t.getTeamId())}
                     className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${teamIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                     {/* Render table cells based on the header labels */}

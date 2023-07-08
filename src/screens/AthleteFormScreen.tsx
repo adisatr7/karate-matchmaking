@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import MainLayout from "../components/MainLayout"
 import Athlete from "../data/classes/Athlete"
-import { AthletePageParams } from "../types"
+import { FormPageParams } from "../types"
 import FormInput from "../components/FormInput"
 import FormDropdown from "../components/FormDropdown"
 import { message } from "@tauri-apps/api/dialog"
@@ -20,8 +20,8 @@ import athletePicture from "../assets/athlete3.png"
 export default function AthleteFormScreen() {
 
   // Params passed from URL path
-  const params = useParams<AthletePageParams>()
-  const {athleteId, mode} = params
+  const params = useParams<FormPageParams>()
+  const {id: athleteId, mode} = params
 
   // Initializes other hooks
   const modalStatus: string = useAppSelector(state => state.modal.showing)

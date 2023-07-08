@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store"
 import { collapseSidebar } from "../store/slices/sidebarSlice"
 import { login } from "../store/slices/authSlice"
 
-import Entry from "../components/Entry"
+import Input from "../components/Input"
 import Button from "../components/Button"
 
 import athleteImage1 from "../assets/athlete1.png"
@@ -85,12 +85,12 @@ export default function LoginScreen() {
 
       {/* Login form */}
       <div className="bg-dark-glass bg-opacity-50 px-[24px] py-[22px] backdrop-blur-md rounded-lg flex flex-col gap-[16px]">
-        <Entry 
+        <Input 
           label="ID panitia" 
           value={idPanitiaInput} 
           onChange={setIdPanitiaInput} 
           className="w-[250px]"/>
-        <Entry 
+        <Input 
           label="Kata sandi"
           value={passwordInput} 
           onChange={setPasswordInput}
