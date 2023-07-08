@@ -8,13 +8,17 @@ import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
 import { EMPTY_TEAM_ID } from "../constants"
+import { useNavigate } from "react-router-dom"
 
 
 export default function TeamListScreen() {
+  const navigate = useNavigate()
+  
   const [teamList, setTeamsList] = useState<Team[]>([])
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([])
   const [searchKeyword, setSearchKeyword] = useState("")
 
+  
   /**
    * Fetch the teams data from the teams directory
    */
@@ -58,6 +62,7 @@ export default function TeamListScreen() {
     fetchTeams()
   }, [])
 
+  
   /**
    * Filter the teams based on the search keyword
    */
@@ -77,6 +82,12 @@ export default function TeamListScreen() {
     filterTeams()
   }, [searchKeyword])
 
+
+  const handleNewTeam = () => {
+    navigate("/team/new/add")
+  }
+
+  
   return (
     <MainLayout currentPageName="Daftar Tim">
 
@@ -94,6 +105,7 @@ export default function TeamListScreen() {
           className="flex-[1]"/>
         <Button 
           label="DAFTARKAN TIM BARU"
+          onClick={handleNewTeam}
           className="flex-[1]"/>
         {/* <Button 
           label="?"

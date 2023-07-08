@@ -202,15 +202,24 @@ export default function TeamFormScreen() {
 
         {/* Left column */}
         <div className="flex flex-col flex-[5] h-fit px-[8px] gap-[12px]">
+
+          {/* Team name */}
           <FormInput 
-            label="Nama Lengkap"
+            label="Nama Tim"
             onChange={(value) => setNameInput(value)}
             value={nameInput}/>
 
+          {/* Team description */}
           <FormTextArea 
-            label="Deskripsi"
+            label="Deskripsi (opsional)"
             onChange={(value) => setDescInput(value)}
             value={descInput}/>
+
+          {/* Team city origin */}
+          <FormInput 
+            label="Kota asal"
+            onChange={(value) => setCityInput(value)}
+            value={cityInput}/>
 
           {/* Date created input */}
           <div className="flex flex-row">
@@ -238,6 +247,7 @@ export default function TeamFormScreen() {
               value={yearCreatedInput.toString()}/>
           </div>
 
+          {/* Submit Button */}
           <div className="flex flex-row self-end w-fit mr-[10px] mt-[36px]">
             <Button
               label="SIMPAN"
