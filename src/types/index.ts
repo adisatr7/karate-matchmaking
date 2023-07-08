@@ -156,11 +156,3 @@ export type AthletePerformance =
       ippon: number
     }
   | undefined
-
-/**
- * Form page params type definition
- */
-export type FormPageParams = {
-  id: string
-  mode: "edit" | "add"
-}

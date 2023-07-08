@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import MainLayout from "../components/MainLayout"
-import { FormPageParams } from "../types"
 import FormInput from "../components/FormInput"
 import FormDropdown from "../components/FormDropdown"
 import { message } from "@tauri-apps/api/dialog"
@@ -18,11 +17,16 @@ import Team from "../data/classes/Team"
 import FormTextArea from "../components/FormTextArea"
 
 
+type ParamsType = {
+  teamId: string,
+  mode: "add" | "edit"
+}
+
 export default function TeamFormScreen() {
 
   // Params passed from URL path
-  const params = useParams<FormPageParams>()
-  const {id: teamId, mode} = params
+  const params = useParams<ParamsType>()
+  const {teamId, mode} = params
 
   // Initializes other hooks
   const modalStatus: string = useAppSelector(state => state.modal.showing)
