@@ -17,13 +17,13 @@ export default function TeamDetailScreen() {
   const navigate = useNavigate()
 
   const params = useParams<ParamsType>()
-  const [currentTeam, setTeam] = useState<Team | undefined>()
+  const [currentTeam, setTeam] = useState<Team>()
   
-  const [winRates, setWinRates] = useState<number[] | undefined>([])
+  const [winRates, setWinRates] = useState<number[]>([])
   const [members, setMembers] = useState<Athlete[]>([])
   
   const [filteredMembers, setFilteredMembers] = useState<Athlete[]>([])
-  const [filteredWinrates, setFilteredWinrates] = useState<number[] | undefined>([])
+  const [filteredWinrates, setFilteredWinrates] = useState<number[]>([])
   const [searchKeyword, setSearchKeyword] = useState<string>("")
   
   
@@ -111,7 +111,7 @@ export default function TeamDetailScreen() {
    * Handle the new member button
    */
   const handleNewMember = () => {
-    
+    navigate(`/team/${params.teamId}/addmember`)
   }
 
   return (
