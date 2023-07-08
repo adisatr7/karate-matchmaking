@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Search as SearchIcon } from "../assets/icons"
 import Button from "../components/Button"
-import Entry from "../components/Entry"
+import Input from "../components/Input"
 import MainLayout from "../components/MainLayout"
 import TeamMembersTable from "../components/Tables/TeamMembersTable"
 import Athlete from "../data/classes/Athlete"
@@ -14,6 +14,8 @@ type ParamsType = {
 }
 
 export default function TeamDetailScreen() {
+  const navigate = useNavigate()
+
   const params = useParams<ParamsType>()
   const [currentTeam, setTeam] = useState<Team | undefined>()
   
@@ -23,6 +25,7 @@ export default function TeamDetailScreen() {
   const [filteredMembers, setFilteredMembers] = useState<Athlete[]>([])
   const [filteredWinrates, setFilteredWinrates] = useState<number[] | undefined>([])
   const [searchKeyword, setSearchKeyword] = useState<string>("")
+  
   
   /**
    * Fetch the team data from the `teams` directory
@@ -38,6 +41,7 @@ export default function TeamDetailScreen() {
     fetchTeamData()
   }, [])
 
+  
   /**
    * Fetch the team members data from the `athletes` directory
    */
@@ -71,6 +75,7 @@ export default function TeamDetailScreen() {
     fetchMembers()
   }, [currentTeam])
 
+  
   /**
    * Filter the members and their winrate based on the search keyword
    */
@@ -93,6 +98,15 @@ export default function TeamDetailScreen() {
     filterMembers()
   }, [searchKeyword])
 
+  
+  /**
+   * Handle the change description button
+   */  
+  const handleChangeDesc = () => {
+    navigate(`/team/${params.teamId}/edit`)
+  }
+
+  
   /**
    * Handle the new member button
    */
@@ -115,14 +129,13 @@ export default function TeamDetailScreen() {
         <p className="opacity-70">{currentTeam?.getDesc()}</p>
         <Button
           label="UBAH DESKRIPSI TIM"
+          onClick={handleChangeDesc}
           className="text-caption w-fit px-[28px]"/>
-          {/* TODO: Add on-click */}
-          {/* TODO: Implement member management */}
         <h2 className="text-subheading font-quicksand">Anggota Tim</h2>
 
         {/* Search bar and its buttons */}
         <div className="flex flex-row h-fit w-full gap-[10px] text-caption">
-          <Entry 
+          <Input 
             label="Cari nama anggota" 
             inputMode="text" 
             onChange={setSearchKeyword}
@@ -138,7 +151,7 @@ export default function TeamDetailScreen() {
             className="flex-[1]"/>
         </div>
         
-        <div className="flex flex-col w-full max-h-full overflow-y-scroll text-caption">
+        <div className="flex flex-col w-full max-h-full overflow-y-scroll">
           <TeamMembersTable data={searchKeyword ? filteredMembers : members} winRates={searchKeyword ? filteredWinrates : winRates}/>
         </div>
       </div>
