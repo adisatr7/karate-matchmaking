@@ -133,7 +133,7 @@ export default function DivisionCarousel({ divisions }: PropsType) {
 
       {/* Content container */}
       <div className="flex flex-row w-full h-fit">
-        <ContestantsTable contestants={contestantsOfActiveDivision}/>
+        <ContestantsTable division={divisions[activeSlide]} contestants={contestantsOfActiveDivision}/>
       </div>
 
     </div>

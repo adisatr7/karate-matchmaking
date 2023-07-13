@@ -109,7 +109,7 @@ export default function TournamentDetailScreen() {
           <p><span className={transparentTextStyle}>Status: </span>{toSentenceCase(tournament?.getStatus()! || "")}</p>
 
           {/* Tournament description */}
-          <p className={transparentTextStyle}>{tournament?.getDesc()}</p>
+          <p className={`${transparentTextStyle} text-caption mb-[6px]`}>{tournament?.getDesc()}</p>
 
           <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
             <Button 

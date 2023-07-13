@@ -40,15 +40,12 @@ export default function TournamentListScreen() {
         
         // Load the tournament data
         const tournament = await Tournament.load(filename)
-        const contestants = await tournament.getContestantAmount()
 
         // Add the tournament data to the list
         tournaments.push(tournament)
-        totalContestants.push(contestants)
 
-        // Update the state
+        // Set the state
         setTournamentList(tournaments)
-        setContestantAmount(totalContestants)
       })
     })
 
@@ -64,6 +61,28 @@ export default function TournamentListScreen() {
   }, [])
 
 
+  /**
+   * Fetch the amount of contestants in each tournament
+   */
+  const fetchContestantAmount = async () => {
+    const totalContestants: number[] = []
+    tournamentList.forEach(async (tournament) => {
+      const contestants = await tournament.getContestantAmount()
+      totalContestants.push(contestants)
+      
+      setContestantAmount(totalContestants)
+    })
+  }
+
+  // Fetch the amount of contestants in each tournament when the tournament list is updated
+  useEffect(() => {
+    fetchContestantAmount()
+  }, [tournamentList])
+
+
+  /**
+   * Filter the tournaments based on the search keyword
+   */
   const filterTournaments = () => {
     const filteredTeams: Tournament[] = []
     const filteredContestantAmount: number[] = []
@@ -79,6 +98,7 @@ export default function TournamentListScreen() {
     setFilteredContestantAmount(filteredContestantAmount)
   }
 
+  // Filter the tournaments when the search keyword is updated
   useEffect(() => {
     filterTournaments()
   }, [searchKeyword])
@@ -106,15 +126,11 @@ export default function TournamentListScreen() {
         <Button 
           label="PERTANDINGAN BARU"
           className="flex-[1]"/>
-        {/* <Button 
-          label="?"
-          onClick={handleHelp}
-          className="w-fit px-[18px]"/> */}
       </div>
 
       {/* Table */}
       <div className="flex flex-col w-full max-h-full overflow-y-scroll">
-        <TournamentsTable data={searchKeyword ? filteredTournaments : tournamentList} contestantAmount={searchKeyword ? filteredContestantAmount :contestantAmount}/>
+        <TournamentsTable data={searchKeyword ? filteredTournaments : tournamentList} contestantAmount={searchKeyword ? filteredContestantAmount : contestantAmount}/>
       </div>
 
     </MainLayout>

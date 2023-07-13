@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import Tournament from "../../data/classes/Tournament"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
@@ -24,7 +25,7 @@ export default function TournamentsTable({ data: tournamentList, contestantAmoun
     "STATUS", 
     // "JADWAL",
     "PENYELENGGARA", 
-    "PESERTA"
+    // "PESERTA"
   ]
 
   
@@ -68,7 +69,8 @@ export default function TournamentsTable({ data: tournamentList, contestantAmoun
                         : label === "NAMA PERTANDINGAN" ? toSentenceCase(t.getTournamentName())
                         : label === "STATUS" ? toSentenceCase(t.getStatus())
                         : label === "PENYELENGGARA" ? t.getHost()
-                        : contestantAmount[tournamentIndex]
+                        : label === "PESERTA" ? contestantAmount[tournamentIndex]
+                        : ""
                       }
                     </td>
                 ))}
