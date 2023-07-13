@@ -5,16 +5,17 @@ import Division from "../data/classes/Division"
 import { useAppDispatch, useAppSelector } from "../store"
 import { nextSlide, previousSlide, setSlide } from "../store/slices/divisionCarouselSlice"
 import ContestantsTable from "./Tables/ContestantsTable"
-import { ContestantType } from "../types"
+import { ContestantType, TournamentStatusOptions } from "../types"
 import useNotification from "../hooks/useNotification"
 import Button from "./Button"
 
 
 type PropsType = {
   divisions: Division[]
+  tournamentStatus: TournamentStatusOptions
 }
 
-export default function DivisionCarousel({ divisions }: PropsType) {
+export default function DivisionCarousel({ divisions, tournamentStatus }: PropsType) {
   const dispatch = useAppDispatch()
   const activeSlide = useAppSelector(state => state.divisionCarousel.activeSlide)
   const [contestantsOfActiveDivision, setContestantsOfActiveDivision] = useState<ContestantType[]>([])
@@ -71,6 +72,16 @@ export default function DivisionCarousel({ divisions }: PropsType) {
     if (activeSlide > 0)
       dispatch(previousSlide())
   }
+
+
+  const handleNewContestant = () => {
+
+  }
+
+
+  const handleNewDivision = () => {
+    
+  }
   
   
   return (
@@ -86,13 +97,28 @@ export default function DivisionCarousel({ divisions }: PropsType) {
 
       {/* Action buttons */}
       <div className="flex flex-row h-fit w-full gap-[10px] justify-between text-caption">
-        <div className="flex flex-row w-fit">
-          <Button 
-            label="TAMBAH KONTESTAN"
-            className="w-fit px-[24px]"/>
+        <div className="flex flex-row w-fit gap-[12px] mb-[4px]">
+
+          {/* Add contestant button */}
+          { tournamentStatus === "pendaftaran" &&
+            <Button 
+              onClick={handleNewContestant}
+              label="TAMBAH KONTESTAN"
+              className="w-fit px-[24px]"/>
+          }
+
+          {/* See bracket button */}
           <Button 
             label="LIHAT BAGAN PERTANDINGAN"
             className="w-fit px-[24px]"/>
+
+          {/* New division button */}
+          { tournamentStatus === "pendaftaran" &&
+            <Button 
+              onClick={handleNewDivision}
+              label="BUAT KELAS BARU"
+              className="w-fit px-[24px]"/> 
+          }
         </div>
 
         {/* Division selector */}
