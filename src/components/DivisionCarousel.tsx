@@ -2,12 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
-import Athlete from "../data/classes/Athlete"
 import Division from "../data/classes/Division"
-import Team from "../data/classes/Team"
 import { useAppDispatch, useAppSelector } from "../store"
 import { nextSlide, previousSlide, setSlide } from "../store/slices/divisionCarouselSlice"
 import ContestantsTable from "./Tables/ContestantsTable"
+import { ContestantType } from "../types"
 import useNotification from "../hooks/useNotification"
 
 
@@ -19,30 +18,40 @@ export default function DivisionCarousel({ divisions }: PropsType) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const activeSlide = useAppSelector(state => state.divisionCarousel.activeSlide)
-  const [playingTeams, setPlayingTeams] = useState<Team[]>([])
-  const [playingAthletes, setPlayingAthletes] = useState<Athlete[]>([])
+  const [contestantsOfActiveDivision, setContestantsOfActiveDivision] = useState<ContestantType[]>([])
   
-  
+
   /**
-   * Fetch the contestants of the current division
-  */
-  const fetchContestants = async (): Promise<void> => {
-    const teams = await divisions[activeSlide]?.getRegisteredTeams()
-    setPlayingTeams(teams)
-    
-    const athletes = await divisions[activeSlide]?.getRegisteredAthletes()
-    setPlayingAthletes(athletes)
+   * Update contestants data tp match what the currently selected division is
+   */
+  const updateContestantsData = () => {
+    try {
+      const division = divisions[activeSlide]
+
+      if (!division)
+        return
+
+      const contestants = division.getContestantsList()
+      setContestantsOfActiveDivision(contestants)
+    }
+
+    catch (err) {
+      useNotification("Terjadi kesalahan saat memuat data kontestan", err)
+    }
   }
-  
-  // Set the active slide to 0 when the component is loaded
+
+  // Calls the method above when the page is loaded
   useEffect(() => {
-    dispatch(setSlide(0))
-    fetchContestants()
+    dispatch(setSlide(-1))
+    // updateContestantsData()
+    setTimeout(() => {
+      dispatch(setSlide(0))
+    }, 200)
   }, [])
   
-  // Fetch the contestants when the active slide changes
+  // Set the current contestant when the active slide changes
   useEffect(() => {
-    fetchContestants()
+    updateContestantsData()
   }, [activeSlide])
   
   
@@ -110,7 +119,7 @@ export default function DivisionCarousel({ divisions }: PropsType) {
 
       {/* Content container */}
       <div className="flex flex-row w-full h-fit">
-        <ContestantsTable teams={playingTeams} athletes={playingAthletes}/>
+        <ContestantsTable contestants={contestantsOfActiveDivision}/>
       </div>
 
     </div>

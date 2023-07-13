@@ -141,6 +141,10 @@ export default class Division {
     return this.divisionName
   }
 
+  public getContestantsList(): ContestantType[] {
+    return this.contestants
+  }
+
   /**
    * Get registered teams data.
    *
@@ -161,7 +165,6 @@ export default class Division {
         // At the end of the forEach loop, resolve the promise
         resolve(teams)
       } catch (err) {
-
         // In the case of an error, reject the promise
         useNotification("Terjadi kesalahan saat mengambil data tim", err)
         reject(err)
@@ -171,7 +174,7 @@ export default class Division {
 
   /**
    * Get registered athletes data.
-   * 
+   *
    * @returns A list of registered athletes data
    */
   public async getRegisteredAthletes(): Promise<Athlete[]> {
@@ -189,7 +192,6 @@ export default class Division {
         // Resolve the promise
         resolve(athletes)
       } catch (err) {
-
         // In the case of an error, reject the promise
         useNotification("Terjadi kesalahan saat mengambil data atlet", err)
         reject(err)

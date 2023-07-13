@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import MainLayout from "../components/MainLayout"
 import Input from "../components/Input"
 import Button from "../components/Button"
@@ -8,12 +9,11 @@ import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import Team from "../data/classes/Team"
 import useNotification from "../hooks/useNotification"
 import { EMPTY_TEAM_ID } from "../constants"
-import { useNavigate } from "react-router-dom"
 
 
 export default function TeamListScreen() {
   const navigate = useNavigate()
-  
+
   const [teamList, setTeamsList] = useState<Team[]>([])
   const [filteredTeams, setFilteredTeams] = useState<Team[]>([])
   const [searchKeyword, setSearchKeyword] = useState("")

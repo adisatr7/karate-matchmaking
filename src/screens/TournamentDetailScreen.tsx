@@ -18,15 +18,24 @@ export default function TournamentDetailScreen() {
   const params = useParams<ParamsType>()
   const [tournament, setTournament] = useState<Tournament>()
   const [divisions, setDivisions] = useState<Division[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   
   
   /**
    * Fetch the tournament data from the `tournaments` directory
    */
   const fetchTournamentData = async () => {
+
+    // Set loading state -> true
+    setIsLoading(true)
+
+    // Get the tournament id from the URL
     const id = params.tournamentId
+
+    // Load the tournament data from the `tournaments` directory
     const tournamentData = await Tournament.load(id!)
     setTournament(tournamentData)
+    setIsLoading(false)
   }
 
   // Fetch the tournament data when the screen is loaded
@@ -39,6 +48,9 @@ export default function TournamentDetailScreen() {
    * Fetch all divisions data from the `divisions` directory
    */
   const fetchAllDivisionsData = async () => {
+    
+    // Set loading state -> true
+    setIsLoading(true)
     
     // Read the `divisions` directory
     await readDir(
@@ -76,6 +88,11 @@ export default function TournamentDetailScreen() {
     .catch(err => {
       useNotification("Terjadi kesalahan", `Tidak dapat membaca direktori 'divisions': ${err}`)
     })
+
+    // Set loading state -> false
+    .finally(() => {
+      setIsLoading(false)
+    })
   }
 
   // Fetch the divisions data when the tournament data is loaded
@@ -106,7 +123,7 @@ export default function TournamentDetailScreen() {
           <p className={transparentTextStyle}>{tournament?.getDesc()}</p>
 
           <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
-            <Button label="UBAH DESKRIPSI TIM" className="w-fit px-[36px]"/>
+            <Button label="UBAH DESKRIPSI PERTANDINGAN" className="w-fit px-[36px]"/>
             {/* <Button label="DETAIL PERTANDINGAN" className="w-full"/>
             <Button label="DAFTAR TIM" className="w-full"/>
             <Button label="DAFTAR PESERTA" className="w-full"/> */}
@@ -120,7 +137,6 @@ export default function TournamentDetailScreen() {
           {/* Divisions carousel */}
           <DivisionCarousel divisions={divisions}/>
 
-          {/* TODO: Participating teams table for each division */}
         </div>
 
       </div>

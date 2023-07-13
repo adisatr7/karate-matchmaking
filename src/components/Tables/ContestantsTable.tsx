@@ -1,15 +1,13 @@
-import { toSentenceCase } from "../../utils/stringFunctions"
 import { useNavigate } from "react-router-dom"
-import Team from "../../data/classes/Team"
-import Athlete from "../../data/classes/Athlete"
+import { ContestantType } from "../../types"
+import { toSentenceCase } from "../../utils/stringFunctions"
 
 
 type PropsType = {
-  teams: Team[]
-  athletes: Athlete[]
+  contestants: ContestantType[]
 }
 
-export default function ContestantsTable({ teams: teamList, athletes: athleteList }: PropsType) {
+export default function ContestantsTable({ contestants }: PropsType) {
 
   // Navigation hook so the app can navigate to other screens
   const navigate = useNavigate()
@@ -19,7 +17,6 @@ export default function ContestantsTable({ teams: teamList, athletes: athleteLis
     "NO", 
     "NAMA ATLET", 
     "MEWAKILI TIM",
-    "INISIAL",
   ]
 
   
@@ -47,12 +44,12 @@ export default function ContestantsTable({ teams: teamList, athletes: athleteLis
       </thead>
       
       <tbody>
-        { athleteList?.map((a: Athlete, athleteIndex: number) => {
+        { contestants?.map((c: ContestantType, athleteIndex: number) => {
 
             return (
               <tr
                 key={athleteIndex}
-                onClick={() => handleRowClick(athleteList[athleteIndex].getAthleteId())}
+                onClick={() => handleRowClick(c.athleteId)}
                 className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${athleteIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                 {/* Render table cells based on the header labels */}
@@ -60,15 +57,20 @@ export default function ContestantsTable({ teams: teamList, athletes: athleteLis
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
                       { 
                         label === "NO" ? athleteIndex + 1 
-                          : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
-                          : label === "MEWAKILI TIM" ? teamList[athleteIndex].getTeamName()
-                          : label === "INISIAL" ? teamList[athleteIndex].getInitial().toUpperCase()
+                          : label === "NAMA ATLET" ? toSentenceCase(c.athleteName)
+                          : label === "MEWAKILI TIM" ? toSentenceCase(c.teamName)
                           : ""
                       }
                     </td>
                 ))}
               </tr>
         )})}
+        {
+          contestants.length === 0 &&
+          <tr className="rounded-full bg-opacity-40 hover:bg-stone-700 bg-stone-800">
+            <td className="px-[10px] text-center text-caption py-[12px] opacity-60" colSpan={headerLabels.length}>Data peserta kosong</td>
+          </tr>
+        }
       </tbody>
     </table>
   )
