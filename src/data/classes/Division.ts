@@ -236,11 +236,11 @@ export default class Division {
     this.contestants = registeredTeams
   }
 
-  public addRegisteredTeam(team: ContestantType): void {
+  public addContestant(team: ContestantType): void {
     this.contestants.push(team)
   }
 
-  public removeRegisteredTeam(team: ContestantType): void {
+  public removeContestant(team: ContestantType): void {
     this.contestants = this.contestants.filter(
       (registeredTeam) => registeredTeam.teamId !== team.teamId
     )

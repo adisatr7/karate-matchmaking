@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router-dom"
 import { ContestantType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
+import CloseIcon from "@mui/icons-material/Close"
+import { ask } from "@tauri-apps/api/dialog"
+import Division from "../../data/classes/Division"
+import useNotification from "../../hooks/useNotification"
 
 
 type PropsType = {
+  division: Division
   contestants: ContestantType[]
 }
 
-export default function ContestantsTable({ contestants }: PropsType) {
+export default function ContestantsTable({ division, contestants }: PropsType) {
 
   // Navigation hook so the app can navigate to other screens
   const navigate = useNavigate()
@@ -17,6 +22,7 @@ export default function ContestantsTable({ contestants }: PropsType) {
     "NO", 
     "NAMA ATLET", 
     "MEWAKILI TIM",
+    ""
   ]
 
   
@@ -29,6 +35,22 @@ export default function ContestantsTable({ contestants }: PropsType) {
   const handleRowClick = (athleteId: string) => {
     navigate(`/athlete/${athleteId}`)
   } 
+
+
+  const handleDeleteContestant = async (index: number) => {
+    const confirm = await ask(
+      `Apakah anda yakin ingin menghapus ${contestants[index].athleteName} dari kelas ini?`, {
+        title: "Konfirmasi",
+        type: "warning",
+      })
+    
+    if (confirm) {
+      division.removeContestant(contestants[index])
+      division.save()
+
+      useNotification("Berhasil", `Peserta berhasil dikeluarkan dari kelas pertandingan ${division.getDivisionName()}`)
+    }
+  }
   
 
   return (
@@ -49,17 +71,19 @@ export default function ContestantsTable({ contestants }: PropsType) {
             return (
               <tr
                 key={athleteIndex}
-                onClick={() => handleRowClick(c.athleteId)}
-                className={`bg-opacity-40 hover:bg-primary-gradient rounded-full hover:cursor-pointer ${athleteIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
+                className={`bg-opacity-40 rounded-full hover:bg-primary-gradient hover:cursor-pointer ${athleteIndex % 2 === 0 ? "bg-stone-900" : "bg-stone-800"}`}>
 
                 {/* Render table cells based on the header labels */}
                 { headerLabels.map((label: string, rowIndex: number) => (
-                    <td key={rowIndex} className={`px-[10px] py-[4px]`}>
+                    <td key={rowIndex} className={`px-[10px] py-[4px] ${label === "" && "bg-stone-800 hover:cursor-default"}`}>
                       { 
                         label === "NO" ? athleteIndex + 1 
-                          : label === "NAMA ATLET" ? toSentenceCase(c.athleteName)
-                          : label === "MEWAKILI TIM" ? toSentenceCase(c.teamName)
-                          : ""
+                          : label === "NAMA ATLET" ? <p onClick={() => handleRowClick(c.athleteId)}>{toSentenceCase(c.athleteName)}</p>
+                          : label === "MEWAKILI TIM" ? <p onClick={() => handleRowClick(c.athleteId)}>{toSentenceCase(c.teamName)}</p>
+                          : <CloseIcon 
+                              fontSize="small"
+                              onClick={() => handleDeleteContestant(athleteIndex)}
+                              className="w-full text-white hover:text-red-600 hover:cursor-pointer"/>
                       }
                     </td>
                 ))}

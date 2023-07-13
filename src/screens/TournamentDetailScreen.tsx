@@ -112,15 +112,17 @@ export default function TournamentDetailScreen() {
           <p className={transparentTextStyle}>{tournament?.getDesc()}</p>
 
           <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
-            <Button label="UBAH DESKRIPSI PERTANDINGAN" className="w-fit px-[36px]"/>
-            {/* <Button label="DETAIL PERTANDINGAN" className="w-full"/>
-            <Button label="DAFTAR TIM" className="w-full"/>
-            <Button label="DAFTAR PESERTA" className="w-full"/> */}
+            <Button 
+              label="UBAH DESKRIPSI PERTANDINGAN" 
+              className="w-fit px-[36px]"/>
+            <Button 
+              label="UBAH STATUS PERTANDINGAN" 
+              className="w-fit px-[36px]"/>
           </div>
         </div>
 
         {/* Divisions container */}
-        <div>
+        <div className="flex flex-col gap-[8px] mb-[12px]">
           <h1 className="text-heading mt-[16px]">Kelas</h1>
 
           {/* Divisions carousel */}
