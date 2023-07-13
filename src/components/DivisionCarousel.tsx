@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import Division from "../data/classes/Division"
@@ -15,7 +14,6 @@ type PropsType = {
 }
 
 export default function DivisionCarousel({ divisions }: PropsType) {
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const activeSlide = useAppSelector(state => state.divisionCarousel.activeSlide)
   const [contestantsOfActiveDivision, setContestantsOfActiveDivision] = useState<ContestantType[]>([])

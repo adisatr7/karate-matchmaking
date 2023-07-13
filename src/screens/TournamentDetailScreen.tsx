@@ -18,7 +18,6 @@ export default function TournamentDetailScreen() {
   const params = useParams<ParamsType>()
   const [tournament, setTournament] = useState<Tournament>()
   const [divisions, setDivisions] = useState<Division[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   
   
   /**
@@ -26,16 +25,14 @@ export default function TournamentDetailScreen() {
    */
   const fetchTournamentData = async () => {
 
-    // Set loading state -> true
-    setIsLoading(true)
-
     // Get the tournament id from the URL
     const id = params.tournamentId
 
     // Load the tournament data from the `tournaments` directory
     const tournamentData = await Tournament.load(id!)
+
+    // Set the tournament data state
     setTournament(tournamentData)
-    setIsLoading(false)
   }
 
   // Fetch the tournament data when the screen is loaded
@@ -48,9 +45,6 @@ export default function TournamentDetailScreen() {
    * Fetch all divisions data from the `divisions` directory
    */
   const fetchAllDivisionsData = async () => {
-    
-    // Set loading state -> true
-    setIsLoading(true)
     
     // Read the `divisions` directory
     await readDir(
@@ -87,11 +81,6 @@ export default function TournamentDetailScreen() {
     // In case the `divisions` directory doesn't exist, show an error notification
     .catch(err => {
       useNotification("Terjadi kesalahan", `Tidak dapat membaca direktori 'divisions': ${err}`)
-    })
-
-    // Set loading state -> false
-    .finally(() => {
-      setIsLoading(false)
     })
   }
 
