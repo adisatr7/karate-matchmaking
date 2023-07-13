@@ -127,11 +127,15 @@ export default class Division {
     return this.registeredTeams.length
   }
 
+  public getTournamentId(): string {
+    return this.tournamentId
+  }
+
   public getDivisionId(): string {
     return this.divisionId
   }
 
-  public getName(): string {
+  public getDivisionName(): string {
     return this.divisionName
   }
 

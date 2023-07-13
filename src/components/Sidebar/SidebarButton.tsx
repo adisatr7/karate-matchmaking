@@ -32,7 +32,7 @@ export default function SidebarButton({ icon: Icon, label, path, onClick }: Prop
       {/* Icon */}
       <Icon 
         className={`bg-cover w-[28px] h-[28px] duration-500 ease-in-out transition-transform 
-        ${sidebarStatus === "expanded" ? "translate-x-0" : "translate-x-[242px]"}`}/>
+        ${sidebarStatus === "expanded" ? "translate-x-0" : "translate-x-[255px]"}`}/>
 
       {/* Text label */}
       <p 
