@@ -81,6 +81,7 @@ export default class Athlete {
 
         // If file is not found, reject the promise
         .catch((err) => {
+          useNotification("Terjadi kesalahan saat membaca data atlet", err)
           reject(err)
         })
     })

@@ -7,6 +7,7 @@ import Division from "../data/classes/Division"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
 import Button from "../components/Button"
+import DivisionCarousel from "../components/DivisionCarousel"
 
 
 type ParamsType = {
@@ -81,7 +82,7 @@ export default function TournamentDetailScreen() {
   useEffect(() => {
     fetchAllDivisionsData()
   }, [tournament])
-
+  
 
   return (
     <MainLayout
@@ -115,45 +116,9 @@ export default function TournamentDetailScreen() {
         {/* Divisions container */}
         <div>
           <h1 className="text-heading mt-[16px]">Kelas</h1>
-          {/* TODO: Buttons related to divisions management */}
 
-
-          {
-            divisions && divisions.map(division => (
-              <div className="flex flex-col w-full h-fit my-[12px]">
-                
-                {/* Division name */}
-                <h2 className="text-body">{division.getDivisionName()}</h2>
-
-                <div className="flex flex-row h-fit w-full gap-[12px]">
-
-                  {/* Table containing list of participants */}
-                  <div className="flex flex-col w-full overflow-y-scroll text-caption h-fit">
-                    <table className="w-full">
-                      <thead>
-                        <tr>
-                          <th className="text-left">Nama Tim</th>
-                          <th className="text-left">Nama Atlet</th>
-                        </tr>
-                      </thead>
-                    </table>
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex flex-col w-fit h-fit">
-                    
-                  </div>
-                  
-                </div>
-                
-                {/* Bracket placeholder */}
-                {/* <div className="flex flex-col justify-center items-center h-[500px] w-full bg-dark-glass bg-opacity-80 backdrop-blur-sm rounded-md gap-[12px] mt-[12px]">
-                  <p className="text-white font-quicksilver text-body">Bracket placeholder</p>
-                </div> */}
-
-              </div>
-            ))
-          }
+          {/* Divisions carousel */}
+          <DivisionCarousel divisions={divisions}/>
 
           {/* TODO: Participating teams table for each division */}
         </div>

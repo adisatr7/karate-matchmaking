@@ -2,6 +2,7 @@ import Athlete from "./Athlete"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
+import useNotification from "../../hooks/useNotification"
 
 export default class Team {
   private teamId: string
@@ -70,6 +71,7 @@ export default class Team {
 
         // If file is not found, reject the promise
         .catch((err) => {
+          useNotification("Terjadi kesalahan saat membuka data tim", err)
           reject(err)
         })
     })

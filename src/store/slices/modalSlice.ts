@@ -35,6 +35,9 @@ export const modalSlice = createSlice({
       state.showing = action.payload
     },
 
+    /**
+     * Close the modal
+     */
     closeModal: (state) => {
       state.showing = ""
     }

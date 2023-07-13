@@ -5,12 +5,14 @@ import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import { ContestantType, DivisionType } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
+import Athlete from "./Athlete"
+import useNotification from "../../hooks/useNotification"
 
 export default class Division {
   private tournamentId: string
   private divisionId: string
   private divisionName: string
-  private registeredTeams: ContestantType[]
+  private contestants: ContestantType[]
   private matchIds: string[]
 
   /**
@@ -18,20 +20,20 @@ export default class Division {
    * will be generated automatically via `generateID()` function.
    *
    * @param divisionName Division name
-   * @param registeredTeams Division registered teams
+   * @param contestants Division registered teams
    * @param matches Division matches
    */
   constructor(
     divisionId?: string,
     tournamentId: string = "",
     divisionName: string = "",
-    registeredTeams: ContestantType[] = [],
+    contestants: ContestantType[] = [],
     matchIds: string[] = []
   ) {
     this.divisionId = divisionId || generateID("k")
     this.tournamentId = tournamentId
     this.divisionName = divisionName
-    this.registeredTeams = registeredTeams
+    this.contestants = contestants
     this.matchIds = matchIds
   }
 
@@ -124,7 +126,7 @@ export default class Division {
    * @returns Amount of registered teams
    */
   public getContestantAmount(): number {
-    return this.registeredTeams.length
+    return this.contestants.length
   }
 
   public getTournamentId(): string {
@@ -151,15 +153,45 @@ export default class Division {
         const teams: Team[] = []
 
         // For each registered team IDs stored by this Division
-        this.registeredTeams.forEach(async (registeredTeam) => {
-          const team: Team = await Team.load(registeredTeam.teamId)
+        this.contestants.forEach(async (contestant) => {
+          const team: Team = await Team.load(contestant.teamId)
           teams.push(team)
         })
 
         // At the end of the forEach loop, resolve the promise
         resolve(teams)
       } catch (err) {
+
         // In the case of an error, reject the promise
+        useNotification("Terjadi kesalahan saat mengambil data tim", err)
+        reject(err)
+      }
+    })
+  }
+
+  /**
+   * Get registered athletes data.
+   * 
+   * @returns A list of registered athletes data
+   */
+  public async getRegisteredAthletes(): Promise<Athlete[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // Create an empty list to store the athletes data
+        const athletes: Athlete[] = []
+
+        // For each registered team IDs stored by this Division
+        this.contestants.forEach(async (contestant) => {
+          const athlete: Athlete = await Athlete.load(contestant.athleteId)
+          athletes.push(athlete)
+        })
+
+        // Resolve the promise
+        resolve(athletes)
+      } catch (err) {
+
+        // In the case of an error, reject the promise
+        useNotification("Terjadi kesalahan saat mengambil data atlet", err)
         reject(err)
       }
     })
@@ -199,15 +231,15 @@ export default class Division {
   }
 
   public setRegisteredTeams(registeredTeams: ContestantType[]): void {
-    this.registeredTeams = registeredTeams
+    this.contestants = registeredTeams
   }
 
   public addRegisteredTeam(team: ContestantType): void {
-    this.registeredTeams.push(team)
+    this.contestants.push(team)
   }
 
   public removeRegisteredTeam(team: ContestantType): void {
-    this.registeredTeams = this.registeredTeams.filter(
+    this.contestants = this.contestants.filter(
       (registeredTeam) => registeredTeam.teamId !== team.teamId
     )
   }
