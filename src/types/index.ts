@@ -68,13 +68,13 @@ export type DivisionType = {
  * Match type definition
  */
 export type MatchType = {
-  divisionId: string // References -> Division
-  matchId: string // Unique ID - Value randomized
+  divisionId: string            // References -> Division
+  matchId: string               // Unique ID - Value randomized
   matchName?: string
   nextMatchId: string
   playDate: string
   status: MatchStatusOptions
-  winner: MatchWinnerOptions // May require more thinking
+  winner: MatchWinnerOptions    // May require more thinking
   contestants: ContestantType[] // Contains 2 Contestant objects
 }
 

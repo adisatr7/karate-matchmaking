@@ -19,7 +19,7 @@ export default function FormDropdown({ label, placeholder, options, onChange, va
     <div className="flex flex-col gap-[8px] w-full h-fit px-[10px]">
       <p className="font-quicksand text-body text-white">{label}</p>
       <Dropdown 
-        placeholder={placeholder} 
+        label={placeholder} 
         options={options}
         onChange={onChange}
         value={value}/>

@@ -8,6 +8,11 @@ import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
 import Button from "../components/Button"
 import DivisionCarousel from "../components/DivisionCarousel"
+import { useAppDispatch, useAppSelector } from "../store"
+import Modal from "../components/Modal/Modal"
+import Dropdown from "../components/Dropdown"
+import { setModal } from "../store/slices/modalSlice"
+import { TournamentStatusOptions } from "../types"
 
 
 type ParamsType = {
@@ -16,6 +21,9 @@ type ParamsType = {
 
 export default function TournamentDetailScreen() {
   const params = useParams<ParamsType>()
+  const dispatch = useAppDispatch()
+  const modalStatus: string = useAppSelector(state => state.modal.showing)
+
   const [tournament, setTournament] = useState<Tournament>()
   const [divisions, setDivisions] = useState<Division[]>([])
 
@@ -136,12 +144,39 @@ export default function TournamentDetailScreen() {
     setDesc(tournament?.getDesc()!)
   }
 
+  
+  /**
+   * Handle the save tournament status button
+   */
+  const handleSaveStatus = (selectedOption: string) => {
 
-  const handleChangeStatus = () => {
-    
+    // Close the modal
+    dispatch(setModal(""))
+
+    // Set the tournament status
+    const newStatus: TournamentStatusOptions = selectedOption.toLowerCase() as TournamentStatusOptions
+
+    // Save the tournament data
+    const newTournament: Tournament = new Tournament(
+      tournament?.getTournamentId()!,
+      tournament?.getTournamentName()!,
+      tournament?.getDesc()!,
+      newStatus!,
+      tournament?.getHost()!,
+      tournament?.getDivisionIds()!
+    )
+
+    // Set the tournament data state
+    setTournament(newTournament)
+
+    // Save the tournament data
+    newTournament.save()
+
+    // Show a notification
+    useNotification("Berhasil", "Status pertandingan berhasil diperbarui")
   }
 
-  
+
   const handleNewDivision = () => {
     
   }
@@ -154,57 +189,76 @@ export default function TournamentDetailScreen() {
       prevPageUrl="/tournament/all"
       currentPageName={tournament ? tournament.getTournamentName() : "Memuat..."}>
 
-      <div className="overflow-y-scroll">
+      {/* Tournament info section */}
+      <div className="flex flex-col gap-1 mr-[14px] text-body">
 
-        {/* Tournament info section */}
-        <div className="flex flex-col gap-1 mr-[14px] text-body">
+        {/* Tournament host */}
+        <p><span className={transparentTextStyle}>Penyelenggara: </span>{toSentenceCase(tournament?.getHost()! || "")}</p>
 
-          {/* Tournament host */}
-          <p><span className={transparentTextStyle}>Penyelenggara: </span>{toSentenceCase(tournament?.getHost()! || "")}</p>
+        {/* Tournament status */}
+        <p><span className={transparentTextStyle}>Status: </span>{toSentenceCase(tournament?.getStatus()! || "")}</p>
 
-          {/* Tournament status */}
-          <p><span className={transparentTextStyle}>Status: </span>{toSentenceCase(tournament?.getStatus()! || "")}</p>
+        {/* Tournament description */}
+        <textarea
+          onChange={(e => handleEditDesc(e.target.value, e.target.rows))}
+          value={desc}
+          rows={descTextHeight}
+          className={`${transparentTextStyle} bg-transparent w-full h-fit text-caption mb-[6px] focus:outline-none ${isEditMode ? "focus:border focus:border-primary-opaque rounded-md bg-white text-black px-[8px] py-[4px]" : "hover:cursor-default focus:caret-transparent"}`}/>
 
-          {/* Tournament description */}
-          <textarea
-            onChange={(e => handleEditDesc(e.target.value, e.target.rows))}
-            value={desc}
-            rows={descTextHeight}
-            className={`${transparentTextStyle} bg-transparent w-full h-fit text-caption mb-[6px] focus:outline-none ${isEditMode ? "focus:border focus:border-primary-opaque rounded-md bg-white text-black px-[8px] py-[4px]" : "hover:cursor-default focus:caret-transparent"}`}/>
-
-          <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
+        {/* Buttons container */}
+        <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
+          <Button 
+            label={`${isEditMode ? "SIMPAN PERUBAHAN" : "UBAH DESKRIPSI PERTANDINGAN"}`} 
+            onClick={handleToggleEditMode}
+            className="w-fit px-[36px]"/>
+          { isEditMode &&
             <Button 
-              label={`${isEditMode ? "SIMPAN PERUBAHAN" : "UBAH DESKRIPSI PERTANDINGAN"}`} 
-              onClick={handleToggleEditMode}
+              label="BATAL"
+              onClick={handleCancelEdit}
               className="w-fit px-[36px]"/>
-            { isEditMode &&
-              <Button 
-                label="BATAL"
-                onClick={handleCancelEdit}
-                className="w-fit px-[36px]"/>
-            }
-            { !isEditMode &&
-              <Button 
-                label="UBAH STATUS PERTANDINGAN" 
-                className="w-fit px-[36px]"/>
-            }
-          </div>
-        </div>
-
-        {/* Divisions container */}
-        <div className="flex flex-col gap-[8px] mb-[12px]">
-          <h1 className="text-heading mt-[16px]">Kelas</h1>
-
-          {/* Divisions carousel */}
-          {
-            divisions.length > 0 
-              ? <DivisionCarousel divisions={divisions} tournamentStatus={tournament?.getStatus()!}/>
-              : <p className="text-left text-gray-300 text-caption">Pertandingan ini belum memiliki kelas. <span onClick={handleNewDivision} className="font-semibold text-gray-200 hover:text-white hover:underline hover:cursor-pointer">Klik disini</span> untuk membuat kelas baru.</p>
           }
-
+          { !isEditMode &&
+            <Button 
+              onClick={() => dispatch(setModal("change-tournament-status"))}
+              label="UBAH STATUS PERTANDINGAN" 
+              className="w-fit px-[36px]"/>
+          }
         </div>
-
       </div>
+
+      {/* Divisions container */}
+      <div className="flex flex-col gap-[8px] mb-[12px]">
+        <h1 className="text-heading mt-[16px]">Kelas</h1>
+
+        {/* Divisions carousel */}
+        {
+          divisions.length > 0 
+            ? <DivisionCarousel divisions={divisions} tournamentStatus={tournament?.getStatus()!}/>
+            : <p className="text-left text-gray-300 text-caption">Pertandingan ini belum memiliki kelas. <span onClick={handleNewDivision} className="font-semibold text-gray-200 hover:text-white hover:underline hover:cursor-pointer">Klik disini</span> untuk membuat kelas baru.</p>
+        }
+      </div>
+
+      {/* Change tournament status modal */}
+      { modalStatus === "change-tournament-status" && 
+        <Modal title="Ubah status pertandingan">
+          <div className="flex flex-col justify-center mt-[12px] gap-[12px]">
+            <Dropdown 
+              label="Pilih status pertandingan"
+              value={tournament?.getStatus()}
+              onChange={handleSaveStatus}
+              options={[
+                "Pendaftaran", 
+                "Akan main", 
+                "Berlangsung", 
+                "Selesai", 
+                "Ditunda", 
+                "Dibatalkan"
+              ]}/>
+            <p className="max-w-[500px] text-gray-300"><span className="font-bold text-white">Perhatian:</span> Anda tidak dapat mengubah data pertandingan maupun kelas jika status pertandingan diatur ke selain "Pendaftaran"</p>
+          </div>
+            
+        </Modal>
+      }
     </MainLayout>
   )
 }
