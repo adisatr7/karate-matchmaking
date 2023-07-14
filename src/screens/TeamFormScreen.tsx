@@ -250,7 +250,7 @@ export default function TeamFormScreen() {
           {/* Submit Button */}
           <div className="flex flex-row self-end w-fit mr-[10px] mt-[36px]">
             <Button
-              label="SIMPAN"
+              label="Simpan"
               onClick={handleSubmitButton}
               className="text-caption px-[26px]"/>    
           </div>

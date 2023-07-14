@@ -18,10 +18,10 @@ export default function HighlightScreen() {
 
       {/* Buttons container */}
       <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
-        <Button label="BROADCAST" className="w-full" onClick={handleBroadcast}/>
-        <Button label="DETAIL PERTANDINGAN" className="w-full" onClick={handleBroadcast}/>
-        <Button label="DAFTAR TIM" className="w-full" onClick={handleBroadcast}/>
-        <Button label="DAFTAR PESERTA" className="w-full" onClick={handleBroadcast}/>
+        <Button label="Broadcast" className="w-full" onClick={handleBroadcast}/>
+        <Button label="Detail Pertandingan" className="w-full" onClick={handleBroadcast}/>
+        <Button label="Daftar Tim" className="w-full" onClick={handleBroadcast}/>
+        <Button label="Daftar Peserta" className="w-full" onClick={handleBroadcast}/>
       </div>
 
     </MainLayout>

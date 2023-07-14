@@ -118,11 +118,11 @@ export default function AthleteListScreen() {
           value={searchKeyword}
           className="flex-[2]"/>
         <Button 
-          label="CARI ATLET"
+          label="Cari Atlet"
           className="flex-[1]"/>
         <Button 
           onClick={handleNewAthlete}
-          label="DAFTARKAN ATLET BARU"
+          label="Daftarkan Atlet Baru"
           className="flex-[1]"/>
       </div>
 

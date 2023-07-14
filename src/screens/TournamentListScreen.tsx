@@ -121,10 +121,10 @@ export default function TournamentListScreen() {
           value={searchKeyword}
           className="flex-[2]"/>
         <Button 
-          label="CARI PERTANDINGAN"
+          label="Cari Pertandingan"
           className="flex-[1]"/>
         <Button 
-          label="PERTANDINGAN BARU"
+          label="Pertandingan Baru"
           className="flex-[1]"/>
       </div>
 

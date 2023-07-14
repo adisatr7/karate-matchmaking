@@ -128,7 +128,7 @@ export default function TeamDetailScreen() {
         </div>
         <p className="opacity-70">{currentTeam?.getDesc()}</p>
         <Button
-          label="UBAH DESKRIPSI TIM"
+          label="Ubah Deskripsi Tim"
           onClick={handleChangeDesc}
           className="text-caption w-fit px-[28px]"/>
         <h2 className="text-subheading font-quicksand">Anggota Tim</h2>
@@ -143,11 +143,11 @@ export default function TeamDetailScreen() {
             value={searchKeyword}
             className="flex-[2]"/>
           <Button 
-            label="CARI ANGGOTA"
+            label="Cari Anggota"
             className="flex-[1]"/>
           <Button 
             onClick={handleNewMember}
-            label="TAMBAH ANGGOTA BARU"
+            label="Tambah Anggota Baru"
             className="flex-[1]"/>
         </div>
         

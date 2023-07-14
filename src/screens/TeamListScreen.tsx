@@ -101,10 +101,10 @@ export default function TeamListScreen() {
           value={searchKeyword}
           className="flex-[2]"/>
         <Button 
-          label="CARI TIM"
+          label="Cari Tim"
           className="flex-[1]"/>
         <Button 
-          label="DAFTARKAN TIM BARU"
+          label="Daftarkan Tim Baru"
           onClick={handleNewTeam}
           className="flex-[1]"/>
         {/* <Button 

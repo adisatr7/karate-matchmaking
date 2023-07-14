@@ -254,7 +254,7 @@ export default function AthleteProfileScreen() {
             {/* Edit profile button */}
             <Button
               onClick={handleEditProfile}
-              label="PERBARUI BIODATA" 
+              label="Perbarui Biodata" 
               className="text-caption w-[280px] mt-[10px]"/>
           </div>
 

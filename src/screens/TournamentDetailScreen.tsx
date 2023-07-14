@@ -208,19 +208,19 @@ export default function TournamentDetailScreen() {
         {/* Buttons container */}
         <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
           <Button 
-            label={`${isEditMode ? "SIMPAN PERUBAHAN" : "UBAH DESKRIPSI PERTANDINGAN"}`} 
+            label={`${isEditMode ? "Simpan Perubahan" : "Ubah Deskripsi Pertandingan"}`} 
             onClick={handleToggleEditMode}
             className="w-fit px-[36px]"/>
           { isEditMode &&
             <Button 
-              label="BATAL"
+              label="Batal"
               onClick={handleCancelEdit}
               className="w-fit px-[36px]"/>
           }
           { !isEditMode &&
             <Button 
               onClick={() => dispatch(setModal("change-tournament-status"))}
-              label="UBAH STATUS PERTANDINGAN" 
+              label="Ubah Status Pertandingan" 
               className="w-fit px-[36px]"/>
           }
         </div>

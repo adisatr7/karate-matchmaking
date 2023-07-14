@@ -103,20 +103,20 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
           { tournamentStatus === "pendaftaran" &&
             <Button 
               onClick={handleNewContestant}
-              label="TAMBAH KONTESTAN"
+              label="Tambah Kontestan"
               className="w-fit px-[24px]"/>
           }
 
           {/* See bracket button */}
           <Button 
-            label="LIHAT BAGAN PERTANDINGAN"
+            label="Lihat Bagan Pertandingan"
             className="w-fit px-[24px]"/>
 
           {/* New division button */}
           { tournamentStatus === "pendaftaran" &&
             <Button 
               onClick={handleNewDivision}
-              label="BUAT KELAS BARU"
+              label="Buat Kelas Baru"
               className="w-fit px-[24px]"/> 
           }
         </div>
