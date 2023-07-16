@@ -77,7 +77,7 @@ const screens = createBrowserRouter([
     element: <AthleteListScreen/>
   },
   {
-    path: "/athlete/:athleteId",
+    path: "/athlete/:athleteId/:prevPage",
     element: <AthleteProfileScreen/>
   },
   {

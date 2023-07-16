@@ -1,7 +1,7 @@
-import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
-import { ask, message, open } from "@tauri-apps/api/dialog"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded"
+import { ask, message, open } from "@tauri-apps/api/dialog"
 import Button from "../components/Button"
 import MainLayout from "../components/MainLayout"
 import NumericDisplay from "../components/NumericDisplay"
@@ -18,12 +18,15 @@ import { AthletePerformance } from "../types"
 
 type ParamsType = {
   athleteId: string
+  prevPage: string
 }
 
 export default function AthleteProfileScreen() {
   const navigate = useNavigate()
   const params = useParams<ParamsType>()
-  const {athleteId} = params
+  const {athleteId, prevPage} = params
+
+  const prevPageName: string = prevPage === "0" ? "Atlet" : "Detail Pertandingan"
 
   const [currentAthlete, setCurrentAthlete] = useState<Athlete | undefined>()
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>()
@@ -215,8 +218,8 @@ export default function AthleteProfileScreen() {
     return (
       <MainLayout
         backButton
-        prevPageName="Atlet"
-        prevPageUrl="/athlete/all"
+        prevPageName={prevPageName}
+        prevPageUrl={prevPage === "0" ? "/athlete/all" : ""}
         currentPageName={currentAthlete ? currentAthlete.getAthleteName() : "Memuat..."}>
 
         {/* Container, goes to the --> */}

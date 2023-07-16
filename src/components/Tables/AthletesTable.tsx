@@ -31,7 +31,7 @@ export default function AthletesTable({ data: athletesList, teamsList }: PropsTy
    * @param athleteId ID of the athlete
    */
   const handleRowClick = (athleteId: string) => {
-    navigate(`/athlete/${athleteId}`)
+    navigate(`/athlete/${athleteId}/0`)
   }
 
   return (

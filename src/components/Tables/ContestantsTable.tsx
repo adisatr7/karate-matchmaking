@@ -33,7 +33,7 @@ export default function ContestantsTable({ division, contestants }: PropsType) {
    * @param athleteId ID of the athlete
    */
   const handleRowClick = (athleteId: string) => {
-    navigate(`/athlete/${athleteId}`)
+    navigate(`/athlete/${athleteId}/1`)
   } 
 
 
