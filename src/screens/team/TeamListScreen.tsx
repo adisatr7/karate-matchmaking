@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import MainLayout from "../components/MainLayout"
-import Input from "../components/Input"
-import Button from "../components/Button"
-import { Search as SearchIcon } from "../assets/icons"
-import TeamsTable from "../components/Tables/TeamsTable"
+import MainLayout from "../../components/MainLayout"
+import Input from "../../components/Input"
+import Button from "../../components/Button"
+import { Search as SearchIcon } from "../../assets/icons"
+import TeamsTable from "../../components/Tables/TeamsTable"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-import Team from "../data/classes/Team"
-import useNotification from "../hooks/useNotification"
-import { EMPTY_TEAM_ID } from "../constants"
+import Team from "../../data/classes/Team"
+import useNotification from "../../hooks/useNotification"
+import { EMPTY_TEAM_ID } from "../../constants"
 
 
 export default function TeamListScreen() {

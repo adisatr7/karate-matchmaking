@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { Search as SearchIcon } from "../assets/icons"
-import Button from "../components/Button"
-import Input from "../components/Input"
-import MainLayout from "../components/MainLayout"
-import TeamMembersTable from "../components/Tables/TeamMembersTable"
-import Athlete from "../data/classes/Athlete"
-import Team from "../data/classes/Team"
+import { Search as SearchIcon } from "../../assets/icons"
+import Button from "../../components/Button"
+import Input from "../../components/Input"
+import MainLayout from "../../components/MainLayout"
+import TeamMembersTable from "../../components/Tables/TeamMembersTable"
+import Athlete from "../../data/classes/Athlete"
+import Team from "../../data/classes/Team"
 
 
 type ParamsType = {

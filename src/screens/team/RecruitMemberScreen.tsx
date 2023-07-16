@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import MainLayout from "../components/MainLayout"
+import MainLayout from "../../components/MainLayout"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-import Athlete from "../data/classes/Athlete"
-import useNotification from "../hooks/useNotification"
-import { EMPTY_TEAM_ID } from "../constants"
+import Athlete from "../../data/classes/Athlete"
+import useNotification from "../../hooks/useNotification"
+import { EMPTY_TEAM_ID } from "../../constants"
 import { useNavigate, useParams } from "react-router-dom"
-import Team from "../data/classes/Team"
-import { toSentenceCase } from "../utils/stringFunctions"
+import Team from "../../data/classes/Team"
+import { toSentenceCase } from "../../utils/stringFunctions"
 import { ask } from "@tauri-apps/api/dialog"
 
 

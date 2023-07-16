@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import MainLayout from "../components/MainLayout"
-import Input from "../components/Input"
-import Button from "../components/Button"
-import { Search as SearchIcon } from "../assets/icons"
-import TournamentsTable from "../components/Tables/TournamentsTable"
-import Tournament from "../data/classes/Tournament"
+import MainLayout from "../../components/MainLayout"
+import Input from "../../components/Input"
+import Button from "../../components/Button"
+import { Search as SearchIcon } from "../../assets/icons"
+import TournamentsTable from "../../components/Tables/TournamentsTable"
+import Tournament from "../../data/classes/Tournament"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-import useNotification from "../hooks/useNotification"
+import useNotification from "../../hooks/useNotification"
 
 
 export default function TournamentListScreen() {

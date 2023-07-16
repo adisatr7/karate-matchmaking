@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-import { Search as SearchIcon } from "../assets/icons"
-import Button from "../components/Button"
-import Input from "../components/Input"
-import MainLayout from "../components/MainLayout"
-import AthletesTable from "../components/Tables/AthletesTable"
-import Athlete from "../data/classes/Athlete"
-import Team from "../data/classes/Team"
+import { Search as SearchIcon } from "../../assets/icons"
+import Button from "../../components/Button"
+import Input from "../../components/Input"
+import MainLayout from "../../components/MainLayout"
+import AthletesTable from "../../components/Tables/AthletesTable"
+import Athlete from "../../data/classes/Athlete"
+import Team from "../../data/classes/Team"
 
 
 export default function AthleteListScreen() {
