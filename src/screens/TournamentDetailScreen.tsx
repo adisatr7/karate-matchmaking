@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Tournament from "../data/classes/Tournament"
 import { useEffect, useState } from "react"
 import MainLayout from "../components/MainLayout"
@@ -13,6 +13,7 @@ import Modal from "../components/Modal/Modal"
 import Dropdown from "../components/Dropdown"
 import { setModal } from "../store/slices/modalSlice"
 import { TournamentStatusOptions } from "../types"
+import { ask } from "@tauri-apps/api/dialog"
 
 
 type ParamsType = {
@@ -21,7 +22,9 @@ type ParamsType = {
 
 export default function TournamentDetailScreen() {
   const params = useParams<ParamsType>()
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  
   const modalStatus: string = useAppSelector(state => state.modal.showing)
 
   const [tournament, setTournament] = useState<Tournament>()
@@ -176,6 +179,24 @@ export default function TournamentDetailScreen() {
     useNotification("Berhasil", "Status pertandingan berhasil diperbarui")
   }
 
+  /**
+   * Handle the delete tournament button
+   */
+  const handleDeleteTournament = async () => {
+    const confirm = await ask("Anda juga dapat membatalkan pertandingan tanpa menghapus data pertandingan ini dengan mengganti status pertandingan menjadi \"Dibatalkan\".", { title: "Yakin ingin menghapus data pertandingan ini?", type: "warning" })
+
+    if (confirm) {
+      // Delete the tournament data
+      tournament?.delete()
+
+      // Show a notification
+      useNotification("Berhasil", "Pertandingan berhasil dihapus")
+
+      // Go back to the previous page
+      navigate("/tournament/all")
+    }
+  }
+
 
   const handleNewDivision = () => {
     
@@ -207,20 +228,30 @@ export default function TournamentDetailScreen() {
 
         {/* Buttons container */}
         <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
+
+          {/* Edit tournament desc button */}
           <Button 
             label={`${isEditMode ? "Simpan Perubahan" : "Ubah Deskripsi Pertandingan"}`} 
             onClick={handleToggleEditMode}
             className="w-fit px-[36px]"/>
-          { isEditMode &&
-            <Button 
-              label="Batal"
-              onClick={handleCancelEdit}
-              className="w-fit px-[36px]"/>
+
+          {/* Edit tournament status button  */}
+          { isEditMode 
+            ? <Button 
+                label="Batal"
+                onClick={handleCancelEdit}
+                className="w-fit px-[36px]"/>
+            : <Button 
+                onClick={() => dispatch(setModal("change-tournament-status"))}
+                label="Ubah Status Pertandingan" 
+                className="w-fit px-[36px]"/>
           }
-          { !isEditMode &&
+
+          {/* Delete tournament button - Only avaailable when the tournament hasn't been started yet  */}
+          { tournament?.getStatus() === "pendaftaran" &&
             <Button 
-              onClick={() => dispatch(setModal("change-tournament-status"))}
-              label="Ubah Status Pertandingan" 
+              label={`Hapus Pertandingan`} 
+              onClick={handleDeleteTournament}
               className="w-fit px-[36px]"/>
           }
         </div>

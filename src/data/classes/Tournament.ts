@@ -1,8 +1,9 @@
-import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
+import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
 import { TournamentStatusOptions, TournamentType } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 import Division from "./Division"
+import useNotification from "../../hooks/useNotification"
 
 export default class Tournament {
   private tournamentId: string
@@ -214,5 +215,24 @@ export default class Tournament {
     this.divisionIds = this.divisionIds.filter(
       (division) => division !== divisionId
     )
+  }
+
+  /**
+   * Delete this tournament from filesystem.
+   */
+  public async delete(): Promise<void> {
+
+    // Delete this tournament from filesystem
+    await removeFile(`tournaments/${this.tournamentId}.data`, { dir: BaseDirectory.AppData })
+
+      // Delete all divisions that belong to this tournament
+      .then(() => {
+        useNotification("Berhasil", "Data turnamen berhasil dihapus")
+      })
+
+      // If error occured, show a notification
+      .catch(err => {
+        useNotification("Gagal", `Data turnamen gagal dihapus: ${err}`)
+      })
   }
 }
