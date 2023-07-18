@@ -102,7 +102,7 @@ export default function AthleteListScreen() {
    * Handler for the "Daftarkan Atlet Baru" button.
    */
   const handleNewAthlete = () => {
-    navigate("/athlete/new/add")
+    navigate("/athlete/form/new/add")
   }
 
   return (

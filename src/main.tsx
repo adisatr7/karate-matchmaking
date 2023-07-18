@@ -13,17 +13,19 @@ import LoginScreen from "./screens/LoginScreen.tsx"
 
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
-import TournamentListScreen from "./screens/TournamentListScreen.tsx"
-import TeamListScreen from "./screens/TeamListScreen.tsx"
-import AthleteListScreen from "./screens/AthleteListScreen.tsx"
+
+import TournamentListScreen from "./screens/tournament/TournamentListScreen.tsx"
+import TeamListScreen from "./screens/team/TeamListScreen.tsx"
+import AthleteListScreen from "./screens/athlete/AthleteListScreen.tsx"
 import TournamentDetailScreen from "./screens/tournament/TournamentDetailScreen.tsx"
 import UnderConstructionScreen from "./screens/errors/UnderConstructionScreen.tsx"
 import TeamDetailScreen from "./screens/team/TeamDetailScreen.tsx"
-import AthleteProfileScreen from "./screens/AthleteProfileScreen.tsx"
+import AthleteProfileScreen from "./screens/athlete/AthleteProfileScreen.tsx"
 import AthleteFormScreen from "./screens/athlete/AthleteFormScreen.tsx"
 import JoinTeamScreen from "./screens/athlete/JoinTeamScreen.tsx"
-import TeamFormScreen from "./screens/TeamFormScreen.tsx"
+import TeamFormScreen from "./screens/team/TeamFormScreen.tsx"
 import RecruitMemberScreen from "./screens/team/RecruitMemberScreen.tsx"
+import TournamentFormScreen from "./screens/tournament/TournamentFormScreen.tsx"
 
 
 /**
@@ -57,6 +59,10 @@ const screens = createBrowserRouter([
     element: <TournamentDetailScreen/>
   },
   {
+    path: "/tournament/:tournamentId/:mode",
+    element: <TournamentFormScreen/>
+  },
+  {
     path: "/team/all",
     element: <TeamListScreen/>
   },
@@ -77,11 +83,11 @@ const screens = createBrowserRouter([
     element: <AthleteListScreen/>
   },
   {
-    path: "/athlete/:athleteId/:prevPage",
+    path: "/athlete/profile/:athleteId/:prevPage",
     element: <AthleteProfileScreen/>
   },
   {
-    path: "/athlete/:athleteId/:mode",
+    path: "/athlete/form/:athleteId/:mode",
     element: <AthleteFormScreen/>
   },
   {

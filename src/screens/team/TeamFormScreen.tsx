@@ -12,7 +12,7 @@ import { setModal } from "../../store/slices/modalSlice"
 import Modal from "../../components/Modal/Modal"
 import { CircularProgress } from "@mui/material"
 import useNotification from "../../hooks/useNotification"
-import athletePicture from "../assets/athlete3.png"
+import athletePicture from "../../assets/athlete3.png"
 import Team from "../../data/classes/Team"
 import FormTextArea from "../../components/FormTextArea"
 

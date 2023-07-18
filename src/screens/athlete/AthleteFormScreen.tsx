@@ -13,7 +13,7 @@ import { setModal } from "../../store/slices/modalSlice"
 import Modal from "../../components/Modal/Modal"
 import { CircularProgress } from "@mui/material"
 import useNotification from "../../hooks/useNotification"
-import athletePicture from "../assets/athlete3.png"
+import athletePicture from "../../assets/athlete3.png"
 
 
 type ParamsType = {
@@ -234,7 +234,7 @@ export default function AthleteFormScreen() {
     <MainLayout 
       backButton
       prevPageName={ athleteId && athlete?.getAthleteName() }
-      prevPageUrl={ athleteId ? `/athlete/${athleteId}` : `/athlete` }
+      prevPageUrl={ athleteId ? `/athlete/profile/${athleteId}/0` : `/athlete` }
       currentPageName={ 
         mode === "edit" ? "Ubah Biodata" : 
         mode === "add" ? "Daftarkan Atlet Baru" 

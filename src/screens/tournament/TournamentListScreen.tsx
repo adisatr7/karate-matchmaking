@@ -7,9 +7,12 @@ import TournamentsTable from "../../components/Tables/TournamentsTable"
 import Tournament from "../../data/classes/Tournament"
 import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
 import useNotification from "../../hooks/useNotification"
+import { useNavigate } from "react-router-dom"
 
 
 export default function TournamentListScreen() {
+  const navigate = useNavigate()
+  
   const [tournamentList, setTournamentList] = useState<Tournament[]>([])
   const [contestantAmount, setContestantAmount] = useState<number[]>([])
   
@@ -22,7 +25,7 @@ export default function TournamentListScreen() {
    */
   const fetchTournaments = async () => {
     const tournaments: Tournament[] = []
-    const totalContestants: number[] = []
+    // const totalContestants: number[] = []
 
     // Read the tournaments directory
     await readDir(
@@ -105,7 +108,7 @@ export default function TournamentListScreen() {
 
   
   const handleAddTournament = () => {
-    
+    navigate("/tournament/new/add")
   }
 
   return (
@@ -125,6 +128,7 @@ export default function TournamentListScreen() {
           className="flex-[1]"/>
         <Button 
           label="Pertandingan Baru"
+          onClick={handleAddTournament}
           className="flex-[1]"/>
       </div>
 

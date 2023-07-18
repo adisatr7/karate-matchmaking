@@ -202,7 +202,7 @@ export default function AthleteProfileScreen() {
    * Handle the button click to go to the edit profile page of the current athlete
    */
   const handleEditProfile = () => {
-    navigate(`/athlete/${athleteId}/edit`)
+    navigate(`/athlete/form/${athleteId}/edit`)
   }
 
   
