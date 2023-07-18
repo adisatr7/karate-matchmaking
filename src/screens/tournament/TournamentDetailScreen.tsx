@@ -220,11 +220,14 @@ export default function TournamentDetailScreen() {
         <p><span className={transparentTextStyle}>Status: </span>{toSentenceCase(tournament?.getStatus()! || "")}</p>
 
         {/* Tournament description */}
-        <textarea
-          onChange={(e => handleEditDesc(e.target.value, e.target.rows))}
-          value={desc}
-          rows={descTextHeight}
-          className={`${transparentTextStyle} bg-transparent w-full h-fit text-caption mb-[6px] focus:outline-none ${isEditMode ? "focus:border focus:border-primary-opaque rounded-md bg-white text-black px-[8px] py-[4px]" : "hover:cursor-default focus:caret-transparent"}`}/>
+        { isEditMode
+          ? <textarea
+              onChange={(e => handleEditDesc(e.target.value, e.target.rows))}
+              value={desc}
+              rows={descTextHeight}
+              className={`${transparentTextStyle} bg-transparent w-full h-fit text-caption mb-[6px] focus:outline-none focus:border focus:border-primary-opaque rounded-md bg-white text-black px-[8px] py-[4px]`}/>
+          : <p className={`${transparentTextStyle} text-caption mb-[6px]`}>{tournament?.getDesc()}</p>
+        }
 
         {/* Buttons container */}
         <div className="flex flex-row h-fit w-full text-caption gap-[12px]">
