@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Division from "../data/classes/Division"
+import useNotification from "../hooks/useNotification"
 import { useAppDispatch, useAppSelector } from "../store"
 import { nextSlide, previousSlide, setSlide } from "../store/slices/divisionCarouselSlice"
-import ContestantsTable from "./Tables/ContestantsTable"
 import { ContestantType, TournamentStatusOptions } from "../types"
-import useNotification from "../hooks/useNotification"
 import Button from "./Button"
+import ContestantsTable from "./Tables/ContestantsTable"
 
 
 type PropsType = {
@@ -16,6 +17,7 @@ type PropsType = {
 }
 
 export default function DivisionCarousel({ divisions, tournamentStatus }: PropsType) {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const activeSlide = useAppSelector(state => state.divisionCarousel.activeSlide)
   const [contestantsOfActiveDivision, setContestantsOfActiveDivision] = useState<ContestantType[]>([])
@@ -42,6 +44,9 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
 
   // Calls the method above when the page is loaded
   useEffect(() => {
+    if (activeSlide === 0 || activeSlide < divisions.length)
+      return
+
     dispatch(setSlide(-1))
     // updateContestantsData()
     setTimeout(() => {
@@ -74,8 +79,13 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
   }
 
 
+  /**
+   * Handle add new contestant button
+   */
   const handleNewContestant = () => {
-
+    const division = divisions[activeSlide]
+    const tournamentId: string = division.getTournamentId()
+    navigate(`/tournament/${tournamentId}/${division.getDivisionId()}/addcontestant`)
   }
 
 

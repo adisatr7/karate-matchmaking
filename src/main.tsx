@@ -26,6 +26,7 @@ import JoinTeamScreen from "./screens/athlete/JoinTeamScreen.tsx"
 import TeamFormScreen from "./screens/team/TeamFormScreen.tsx"
 import RecruitMemberScreen from "./screens/team/RecruitMemberScreen.tsx"
 import TournamentFormScreen from "./screens/tournament/TournamentFormScreen.tsx"
+import AddContestantScreen from "./screens/team/AddContestantScreen.tsx"
 
 
 /**
@@ -61,6 +62,10 @@ const screens = createBrowserRouter([
   {
     path: "/tournament/:tournamentId/:mode",
     element: <TournamentFormScreen/>
+  },
+  {
+    path: "tournament/:tournamentId/:divisionId/addcontestant",
+    element: <AddContestantScreen/>
   },
   {
     path: "/team/all",

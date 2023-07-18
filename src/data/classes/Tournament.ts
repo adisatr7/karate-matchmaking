@@ -227,12 +227,12 @@ export default class Tournament {
 
       // Delete all divisions that belong to this tournament
       .then(() => {
-        useNotification("Berhasil", "Data turnamen berhasil dihapus")
+        useNotification("Berhasil", "Data pertandingan berhasil dihapus")
       })
 
       // If error occured, show a notification
       .catch(err => {
-        useNotification("Gagal", `Data turnamen gagal dihapus: ${err}`)
+        useNotification("Gagal", `Data pertandingan gagal dihapus: ${err}`)
       })
   }
 }

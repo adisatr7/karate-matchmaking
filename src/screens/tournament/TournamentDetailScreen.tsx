@@ -189,9 +189,6 @@ export default function TournamentDetailScreen() {
       // Delete the tournament data
       tournament?.delete()
 
-      // Show a notification
-      useNotification("Berhasil", "Pertandingan berhasil dihapus")
-
       // Go back to the previous page
       navigate("/tournament/all")
     }
