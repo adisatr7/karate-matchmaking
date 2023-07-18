@@ -14,6 +14,7 @@ import Modal from "../../components/Modal/Modal"
 import { CircularProgress } from "@mui/material"
 import useNotification from "../../hooks/useNotification"
 import athletePicture from "../../assets/athlete3.png"
+import { genderToString } from "../../utils/genderToString"
 
 
 type ParamsType = {
@@ -82,23 +83,7 @@ export default function AthleteFormScreen() {
       setHeightInput(athlete.getHeight().toString())
     }
   }, [athlete])
-
-  /**
-   * Converts `m` and `f` to `Laki-laki` and `Perempuan` respectively
-   * 
-   * @returns `Laki-laki` or `Perempuan`
-   */
-    const parseGender = (): string => {
-
-      if (genderInput === "m")
-        return "Laki-laki"
   
-      else if (genderInput === "f")
-        return "Perempuan"
-  
-      else
-        return ""
-    }
 
   /**
    * Handles gender selection dropdown. Converts `Laki-laki` to `m` and `Perempuan` to `f`
@@ -157,8 +142,7 @@ export default function AthleteFormScreen() {
       return false
     }
 
-    else
-      return true
+    return true
   }
 
   
@@ -285,7 +269,7 @@ export default function AthleteFormScreen() {
             placeholder="Pilih jenis kelamin"
             options={["Laki-laki", "Perempuan"]}
             onChange={(value) => handleGenderSelect(value)}
-            value={parseGender()}/>
+            value={genderToString(genderInput)}/>
 
           <div className="flex flex-row">
             <FormInput 

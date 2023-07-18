@@ -1,6 +1,4 @@
 import { v4 as uuidv4 } from "uuid"
-import { BaseDirectory, readDir } from "@tauri-apps/api/fs"
-import useNotification from "../hooks/useNotification"
 
 
 /**

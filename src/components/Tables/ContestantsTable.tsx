@@ -70,7 +70,15 @@ export default function ContestantsTable({ division, contestants }: PropsType) {
    */
   const handleRowClick = (athleteId: string) => {
     navigate(`/athlete/profile/${athleteId}/1`)
-  } 
+  }
+
+
+  /**
+   * Handler for when the user clicks the "Tambah Peserta" button.
+   */
+  const handleNewContestant = () => {
+    navigate(`/tournament/${division.getTournamentId()}/${division.getDivisionId()}/addcontestant`)
+  }
   
 
   return (
@@ -112,7 +120,7 @@ export default function ContestantsTable({ division, contestants }: PropsType) {
         {
           contestants.length === 0 &&
           <tr className="rounded-full bg-opacity-40 hover:bg-stone-700 bg-stone-800">
-            <td className="px-[10px] text-center text-caption py-[12px] opacity-60" colSpan={headerLabels.length}>Data peserta kosong</td>
+            <td className="px-[10px] text-center text-caption py-[12px] text-gray-400" colSpan={headerLabels.length}>Data peserta kosong <span onClick={handleNewContestant} className="font-semibold text-gray-200 hover:text-white hover:underline hover:cursor-pointer">Klik disini</span> untuk mulai menambahkan peserta ke kelas ini.</td>
           </tr>
         }
       </tbody>

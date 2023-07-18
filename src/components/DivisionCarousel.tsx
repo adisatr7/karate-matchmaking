@@ -91,7 +91,7 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
 
 
   const handleNewDivision = () => {
-    
+    navigate(`/tournament/${divisions[activeSlide].getTournamentId()}/division/new`)
   }
 
   

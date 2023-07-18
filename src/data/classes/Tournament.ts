@@ -91,18 +91,16 @@ export default class Tournament {
    */
   public async getContestantAmount(): Promise<number> {
     return new Promise(async (resolve, reject) => {
-      
       // Get all divisions that belong to this tournament
       await this.getDivisions()
 
         // Get all contestants from each division
         .then(async (divisions) => {
-
           // Create a variable to store the total amount of contestants
           let totalContestantAmount = 0
 
           // Count the amount of contestants from each division
-          divisions.forEach(division => {
+          divisions.forEach((division) => {
             const contestantAmount = division.getContestantAmount()
 
             // Add the amount of contestants to the total amount
@@ -202,7 +200,7 @@ export default class Tournament {
    *
    * @param divisionId A Division ID that belongs to this tournament.
    */
-  public addDivision(divisionId: string): void {
+  public addDivisionId(divisionId: string): void {
     this.divisionIds.push(divisionId)
   }
 
@@ -211,7 +209,7 @@ export default class Tournament {
    *
    * @param divisionId A Division ID that belongs to this tournament.
    */
-  public removeDivision(divisionId: string): void {
+  public removeDivisionId(divisionId: string): void {
     this.divisionIds = this.divisionIds.filter(
       (division) => division !== divisionId
     )
@@ -221,17 +219,17 @@ export default class Tournament {
    * Delete this tournament from filesystem.
    */
   public async delete(): Promise<void> {
-
     // Delete this tournament from filesystem
-    await removeFile(`tournaments/${this.tournamentId}.data`, { dir: BaseDirectory.AppData })
-
+    await removeFile(`tournaments/${this.tournamentId}.data`, {
+      dir: BaseDirectory.AppData,
+    })
       // Delete all divisions that belong to this tournament
       .then(() => {
         useNotification("Berhasil", "Data pertandingan berhasil dihapus")
       })
 
       // If error occured, show a notification
-      .catch(err => {
+      .catch((err) => {
         useNotification("Gagal", `Data pertandingan gagal dihapus: ${err}`)
       })
   }

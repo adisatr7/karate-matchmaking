@@ -99,8 +99,7 @@ export default function TeamFormScreen() {
       return false
     }
 
-    else
-      return true
+    return true
   }
 
   

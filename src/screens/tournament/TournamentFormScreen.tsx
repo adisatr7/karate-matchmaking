@@ -83,8 +83,7 @@ export default function TournamentFormScreen() {
       return false
     }
 
-    else
-      return true
+    return true
   }
 
   
@@ -103,7 +102,7 @@ export default function TournamentFormScreen() {
     // If current mode is `add`, create new tournament
     if (mode === "add") {
       const tournament = new Tournament(
-        generateID("a"),
+        generateID("t"),
         nameInput,
         descInput,
         "pendaftaran",

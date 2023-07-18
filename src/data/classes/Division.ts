@@ -34,8 +34,8 @@ export default class Division {
   ) {
     this.divisionId = divisionId || generateID("k")
     this.tournamentId = tournamentId
-    this.gender = gender
     this.divisionName = divisionName
+    this.gender = gender
     this.contestants = contestants
     this.matchIds = matchIds
   }

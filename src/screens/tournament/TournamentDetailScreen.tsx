@@ -195,8 +195,11 @@ export default function TournamentDetailScreen() {
   }
 
 
+  /**
+   * Handle the new division button
+   */
   const handleNewDivision = () => {
-    
+    navigate(`/tournament/${tournament?.getTournamentId()}/division/new`)
   }
   
 

@@ -121,7 +121,9 @@ export default function AddContestantScreen() {
 
   // Fetch the list of athletes when the screen is loaded
   useEffect(() => {
-    fetchAthletes()
+    setTimeout(() => {
+      fetchAthletes()
+    }, 150)
   }, [currentDivision])
 
 
@@ -188,7 +190,7 @@ export default function AddContestantScreen() {
       backButton
       prevPageName={currentDivision?.getDivisionName()}
       prevPageUrl={`/tournament/${tournamentId}`}
-      currentPageName="Tambah Anggota">
+      currentPageName={`Tambah Peserta ${currentDivision?.getGender() === "m" ? "Putra" : "Putri"}`}>
 
       <p className="text-caption">{
         // TODO: Add a text that explains that athletes which team has been represented by another athlete will not be displayed
