@@ -8,6 +8,8 @@ import Division from "../../data/classes/Division"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import { ask } from "@tauri-apps/api/dialog"
 import Tournament from "../../data/classes/Tournament"
+import Team from "../../data/classes/Team"
+import { ContestantType } from "../../types"
 
 
 type ParamsType = {
@@ -16,8 +18,6 @@ type ParamsType = {
 }
 
 export default function AddContestantScreen() {
-  // TODO: Add gender filter
-  
   const navigate = useNavigate()
   const params = useParams<ParamsType>()
   const {tournamentId, divisionId} = params
@@ -25,12 +25,13 @@ export default function AddContestantScreen() {
   const [currentTournament, setCurrentTournament] = useState<Tournament>()
   const [currentDivision, setCurrentDivision] = useState<Division>()
   const [athletesList, setAthletesList] = useState<Athlete[]>([])
+  const [teamsList, setTeamsList] = useState<Team[]>([])
 
   const headerLabels: string[] = [
     "NO", 
     "NAMA ATLET",
-    // "TIM",
-    "JENIS KELAMIN",
+    "TIM",
+    // "JENIS KELAMIN",
     "USIA",
     "BERAT (Kg)"
   ]
@@ -52,6 +53,12 @@ export default function AddContestantScreen() {
     const tempData: Division = await Division.load(divisionId!)
     setCurrentDivision(tempData)
   }
+    
+  // Fetch the current tournament and division data when the screen is loaded
+  useEffect(() => {
+    fetchTournament()
+    fetchCurrentDivision()
+  }, [])
 
   
   /**
@@ -69,8 +76,16 @@ export default function AddContestantScreen() {
       // If the list is not empty, fetch the athlete data
       .then(async (result) => {
 
-        // Prepare an empty list to store the athlete data
+        // Retrieves the gender option for the current division
+        const divisionGender = currentDivision?.getGender()
+
+        // If gender is undefined, return // an error 
+        if (!divisionGender)
+          return // useNotification("Terjadi kesalahan saat memuat data atlet", `currentDivision.gender is ${currentDivision?.getGender()}`)
+
+        // Prepare an empty list to store the athlete and team data
         const athleteList: Athlete[] = []
+        const teams: Team[] = []
 
         // For each athlete, fetch the athlete data
         result.forEach(async (file) => {
@@ -78,25 +93,36 @@ export default function AddContestantScreen() {
 
           // Create an Athlete object from the athlete data
           const athlete: Athlete = await Athlete.load(athleteId!)
+          const team = await athlete.getCurrentTeam()
 
+          // Check if the athlete's gender matches the required gender to join the division
+          if (athlete.getGender() !== divisionGender)
+            return
+          
+          // Check if athlete is already registered in the current division
+          const contestants = currentDivision?.getContestantsList()
+          if (contestants?.some((contestant) => contestant.athleteId === athleteId))
+            return
+          
+          // Check if the team already has a player playing in the current division
+          if (contestants?.some((contestant) => contestant.teamId === athlete.getCurrentTeamId()))
+            return
+          
           // Push the athlete data into the list
           athleteList.push(athlete)
           setAthletesList(athleteList)
+
+          // Push the team data into the list
+          teams.push(team)
+          setTeamsList(teams)
         })
       })
   }
 
-  
-  // const fetchTeam = async (athlete: Athlete) => {
-  //   return await athlete.getCurrentTeam()
-  // }
-
-  // Fetch the list of athletes and winrate ratio when the screen is loaded
+  // Fetch the list of athletes when the screen is loaded
   useEffect(() => {
-    fetchTournament()
-    fetchCurrentDivision()
     fetchAthletes()
-  }, [])
+  }, [currentDivision])
 
 
   /**
@@ -111,24 +137,39 @@ export default function AddContestantScreen() {
     const team = await athlete.getCurrentTeam()
 
     // Ask the user to confirm the action
-    const choice = await ask(`Apakah Anda yakin ingin menambahkan ${athlete?.getAthleteName()} ke ${currentDivision?.getDivisionName()} ${currentTournament?.getTournamentName()}?`, { title: "Konfirmasi", okLabel: "Gabung", cancelLabel: "Batal" })
+    const choice = await ask(
+      `Apakah Anda yakin ingin menambahkan ${athlete?.getAthleteName()} ke ${currentDivision?.getDivisionName()} ${currentTournament?.getTournamentName()}?`, { 
+        title: "Konfirmasi", 
+        okLabel: "Gabung", 
+        cancelLabel: "Batal" 
+      })
 
     // If the user confirms, add the athlete to the team
     if (choice) {
+
+      // If current division is not loaded, return an error notification
+      if (!currentDivision) {
+        useNotification("Terjadi kesalahan saat menambahkan peserta", `currentDivision = ${JSON.stringify(currentDivision)}`)
+          return
+      }
+      
       
       // Add the selected contestant into the division
-      currentDivision?.addContestant({
+      const newContestant: ContestantType = {
         athleteId: athlete.getAthleteId(),
         athleteName: athlete.getAthleteName(),
         teamId: team.getTeamId(),
         teamName: team.getTeamName()
-      })
-
+      }
+      currentDivision.addContestant(newContestant)
+      
       // Save all changes
-      currentDivision?.save()
+      currentDivision.save()
 
       // Show the success notification
       useNotification("Berhasil", `${athlete?.getAthleteName()} berhasil ditambahkan ke tim ${currentTournament?.getTournamentName()}!`)
+
+      // Redirect to the tournament screen
       navigate(`/tournament/${tournamentId}`)
     }
   }
@@ -138,7 +179,7 @@ export default function AddContestantScreen() {
    * Handle new athlete button
    */
   const handleNewAthlete = () => {
-    navigate("/athlete/new/add")
+    navigate("/athlete/form/new/add/")
   }
   
   
@@ -148,7 +189,11 @@ export default function AddContestantScreen() {
       prevPageName={currentDivision?.getDivisionName()}
       prevPageUrl={`/tournament/${tournamentId}`}
       currentPageName="Tambah Anggota">
-        
+
+      <p className="text-caption">{
+        // TODO: Add a text that explains that athletes which team has been represented by another athlete will not be displayed
+      }</p>
+
       <table className="w-full text-white bg-opacity-50 border border-separate rounded-md table-auto h-fit bg-dark-glass border-stone-600 backdrop-blur-md font-quicksand">
     
         {/* Header */}
@@ -163,7 +208,8 @@ export default function AddContestantScreen() {
         <tbody>
           { athletesList.length > 0 ? athletesList.map((a: Athlete, athleteIndex: number) => {
 
-            // const currentTeam = fetchTeam(a)
+            const currentTeam = teamsList[athleteIndex]
+            const teamName = currentTeam?.getTeamName()
 
               // Render the table row
               return (
@@ -178,11 +224,11 @@ export default function AddContestantScreen() {
                         { 
                           label === "NO" ? athleteIndex + 1 
                             : label === "NAMA ATLET" ? toSentenceCase(a.getAthleteName())
-                            // : label === "TIM" ? currentTeam.getTeamName()Z
-                            : label === "JENIS KELAMIN" 
-                              ? a.getGender() === "m" 
-                                ? "Laki-laki" 
-                                : "Perempuan"
+                            : label === "TIM" ? teamName
+                            // : label === "JENIS KELAMIN" 
+                            //   ? a.getGender() === "m" 
+                            //     ? "Laki-laki" 
+                            //     : "Perempuan"
                             : label === "USIA" ? a.getAge()
                             : label === "BERAT (Kg)" ? a.getWeight()
                             : ""
@@ -191,7 +237,11 @@ export default function AddContestantScreen() {
                   ))}
                 </tr>
               )})
-            : <tr className="text-center"><td colSpan={headerLabels.length} className="py-4 text-gray-300 text-caption hover:bg-stone-700">Tidak ada atlet yang tersedia. Klik <span onClick={handleNewAthlete} className="font-bold text-white hover:underline hover:cursor-pointer">disini</span> untuk menambahkan data atlet baru.</td></tr>
+            : <tr className="text-center">
+                <td colSpan={headerLabels.length} className="py-4 text-gray-300 text-caption hover:bg-stone-700">
+                    Tidak ada atlet yang tersedia. Klik <span onClick={handleNewAthlete} className="font-bold text-white hover:underline hover:cursor-pointer">disini</span> untuk menambahkan data atlet baru.
+                </td>
+              </tr>
           }
         </tbody>
       </table>

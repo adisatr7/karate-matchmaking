@@ -3,7 +3,8 @@
     "tournamentId": "t-6249b55f-b49b-5548-806f-be275c1df21b",
     "divisionId": "k-e9c9137b-512f-41b1-b005-3e77ad061acf",
     "divisionName": "Kelas Kadet Putra",
-    "registeredTeams": [
+    "gender": "m",
+    "contestants": [
       {
         "athleteId": "a-8f294db8-5e71-5b6c-b3ec-6797a16b3372",
         "athleteName": "Bagus Santoso",
@@ -39,7 +40,8 @@
     "tournamentId": "t-6249b55f-b49b-5548-806f-be275c1df21b",
     "divisionId": "k-df26a3b6-d590-571e-8e19-65720190440d",
     "divisionName": "Kelas Kadet Putri",
-    "registeredTeams": [
+    "gender": "f",
+    "contestants": [
       {
         "athleteId": "a-f948fb82-3085-5b08-aafd-9bfd6f227233",
         "athleteName": "Christina Angel",
@@ -105,14 +107,16 @@
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
     "divisionId": "k-da281e11-7270-5b54-b856-6abebc0f28d7",
     "divisionName": "Kelas Under 21 - Putra",
-    "registeredTeams": [],
+    "gender": "m",
+    "contestants": [],
     "matchIds": []
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
     "divisionId": "k-30d3e47c-57b2-5baf-9037-60e62dd1602d",
     "divisionName": "Kelas Under 21 - Putri",
-    "registeredTeams": [],
+    "gender": "f",
+    "contestants": [],
     "matchIds": []
   },
 
@@ -121,28 +125,32 @@
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
     "divisionId": "k-9a167de9-3ecc-5ee8-b6a3-44c01d2a3e21",
     "divisionName": "Kelas Junior Putra",
-    "registeredTeams": [],
+    "gender": "m",
+    "contestants": [],
     "matchIds": []
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
     "divisionId": "k-a98f7593-93fe-54f6-89f7-7c6411ab3e68",
     "divisionName": "Kelas Junior Putri",
-    "registeredTeams": [],
+    "gender": "f",
+    "contestants": [],
     "matchIds": []
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
     "divisionId": "k-41e73c7c-0666-5b4e-8e6e-28a6320cacf9",
     "divisionName": "Kelas Senior Putra",
-    "registeredTeams": [],
+    "gender": "m",
+    "contestants": [],
     "matchIds": []
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
     "divisionId": "k-3751cc9e-b9f4-5286-87ad-1ecfa47bf4bf",
     "divisionName": "Kelas Senior Putri",
-    "registeredTeams": [],
+    "gender": "f",
+    "contestants": [],
     "matchIds": []
   }
 ]

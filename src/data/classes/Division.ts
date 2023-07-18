@@ -2,7 +2,7 @@ import Match from "./Match"
 import Team from "./Team"
 import Tournament from "./Tournament"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
-import { ContestantType, DivisionType } from "../../types"
+import { ContestantType, DivisionType, Gender } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 import Athlete from "./Athlete"
@@ -12,6 +12,7 @@ export default class Division {
   private tournamentId: string
   private divisionId: string
   private divisionName: string
+  private gender: Gender
   private contestants: ContestantType[]
   private matchIds: string[]
 
@@ -27,11 +28,13 @@ export default class Division {
     divisionId?: string,
     tournamentId: string = "",
     divisionName: string = "",
+    gender: Gender = "m",
     contestants: ContestantType[] = [],
     matchIds: string[] = []
   ) {
     this.divisionId = divisionId || generateID("k")
     this.tournamentId = tournamentId
+    this.gender = gender
     this.divisionName = divisionName
     this.contestants = contestants
     this.matchIds = matchIds
@@ -64,7 +67,8 @@ export default class Division {
             parsedData.divisionId,
             parsedData.tournamentId,
             parsedData.divisionName,
-            parsedData.registeredTeams,
+            parsedData.gender,
+            parsedData.contestants,
             parsedData.matchIds
           )
 
@@ -138,11 +142,19 @@ export default class Division {
   }
 
   public getDivisionName(): string {
-    return this.divisionName
+    return this.divisionName // + this.gender === "m" ? " Putra" : " Putri"
+  }
+
+  public getGender(): Gender {
+    return this.gender
   }
 
   public getContestantsList(): ContestantType[] {
     return this.contestants
+  }
+
+  public getMatchIds(): string[] {
+    return this.matchIds
   }
 
   /**
@@ -232,12 +244,16 @@ export default class Division {
     this.divisionName = name
   }
 
+  public setGender(gender: Gender): void {
+    this.gender = gender
+  }
+
   public setRegisteredTeams(registeredTeams: ContestantType[]): void {
     this.contestants = registeredTeams
   }
 
-  public addContestant(team: ContestantType): void {
-    this.contestants.push(team)
+  public addContestant(newContestant: ContestantType): void {
+    this.contestants.push(newContestant)
   }
 
   public removeContestant(team: ContestantType): void {

@@ -60,7 +60,8 @@ export type DivisionType = {
   tournamentId: string // References -> Tournament
   divisionId: string // Unique ID - Value randomized
   divisionName: string
-  registeredTeams: ContestantType[]
+  gender: Gender
+  contestants: ContestantType[]
   matchIds: string[]
 }
 

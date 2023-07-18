@@ -9,6 +9,7 @@ import { nextSlide, previousSlide, setSlide } from "../store/slices/divisionCaro
 import { ContestantType, TournamentStatusOptions } from "../types"
 import Button from "./Button"
 import ContestantsTable from "./Tables/ContestantsTable"
+// import { ask } from "@tauri-apps/api/dialog"
 
 
 type PropsType = {
@@ -92,6 +93,43 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
   const handleNewDivision = () => {
     
   }
+
+  
+  // const handleDeleteContestant = async (index: number) => {
+
+  //   const contestants = divisions[activeSlide].getContestantsList()
+
+  //   const confirm = await ask(
+  //     `Apakah anda yakin ingin menghapus ${contestants[index].athleteName} dari kelas ini?`, {
+  //       title: "Konfirmasi",
+  //       type: "warning",
+  //     })
+    
+  //   // If the user confirms the deletion, remove the athlete from the division
+  //   if (confirm) {
+
+  //     const currentDivision = divisions[activeSlide]
+      
+  //     // Create a copy of the division object
+  //     const temp = new Division(
+  //       currentDivision.getDivisionId(),
+  //       currentDivision.getTournamentId(),
+  //       currentDivision.getDivisionName(),
+  //       currentDivision.getGender(),
+  //       currentDivision.getContestantsList(),
+  //       currentDivision.getMatchIds()
+  //     )
+
+  //     // Remove the athlete from the division
+  //     const contestant: ContestantType = currentDivision.getContestantsList()[index]
+  //     temp.removeContestant(contestant)
+
+  //     // Save the division to filesystem
+  //     temp.save()
+
+  //     useNotification("Berhasil", `Peserta berhasil dikeluarkan dari kelas pertandingan ${currentDivision.getDivisionName()}`)
+  //   }
+  // }
   
   
   return (
@@ -169,7 +207,11 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
 
       {/* Content container */}
       <div className="flex flex-row w-full h-fit">
-        <ContestantsTable division={divisions[activeSlide]} contestants={contestantsOfActiveDivision}/>
+        <ContestantsTable 
+          division={divisions[activeSlide]} 
+          contestants={contestantsOfActiveDivision}
+          // handleDeleteContestant={handleDeleteContestant}
+          />
       </div>
 
     </div>

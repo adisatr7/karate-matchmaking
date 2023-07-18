@@ -2,19 +2,18 @@ import { useNavigate } from "react-router-dom"
 import { ContestantType } from "../../types"
 import { toSentenceCase } from "../../utils/stringFunctions"
 import CloseIcon from "@mui/icons-material/Close"
-import { ask } from "@tauri-apps/api/dialog"
 import Division from "../../data/classes/Division"
 import useNotification from "../../hooks/useNotification"
+import { ask } from "@tauri-apps/api/dialog"
 
 
 type PropsType = {
   division: Division
   contestants: ContestantType[]
+  // handleDeleteContestant: (index: number) => Promise<void>
 }
 
 export default function ContestantsTable({ division, contestants }: PropsType) {
-
-  // Navigation hook so the app can navigate to other screens
   const navigate = useNavigate()
 
   // Labels for the header row
@@ -26,6 +25,43 @@ export default function ContestantsTable({ division, contestants }: PropsType) {
   ]
 
   
+  const handleDeleteContestant = async (index: number) => {
+    
+    const confirm = await ask(
+      `Apakah anda yakin ingin menghapus ${contestants[index].athleteName} dari kelas ini?`, {
+        title: "Konfirmasi",
+        type: "warning",
+      })
+    
+    // If the user confirms the deletion, remove the athlete from the division
+    if (confirm) {
+      
+      // Create a copy of the division object
+      const temp = new Division(
+        division.getDivisionId(),
+        division.getTournamentId(),
+        division.getDivisionName(),
+        division.getGender(),
+        division.getContestantsList(),
+        division.getMatchIds()
+      )
+
+      // Remove the athlete from the division
+      const contestant: ContestantType = division.getContestantsList()[index]
+      temp.removeContestant(contestant)
+
+      // Save the division to filesystem
+      temp.save()
+
+      // Show notification
+      useNotification("Berhasil", `Peserta berhasil dikeluarkan dari kelas pertandingan ${division.getDivisionName()}`)
+
+      // Refresh the page
+      window.location.reload()
+    }
+  }
+
+  
   /**
    * Handler for when a row is clicked. The app will navigate to the 
    * athlete's profile screen.
@@ -35,22 +71,6 @@ export default function ContestantsTable({ division, contestants }: PropsType) {
   const handleRowClick = (athleteId: string) => {
     navigate(`/athlete/profile/${athleteId}/1`)
   } 
-
-
-  const handleDeleteContestant = async (index: number) => {
-    const confirm = await ask(
-      `Apakah anda yakin ingin menghapus ${contestants[index].athleteName} dari kelas ini?`, {
-        title: "Konfirmasi",
-        type: "warning",
-      })
-    
-    if (confirm) {
-      division.removeContestant(contestants[index])
-      division.save()
-
-      useNotification("Berhasil", `Peserta berhasil dikeluarkan dari kelas pertandingan ${division.getDivisionName()}`)
-    }
-  }
   
 
   return (
