@@ -57,11 +57,11 @@ export default function Sidebar() {
 
       {/* Middle buttons container */}
       <div className="flex flex-col h-full my-[12px] transition-all w-full">
-        <SidebarButton 
+        {/* <SidebarButton 
           icon={Icons.Highlight} 
           label="Highlight"
           path="highlight"
-          onClick={() => navigate("/highlight")}/>
+          onClick={() => navigate("/highlight")}/> */}
         <SidebarButton 
           icon={Icons.Tournaments} 
           label="Pertandingan"
