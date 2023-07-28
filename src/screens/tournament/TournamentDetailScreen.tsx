@@ -201,7 +201,7 @@ export default function TournamentDetailScreen() {
   const handleNewDivision = () => {
     navigate(`/tournament/${tournament?.getTournamentId()}/division/new`)
   }
-  
+    
 
   return (
     <MainLayout

@@ -90,8 +90,21 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
   }
 
 
+  /**
+   * Handle new division button
+   */
   const handleNewDivision = () => {
     navigate(`/tournament/${divisions[activeSlide].getTournamentId()}/division/new`)
+  }
+
+
+  /**
+   * Handle view bracket button
+   */
+  const handleViewBracket = () => {
+    const division = divisions[activeSlide]
+
+    navigate(`/tournament/${division?.getTournamentId()}/division/${division?.getDivisionId()}/bracket`)
   }
 
   
@@ -157,6 +170,7 @@ export default function DivisionCarousel({ divisions, tournamentStatus }: PropsT
 
           {/* See bracket button */}
           <Button 
+            onClick={handleViewBracket}
             label="Lihat Bagan Pertandingan"
             className="w-fit px-[24px]"/>
 

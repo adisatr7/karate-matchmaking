@@ -28,6 +28,7 @@ import RecruitMemberScreen from "./screens/team/RecruitMemberScreen.tsx"
 import TournamentFormScreen from "./screens/tournament/TournamentFormScreen.tsx"
 import AddContestantScreen from "./screens/team/AddContestantScreen.tsx"
 import DivisionFormScreen from "./screens/tournament/DivisionFormScreen.tsx"
+import BracketScreen from "./screens/tournament/BracketScreen.tsx"
 
 
 /**
@@ -48,10 +49,10 @@ const screens = createBrowserRouter([
     path: "/login",
     element: <LoginScreen/>
   },
-  {
-    path: "/highlight",
-    element: <HighlightScreen/>
-  },
+  // {
+  //   path: "/highlight",
+  //   element: <HighlightScreen/>
+  // },
   {
     path: "/tournament/all",
     element: <TournamentListScreen/>
@@ -67,6 +68,10 @@ const screens = createBrowserRouter([
   {
     path: "tournament/:tournamentId/:divisionId/addcontestant",
     element: <AddContestantScreen/>
+  },
+  {
+    path: "/tournament/:tournamentId/division/:divisionId/bracket",
+    element: <BracketScreen/>
   },
   {
     path: "tournament/:tournamentId/division/new",
