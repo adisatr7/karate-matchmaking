@@ -23,7 +23,7 @@ export default function App() {
     if (currentUser) {
       dispatch(login(currentUser))
       dispatch(collapseSidebar())
-      navigate("/tournament/all")
+      navigate("/highlight")
     }
     
     // If the user is not logged in, redirect to the login screen
