@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import MainLayout from "../../components/MainLayout"
 import Division from "../../data/classes/Division"
 import Bracket from "../../components/Bracket"
-import useNotification from "../../hooks/useNotification"
 import Match from "../../data/classes/Match"
+import TeamBlock from "../../components/Bracket/TeamBlock"
 
 
 export default function BracketScreen() {
@@ -64,7 +64,7 @@ export default function BracketScreen() {
 
   return (
     <MainLayout 
-      backButton={division ? true : false}
+      backButton
       prevPageName={division?.getDivisionName() || "Error: Gagal memuat data"}
       prevPageUrl={`/tournament/${tournamentId}` || "tournament/all"}
       currentPageName="Bagan Pertandingan">
@@ -72,12 +72,14 @@ export default function BracketScreen() {
       {/* Empty void */}
       <div className="flex w-[1px] h-[18px]"/>
 
-      { matches && matches.length > 0
-        ? <Bracket matches={matches}/> 
-        : <p className="text-center text-gray-400">
-            Kelas ini belum memiliki pertandingan. <span onClick={handleGenerateMatches} className="font-bold text-gray-300 hover:text-white hover:underline hover:cursor-pointer">Klik disini</span> untuk menambahkan pertandingan.
-          </p>
-      }
+      <div className="flex flex-col w-full overflow-x-scroll h-fit">
+        { matches && matches.length > 0
+          ? <Bracket matches={matches} finalist={division!.getFinalist()}/>
+          : <p className="text-center text-gray-400">
+              Kelas ini belum memiliki pertandingan. <span onClick={handleGenerateMatches} className="font-bold text-gray-300 hover:text-white hover:underline hover:cursor-pointer">Klik disini</span> untuk menambahkan pertandingan.
+            </p>
+        }
+      </div>
 
     </MainLayout>
   )

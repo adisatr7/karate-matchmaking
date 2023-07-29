@@ -13,7 +13,7 @@ import { MatchStatusOptions } from "../../types"
 export default function statusColor(status: MatchStatusOptions, isWinning: boolean): string {
   switch (status) {
     case "akan main":
-      return "bg-stone-500"
+      return "bg-stone-800 border border-stone-700 bg-opacity-50"
 
     case "berlangsung":
       return "bg-primary-gradient"
@@ -22,7 +22,7 @@ export default function statusColor(status: MatchStatusOptions, isWinning: boole
       if (isWinning) 
         return "bg-secondary-gradient"
       else 
-        return "bg-stone-500"
+        return "bg-stone-700 border border-stone-600 bg-opacity-50"
 
     case "dibatalkan" || "ditunda":
       return "bg-stone-800"

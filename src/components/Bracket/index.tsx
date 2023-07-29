@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import Match from "../../data/classes/Match"
 import Round from "./RoundBlock"
-import useNotification from "../../hooks/useNotification"
+import { ContestantType } from "../../types"
+import TeamBlock from "./TeamBlock"
 
 
 type PropsType = {
   matches: Match[]
+  finalist: ContestantType | null
 }
 
-export default function Bracket({ matches }: PropsType) {
+export default function Bracket({ matches, finalist }: PropsType) {
   const [roundBlocks, setRoundBlocks] = useState<any[]>([])
 
   useEffect(() => {
@@ -18,7 +20,6 @@ export default function Bracket({ matches }: PropsType) {
       let roundMatches: Match[] = filterMatchesByRound(i+1)
       tempRoundBlocks.push(roundMatches)
     }
-
 
     setRoundBlocks(tempRoundBlocks)
   }, [matches])
@@ -78,10 +79,19 @@ export default function Bracket({ matches }: PropsType) {
 
 
   return (
-    <div className="flex flex-row w-full bg-opacity-60 h-fit bg-dark-glass px-[28px] py-[24px] border border-stone-600 rounded-xl">
+    <div className="flex flex-row w-full bg-opacity-60 h-fit bg-dark-glass px-[32px] py-[36px] border border-stone-600 rounded-xl overflow-scroll">
       { roundBlocks.map((matches: Match[]) => (
         <Round matches={matches}/>
       ))}
+
+      <div className="flex flex-row items-center justify-center h-full w-fit">
+        <TeamBlock 
+          isWinning
+          isFinalist
+          score={-1}
+          name={finalist !== null ? finalist.teamName : ""} 
+          status={finalist ? "selesai" : "akan main"}/>
+      </div>
     </div>
   )
 }

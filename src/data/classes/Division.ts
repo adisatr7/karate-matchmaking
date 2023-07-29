@@ -15,6 +15,7 @@ export default class Division {
   private gender: Gender
   private contestants: ContestantType[]
   private matchIds: string[]
+  private finalist: ContestantType | null
 
   /**
    * Division constructor, used to create new Division object. Division ID
@@ -30,7 +31,8 @@ export default class Division {
     divisionName: string = "",
     gender: Gender = "m",
     contestants: ContestantType[] = [],
-    matchIds: string[] = []
+    matchIds: string[] = [],
+    finalist?: ContestantType
   ) {
     this.divisionId = divisionId || generateID("k")
     this.tournamentId = tournamentId
@@ -38,6 +40,7 @@ export default class Division {
     this.gender = gender
     this.contestants = contestants
     this.matchIds = matchIds
+    this.finalist = finalist || null
   }
 
   /**
@@ -69,7 +72,8 @@ export default class Division {
             parsedData.divisionName,
             parsedData.gender,
             parsedData.contestants,
-            parsedData.matchIds
+            parsedData.matchIds,
+            parsedData.finalist
           )
 
           // Resolve the promise with the new Division object
@@ -317,7 +321,7 @@ export default class Division {
         // For each match IDs stored by this Division
         this.matchIds.forEach(async (matchId) => {
           // Get the match data from filesystem
-          const match = await this.getMatch(matchId)
+          const match = await Match.load(matchId)
 
           // Push the data into the list created earlier
           matches.push(match)
@@ -330,6 +334,10 @@ export default class Division {
         reject(err)
       }
     })
+  }
+
+  public getFinalist(): ContestantType | null {
+    return this.finalist
   }
 
   public setName(name: string): void {
@@ -364,5 +372,9 @@ export default class Division {
 
   public removeMatchId(matchId: string): void {
     this.matchIds = this.matchIds.filter((id) => id !== matchId)
+  }
+
+  public setFinalist(finalist: ContestantType): void {
+    this.finalist = finalist
   }
 }

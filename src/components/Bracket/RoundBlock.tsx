@@ -1,5 +1,6 @@
 import Match from "../../data/classes/Match"
 import MatchBlock from "./MatchBlock"
+import TeamBlock from "./TeamBlock"
 
 
 type PropsType = {

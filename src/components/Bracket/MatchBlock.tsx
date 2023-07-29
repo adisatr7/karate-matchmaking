@@ -14,13 +14,13 @@ type PropsType = {
 
 export default function MatchBlock({ teamAName, teamAScore, teamBName="", teamBScore=-1, round, status, winner }: PropsType) {
 
-  /**
-   * The gap between two opposing team blocks that fight each other
-   * during the current match.
-   */
-  const teamBlockGap = round === 1 
-    ? 0
-    : 48 * (1.5 ** (round - 1))
+  // /**
+  //  * The gap between two opposing team blocks that fight each other
+  //  * during the current match.
+  //  */
+  // const teamBlockGap = round === 1 
+  //   ? 0
+  //   : 48 * (1.5 ** (round - 1))
 
   /**
    * The height of the line that connects two opposing team blocks
@@ -91,10 +91,10 @@ export default function MatchBlock({ teamAName, teamAScore, teamBName="", teamBS
       <div className="flex flex-col items-center justify-center h-full w-fit">
 
         {/* Team A */}
-        <div className={`w-[1px] h-[28%] ${winner === "teamA" ? "bg-secondary-opaque" : "bg-stone-500"}`}/>
+        <div className={`w-[1px] h-[28%] ${winner === "teamA" ? "bg-blue-600" : "bg-stone-500"}`}/>
 
         {/* Team B */}
-        <div className={`w-[1px] h-[28%] ${winner === "teamB" ? "bg-secondary-opaque" : "bg-stone-500"}`}/>
+        <div className={`w-[1px] h-[28%] ${winner === "teamB" ? "bg-blue-600" : "bg-stone-500"}`}/>
       </div>
 
       {/* Horizontal line */}

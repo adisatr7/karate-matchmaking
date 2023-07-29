@@ -68,7 +68,8 @@ export default class Match {
             // parsedData.playDate,
             parsedData.status,
             parsedData.winner,
-            parsedData.contestants
+            parsedData.contestants,
+            parsedData.scores
           )
 
           // Resolve the promise with the new Match object

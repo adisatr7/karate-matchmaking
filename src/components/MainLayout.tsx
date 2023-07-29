@@ -32,7 +32,7 @@ export default function MainLayout({ children, currentPageName, prevPageName, pr
 
       <div
         onClick={handleDismissSidebar}
-        className={`flex flex-1 flex-col pl-[130px] pr-[30px] py-[28px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
+        className={`flex flex-1 w-full flex-col pl-[130px] pr-[30px] py-[28px] transition-all duration-500 bg-black ${sidebarStatus === "expanded" ? "blur-sm bg-opacity-20" : "blur-0 bg-opacity-0"}`}>
 
         {/* Page header */}
         <Header 
