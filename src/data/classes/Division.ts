@@ -2,7 +2,7 @@ import Match from "./Match"
 import Team from "./Team"
 import Tournament from "./Tournament"
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
-import { ContestantType, Gender } from "../../types"
+import { ContestantType, DivisionType, Gender } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 import Athlete from "./Athlete"
@@ -60,7 +60,7 @@ export default class Division {
       })
         // If file is found, parse its content
         .then((data) => {
-          const parsedData = JSON.parse(data)
+          const parsedData: DivisionType = JSON.parse(data)
 
           // Create a new Division object
           const division = new Division(
