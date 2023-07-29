@@ -8,12 +8,11 @@ import {
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 
-
 export default class Match {
-  private divisionId: string  // References -> Division
+  private divisionId: string // References -> Division
   private matchId: string
   private matchName: string
-  private nextMatchId: string
+  // private nextMatchId: string
   private round: number
   // private playDate: Date
   private status: MatchStatusOptions
@@ -25,7 +24,7 @@ export default class Match {
     divisionId: string,
     matchId?: string,
     matchName: string = "",
-    nextMatchId: string = "",
+    // nextMatchId: string = "",
     round: number = 0,
     // playDate: Date = new Date(),
     status: MatchStatusOptions = "akan main",
@@ -36,7 +35,7 @@ export default class Match {
     this.divisionId = divisionId
     this.matchId = matchId || generateID("m-x")
     this.matchName = matchName
-    this.nextMatchId = nextMatchId
+    // this.nextMatchId = nextMatchId
     this.round = round
     // this.playDate = playDate
     this.status = status
@@ -64,7 +63,7 @@ export default class Match {
             parsedData.divisionId,
             parsedData.matchId,
             parsedData.matchName,
-            parsedData.nextMatchId,
+            // parsedData.nextMatchId,
             parsedData.round,
             // parsedData.playDate,
             parsedData.status,
@@ -117,17 +116,17 @@ export default class Match {
    *
    * @returns The next match data
    */
-  public async getNextMatch(): Promise<Match> {
-    return new Promise(async (resolve, reject) => {
-      await Match.load(this.nextMatchId)
-        .then((match: Match) => {
-          resolve(match)
-        })
-        .catch((err) => {
-          reject(err)
-        })
-    })
-  }
+  // public async getNextMatch(): Promise<Match> {
+  //   return new Promise(async (resolve, reject) => {
+  //     await Match.load(this.nextMatchId)
+  //       .then((match: Match) => {
+  //         resolve(match)
+  //       })
+  //       .catch((err) => {
+  //         reject(err)
+  //       })
+  //   })
+  // }
 
   public getDivisionId(): string {
     return this.divisionId
@@ -141,9 +140,9 @@ export default class Match {
     return this.matchName
   }
 
-  public getNextMatchId(): string {
-    return this.nextMatchId
-  }
+  // public getNextMatchId(): string {
+  //   return this.nextMatchId
+  // }
 
   public getRound(): number {
     return this.round
@@ -157,8 +156,7 @@ export default class Match {
     return this.status
   }
 
-  // TODO: May require some more thinking
-  public getWinner(): MatchWinnerOptions {
+  public getWinnerStatus(): MatchWinnerOptions {
     return this.winner
   }
 
@@ -182,9 +180,9 @@ export default class Match {
     this.matchName = newName
   }
 
-  public setNextMatchId(newId: string) {
-    this.nextMatchId = newId
-  }
+  // public setNextMatchId(newId: string) {
+  //   this.nextMatchId = newId
+  // }
 
   public setRound(newRound: number) {
     this.round = newRound

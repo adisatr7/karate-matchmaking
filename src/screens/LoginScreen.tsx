@@ -65,7 +65,7 @@ export default function LoginScreen() {
     dispatch(login(user))
     
     // Navigate to home screen
-    navigate("/highlight")
+    navigate("/tournament/all")
     
     if (currentUser)
       useNotification("Berhasil masuk", `Selamat datang, ${currentUser.name}!`)

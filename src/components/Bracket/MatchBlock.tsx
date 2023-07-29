@@ -3,7 +3,6 @@ import TeamBlock from "./TeamBlock"
 
 
 type PropsType = {
-  blockWidth: number
   teamAName: string
   teamAScore: number
   teamBName?: string
@@ -13,7 +12,7 @@ type PropsType = {
   winner: MatchWinnerOptions
 }
 
-export default function MatchBlock({ blockWidth, teamAName, teamAScore, teamBName="", teamBScore=-1, round, status, winner }: PropsType) {
+export default function MatchBlock({ teamAName, teamAScore, teamBName="", teamBScore=-1, round, status, winner }: PropsType) {
 
   /**
    * The gap between two opposing team blocks that fight each other
@@ -48,40 +47,58 @@ export default function MatchBlock({ blockWidth, teamAName, teamAScore, teamBNam
 
 
   return (
-    <div className={`flex flex-row gap-[${teamBlockGap}px] justify-center h-full w-fit items-center`}>
+    <div className={`flex flex-row justify-center h-full w-fit items-center`}>
 
       {/* Block container */}
-      <div className="flex flex-col h-full w-fit">
-        { contestants.map((contestant, index) => (
-          <TeamBlock 
-            blockWidth={blockWidth}
-            name={contestant.name}
-            score={contestant.score}
-            status={status}
-            isWinning={
-              // Team A is winning
-              (index === 0 && winner === "teamA") || 
+      <div className="flex flex-col justify-center h-full w-fit">
+          { contestants.map((contestant, index) => {
 
-              // Team B is winning
-              (index === 1 && winner === "teamB") ||
+            // Iteration helper for the gap div
+            const roundArray = []
+            let i = 1
+            while (i < round) {
+              for (let j=0; j<=i; j++)
+                roundArray.push(i)
+              i++
+            }
+            
+            return (
+              <>
+                <TeamBlock 
+                  key={index}
+                  name={contestant.name}
+                  score={contestant.score}
+                  status={status}
+                  isWinning={
+                    // Team A is winning
+                    (index === 0 && winner === "teamA") || 
+
+                    // Team B is winning
+                    (index === 1 && winner === "teamB")}/>
+                
+                {/* Gap between the two teams that are fighting */}
+                { index === 0 && roundArray.map(() => (
+                  <div className="flex flex-col h-[36px] w-full"/>
+                ))}
+              </>
               
-              // Team A is winning by default (bye)
-              (index === 0 && status === "bye")}/>
-        ))}
+              // // Team A is winning by default (bye)
+              // (index === 0 && status === "bye")
+        )})}
       </div>
 
       {/* Vertical lines */}
-      <div className="flex flex-col h-full w-fit my-[36px] items-center justify-center">
+      <div className="flex flex-col items-center justify-center h-full w-fit">
 
         {/* Team A */}
-        <div className={`w-1 h-full ${winner === "teamA" ? "bg-secondary-opaque" : "bg-stone-700"}`}/>
+        <div className={`w-[1px] h-[28%] ${winner === "teamA" ? "bg-secondary-opaque" : "bg-stone-500"}`}/>
 
         {/* Team B */}
-        <div className={`w-1 h-full ${winner === "teamB" ? "bg-secondary-opaque" : "bg-stone-700"}`}/>
+        <div className={`w-[1px] h-[28%] ${winner === "teamB" ? "bg-secondary-opaque" : "bg-stone-500"}`}/>
       </div>
 
       {/* Horizontal line */}
-      <div className={`w-[${blockWidth}px] h-[1px] ${status === "akan main" ? "bg-stone-800" : status === "selesai" ? "bg-secondary-opaque" : ""}`}/>
+      <div className={`w-[24px] h-[1px] ${status === "akan main" || status === "berlangsung" ? "bg-stone-500" : status === "selesai" ? "bg-secondary-opaque" : ""}`}/>
     </div>
   )
 }

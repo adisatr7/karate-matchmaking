@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Match from "../../data/classes/Match"
 import Round from "./RoundBlock"
+import useNotification from "../../hooks/useNotification"
 
 
 type PropsType = {
@@ -18,6 +19,7 @@ export default function Bracket({ matches }: PropsType) {
       tempRoundBlocks.push(roundMatches)
     }
 
+
     setRoundBlocks(tempRoundBlocks)
   }, [matches])
 
@@ -28,7 +30,7 @@ export default function Bracket({ matches }: PropsType) {
    * 
    * @returns The width of a single match block in pixels.
    */
-  const calculateBlockWidth = (): number => {
+  const getLongestName = (): number => {
 
     // Get only the matches from the first round to not waste time
     const firstRoundMatches = matches.filter(match => match.getRound() === 1)
@@ -44,9 +46,8 @@ export default function Bracket({ matches }: PropsType) {
     })
 
     // Return the width of a single match block
-    return longestTeamName + 48
+    return longestTeamName
   }
-
 
   /**
    * Calculate the height of a single round block based on the number.
@@ -77,9 +78,9 @@ export default function Bracket({ matches }: PropsType) {
 
 
   return (
-    <div className="flex flex-row h-fit w-fit">
+    <div className="flex flex-row w-full h-fit">
       { roundBlocks.map((matches: Match[]) => (
-        <Round matches={matches} blockWidth={calculateBlockWidth()}/>
+        <Round matches={matches}/>
       ))}
     </div>
   )

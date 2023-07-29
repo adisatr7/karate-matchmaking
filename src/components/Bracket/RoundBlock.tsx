@@ -4,23 +4,22 @@ import MatchBlock from "./MatchBlock"
 
 type PropsType = {
   matches: Match[]
-  blockWidth: number
 }
 
-export default function Round({ matches, blockWidth }: PropsType) {
+export default function Round({ matches }: PropsType) {
 
   
   const currentRound = matches[0].getRound()
 
-  /**
-   * Vertical margin, just to make sure the bracket is centered.
-   */
-  const verticalMargin = currentRound === 1
-    ? 0
-    : 18 * (currentRound - 1)
+  // /**
+  //  * Vertical margin, just to make sure the bracket is centered.
+  //  */
+  // const verticalMargin = currentRound === 1
+  //   ? 0
+  //   : 18 * (currentRound - 1)
 
   return (
-    <div className={`flex flex-col h-full w-fit justify-between my-[${verticalMargin}px]`}>
+    <div className={`flex flex-col h-full w-fit gap-[36px]`}>
       { matches.map(match => {
 
         const matchAName = match.getContestants()[0].teamName
@@ -30,14 +29,13 @@ export default function Round({ matches, blockWidth }: PropsType) {
 
         return (
           <MatchBlock 
-            blockWidth={blockWidth}
             teamAName={matchAName}
             teamAScore={matchAScore}
             teamBName={matchBName}
             teamBScore={matchBScore}
             round={currentRound}
             status={match.getStatus()}
-            winner={match.getWinner()}/>
+            winner={match.getWinnerStatus()}/>
         )
       })}
     </div>

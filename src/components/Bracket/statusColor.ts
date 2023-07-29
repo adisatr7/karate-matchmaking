@@ -19,11 +19,13 @@ export default function statusColor(status: MatchStatusOptions, isWinning: boole
       return "bg-primary-gradient"
 
     case "selesai":
-      if (isWinning) return "bg-secondary-gradient"
-      else return "bg-stone-500"
+      if (isWinning) 
+        return "bg-secondary-gradient"
+      else 
+        return "bg-stone-500"
 
     case "dibatalkan" || "ditunda":
-      return "bg-stone-500"
+      return "bg-stone-800"
 
     default:
       useNotification(

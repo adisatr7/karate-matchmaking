@@ -26,7 +26,9 @@ export default function BracketScreen() {
 
   // Fetch division data when the component mounts
   useEffect(() => {
-    fetchDivision()
+    setTimeout(() => {
+      fetchDivision()
+    }, 300)
   }, [])
 
 
@@ -37,9 +39,14 @@ export default function BracketScreen() {
     if (!division)
       return
 
-    await division.getMatches()
-      .then(matches => setMatches(matches))
-      .catch(err => useNotification("Terjadi kesalahan saat mengambil data pertandingan", err))
+      const divisionMatches: Match[] = []
+      const matchIds: string[] = division.getMatchIds()
+    
+    for (let i=0; i<matchIds.length; i++) {
+      const match = await Match.load(matchIds[i])
+      divisionMatches.push(match)
+    }
+    setMatches(divisionMatches)
   }
 
   // Fetch matches data when the division state changes
@@ -47,9 +54,12 @@ export default function BracketScreen() {
     fetchMatches()
   }, [division])
 
-
+  
   const handleGenerateMatches = async () => {
-    // TODO: Implement
+    if (!division)
+      return
+
+    division.generateMatches()
   }
 
   return (
@@ -59,10 +69,10 @@ export default function BracketScreen() {
       prevPageUrl={`/tournament/${tournamentId}` || "tournament/all"}
       currentPageName="Bagan Pertandingan">
 
-      { matches 
+      { matches && matches.length > 0
         ? <Bracket matches={matches}/> 
-        : <p className="text-center text-gray-500">
-            Kelas ini belum memiliki pertandingan. <span onClick={handleGenerateMatches} className="font-bold hover:underline hover:cursor-pointer">Klik disini</span> untuk menambahkan pertandingan.
+        : <p className="text-center text-gray-400">
+            Kelas ini belum memiliki pertandingan. <span onClick={handleGenerateMatches} className="font-bold text-gray-300 hover:text-white hover:underline hover:cursor-pointer">Klik disini</span> untuk menambahkan pertandingan.
           </p>
       }
 

@@ -83,24 +83,116 @@ export default class Division {
     })
   }
 
-  // TODO: Implement match randomizer based on how many teams are registered
+  /**
+   * Generate matches for this division all the way to the final match.
+   * Future matches are created but have no contestants yet.
+   */
+  public generateMatches(): void {
+    // Calculate the amount of rounds needed based on the amount of contestants
+    const rounds = Math.ceil(Math.log2(this.contestants.length))
 
-  public async getMatch(matchId: string): Promise<Match> {
-    return new Promise(async (resolve, reject) => {
-      // Read match data from filesystem
-      await readTextFile(`matches/${matchId}.data`)
-        // If match data is found, resolve the promise
-        .then(async (matchData) => {
-          const match: Match = await Match.load(matchData)
-          resolve(match)
-        })
+    // Create an empty list to store the matches
+    const matches: Match[] = []
+    let game = 0
 
-        // If match data is not found, reject the promise
-        .catch((err) => {
-          reject(err)
-        })
+    // For each round
+    for (let round = 0; round < rounds; round++) {
+      // Calculate the amount of matches in this round
+      const matchesInRound = Math.ceil(this.contestants.length / Math.pow(2, round + 1))
+
+      // For each match in this round
+      for (let match = 0; match < matchesInRound; match++) {
+        // // Check if there are enough contestants to create a regular match
+        // if (this.contestants.length > match * 2 + 1) {
+
+        // Create a new match
+        const newMatch = new Match(
+          this.divisionId,
+          generateID(`m-${game}`),
+          this.generateMatchName(game, this.contestants.length),
+          // "Placeholder: NextMatchID",
+          round,
+          "akan main",
+          "tbd",
+          [this.contestants[match * 2], this.contestants[match * 2 + 1]],
+          [0, 0]
+        )
+
+        // Add the new match to the list
+        matches.push(newMatch)
+        // } 
+        
+        // // If there are not enough contestants, create a bye match
+        // else {
+        //   const byeMatch = new Match(this.divisionId)
+        //   byeMatch.setBye(true)
+
+        //   // Add the bye match to the list
+        //   matches.push(byeMatch)
+        // }
+      }
+    }
+
+    // Save the matches into filesystem
+    matches.forEach((match) => {
+      match.save()
     })
   }
+
+  /**
+   * Generate match name.
+   * 
+   * @param currentMatchNumber Current match number, starting from 0
+   * @param totalMatches Total amount of matches in this division
+   * 
+   * @returns Match name
+   */
+  private generateMatchName(currentMatchNumber: number, totalMatches: number): string {
+    // Qualification round
+    if (currentMatchNumber <= totalMatches / 2) {
+      return `Babak Penyisihan ${currentMatchNumber}`
+    }
+
+    // Quarter final
+    else if (currentMatchNumber <= totalMatches * 0.75) {
+      return `Perempat Final ${currentMatchNumber - totalMatches / 2}`
+    }
+
+    // Semi final
+    else if (currentMatchNumber <= totalMatches * 0.875) {
+      return `Semi Final ${currentMatchNumber - totalMatches * 0.75}`
+    }
+
+    // Final
+    else if (currentMatchNumber <= totalMatches * 0.9375) {
+      return `Final ${currentMatchNumber - totalMatches * 0.875}`
+    }
+
+    return `Pertandingan ke-${currentMatchNumber +1}`
+  }
+
+  // /**
+  //  * Generate match name for all matches in this division.
+  //  * 
+  //  * @param matchId Match ID
+  //  * @returns Match object 
+  //  */
+  // public async getMatch(matchId: string): Promise<Match> {
+  //   return new Promise(async (resolve, reject) => {
+  //     // Read match data from filesystem
+  //     await readTextFile(`matches/${matchId}.data`)
+  //       // If match data is found, resolve the promise
+  //       .then(async (matchData) => {
+  //         const match: Match = await Match.load(matchData)
+  //         resolve(match)
+  //       })
+
+  //       // If match data is not found, reject the promise
+  //       .catch((err) => {
+  //         reject(err)
+  //       })
+  //   })
+  // }
 
   /**
    * Get the tournament data this division belongs to.
