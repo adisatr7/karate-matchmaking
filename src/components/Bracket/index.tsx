@@ -24,30 +24,30 @@ export default function Bracket({ matches }: PropsType) {
   }, [matches])
 
 
-  /**
-   * Calculate the width of a single match block based on the length
-   * of the longest team name.
-   * 
-   * @returns The width of a single match block in pixels.
-   */
-  const getLongestName = (): number => {
+  // /**
+  //  * Calculate the width of a single match block based on the length
+  //  * of the longest team name.
+  //  * 
+  //  * @returns The width of a single match block in pixels.
+  //  */
+  // const getLongestName = (): number => {
 
-    // Get only the matches from the first round to not waste time
-    const firstRoundMatches = matches.filter(match => match.getRound() === 1)
+  //   // Get only the matches from the first round to not waste time
+  //   const firstRoundMatches = matches.filter(match => match.getRound() === 1)
 
-    // Iterate over the matches and find the longest team name
-    let longestTeamName: number = 0
-    firstRoundMatches.forEach(match => {
-      match.getContestants().forEach(contestant => {
-        if (contestant.teamName.length > longestTeamName) {
-          longestTeamName = contestant.teamName.length
-        }
-      })
-    })
+  //   // Iterate over the matches and find the longest team name
+  //   let longestTeamName: number = 0
+  //   firstRoundMatches.forEach(match => {
+  //     match.getContestants().forEach(contestant => {
+  //       if (contestant.teamName.length > longestTeamName) {
+  //         longestTeamName = contestant.teamName.length
+  //       }
+  //     })
+  //   })
 
-    // Return the width of a single match block
-    return longestTeamName
-  }
+  //   // Return the width of a single match block
+  //   return longestTeamName
+  // }
 
   /**
    * Calculate the height of a single round block based on the number.
@@ -78,7 +78,7 @@ export default function Bracket({ matches }: PropsType) {
 
 
   return (
-    <div className="flex flex-row w-full h-fit">
+    <div className="flex flex-row w-full bg-opacity-60 h-fit bg-dark-glass px-[28px] py-[24px] border border-stone-600 rounded-xl">
       { roundBlocks.map((matches: Match[]) => (
         <Round matches={matches}/>
       ))}

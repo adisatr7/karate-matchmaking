@@ -69,6 +69,9 @@ export default function BracketScreen() {
       prevPageUrl={`/tournament/${tournamentId}` || "tournament/all"}
       currentPageName="Bagan Pertandingan">
 
+      {/* Empty void */}
+      <div className="flex w-[1px] h-[18px]"/>
+
       { matches && matches.length > 0
         ? <Bracket matches={matches}/> 
         : <p className="text-center text-gray-400">

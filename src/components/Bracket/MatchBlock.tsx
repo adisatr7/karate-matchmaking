@@ -98,7 +98,7 @@ export default function MatchBlock({ teamAName, teamAScore, teamBName="", teamBS
       </div>
 
       {/* Horizontal line */}
-      <div className={`w-[24px] h-[1px] ${status === "akan main" || status === "berlangsung" ? "bg-stone-500" : status === "selesai" ? "bg-secondary-opaque" : ""}`}/>
+      <div className={`w-[24px] h-[1px] ${status === "akan main" || status === "berlangsung" ? "bg-stone-500" : status === "selesai" ? "bg-blue-600" : ""}`}/>
     </div>
   )
 }
