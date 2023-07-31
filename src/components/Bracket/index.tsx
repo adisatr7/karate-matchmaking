@@ -85,12 +85,13 @@ export default function Bracket({ matches, finalist }: PropsType) {
       ))}
 
       <div className="flex flex-row items-center justify-center h-full w-fit">
-        <TeamBlock 
+        <TeamBlock
+          matchId="" 
           isWinning
           isFinalist
           score={-1}
           name={finalist !== null ? finalist.teamName : ""} 
-          status={finalist ? "selesai" : "akan main"}/>
+          status={finalist ? "berlangsung" : "akan main"}/>
       </div>
     </div>
   )

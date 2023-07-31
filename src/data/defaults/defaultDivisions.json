@@ -34,7 +34,13 @@
       "m-7a73d4e2-48a6-5e29-8907-7b976e3652f3",
       "m-306de408-4379-54b0-98bf-0feffcce7b2d",
       "m-b927d4fe-be1c-5072-94da-15caffd3af1b"
-    ]
+    ],
+    "finalist": {
+      "athleteId": "a-8f294db8-5e71-5b6c-b3ec-6797a16b3372",
+      "athleteName": "Bagus Santoso",
+      "teamId": "t-5d2bba89-1c67-56b8-9623-64d3a5ee2115",
+      "teamName": "Samurai Karate Club"
+    }
   },
   {
     "tournamentId": "t-6249b55f-b49b-5548-806f-be275c1df21b",
@@ -99,7 +105,8 @@
       "m-c9f23144-0b0d-5671-a80b-a63624e18639",
       "m-efdae038-b490-53e4-99c9-db4d2e33b0bb",
       "m-4f6f317d-149b-5b9c-b32e-a998d564836e"
-    ]
+    ],
+    "finalist": null
   },
 
 
@@ -109,7 +116,8 @@
     "divisionName": "Kelas Under 21 - Putra",
     "gender": "m",
     "contestants": [],
-    "matchIds": []
+    "matchIds": [],
+    "finalist": null
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
@@ -117,7 +125,8 @@
     "divisionName": "Kelas Under 21 - Putri",
     "gender": "f",
     "contestants": [],
-    "matchIds": []
+    "matchIds": [],
+    "finalist": null
   },
 
 
@@ -127,7 +136,8 @@
     "divisionName": "Kelas Junior Putra",
     "gender": "m",
     "contestants": [],
-    "matchIds": []
+    "matchIds": [],
+    "finalist": null
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
@@ -135,7 +145,8 @@
     "divisionName": "Kelas Junior Putri",
     "gender": "f",
     "contestants": [],
-    "matchIds": []
+    "matchIds": [],
+    "finalist": null
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
@@ -143,7 +154,8 @@
     "divisionName": "Kelas Senior Putra",
     "gender": "m",
     "contestants": [],
-    "matchIds": []
+    "matchIds": [],
+    "finalist": null
   },
   {
     "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
@@ -151,6 +163,7 @@
     "divisionName": "Kelas Senior Putri",
     "gender": "f",
     "contestants": [],
-    "matchIds": []
+    "matchIds": [],
+    "finalist": null
   }
 ]

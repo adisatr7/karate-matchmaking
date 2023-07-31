@@ -1,6 +1,11 @@
 import Athlete from "./Athlete"
 import Match from "./Match"
-import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
+import {
+  BaseDirectory,
+  readDir,
+  readTextFile,
+  removeFile,
+} from "@tauri-apps/api/fs"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 
@@ -39,11 +44,14 @@ export default class MatchHistory {
   }
 
   /**
-   *
+   * Load all MatchHistory data from filesystem.
+   * 
    * @param matchHistoryId
    * @returns
    */
-  public static async load(matchHistoryId: string): Promise<MatchHistory> {
+  public static async loadByHistoryId(
+    matchHistoryId: string
+  ): Promise<MatchHistory> {
     return new Promise(async (resolve, reject) => {
       // Read from filesystem
       await readTextFile(`matchHistory/${matchHistoryId}.data`, {
@@ -72,6 +80,31 @@ export default class MatchHistory {
         .catch((err) => {
           reject(err)
         })
+    })
+  }
+
+  /**
+   * Load all MatchHistory data from filesystem.
+   * 
+   * @param athleteId Athlete ID to load MatchHistory data from.
+   * @param matchId Match ID to load MatchHistory data from.
+   * 
+   * @returns Promise that resolves to an array of MatchHistory objects
+   */
+  public static async loadByMatchId(
+    athleteId: string,
+    matchId: string
+  ): Promise<MatchHistory> {
+    return new Promise(async (resolve, reject) => {
+      const athlete = await Athlete.load(athleteId)
+      const matchHistories = await athlete.getMatchHistories()
+
+      matchHistories.forEach(async (matchHistory) => {
+        if (matchHistory.getMatchId() === matchId) {
+          resolve(matchHistory)
+        }
+      })
+      reject("MatchHistory not found")
     })
   }
 
@@ -172,17 +205,21 @@ export default class MatchHistory {
 
   public setIsWinning(isWinning: boolean): void {
     this.isWinning = isWinning
+    this.save()
   }
 
   public setYuko(newScore: number): void {
     this.yuko = newScore
+    this.save()
   }
 
   public setWazari(newScore: number): void {
     this.wazari = newScore
+    this.save()
   }
 
   public setIppon(newScore: number): void {
     this.ippon = newScore
+    this.save()
   }
 }

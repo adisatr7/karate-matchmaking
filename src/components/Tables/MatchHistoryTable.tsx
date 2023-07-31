@@ -32,7 +32,7 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
       <tbody>
         { matchHistory.length > 0 ? matchHistory.map((mh: MatchHistory, historyIndex: number) => {
 
-          const time = matches[historyIndex]?.getPlayDate() || ""
+          const time: string = matches[historyIndex]?.getPlayDate().toString() || ""
 
             // Render the table row
             return (
@@ -43,8 +43,7 @@ export default function MatchHistoryTable({ matchHistory, matches }: PropsType) 
                 {/* Render table cells based on the header labels */}
                 { headerLabels.map((label: string, rowIndex: number) => (
                     <td key={rowIndex} className={`px-[10px] py-[4px]`}>
-                      { 
-                        label === "NO" ? historyIndex + 1 
+                      { label === "NO" ? historyIndex + 1 
                           : label === "WAKTU TANDING" ? time
                           : label === "STATUS" 
                             ? mh.getIsWinning() 

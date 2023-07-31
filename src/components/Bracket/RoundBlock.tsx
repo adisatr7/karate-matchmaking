@@ -30,6 +30,7 @@ export default function Round({ matches }: PropsType) {
 
         return (
           <MatchBlock 
+            matchId={match.getMatchId()}
             teamAName={matchAName}
             teamAScore={matchAScore}
             teamBName={matchBName}

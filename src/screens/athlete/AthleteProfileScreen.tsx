@@ -278,7 +278,7 @@ export default function AthleteProfileScreen() {
 
               {/* Radar chart */}
               <div className="flex flex-col w-full">
-                <PerformanceChart performanceData={performance}/>
+                <PerformanceChart performanceData={performance!}/>
                 {/* <div className="flex flex-row items-center justify-center text-white rounded-full bg-opacity-80 h-[200px] w-[200px] bg-dark-glass">Placeholder</div> */}
               </div>
             </div>

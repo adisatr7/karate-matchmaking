@@ -3,6 +3,7 @@ import TeamBlock from "./TeamBlock"
 
 
 type PropsType = {
+  matchId: string
   teamAName: string
   teamAScore: number
   teamBName?: string
@@ -12,7 +13,7 @@ type PropsType = {
   winner: MatchWinnerOptions
 }
 
-export default function MatchBlock({ teamAName, teamAScore, teamBName="", teamBScore=-1, round, status, winner }: PropsType) {
+export default function MatchBlock({ matchId, teamAName, teamAScore, teamBName="", teamBScore=-1, round, status, winner }: PropsType) {
 
   // /**
   //  * The gap between two opposing team blocks that fight each other
@@ -65,6 +66,7 @@ export default function MatchBlock({ teamAName, teamAScore, teamBName="", teamBS
             return (
               <>
                 <TeamBlock 
+                  matchId={matchId}
                   key={index}
                   name={contestant.name}
                   score={contestant.score}

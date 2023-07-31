@@ -33,7 +33,7 @@ export default function TeamMembersTable({ data: athletesList, winRates }: Props
    */
   const handleRowClick = (athleteId: string) => {
     dispatch(setCurrentPath(""))
-    navigate(`/athlete/${athleteId}`)
+    navigate(`/athlete/profile/${athleteId}/1`)
   }
 
   return (

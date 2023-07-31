@@ -110,7 +110,7 @@ export default class Athlete {
       // Delete all match histories related to this athlete
       await Promise.all(
         this.matchHistoryIds.map(async (id) => {
-          return await MatchHistory.load(id)
+          return await MatchHistory.loadByHistoryId(id)
         })
       ).then((matchHistories) => {
         matchHistories.forEach((matchHistory) => {
@@ -139,7 +139,7 @@ export default class Athlete {
         // Load all match histories
         const matchHistories = await Promise.all(
           this.matchHistoryIds.map(async (id) => {
-            return await MatchHistory.load(id)
+            return await MatchHistory.loadByHistoryId(id)
           })
         )
 
@@ -167,25 +167,21 @@ export default class Athlete {
    */
   public async getWinRateRatio(): Promise<number> {
     return new Promise(async (resolve, reject) => {
-        // Get total wins
-        await this.calculateTotalWins()
-          .then((totalWins: number) => {
+      // Get total wins
+      await this.calculateTotalWins()
+        .then((totalWins: number) => {
+          // Calculate win rate
+          const winrate = totalWins / this.matchHistoryIds.length
 
-            // Calculate win rate
-            const winrate = totalWins / this.matchHistoryIds.length
-    
-            // Resolve the promise
-            if (winrate)
-              resolve(winrate)
-              
-            else
-              resolve(0)
-          })
+          // Resolve the promise
+          if (winrate) resolve(winrate)
+          else resolve(0)
+        })
 
-          .catch(err => {
-            reject(err)
-            useNotification("Winrate rejected")
-          })
+        .catch((err) => {
+          reject(err)
+          useNotification("Winrate rejected")
+        })
     })
   }
 
@@ -224,7 +220,7 @@ export default class Athlete {
         // Load all match histories
         const matchHistories = await Promise.all(
           this.matchHistoryIds.map(async (id) => {
-            return await MatchHistory.load(id)
+            return await MatchHistory.loadByHistoryId(id)
           })
         )
 
@@ -254,7 +250,7 @@ export default class Athlete {
         // Load all match histories
         const matchHistories = await Promise.all(
           this.matchHistoryIds.map(async (id) => {
-            return await MatchHistory.load(id)
+            return await MatchHistory.loadByHistoryId(id)
           })
         )
 
@@ -284,7 +280,7 @@ export default class Athlete {
         // Load all match histories
         const matchHistories = await Promise.all(
           this.matchHistoryIds.map(async (id) => {
-            return await MatchHistory.load(id)
+            return await MatchHistory.loadByHistoryId(id)
           })
         )
 
@@ -335,7 +331,7 @@ export default class Athlete {
       // Load all match histories
       await Promise.all(
         this.matchHistoryIds.map(async (id) => {
-          return await MatchHistory.load(id)
+          return await MatchHistory.loadByHistoryId(id)
         })
       )
 
@@ -376,17 +372,14 @@ export default class Athlete {
       const birthYear = this.getTtl().split(",")[1].split(" ")[3]
 
       return currentYear - parseInt(birthYear)
-    }
+    } catch (err) {
+      useNotification(
+        "Terjadi kesalahan saat menghitung umur",
+        `Data TTL mungkin tidak menggunakan format yang benar (${this.getTtl()})`
+      )
 
-    catch (err) {
-        useNotification(
-          "Terjadi kesalahan saat menghitung umur", 
-          `Data TTL mungkin tidak menggunakan format yang benar (${this.getTtl()})`
-        )
-        
       return -1
     }
-
   }
   public getWeight(): number {
     return this.weight

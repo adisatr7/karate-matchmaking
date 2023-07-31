@@ -29,6 +29,7 @@ import TournamentFormScreen from "./screens/tournament/TournamentFormScreen.tsx"
 import AddContestantScreen from "./screens/team/AddContestantScreen.tsx"
 import DivisionFormScreen from "./screens/tournament/DivisionFormScreen.tsx"
 import BracketScreen from "./screens/tournament/BracketScreen.tsx"
+import MatchScreen from "./screens/MatchScreen.tsx"
 
 
 /**

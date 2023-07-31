@@ -150,7 +150,7 @@
     "matchId": "m-efdae038-b490-53e4-99c9-db4d2e33b0bb",
     "isWinning": false,
     "yuko": 0,
-    "wazari": 1,
+    "wazari": 0,
     "ippon": 0
   },
   {
@@ -158,7 +158,7 @@
     "athleteId": "a-db372005-6a67-5a7a-b89b-994994ea86bc",
     "matchId": "m-efdae038-b490-53e4-99c9-db4d2e33b0bb",
     "isWinning": false,
-    "yuko": 2,
+    "yuko": 0,
     "wazari": 0,
     "ippon": 0
   }

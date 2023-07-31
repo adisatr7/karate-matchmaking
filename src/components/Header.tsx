@@ -1,20 +1,37 @@
 import { Link, useNavigate } from "react-router-dom"
 import ProfileButton from "./ProfileButton"
 import BackButton from "./BackButton"
+import { useAppDispatch } from "../store"
+import { collapseSidebar } from "../store/slices/sidebarSlice"
 
 
 type PropsType = {
-  currentPageName: string,
-  prevPageName?: string,
-  prevPageUrl?: string,
+  currentPageName: string
+  prevPageName?: string
+  prevPageUrl?: string
   backButton?: boolean
+  hideProfileButton?: boolean
 }
 
-export default function Header({ currentPageName, prevPageName, prevPageUrl, backButton }: PropsType) {
+export default function Header({ currentPageName, prevPageName, prevPageUrl, backButton, hideProfileButton }: PropsType) {
+
+  /**
+   * React router's navigate function.
+   */
   const navigate = useNavigate()
 
+  /**
+   * Redux's dispatch function.
+   */
+  const dispatch = useAppDispatch()
 
+
+  /**
+   * Handles the click event on the prev page button.
+   */
   const handleGoToPrevPage = () => {
+    dispatch(collapseSidebar())
+
     if (prevPageUrl)
       navigate(prevPageUrl)
 
@@ -49,7 +66,9 @@ export default function Header({ currentPageName, prevPageName, prevPageUrl, bac
         }
         <h1 className="font-bold text-white font-quicksand text-heading">{currentPageName}</h1>
       </div>
-      <ProfileButton/>
+      { !hideProfileButton &&
+        <ProfileButton/>
+      }
     </div>
   )
 }
