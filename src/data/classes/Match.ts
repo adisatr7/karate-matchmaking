@@ -14,7 +14,7 @@ export default class Match {
   private matchName: string
   // private nextMatchId: string
   private round: number
-  // private playDate: Date
+  private playDate: Date
   private status: MatchStatusOptions
   private winner: MatchWinnerOptions
   private contestants: ContestantType[]
@@ -26,7 +26,7 @@ export default class Match {
     matchName: string = "",
     // nextMatchId: string = "",
     round: number = 0,
-    // playDate: Date = new Date(),
+    playDate: Date = new Date(),
     status: MatchStatusOptions = "akan main",
     winner: MatchWinnerOptions = "tbd",
     contestants: ContestantType[] = [],
@@ -37,7 +37,7 @@ export default class Match {
     this.matchName = matchName
     // this.nextMatchId = nextMatchId
     this.round = round
-    // this.playDate = playDate
+    this.playDate = playDate
     this.status = status
     this.winner = winner
     this.contestants = contestants
@@ -65,7 +65,7 @@ export default class Match {
             parsedData.matchName,
             // parsedData.nextMatchId,
             parsedData.round,
-            // parsedData.playDate,
+            parsedData.playDate,
             parsedData.status,
             parsedData.winner,
             parsedData.contestants,
@@ -149,9 +149,9 @@ export default class Match {
     return this.round
   }
 
-  // public getPlayDate(): Date {
-  //   return this.playDate
-  // }
+  public getPlayDate(): Date {
+    return this.playDate
+  }
 
   public getStatus(): MatchStatusOptions {
     return this.status
@@ -189,9 +189,9 @@ export default class Match {
     this.round = newRound
   }
 
-  // public setPlayDate(newDate: string) {
-  //   this.playDate = newDate
-  // }
+  public setPlayDate(newDate: Date) {
+    this.playDate = newDate
+  }
 
   public setStatus(newStatus: MatchStatusOptions) {
     this.status = newStatus

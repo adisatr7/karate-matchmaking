@@ -110,6 +110,10 @@ const screens = createBrowserRouter([
     element: <JoinTeamScreen/>
   },
   {
+    path: "match/:matchId",
+    element: <MatchScreen/>
+  },
+  {
     path: "/settings",
     element: <UnderConstructionScreen/>
   }
