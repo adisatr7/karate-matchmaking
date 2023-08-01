@@ -3,6 +3,7 @@ import { MatchStatusOptions } from "../../types"
 import statusColor from "./statusColor"
 import { useAppDispatch } from "../../store"
 import { hideSidebar } from "../../store/slices/sidebarSlice"
+import { message } from "@tauri-apps/api/dialog"
 
 
 type PropsType = {

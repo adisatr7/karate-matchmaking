@@ -3,7 +3,7 @@
     "tournamentId": "t-6249b55f-b49b-5548-806f-be275c1df21b",
     "tournamentName": "Kejuaraan Karate Indonesia",
     "desc": "Kejuaraan karate tingkat nasional yang diadakan setiap tahun oleh Persatuan Karate Indonesia. Turnamen ini merupakan ajang prestisius bagi para atlet karate dari seluruh Indonesia untuk memperlihatkan kemampuan mereka. Dalam kejuaraan ini, para atlet akan berkompetisi dalam berbagai kategori dan tingkatan, mulai dari pemula hingga tingkat profesional. Selain itu, turnamen ini juga menjadi ajang seleksi untuk membentuk tim nasional karate yang akan mewakili Indonesia dalam kompetisi internasional.",
-    "status": "pendaftaran",
+    "status": "berlangsung",
     "hostedBy": "Persatuan Karate Indonesia",
     "divisionIds": [
       "k-e9c9137b-512f-41b1-b005-3e77ad061acf",
@@ -14,7 +14,7 @@
     "tournamentId": "t-9ba8f10a-198d-41d0-8ca4-5497c6e5d2e8",
     "tournamentName": "Piala Karate Jakarta",
     "desc": "Turnamen karate bergengsi di Jakarta yang diorganisir oleh Persatuan Olahraga Karate DKI Jakarta. Piala Karate Jakarta menjadi ajang yang dinantikan oleh para karateka di wilayah Jakarta dan sekitarnya. Kompetisi ini menampilkan pertandingan karate yang menarik dan penuh aksi dari atlet-atlet terbaik di ibu kota. Dalam turnamen ini, peserta akan berkompetisi dalam berbagai kategori dan tingkatan, memberikan penonton pengalaman yang tak terlupakan.",
-    "status": "berlangsung",
+    "status": "pendaftaran",
     "hostedBy": "Persatuan Olahraga Karate DKI Jakarta",
     "divisionIds": [
       "k-da281e11-7270-5b54-b856-6abebc0f28d7",

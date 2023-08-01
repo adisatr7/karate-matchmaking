@@ -2,7 +2,6 @@ import Athlete from "./Athlete"
 import Match from "./Match"
 import {
   BaseDirectory,
-  readDir,
   readTextFile,
   removeFile,
 } from "@tauri-apps/api/fs"

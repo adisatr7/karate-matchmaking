@@ -107,11 +107,11 @@ const screens = createBrowserRouter([
     element: <AthleteFormScreen/>
   },
   {
-    path: "athlete/:athleteId/jointeam",
+    path: "/athlete/:athleteId/jointeam",
     element: <JoinTeamScreen/>
   },
   {
-    path: "match/:matchId",
+    path: "/match/:matchId",
     element: <MatchScreen/>
   },
   {

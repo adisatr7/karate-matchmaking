@@ -138,20 +138,33 @@ export default function BracketScreen() {
       currentPageName="Bagan Pertandingan">
 
       {/* Subheader container */}
-      { division && tournament && 
-        <div className="flex flex-row w-full h-fit text-body text-gray-300 gap-[8px] items-center">
-          
+      { division && tournament && (
+        <div className="flex flex-col w-full h-fit">
           {/* Tournament status label */}
-          { tournamentStatus === "pendaftaran" &&
-            <p>Pertandingan belum dimulai. <button onClick={handleShowConfirmation} className="font-semibold text-white hover:underline">Klik disini</button> untuk memulai.</p>
-          }
-
-          { tournamentStatus === "akan main" &&
-            <p>Klik pertandingan yang sedang berlangsung untuk mengakses skor</p>  
-          }
-
+          { tournamentStatus === "pendaftaran" && (
+            <div className="flex flex-row w-full h-fit text-body text-gray-300 gap-[8px] items-center">
+              <p>Pertandingan belum dimulai. <button onClick={handleShowConfirmation} className="font-semibold text-white hover:underline">Klik disini</button> untuk memulai.</p>
+            </div>
+          )}
+    
+          { tournamentStatus === "akan main" && (
+            <div className="text-gray-300 text-caption flex flex-col gap-[4px]">
+              <div className="flex flex-row w-full h-fit gap-[8px] items-center">
+                <div className="flex rounded-lg h-[24px] w-[24px] bg-secondary-gradient"/>
+                <p>Menang</p>
+              </div> 
+              <div className="flex flex-row w-full h-fit gap-[8px] items-center">
+                <div className="flex rounded-lg border border-stone-600 h-[24px] w-[24px] bg-gray-700"/>
+                <p>Kalah</p>
+              </div> 
+              <div className="flex flex-row w-full h-fit gap-[8px] items-center">
+                <div className="flex rounded-lg h-[24px] w-[24px] bg-primary-gradient"/>
+                <p>Sedang/Akan bertanding</p>
+              </div> 
+            </div>
+          )}
         </div>
-      }
+      )}
 
       <div className="flex flex-col justify-center w-full h-full">
         { matches && matches.length > 0
