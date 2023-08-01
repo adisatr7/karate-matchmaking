@@ -1,0 +1,39 @@
+[
+  {
+    "tournamentId": "t-6249b55f-b49b-5548-806f-be275c1df21b",
+    "tournamentName": "Kejuaraan Karate Indonesia",
+    "desc": "Kejuaraan karate tingkat nasional yang diadakan setiap tahun oleh Persatuan Karate Indonesia. Turnamen ini merupakan ajang prestisius bagi para atlet karate dari seluruh Indonesia untuk memperlihatkan kemampuan mereka. Dalam kejuaraan ini, para atlet akan berkompetisi dalam berbagai kategori dan tingkatan, mulai dari pemula hingga tingkat profesional. Selain itu, turnamen ini juga menjadi ajang seleksi untuk membentuk tim nasional karate yang akan mewakili Indonesia dalam kompetisi internasional.",
+    "status": "berlangsung",
+    "hostedBy": "Persatuan Karate Indonesia",
+    "divisionIds": [
+      "k-e9c9137b-512f-41b1-b005-3e77ad061acf",
+      "k-df26a3b6-d590-571e-8e19-65720190440d"
+    ]
+  },
+  {
+    "tournamentId": "t-9ba8f10a-198d-41d0-8ca4-5497c6e5d2e8",
+    "tournamentName": "Piala Karate Jakarta",
+    "desc": "Turnamen karate bergengsi di Jakarta yang diorganisir oleh Persatuan Olahraga Karate DKI Jakarta. Piala Karate Jakarta menjadi ajang yang dinantikan oleh para karateka di wilayah Jakarta dan sekitarnya. Kompetisi ini menampilkan pertandingan karate yang menarik dan penuh aksi dari atlet-atlet terbaik di ibu kota. Dalam turnamen ini, peserta akan berkompetisi dalam berbagai kategori dan tingkatan, memberikan penonton pengalaman yang tak terlupakan.",
+    "status": "pendaftaran",
+    "hostedBy": "Persatuan Olahraga Karate DKI Jakarta",
+    "divisionIds": [
+      "k-da281e11-7270-5b54-b856-6abebc0f28d7",
+      "k-30d3e47c-57b2-5baf-9037-60e62dd1602d"
+    ]
+  },
+  {
+    "tournamentId": "t-07862354-882b-5674-ab4e-a2e27e45e207",
+    "tournamentName": "Kejuaraan Karate Bali",
+    "desc": "Kejuaraan karate yang diadakan di Bali oleh Asosiasi Karate Bali. Turnamen ini merupakan salah satu event olahraga terbesar di pulau Dewata, mengundang partisipasi dari atlet-atlet karate dari seluruh Indonesia. Kejuaraan Karate Bali tidak hanya menjadi ajang kompetisi yang seru, tetapi juga menjadi kesempatan bagi atlet untuk merasakan keindahan alam dan budaya Bali. Dalam turnamen ini, para peserta akan bertarung dengan semangat juang dan mengukir prestasi yang membanggakan.",
+    "status": "selesai",
+    "hostedBy": "Asosiasi Karate Bali",
+    "divisionIds": [
+      "k-9a167de9-3ecc-5ee8-b6a3-44c01d2a3e21",
+      "k-a98f7593-93fe-54f6-89f7-7c6411ab3e68",
+      "k-b03e4a16-361f-567d-ab05-6de717943c80",
+      "k-524de089-7430-5d8c-b08d-d9c921b43454",
+      "k-41e73c7c-0666-5b4e-8e6e-28a6320cacf9",
+      "k-3751cc9e-b9f4-5286-87ad-1ecfa47bf4bf"
+    ]
+  }
+]

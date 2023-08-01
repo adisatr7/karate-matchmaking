@@ -1,0 +1,33 @@
+
+[
+  {
+    "id": "admin",
+    "name": "Admin",
+    "password": "admin",
+    "imageUrl": "https://www.giantbomb.com/a/uploads/scale_medium/39/392987/3054533-1138738037-axOyf.jpg"
+  },
+  {
+    "id": "veronichan",
+    "name": "Veronichan",
+    "password": "ver123",
+    "imageUrl": "https://dotesports.com/wp-content/uploads/2022/07/28205941/Feature-Image-74.jpg?w=1200"
+  },
+  {
+    "id": "monica",
+    "name": "Monica La Roche",
+    "password": "justmonika",
+    "imageUrl": "https://i.pinimg.com/564x/0b/0f/bb/0b0fbb9a07b0424e85fc009f6effb43c.jpg"
+  },
+  {
+    "id": "jeff",
+    "name": "Jeffords Peralta",
+    "password": "jeff123",
+    "imageUrl": "https://static.wikia.nocookie.net/brooklynnine-nine/images/9/9a/S8_Raymond_Holt_-_Andre_Braugher.jpg"
+  },
+  {
+    "id": "sheep",
+    "name": "Shepard",
+    "password": "sheep123",
+    "imageUrl": "https://www.giantbomb.com/a/uploads/square_medium/8/80647/1813854-mark2s.jpg"
+  }
+]
