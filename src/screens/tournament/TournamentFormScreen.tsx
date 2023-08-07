@@ -153,7 +153,7 @@ export default function TournamentFormScreen() {
       prevPageUrl={ tournamentId ? `/tournament/${tournamentId}` : `/tournament` }
       currentPageName={ 
         mode === "edit" ? "Ubah Biodata" : 
-        mode === "add" ? "Daftarkan Atlet Baru" 
+        mode === "add" ? "Buat Pertandingan Baru" 
         : "Error: Unknown Mode" }>
 
       <div className="flex flex-row h-full w-full ml-[20px] mt-[12px]">

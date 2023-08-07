@@ -8,7 +8,7 @@ import { Provider } from "react-redux"
 import { store } from "./store"
 
 import App from "./App.tsx"
-import HighlightScreen from "./screens/HighlightScreen.tsx"
+// import HighlightScreen from "./screens/HighlightScreen.tsx"
 import LoginScreen from "./screens/LoginScreen.tsx"
 
 import { library } from "@fortawesome/fontawesome-svg-core"

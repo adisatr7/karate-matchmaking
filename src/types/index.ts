@@ -73,12 +73,12 @@ export type AthletePerformance = {
 /**
  * User data type definition used to login
  */
-// export type UserType = {
-//   id: string // Unique ID - Customizable
-//   name: string
-//   password: string
-//   imageUrl: string
-// } | null
+export type UserType = {
+  id: string // Unique ID - Customizable
+  name: string
+  password: string
+  imageUrl: string
+} | null
 
 /**
  * Tournament type definition

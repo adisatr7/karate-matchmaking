@@ -207,7 +207,7 @@ export default function AthleteFormScreen() {
       useNotification("Berhasil", `Data ${athlete!.getAthleteName()} berhasil disimpan!`)
       
       // Redirect user to the athlete's profile page
-      navigate(`/athlete/${athlete!.getAthleteId()}`)
+      navigate(`/athlete/profile/${athlete!.getAthleteId()}/0`)
     }
     
     // Hide the modal

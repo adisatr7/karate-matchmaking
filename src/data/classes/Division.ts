@@ -112,10 +112,11 @@ export default class Division {
         // Create a new match
         const newMatch = new Match(
           this.divisionId,
-          generateID(`m-${game}`),
+          generateID(`m`),
           this.generateMatchName(game, this.contestants.length),
           // "Placeholder: NextMatchID",
           round,
+          new Date(),
           "akan main",
           "tbd",
           [this.contestants[match * 2], this.contestants[match * 2 + 1]],

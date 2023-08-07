@@ -1,5 +1,5 @@
 import { BaseDirectory, readTextFile, removeFile } from "@tauri-apps/api/fs"
-import { TournamentStatusOptions, TournamentType } from "../../types"
+import { TournamentStatusOptions } from "../../types"
 import { writeInto } from "../../utils/fileManager"
 import { generateID } from "../../utils/idGenerator"
 import Division from "./Division"
@@ -61,7 +61,7 @@ export default class Tournament {
       })
         // If file is found, parse its content
         .then((data) => {
-          const parsedObject: TournamentType = JSON.parse(data)
+          const parsedObject = JSON.parse(data)
 
           // Create a new Tournament object
           const tournament = new Tournament(

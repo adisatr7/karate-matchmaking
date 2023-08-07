@@ -108,14 +108,14 @@ export default function JoinTeamScreen() {
 
       // Show the success notification
       useNotification("Berhasil", `${athlete?.getAthleteName()} berhasil bergabung ke tim ${team.getTeamName()}!`)
-      navigate(`/athlete/${athleteId}`)
+      navigate(`/athlete/profile/${athleteId}/0`)
     }
   }
 
   return (
     <MainLayout
       backButton
-      prevPageUrl={`/athlete/${athleteId}`}
+      prevPageUrl={`/athlete/profile/${athleteId}/0`}
       prevPageName={athlete?.getAthleteName()}
       currentPageName="Gabung Tim">
 

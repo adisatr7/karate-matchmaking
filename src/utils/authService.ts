@@ -1,6 +1,6 @@
 import { BaseDirectory, readTextFile } from "@tauri-apps/api/fs"
 import useNotification from "../hooks/useNotification"
-import { UserType } from "../types"
+import { UserType } from "../types/"
 import defaultUsersData from "../data/defaults/defaultUsers.json"
 import { createFolder, writeInto } from "./fileManager"
 import { assignDefaultAthletesData, assignDefaultDivisionsData, assignDefaultMatchData, assignDefaultMatchHistoryData, assignDefaultTeamsData, assignDefaultTournamentsData } from "../data/defaults"
